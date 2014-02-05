@@ -1,0 +1,197 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/llvm-project/!svn/ver/188513/llvm/trunk/test/Transforms/Reassociate
+END
+2002-07-09-DominanceProblem.ll
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/llvm-project/!svn/ver/81537/llvm/trunk/test/Transforms/Reassociate/2002-07-09-DominanceProblem.ll
+END
+pr12245.ll
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/llvm-project/!svn/ver/180796/llvm/trunk/test/Transforms/Reassociate/pr12245.ll
+END
+basictest.ll
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/llvm-project/!svn/ver/186268/llvm/trunk/test/Transforms/Reassociate/basictest.ll
+END
+multistep.ll
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/llvm-project/!svn/ver/186268/llvm/trunk/test/Transforms/Reassociate/multistep.ll
+END
+2002-05-15-MissedTree.ll
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/llvm-project/!svn/ver/81257/llvm/trunk/test/Transforms/Reassociate/2002-05-15-MissedTree.ll
+END
+2002-05-15-SubReassociate.ll
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/llvm-project/!svn/ver/81537/llvm/trunk/test/Transforms/Reassociate/2002-05-15-SubReassociate.ll
+END
+repeats.ll
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/llvm-project/!svn/ver/186268/llvm/trunk/test/Transforms/Reassociate/repeats.ll
+END
+negation.ll
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/llvm-project/!svn/ver/81537/llvm/trunk/test/Transforms/Reassociate/negation.ll
+END
+looptest.ll
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/llvm-project/!svn/ver/81537/llvm/trunk/test/Transforms/Reassociate/looptest.ll
+END
+subtest2.ll
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/llvm-project/!svn/ver/81537/llvm/trunk/test/Transforms/Reassociate/subtest2.ll
+END
+fp-commute.ll
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/llvm-project/!svn/ver/158073/llvm/trunk/test/Transforms/Reassociate/fp-commute.ll
+END
+shifttest.ll
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/llvm-project/!svn/ver/159525/llvm/trunk/test/Transforms/Reassociate/shifttest.ll
+END
+optional-flags.ll
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/llvm-project/!svn/ver/186268/llvm/trunk/test/Transforms/Reassociate/optional-flags.ll
+END
+mightymul.ll
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/llvm-project/!svn/ver/160778/llvm/trunk/test/Transforms/Reassociate/mightymul.ll
+END
+2002-05-15-AgressiveSubMove.ll
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/llvm-project/!svn/ver/81537/llvm/trunk/test/Transforms/Reassociate/2002-05-15-AgressiveSubMove.ll
+END
+absorption.ll
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/llvm-project/!svn/ver/186268/llvm/trunk/test/Transforms/Reassociate/absorption.ll
+END
+2006-04-27-ReassociateVector.ll
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/llvm-project/!svn/ver/81537/llvm/trunk/test/Transforms/Reassociate/2006-04-27-ReassociateVector.ll
+END
+2002-05-15-SubReassociate2.ll
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/llvm-project/!svn/ver/81537/llvm/trunk/test/Transforms/Reassociate/2002-05-15-SubReassociate2.ll
+END
+2003-08-12-InfiniteLoop.ll
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/llvm-project/!svn/ver/81537/llvm/trunk/test/Transforms/Reassociate/2003-08-12-InfiniteLoop.ll
+END
+secondary.ll
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/llvm-project/!svn/ver/129324/llvm/trunk/test/Transforms/Reassociate/secondary.ll
+END
+2012-05-08-UndefLeak.ll
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/llvm-project/!svn/ver/186268/llvm/trunk/test/Transforms/Reassociate/2012-05-08-UndefLeak.ll
+END
+xor_reassoc.ll
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/llvm-project/!svn/ver/186268/llvm/trunk/test/Transforms/Reassociate/xor_reassoc.ll
+END
+no-op.ll
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/186268/llvm/trunk/test/Transforms/Reassociate/no-op.ll
+END
+2012-06-08-InfiniteLoop.ll
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/llvm-project/!svn/ver/158199/llvm/trunk/test/Transforms/Reassociate/2012-06-08-InfiniteLoop.ll
+END
+subtest.ll
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/llvm-project/!svn/ver/81537/llvm/trunk/test/Transforms/Reassociate/subtest.ll
+END
+shift-factor.ll
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/llvm-project/!svn/ver/81545/llvm/trunk/test/Transforms/Reassociate/shift-factor.ll
+END
+mulfactor.ll
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/llvm-project/!svn/ver/186268/llvm/trunk/test/Transforms/Reassociate/mulfactor.ll
+END
+2005-09-01-ArrayOutOfBounds.ll
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/llvm-project/!svn/ver/159525/llvm/trunk/test/Transforms/Reassociate/2005-09-01-ArrayOutOfBounds.ll
+END
+inverses.ll
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/llvm-project/!svn/ver/186268/llvm/trunk/test/Transforms/Reassociate/inverses.ll
+END
+crash.ll
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/171250/llvm/trunk/test/Transforms/Reassociate/crash.ll
+END
+otherops.ll
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/llvm-project/!svn/ver/81537/llvm/trunk/test/Transforms/Reassociate/otherops.ll
+END
+2011-01-26-UseAfterFree.ll
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/llvm-project/!svn/ver/134829/llvm/trunk/test/Transforms/Reassociate/2011-01-26-UseAfterFree.ll
+END

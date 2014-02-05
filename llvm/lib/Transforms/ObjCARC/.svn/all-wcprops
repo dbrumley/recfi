@@ -1,0 +1,107 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/llvm-project/!svn/ver/200281/llvm/trunk/lib/Transforms/ObjCARC
+END
+ObjCARCAliasAnalysis.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/llvm-project/!svn/ver/186026/llvm/trunk/lib/Transforms/ObjCARC/ObjCARCAliasAnalysis.cpp
+END
+DependencyAnalysis.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/llvm-project/!svn/ver/177769/llvm/trunk/lib/Transforms/ObjCARC/DependencyAnalysis.cpp
+END
+ObjCARCAliasAnalysis.h
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/llvm-project/!svn/ver/190536/llvm/trunk/lib/Transforms/ObjCARC/ObjCARCAliasAnalysis.h
+END
+DependencyAnalysis.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/llvm-project/!svn/ver/186026/llvm/trunk/lib/Transforms/ObjCARC/DependencyAnalysis.h
+END
+LLVMBuild.txt
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/173770/llvm/trunk/lib/Transforms/ObjCARC/LLVMBuild.txt
+END
+ObjCARCAPElim.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/llvm-project/!svn/ver/173781/llvm/trunk/lib/Transforms/ObjCARC/ObjCARCAPElim.cpp
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/llvm-project/!svn/ver/173647/llvm/trunk/lib/Transforms/ObjCARC/Makefile
+END
+CMakeLists.txt
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/llvm-project/!svn/ver/173760/llvm/trunk/lib/Transforms/ObjCARC/CMakeLists.txt
+END
+ARCRuntimeEntryPoints.h
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/llvm-project/!svn/ver/190536/llvm/trunk/lib/Transforms/ObjCARC/ARCRuntimeEntryPoints.h
+END
+ObjCARCUtil.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/llvm-project/!svn/ver/186026/llvm/trunk/lib/Transforms/ObjCARC/ObjCARCUtil.cpp
+END
+ObjCARCContract.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/llvm-project/!svn/ver/199104/llvm/trunk/lib/Transforms/ObjCARC/ObjCARCContract.cpp
+END
+ObjCARCExpand.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/llvm-project/!svn/ver/173767/llvm/trunk/lib/Transforms/ObjCARC/ObjCARCExpand.cpp
+END
+ObjCARC.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/llvm-project/!svn/ver/180881/llvm/trunk/lib/Transforms/ObjCARC/ObjCARC.cpp
+END
+ProvenanceAnalysis.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/llvm-project/!svn/ver/175017/llvm/trunk/lib/Transforms/ObjCARC/ProvenanceAnalysis.cpp
+END
+ObjCARC.h
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/llvm-project/!svn/ver/200281/llvm/trunk/lib/Transforms/ObjCARC/ObjCARC.h
+END
+ProvenanceAnalysis.h
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/llvm-project/!svn/ver/190536/llvm/trunk/lib/Transforms/ObjCARC/ProvenanceAnalysis.h
+END
+ObjCARCOpts.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/llvm-project/!svn/ver/200018/llvm/trunk/lib/Transforms/ObjCARC/ObjCARCOpts.cpp
+END

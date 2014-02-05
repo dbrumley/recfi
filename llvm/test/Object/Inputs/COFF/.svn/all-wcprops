@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/llvm-project/!svn/ver/183403/llvm/trunk/test/Object/Inputs/COFF
+END
+i386.yaml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/llvm-project/!svn/ver/183403/llvm/trunk/test/Object/Inputs/COFF/i386.yaml
+END
+x86-64.yaml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/llvm-project/!svn/ver/183403/llvm/trunk/test/Object/Inputs/COFF/x86-64.yaml
+END

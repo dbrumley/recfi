@@ -1,0 +1,1163 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/llvm-project/!svn/ver/200283/llvm/trunk/test/CodeGen/R600
+END
+fdiv.ll
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/fdiv.ll
+END
+load64.ll
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/llvm-project/!svn/ver/197293/llvm/trunk/test/CodeGen/R600/load64.ll
+END
+tex-clause-antidep.ll
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/llvm-project/!svn/ver/194425/llvm/trunk/test/CodeGen/R600/tex-clause-antidep.ll
+END
+legalizedag-bug-expand-setcc.ll
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/llvm-project/!svn/ver/176695/llvm/trunk/test/CodeGen/R600/legalizedag-bug-expand-setcc.ll
+END
+setuo.ll
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/setuo.ll
+END
+fcmp64.ll
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/fcmp64.ll
+END
+64bit-kernel-args.ll
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/64bit-kernel-args.ll
+END
+srl.ll
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/srl.ll
+END
+icmp64.ll
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/llvm-project/!svn/ver/196960/llvm/trunk/test/CodeGen/R600/icmp64.ll
+END
+disconnected-predset-break-bug.ll
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/llvm-project/!svn/ver/180761/llvm/trunk/test/CodeGen/R600/disconnected-predset-break-bug.ll
+END
+fp_to_sint.ll
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/fp_to_sint.ll
+END
+llvm.trunc.ll
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/llvm-project/!svn/ver/197783/llvm/trunk/test/CodeGen/R600/llvm.trunc.ll
+END
+llvm.SI.sample.ll
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/llvm.SI.sample.ll
+END
+llvm.SI.imageload.ll
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/llvm.SI.imageload.ll
+END
+wrong-transalu-pos-fix.ll
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/llvm-project/!svn/ver/191689/llvm/trunk/test/CodeGen/R600/wrong-transalu-pos-fix.ll
+END
+r600-infinite-loop-bug-while-reorganizing-vector.ll
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/llvm-project/!svn/ver/196923/llvm/trunk/test/CodeGen/R600/r600-infinite-loop-bug-while-reorganizing-vector.ll
+END
+trunc-vector-store-assertion-failure.ll
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/llvm-project/!svn/ver/188953/llvm/trunk/test/CodeGen/R600/trunc-vector-store-assertion-failure.ll
+END
+select.ll
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/llvm-project/!svn/ver/190079/llvm/trunk/test/CodeGen/R600/select.ll
+END
+mad_int24.ll
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/mad_int24.ll
+END
+store-vector-ptrs.ll
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/llvm-project/!svn/ver/197669/llvm/trunk/test/CodeGen/R600/store-vector-ptrs.ll
+END
+structurize1.ll
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/llvm-project/!svn/ver/195030/llvm/trunk/test/CodeGen/R600/structurize1.ll
+END
+selectcc-opt.ll
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/llvm-project/!svn/ver/191790/llvm/trunk/test/CodeGen/R600/selectcc-opt.ll
+END
+fcmp.ll
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/llvm-project/!svn/ver/189980/llvm/trunk/test/CodeGen/R600/fcmp.ll
+END
+insert_vector_elt.ll
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/llvm-project/!svn/ver/197669/llvm/trunk/test/CodeGen/R600/insert_vector_elt.ll
+END
+bfe_uint.ll
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/llvm-project/!svn/ver/199918/llvm/trunk/test/CodeGen/R600/bfe_uint.ll
+END
+i8-to-double-to-float.ll
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/llvm-project/!svn/ver/186918/llvm/trunk/test/CodeGen/R600/i8-to-double-to-float.ll
+END
+local-memory.ll
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/llvm-project/!svn/ver/199016/llvm/trunk/test/CodeGen/R600/local-memory.ll
+END
+lds-output-queue.ll
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/llvm-project/!svn/ver/199016/llvm/trunk/test/CodeGen/R600/lds-output-queue.ll
+END
+fma.ll
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/fma.ll
+END
+wait.ll
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/llvm-project/!svn/ver/192557/llvm/trunk/test/CodeGen/R600/wait.ll
+END
+schedule-vs-if-nested-loop.ll
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/llvm-project/!svn/ver/194425/llvm/trunk/test/CodeGen/R600/schedule-vs-if-nested-loop.ll
+END
+array-ptr-calc-i32.ll
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/llvm-project/!svn/ver/197659/llvm/trunk/test/CodeGen/R600/array-ptr-calc-i32.ll
+END
+si-annotate-cf-assertion.ll
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/llvm-project/!svn/ver/197669/llvm/trunk/test/CodeGen/R600/si-annotate-cf-assertion.ll
+END
+mul_int24.ll
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/mul_int24.ll
+END
+fcmp-cnde-int-args.ll
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/llvm-project/!svn/ver/176699/llvm/trunk/test/CodeGen/R600/fcmp-cnde-int-args.ll
+END
+or.ll
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/or.ll
+END
+sgpr-copy-duplicate-operand.ll
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/llvm-project/!svn/ver/194682/llvm/trunk/test/CodeGen/R600/sgpr-copy-duplicate-operand.ll
+END
+predicates.ll
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/llvm-project/!svn/ver/195031/llvm/trunk/test/CodeGen/R600/predicates.ll
+END
+pv.ll
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/llvm-project/!svn/ver/194425/llvm/trunk/test/CodeGen/R600/pv.ll
+END
+schedule-if-2.ll
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/llvm-project/!svn/ver/191788/llvm/trunk/test/CodeGen/R600/schedule-if-2.ll
+END
+gep-address-space.ll
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/llvm-project/!svn/ver/199016/llvm/trunk/test/CodeGen/R600/gep-address-space.ll
+END
+llvm.exp2.ll
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/llvm-project/!svn/ver/196922/llvm/trunk/test/CodeGen/R600/llvm.exp2.ll
+END
+trunc.ll
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/llvm-project/!svn/ver/200283/llvm/trunk/test/CodeGen/R600/trunc.ll
+END
+elf.r600.ll
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/llvm-project/!svn/ver/199840/llvm/trunk/test/CodeGen/R600/elf.r600.ll
+END
+local-memory-two-objects.ll
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/llvm-project/!svn/ver/194755/llvm/trunk/test/CodeGen/R600/local-memory-two-objects.ll
+END
+big_alu.ll
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/llvm-project/!svn/ver/194425/llvm/trunk/test/CodeGen/R600/big_alu.ll
+END
+llvm.AMDGPU.cube.ll
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/llvm-project/!svn/ver/184880/llvm/trunk/test/CodeGen/R600/llvm.AMDGPU.cube.ll
+END
+vtx-fetch-branch.ll
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/llvm-project/!svn/ver/199917/llvm/trunk/test/CodeGen/R600/vtx-fetch-branch.ll
+END
+sint_to_fp.ll
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/sint_to_fp.ll
+END
+32-bit-local-address-space.ll
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/llvm-project/!svn/ver/195034/llvm/trunk/test/CodeGen/R600/32-bit-local-address-space.ll
+END
+uint_to_fp.ll
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/llvm-project/!svn/ver/193701/llvm/trunk/test/CodeGen/R600/uint_to_fp.ll
+END
+r600cfg.ll
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/llvm-project/!svn/ver/194425/llvm/trunk/test/CodeGen/R600/r600cfg.ll
+END
+udiv.ll
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/llvm-project/!svn/ver/194153/llvm/trunk/test/CodeGen/R600/udiv.ll
+END
+fsub64.ll
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/fsub64.ll
+END
+seto.ll
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/seto.ll
+END
+unroll.ll
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/llvm-project/!svn/ver/199916/llvm/trunk/test/CodeGen/R600/unroll.ll
+END
+setcc64.ll
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/llvm-project/!svn/ver/195514/llvm/trunk/test/CodeGen/R600/setcc64.ll
+END
+fmul64.ll
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/fmul64.ll
+END
+llvm.pow.ll
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/llvm-project/!svn/ver/194425/llvm/trunk/test/CodeGen/R600/llvm.pow.ll
+END
+fptrunc.ll
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/fptrunc.ll
+END
+combine_vloads.ll
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/llvm-project/!svn/ver/194783/llvm/trunk/test/CodeGen/R600/combine_vloads.ll
+END
+swizzle-export.ll
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/llvm-project/!svn/ver/194425/llvm/trunk/test/CodeGen/R600/swizzle-export.ll
+END
+vertex-fetch-encoding.ll
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/llvm-project/!svn/ver/188518/llvm/trunk/test/CodeGen/R600/vertex-fetch-encoding.ll
+END
+lds-size.ll
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/llvm-project/!svn/ver/190078/llvm/trunk/test/CodeGen/R600/lds-size.ll
+END
+fmax.ll
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/llvm-project/!svn/ver/194425/llvm/trunk/test/CodeGen/R600/fmax.ll
+END
+loop-address.ll
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/llvm-project/!svn/ver/191790/llvm/trunk/test/CodeGen/R600/loop-address.ll
+END
+parallelorifcollapse.ll
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/llvm-project/!svn/ver/187764/llvm/trunk/test/CodeGen/R600/parallelorifcollapse.ll
+END
+llvm.round.ll
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/llvm-project/!svn/ver/195878/llvm/trunk/test/CodeGen/R600/llvm.round.ll
+END
+setcc.ll
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/llvm-project/!svn/ver/195514/llvm/trunk/test/CodeGen/R600/setcc.ll
+END
+llvm.sqrt.ll
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/llvm-project/!svn/ver/193620/llvm/trunk/test/CodeGen/R600/llvm.sqrt.ll
+END
+max-literals.ll
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/llvm-project/!svn/ver/194425/llvm/trunk/test/CodeGen/R600/max-literals.ll
+END
+llvm.SI.sample-masked.ll
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/llvm.SI.sample-masked.ll
+END
+dagcombiner-bug-illegal-vec4-int-to-fp.ll
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/llvm-project/!svn/ver/180956/llvm/trunk/test/CodeGen/R600/dagcombiner-bug-illegal-vec4-int-to-fp.ll
+END
+llvm.SI.tbuffer.store.ll
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/llvm-project/!svn/ver/199016/llvm/trunk/test/CodeGen/R600/llvm.SI.tbuffer.store.ll
+END
+fabs.ll
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/llvm-project/!svn/ver/195881/llvm/trunk/test/CodeGen/R600/fabs.ll
+END
+fmuladd.ll
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/fmuladd.ll
+END
+vselect64.ll
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/llvm-project/!svn/ver/195398/llvm/trunk/test/CodeGen/R600/vselect64.ll
+END
+llvm.SI.load.dword.ll
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/llvm-project/!svn/ver/200196/llvm/trunk/test/CodeGen/R600/llvm.SI.load.dword.ll
+END
+rv7x0_count3.ll
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/llvm-project/!svn/ver/194425/llvm/trunk/test/CodeGen/R600/rv7x0_count3.ll
+END
+build_vector.ll
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/build_vector.ll
+END
+array-ptr-calc-i64.ll
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/llvm-project/!svn/ver/194433/llvm/trunk/test/CodeGen/R600/array-ptr-calc-i64.ll
+END
+128bit-kernel-args.ll
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/128bit-kernel-args.ll
+END
+llvm.AMDGPU.imax.ll
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/llvm.AMDGPU.imax.ll
+END
+llvm.SI.sendmsg.ll
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/200195/llvm/trunk/test/CodeGen/R600/llvm.SI.sendmsg.ll
+END
+gv-const-addrspace.ll
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/llvm-project/!svn/ver/199825/llvm/trunk/test/CodeGen/R600/gv-const-addrspace.ll
+END
+selectcc-cnd.ll
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/llvm-project/!svn/ver/189980/llvm/trunk/test/CodeGen/R600/selectcc-cnd.ll
+END
+urecip.ll
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/urecip.ll
+END
+schedule-fs-loop-nested.ll
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/llvm-project/!svn/ver/191788/llvm/trunk/test/CodeGen/R600/schedule-fs-loop-nested.ll
+END
+mulhu.ll
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/mulhu.ll
+END
+selectcc-icmp-select-float.ll
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/llvm-project/!svn/ver/180956/llvm/trunk/test/CodeGen/R600/selectcc-icmp-select-float.ll
+END
+llvm.AMDGPU.umax.ll
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/llvm.AMDGPU.umax.ll
+END
+packetizer.ll
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/llvm-project/!svn/ver/184819/llvm/trunk/test/CodeGen/R600/packetizer.ll
+END
+mul_uint24.ll
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/llvm-project/!svn/ver/194625/llvm/trunk/test/CodeGen/R600/mul_uint24.ll
+END
+call_fs.ll
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/llvm-project/!svn/ver/183228/llvm/trunk/test/CodeGen/R600/call_fs.ll
+END
+set-dx10.ll
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/llvm-project/!svn/ver/191603/llvm/trunk/test/CodeGen/R600/set-dx10.ll
+END
+si-sgpr-spill.ll
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/llvm-project/!svn/ver/195880/llvm/trunk/test/CodeGen/R600/si-sgpr-spill.ll
+END
+vselect.ll
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/vselect.ll
+END
+cf-stack-bug.ll
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/llvm-project/!svn/ver/199905/llvm/trunk/test/CodeGen/R600/cf-stack-bug.ll
+END
+fp_to_uint.ll
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/fp_to_uint.ll
+END
+schedule-fs-loop.ll
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/llvm-project/!svn/ver/191788/llvm/trunk/test/CodeGen/R600/schedule-fs-loop.ll
+END
+unsupported-cc.ll
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/llvm-project/!svn/ver/191603/llvm/trunk/test/CodeGen/R600/unsupported-cc.ll
+END
+cf_end.ll
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/llvm-project/!svn/ver/181225/llvm/trunk/test/CodeGen/R600/cf_end.ll
+END
+load.ll
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/llvm-project/!svn/ver/194626/llvm/trunk/test/CodeGen/R600/load.ll
+END
+fneg.ll
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/llvm-project/!svn/ver/194625/llvm/trunk/test/CodeGen/R600/fneg.ll
+END
+imm.ll
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/imm.ll
+END
+llvm.SI.fs.interp.constant.ll
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/llvm.SI.fs.interp.constant.ll
+END
+llvm.rint.ll
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/llvm.rint.ll
+END
+fcmp-cnd.ll
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/llvm-project/!svn/ver/189980/llvm/trunk/test/CodeGen/R600/fcmp-cnd.ll
+END
+add.ll
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/add.ll
+END
+llvm.SI.resinfo.ll
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/llvm.SI.resinfo.ll
+END
+fmin.ll
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/llvm-project/!svn/ver/194425/llvm/trunk/test/CodeGen/R600/fmin.ll
+END
+cayman-loop-bug.ll
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/196121/llvm/trunk/test/CodeGen/R600/cayman-loop-bug.ll
+END
+llvm.floor.ll
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/llvm.floor.ll
+END
+indirect-addressing-si.ll
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/indirect-addressing-si.ll
+END
+llvm.cos.ll
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/llvm-project/!svn/ver/194425/llvm/trunk/test/CodeGen/R600/llvm.cos.ll
+END
+jump-address.ll
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/llvm-project/!svn/ver/196634/llvm/trunk/test/CodeGen/R600/jump-address.ll
+END
+fsqrt.ll
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/fsqrt.ll
+END
+pv-packing.ll
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/llvm-project/!svn/ver/194425/llvm/trunk/test/CodeGen/R600/pv-packing.ll
+END
+and.ll
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/and.ll
+END
+fdiv64.ll
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/fdiv64.ll
+END
+lshl.ll
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/llvm-project/!svn/ver/194625/llvm/trunk/test/CodeGen/R600/lshl.ll
+END
+si-lod-bias.ll
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/si-lod-bias.ll
+END
+llvm.AMDGPU.barrier.local.ll
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/llvm-project/!svn/ver/185161/llvm/trunk/test/CodeGen/R600/llvm.AMDGPU.barrier.local.ll
+END
+urem.ll
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/urem.ll
+END
+add_i64.ll
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/llvm-project/!svn/ver/195042/llvm/trunk/test/CodeGen/R600/add_i64.ll
+END
+bfi_int.ll
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/bfi_int.ll
+END
+fetch-limits.r600.ll
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/llvm-project/!svn/ver/183560/llvm/trunk/test/CodeGen/R600/fetch-limits.r600.ll
+END
+shared-op-cycle.ll
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/194425/llvm/trunk/test/CodeGen/R600/shared-op-cycle.ll
+END
+literals.ll
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/llvm-project/!svn/ver/190644/llvm/trunk/test/CodeGen/R600/literals.ll
+END
+llvm.AMDGPU.trunc.ll
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/llvm.AMDGPU.trunc.ll
+END
+llvm.AMDGPU.imin.ll
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/llvm.AMDGPU.imin.ll
+END
+sgpr-copy.ll
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/llvm-project/!svn/ver/195026/llvm/trunk/test/CodeGen/R600/sgpr-copy.ll
+END
+predicate-dp4.ll
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/llvm-project/!svn/ver/194927/llvm/trunk/test/CodeGen/R600/predicate-dp4.ll
+END
+zero_extend.ll
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/zero_extend.ll
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/llvm-project/!svn/ver/179828/llvm/trunk/test/CodeGen/R600/README
+END
+sub.ll
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/sub.ll
+END
+dot4-folding.ll
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/llvm-project/!svn/ver/183278/llvm/trunk/test/CodeGen/R600/dot4-folding.ll
+END
+mul.ll
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/mul.ll
+END
+register-count-comments.ll
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/llvm-project/!svn/ver/196467/llvm/trunk/test/CodeGen/R600/register-count-comments.ll
+END
+llvm.AMDGPU.umin.ll
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/llvm.AMDGPU.umin.ll
+END
+load-input-fold.ll
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/194425/llvm/trunk/test/CodeGen/R600/load-input-fold.ll
+END
+fadd.ll
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/fadd.ll
+END
+kcache-fold.ll
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/llvm-project/!svn/ver/191603/llvm/trunk/test/CodeGen/R600/kcache-fold.ll
+END
+extload.ll
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/llvm-project/!svn/ver/199823/llvm/trunk/test/CodeGen/R600/extload.ll
+END
+work-item-intrinsics.ll
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/work-item-intrinsics.ll
+END
+llvm.sin.ll
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/llvm-project/!svn/ver/194425/llvm/trunk/test/CodeGen/R600/llvm.sin.ll
+END
+structurize.ll
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/llvm-project/!svn/ver/195031/llvm/trunk/test/CodeGen/R600/structurize.ll
+END
+sdiv.ll
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/llvm-project/!svn/ver/180123/llvm/trunk/test/CodeGen/R600/sdiv.ll
+END
+icmp-select-sete-reverse-args.ll
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/llvm-project/!svn/ver/189980/llvm/trunk/test/CodeGen/R600/icmp-select-sete-reverse-args.ll
+END
+fmad.ll
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/llvm-project/!svn/ver/194425/llvm/trunk/test/CodeGen/R600/fmad.ll
+END
+llvm.SI.sampled.ll
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/llvm.SI.sampled.ll
+END
+lit.local.cfg
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/llvm-project/!svn/ver/188513/llvm/trunk/test/CodeGen/R600/lit.local.cfg
+END
+vtx-schedule.ll
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/llvm-project/!svn/ver/199016/llvm/trunk/test/CodeGen/R600/vtx-schedule.ll
+END
+r600-encoding.ll
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/llvm-project/!svn/ver/194425/llvm/trunk/test/CodeGen/R600/r600-encoding.ll
+END
+unaligned-load-store.ll
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/llvm-project/!svn/ver/194626/llvm/trunk/test/CodeGen/R600/unaligned-load-store.ll
+END
+private-memory.ll
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/llvm-project/!svn/ver/199827/llvm/trunk/test/CodeGen/R600/private-memory.ll
+END
+floor.ll
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/llvm-project/!svn/ver/194425/llvm/trunk/test/CodeGen/R600/floor.ll
+END
+reciprocal.ll
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/llvm-project/!svn/ver/194425/llvm/trunk/test/CodeGen/R600/reciprocal.ll
+END
+atomic_load_add.ll
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/atomic_load_add.ll
+END
+selectcc-cnde-int.ll
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/llvm-project/!svn/ver/189980/llvm/trunk/test/CodeGen/R600/selectcc-cnde-int.ll
+END
+schedule-fs-loop-nested-if.ll
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/llvm-project/!svn/ver/194425/llvm/trunk/test/CodeGen/R600/schedule-fs-loop-nested-if.ll
+END
+llvm.AMDGPU.tex.ll
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/183229/llvm/trunk/test/CodeGen/R600/llvm.AMDGPU.tex.ll
+END
+sra.ll
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/llvm-project/!svn/ver/194626/llvm/trunk/test/CodeGen/R600/sra.ll
+END
+fpext.ll
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/fpext.ll
+END
+complex-folding.ll
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/194425/llvm/trunk/test/CodeGen/R600/complex-folding.ll
+END
+schedule-if.ll
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/llvm-project/!svn/ver/191788/llvm/trunk/test/CodeGen/R600/schedule-if.ll
+END
+bitcast.ll
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/bitcast.ll
+END
+fetch-limits.r700+.ll
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/llvm-project/!svn/ver/183560/llvm/trunk/test/CodeGen/R600/fetch-limits.r700+.ll
+END
+r600-export-fix.ll
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/194425/llvm/trunk/test/CodeGen/R600/r600-export-fix.ll
+END
+texture-input-merge.ll
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/llvm-project/!svn/ver/194425/llvm/trunk/test/CodeGen/R600/texture-input-merge.ll
+END
+load.vec.ll
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/load.vec.ll
+END
+store.ll
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/llvm-project/!svn/ver/193215/llvm/trunk/test/CodeGen/R600/store.ll
+END
+fsub.ll
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/fsub.ll
+END
+fmul.ll
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/fmul.ll
+END
+llvm.SI.tid.ll
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/llvm.SI.tid.ll
+END
+mad_uint24.ll
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/llvm-project/!svn/ver/194625/llvm/trunk/test/CodeGen/R600/mad_uint24.ll
+END
+elf.ll
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/elf.ll
+END
+fconst64.ll
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/fconst64.ll
+END
+sign_extend.ll
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/sign_extend.ll
+END
+lshr.ll
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/llvm-project/!svn/ver/194625/llvm/trunk/test/CodeGen/R600/lshr.ll
+END
+fadd64.ll
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/fadd64.ll
+END
+xor.ll
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/xor.ll
+END
+kernel-args.ll
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/kernel-args.ll
+END
+sint_to_fp64.ll
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/sint_to_fp64.ll
+END
+fp64_to_sint.ll
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/fp64_to_sint.ll
+END
+address-space.ll
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/llvm-project/!svn/ver/195034/llvm/trunk/test/CodeGen/R600/address-space.ll
+END
+parallelandifcollapse.ll
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/llvm-project/!svn/ver/187764/llvm/trunk/test/CodeGen/R600/parallelandifcollapse.ll
+END
+llvm.AMDGPU.mul.ll
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/194425/llvm/trunk/test/CodeGen/R600/llvm.AMDGPU.mul.ll
+END
+store.r600.ll
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/llvm-project/!svn/ver/188515/llvm/trunk/test/CodeGen/R600/store.r600.ll
+END
+atomic_load_sub.ll
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/atomic_load_sub.ll
+END
+rotr.ll
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/llvm-project/!svn/ver/195034/llvm/trunk/test/CodeGen/R600/rotr.ll
+END
+si-vector-hang.ll
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/llvm-project/!svn/ver/192366/llvm/trunk/test/CodeGen/R600/si-vector-hang.ll
+END
+shl.ll
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/llvm-project/!svn/ver/194443/llvm/trunk/test/CodeGen/R600/shl.ll
+END

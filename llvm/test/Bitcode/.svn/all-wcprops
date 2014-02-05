@@ -1,0 +1,203 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/llvm-project/!svn/ver/199346/llvm/trunk/test/Bitcode
+END
+metadata.ll
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/llvm-project/!svn/ver/188843/llvm/trunk/test/Bitcode/metadata.ll
+END
+ptest-new.ll
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/llvm-project/!svn/ver/175605/llvm/trunk/test/Bitcode/ptest-new.ll
+END
+global-variables.3.2.ll.bc
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/llvm-project/!svn/ver/197340/llvm/trunk/test/Bitcode/global-variables.3.2.ll.bc
+END
+visibility-styles.3.2.ll.bc
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/llvm-project/!svn/ver/196718/llvm/trunk/test/Bitcode/visibility-styles.3.2.ll.bc
+END
+linkage-types-3.2.ll.bc
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/196042/llvm/trunk/test/Bitcode/linkage-types-3.2.ll.bc
+END
+arm32_neon_vcnt_upgrade.ll
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/llvm-project/!svn/ver/160410/llvm/trunk/test/Bitcode/arm32_neon_vcnt_upgrade.ll
+END
+invalid.ll.bc
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/llvm-project/!svn/ver/193787/llvm/trunk/test/Bitcode/invalid.ll.bc
+END
+linkage-types-3.2.ll
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/llvm-project/!svn/ver/199218/llvm/trunk/test/Bitcode/linkage-types-3.2.ll
+END
+ssse3_palignr.ll
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/llvm-project/!svn/ver/142948/llvm/trunk/test/Bitcode/ssse3_palignr.ll
+END
+calling-conventions.3.2.ll
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/llvm-project/!svn/ver/197873/llvm/trunk/test/Bitcode/calling-conventions.3.2.ll
+END
+metadata-2.ll
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/llvm-project/!svn/ver/188843/llvm/trunk/test/Bitcode/metadata-2.ll
+END
+drop-debug-info.ll
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/llvm-project/!svn/ver/199346/llvm/trunk/test/Bitcode/drop-debug-info.ll
+END
+extractelement.ll
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/llvm-project/!svn/ver/188843/llvm/trunk/test/Bitcode/extractelement.ll
+END
+invalid.ll
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/llvm-project/!svn/ver/193996/llvm/trunk/test/Bitcode/invalid.ll
+END
+attributes.ll
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/llvm-project/!svn/ver/197645/llvm/trunk/test/Bitcode/attributes.ll
+END
+attributes-3.3.ll
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/llvm-project/!svn/ver/187186/llvm/trunk/test/Bitcode/attributes-3.3.ll
+END
+2009-06-11-FirstClassAggregateConstant.ll
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/llvm-project/!svn/ver/73220/llvm/trunk/test/Bitcode/2009-06-11-FirstClassAggregateConstant.ll
+END
+case-ranges-3.3.ll
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/llvm-project/!svn/ver/190328/llvm/trunk/test/Bitcode/case-ranges-3.3.ll
+END
+null-type.ll
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/llvm-project/!svn/ver/193996/llvm/trunk/test/Bitcode/null-type.ll
+END
+flags.ll
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/llvm-project/!svn/ver/94454/llvm/trunk/test/Bitcode/flags.ll
+END
+shuffle.ll
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/llvm-project/!svn/ver/188843/llvm/trunk/test/Bitcode/shuffle.ll
+END
+upgrade-tbaa.ll
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/llvm-project/!svn/ver/191593/llvm/trunk/test/Bitcode/upgrade-tbaa.ll
+END
+calling-conventions.3.2.ll.bc
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/llvm-project/!svn/ver/197873/llvm/trunk/test/Bitcode/calling-conventions.3.2.ll.bc
+END
+blockaddress.ll
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/llvm-project/!svn/ver/164369/llvm/trunk/test/Bitcode/blockaddress.ll
+END
+2006-12-11-Cast-ConstExpr.ll
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/llvm-project/!svn/ver/132237/llvm/trunk/test/Bitcode/2006-12-11-Cast-ConstExpr.ll
+END
+function-encoding-rel-operands.ll
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/llvm-project/!svn/ver/165739/llvm/trunk/test/Bitcode/function-encoding-rel-operands.ll
+END
+global-variables.3.2.ll
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/197340/llvm/trunk/test/Bitcode/global-variables.3.2.ll
+END
+visibility-styles.3.2.ll
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/llvm-project/!svn/ver/196719/llvm/trunk/test/Bitcode/visibility-styles.3.2.ll
+END
+attributes-3.3.ll.bc
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/llvm-project/!svn/ver/187186/llvm/trunk/test/Bitcode/attributes-3.3.ll.bc
+END
+ptest-old.ll
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/llvm-project/!svn/ver/175605/llvm/trunk/test/Bitcode/ptest-old.ll
+END
+null-type.ll.bc
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/llvm-project/!svn/ver/117552/llvm/trunk/test/Bitcode/null-type.ll.bc
+END
+case-ranges-3.3.ll.bc
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/llvm-project/!svn/ver/190328/llvm/trunk/test/Bitcode/case-ranges-3.3.ll.bc
+END
+select.ll
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/llvm-project/!svn/ver/198267/llvm/trunk/test/Bitcode/select.ll
+END

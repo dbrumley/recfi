@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/llvm-project/!svn/ver/199843/llvm/trunk/test/LTO
+END
+current-section.ll
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/llvm-project/!svn/ver/199843/llvm/trunk/test/LTO/current-section.ll
+END
+runtime-library.ll
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/llvm-project/!svn/ver/194514/llvm/trunk/test/LTO/runtime-library.ll
+END
+lit.local.cfg
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/llvm-project/!svn/ver/192262/llvm/trunk/test/LTO/lit.local.cfg
+END
+cfi_endproc.ll
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/llvm-project/!svn/ver/193090/llvm/trunk/test/LTO/cfi_endproc.ll
+END
+triple-init.ll
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/llvm-project/!svn/ver/197109/llvm/trunk/test/LTO/triple-init.ll
+END
+linkonce_odr_func.ll
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/llvm-project/!svn/ver/193915/llvm/trunk/test/LTO/linkonce_odr_func.ll
+END

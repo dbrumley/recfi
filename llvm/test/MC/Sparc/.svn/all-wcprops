@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/llvm-project/!svn/ver/200112/llvm/trunk/test/MC/Sparc
+END
+sparc-ctrl-instructions.s
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/llvm-project/!svn/ver/198909/llvm/trunk/test/MC/Sparc/sparc-ctrl-instructions.s
+END
+sparc-fp-instructions.s
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/llvm-project/!svn/ver/199974/llvm/trunk/test/MC/Sparc/sparc-fp-instructions.s
+END
+lit.local.cfg
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/llvm-project/!svn/ver/198536/llvm/trunk/test/MC/Sparc/lit.local.cfg
+END
+sparc64-alu-instructions.s
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/llvm-project/!svn/ver/198740/llvm/trunk/test/MC/Sparc/sparc64-alu-instructions.s
+END
+sparc-mem-instructions.s
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/llvm-project/!svn/ver/198658/llvm/trunk/test/MC/Sparc/sparc-mem-instructions.s
+END
+sparc64-ctrl-instructions.s
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/llvm-project/!svn/ver/198738/llvm/trunk/test/MC/Sparc/sparc64-ctrl-instructions.s
+END
+sparc-relocations.s
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/llvm-project/!svn/ver/200112/llvm/trunk/test/MC/Sparc/sparc-relocations.s
+END
+sparc-alu-instructions.s
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/llvm-project/!svn/ver/198533/llvm/trunk/test/MC/Sparc/sparc-alu-instructions.s
+END

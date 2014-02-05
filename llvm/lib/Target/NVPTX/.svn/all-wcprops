@@ -1,0 +1,275 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/llvm-project/!svn/ver/200345/llvm/trunk/lib/Target/NVPTX
+END
+NVPTXISelLowering.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/194810/llvm/trunk/lib/Target/NVPTX/NVPTXISelLowering.h
+END
+NVPTXSplitBBatBar.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/llvm-project/!svn/ver/191610/llvm/trunk/lib/Target/NVPTX/NVPTXSplitBBatBar.cpp
+END
+NVPTXSection.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/llvm-project/!svn/ver/195064/llvm/trunk/lib/Target/NVPTX/NVPTXSection.h
+END
+NVPTXIntrinsics.td
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/llvm-project/!svn/ver/185329/llvm/trunk/lib/Target/NVPTX/NVPTXIntrinsics.td
+END
+NVPTXTargetMachine.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/llvm-project/!svn/ver/199082/llvm/trunk/lib/Target/NVPTX/NVPTXTargetMachine.cpp
+END
+NVPTXInstrInfo.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/llvm-project/!svn/ver/195064/llvm/trunk/lib/Target/NVPTX/NVPTXInstrInfo.cpp
+END
+NVPTXutil.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/llvm-project/!svn/ver/178415/llvm/trunk/lib/Target/NVPTX/NVPTXutil.cpp
+END
+NVPTXUtilities.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/llvm-project/!svn/ver/178415/llvm/trunk/lib/Target/NVPTX/NVPTXUtilities.h
+END
+NVPTXInstrFormats.td
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/llvm-project/!svn/ver/156196/llvm/trunk/lib/Target/NVPTX/NVPTXInstrFormats.td
+END
+NVPTXTargetObjectFile.h
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/llvm-project/!svn/ver/195064/llvm/trunk/lib/Target/NVPTX/NVPTXTargetObjectFile.h
+END
+NVPTXRegisterInfo.td
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/llvm-project/!svn/ver/185334/llvm/trunk/lib/Target/NVPTX/NVPTXRegisterInfo.td
+END
+NVPTXAsmPrinter.h
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/llvm-project/!svn/ver/198708/llvm/trunk/lib/Target/NVPTX/NVPTXAsmPrinter.h
+END
+NVVMReflect.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/llvm-project/!svn/ver/200018/llvm/trunk/lib/Target/NVPTX/NVVMReflect.cpp
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/llvm-project/!svn/ver/156196/llvm/trunk/lib/Target/NVPTX/Makefile
+END
+CMakeLists.txt
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/llvm-project/!svn/ver/195929/llvm/trunk/lib/Target/NVPTX/CMakeLists.txt
+END
+NVPTXISelDAGToDAG.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/186820/llvm/trunk/lib/Target/NVPTX/NVPTXISelDAGToDAG.h
+END
+NVPTXInstrInfo.td
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/llvm-project/!svn/ver/199746/llvm/trunk/lib/Target/NVPTX/NVPTXInstrInfo.td
+END
+NVPTXRegisterInfo.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/llvm-project/!svn/ver/185174/llvm/trunk/lib/Target/NVPTX/NVPTXRegisterInfo.cpp
+END
+NVPTXLowerAggrCopies.h
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/llvm-project/!svn/ver/197653/llvm/trunk/lib/Target/NVPTX/NVPTXLowerAggrCopies.h
+END
+NVPTXISelLowering.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/llvm-project/!svn/ver/200018/llvm/trunk/lib/Target/NVPTX/NVPTXISelLowering.cpp
+END
+NVPTXMCExpr.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/llvm-project/!svn/ver/187798/llvm/trunk/lib/Target/NVPTX/NVPTXMCExpr.h
+END
+NVPTX.td
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/llvm-project/!svn/ver/196065/llvm/trunk/lib/Target/NVPTX/NVPTX.td
+END
+NVPTXSubtarget.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/llvm-project/!svn/ver/197311/llvm/trunk/lib/Target/NVPTX/NVPTXSubtarget.h
+END
+NVPTXAllocaHoisting.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/llvm-project/!svn/ver/197653/llvm/trunk/lib/Target/NVPTX/NVPTXAllocaHoisting.h
+END
+NVPTXFrameLowering.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/llvm-project/!svn/ver/178415/llvm/trunk/lib/Target/NVPTX/NVPTXFrameLowering.h
+END
+cl_common_defines.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/178415/llvm/trunk/lib/Target/NVPTX/cl_common_defines.h
+END
+NVPTXUtilities.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/llvm-project/!svn/ver/178415/llvm/trunk/lib/Target/NVPTX/NVPTXUtilities.cpp
+END
+NVPTXSplitBBatBar.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/197653/llvm/trunk/lib/Target/NVPTX/NVPTXSplitBBatBar.h
+END
+NVPTXInstrInfo.h
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/llvm-project/!svn/ver/195064/llvm/trunk/lib/Target/NVPTX/NVPTXInstrInfo.h
+END
+NVPTXTargetMachine.h
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/llvm-project/!svn/ver/178415/llvm/trunk/lib/Target/NVPTX/NVPTXTargetMachine.h
+END
+ManagedStringPool.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/185606/llvm/trunk/lib/Target/NVPTX/ManagedStringPool.h
+END
+NVPTXutil.h
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/llvm-project/!svn/ver/156196/llvm/trunk/lib/Target/NVPTX/NVPTXutil.h
+END
+NVPTX.h
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/llvm-project/!svn/ver/186844/llvm/trunk/lib/Target/NVPTX/NVPTX.h
+END
+NVPTXAsmPrinter.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/200345/llvm/trunk/lib/Target/NVPTX/NVPTXAsmPrinter.cpp
+END
+NVPTXGenericToNVVM.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/llvm-project/!svn/ver/200244/llvm/trunk/lib/Target/NVPTX/NVPTXGenericToNVVM.cpp
+END
+LLVMBuild.txt
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/llvm-project/!svn/ver/196988/llvm/trunk/lib/Target/NVPTX/LLVMBuild.txt
+END
+NVPTXISelDAGToDAG.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/llvm-project/!svn/ver/196503/llvm/trunk/lib/Target/NVPTX/NVPTXISelDAGToDAG.cpp
+END
+NVPTXVector.td
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/llvm-project/!svn/ver/156196/llvm/trunk/lib/Target/NVPTX/NVPTXVector.td
+END
+NVPTXPrologEpilogPass.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/llvm-project/!svn/ver/198685/llvm/trunk/lib/Target/NVPTX/NVPTXPrologEpilogPass.cpp
+END
+NVPTXLowerAggrCopies.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/llvm-project/!svn/ver/178415/llvm/trunk/lib/Target/NVPTX/NVPTXLowerAggrCopies.cpp
+END
+NVPTXMCExpr.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/llvm-project/!svn/ver/187798/llvm/trunk/lib/Target/NVPTX/NVPTXMCExpr.cpp
+END
+NVPTXSubtarget.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/llvm-project/!svn/ver/195064/llvm/trunk/lib/Target/NVPTX/NVPTXSubtarget.cpp
+END
+NVPTXAllocaHoisting.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/llvm-project/!svn/ver/186392/llvm/trunk/lib/Target/NVPTX/NVPTXAllocaHoisting.cpp
+END
+NVPTXFrameLowering.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/llvm-project/!svn/ver/187799/llvm/trunk/lib/Target/NVPTX/NVPTXFrameLowering.cpp
+END
+NVPTXRegisterInfo.h
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/184369/llvm/trunk/lib/Target/NVPTX/NVPTXRegisterInfo.h
+END

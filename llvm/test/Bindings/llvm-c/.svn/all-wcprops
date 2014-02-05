@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/llvm-project/!svn/ver/193235/llvm/trunk/test/Bindings/llvm-c
+END
+disassemble.test
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/llvm-project/!svn/ver/193233/llvm/trunk/test/Bindings/llvm-c/disassemble.test
+END
+globals.ll
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/llvm-project/!svn/ver/193233/llvm/trunk/test/Bindings/llvm-c/globals.ll
+END
+functions.ll
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/llvm-project/!svn/ver/193233/llvm/trunk/test/Bindings/llvm-c/functions.ll
+END
+lit.local.cfg
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/llvm-project/!svn/ver/193235/llvm/trunk/test/Bindings/llvm-c/lit.local.cfg
+END
+calc.test
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/llvm-project/!svn/ver/193233/llvm/trunk/test/Bindings/llvm-c/calc.test
+END

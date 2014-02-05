@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/llvm-project/!svn/ver/200401/llvm/trunk
+END
+Makefile.common
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/llvm-project/!svn/ver/169569/llvm/trunk/Makefile.common
+END
+.gitignore
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/llvm-project/!svn/ver/200079/llvm/trunk/.gitignore
+END
+Makefile.rules
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/llvm-project/!svn/ver/198451/llvm/trunk/Makefile.rules
+END
+LLVMBuild.txt
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/llvm-project/!svn/ver/191835/llvm/trunk/LLVMBuild.txt
+END
+llvm.spec.in
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/llvm-project/!svn/ver/148985/llvm/trunk/llvm.spec.in
+END
+.arcconfig
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/llvm-project/!svn/ver/169085/llvm/trunk/.arcconfig
+END
+CREDITS.TXT
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/llvm-project/!svn/ver/197757/llvm/trunk/CREDITS.TXT
+END
+README.txt
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/llvm-project/!svn/ver/191949/llvm/trunk/README.txt
+END
+CMakeLists.txt
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/llvm-project/!svn/ver/199595/llvm/trunk/CMakeLists.txt
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/llvm-project/!svn/ver/199447/llvm/trunk/Makefile
+END
+configure
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/llvm-project/!svn/ver/199334/llvm/trunk/configure
+END
+CODE_OWNERS.TXT
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/llvm-project/!svn/ver/196369/llvm/trunk/CODE_OWNERS.TXT
+END
+Makefile.config.in
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/llvm-project/!svn/ver/184808/llvm/trunk/Makefile.config.in
+END
+.clang-format
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/llvm-project/!svn/ver/189737/llvm/trunk/.clang-format
+END
+LICENSE.TXT
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/llvm-project/!svn/ver/198274/llvm/trunk/LICENSE.TXT
+END

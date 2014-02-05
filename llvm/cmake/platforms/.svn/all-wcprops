@@ -1,0 +1,11 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/llvm-project/!svn/ver/200391/llvm/trunk/cmake/platforms
+END
+Android.cmake
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/llvm-project/!svn/ver/200391/llvm/trunk/cmake/platforms/Android.cmake
+END

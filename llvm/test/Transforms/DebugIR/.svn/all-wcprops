@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/llvm-project/!svn/ver/191576/llvm/trunk/test/Transforms/DebugIR
+END
+simple.ll
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/llvm-project/!svn/ver/185212/llvm/trunk/test/Transforms/DebugIR/simple.ll
+END
+simple-addrspace.ll
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/llvm-project/!svn/ver/191576/llvm/trunk/test/Transforms/DebugIR/simple-addrspace.ll
+END
+exception.ll
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/185212/llvm/trunk/test/Transforms/DebugIR/exception.ll
+END
+crash.ll
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/llvm-project/!svn/ver/185212/llvm/trunk/test/Transforms/DebugIR/crash.ll
+END
+vector.ll
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/llvm-project/!svn/ver/185212/llvm/trunk/test/Transforms/DebugIR/vector.ll
+END
+struct.ll
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/llvm-project/!svn/ver/185212/llvm/trunk/test/Transforms/DebugIR/struct.ll
+END
+function.ll
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/llvm-project/!svn/ver/185212/llvm/trunk/test/Transforms/DebugIR/function.ll
+END

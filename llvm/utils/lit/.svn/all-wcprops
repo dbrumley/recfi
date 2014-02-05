@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/llvm-project/!svn/ver/199983/llvm/trunk/utils/lit
+END
+MANIFEST.in
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/llvm-project/!svn/ver/174002/llvm/trunk/utils/lit/MANIFEST.in
+END
+lit.py
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/llvm-project/!svn/ver/92168/llvm/trunk/utils/lit/lit.py
+END
+TODO
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/llvm-project/!svn/ver/189556/llvm/trunk/utils/lit/TODO
+END
+setup.py
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/llvm-project/!svn/ver/188309/llvm/trunk/utils/lit/setup.py
+END

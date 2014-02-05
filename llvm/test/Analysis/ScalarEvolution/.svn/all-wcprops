@@ -1,0 +1,491 @@
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/llvm-project/!svn/ver/200210/llvm/trunk/test/Analysis/ScalarEvolution
+END
+do-loop.ll
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/llvm-project/!svn/ver/188971/llvm/trunk/test/Analysis/ScalarEvolution/do-loop.ll
+END
+2007-08-06-Unsigned.ll
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/llvm-project/!svn/ver/188971/llvm/trunk/test/Analysis/ScalarEvolution/2007-08-06-Unsigned.ll
+END
+pointer-sign-bits.ll
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/llvm-project/!svn/ver/94574/llvm/trunk/test/Analysis/ScalarEvolution/pointer-sign-bits.ll
+END
+load.ll
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/llvm-project/!svn/ver/143117/llvm/trunk/test/Analysis/ScalarEvolution/load.ll
+END
+unreachable-code.ll
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/llvm-project/!svn/ver/98103/llvm/trunk/test/Analysis/ScalarEvolution/unreachable-code.ll
+END
+zext-signed-addrec.ll
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/llvm-project/!svn/ver/198863/llvm/trunk/test/Analysis/ScalarEvolution/zext-signed-addrec.ll
+END
+2008-12-11-SMaxOverflow.ll
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/llvm-project/!svn/ver/102234/llvm/trunk/test/Analysis/ScalarEvolution/2008-12-11-SMaxOverflow.ll
+END
+sle.ll
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/102234/llvm/trunk/test/Analysis/ScalarEvolution/sle.ll
+END
+scev-invalid.ll
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/llvm-project/!svn/ver/177986/llvm/trunk/test/Analysis/ScalarEvolution/scev-invalid.ll
+END
+fold.ll
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/llvm-project/!svn/ver/200210/llvm/trunk/test/Analysis/ScalarEvolution/fold.ll
+END
+max-trip-count.ll
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/llvm-project/!svn/ver/140992/llvm/trunk/test/Analysis/ScalarEvolution/max-trip-count.ll
+END
+trip-count3.ll
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/llvm-project/!svn/ver/194116/llvm/trunk/test/Analysis/ScalarEvolution/trip-count3.ll
+END
+trip-count7.ll
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/llvm-project/!svn/ver/187756/llvm/trunk/test/Analysis/ScalarEvolution/trip-count7.ll
+END
+2008-05-25-NegativeStepToZero.ll
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/llvm-project/!svn/ver/188971/llvm/trunk/test/Analysis/ScalarEvolution/2008-05-25-NegativeStepToZero.ll
+END
+2009-04-22-TruncCast.ll
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/llvm-project/!svn/ver/188971/llvm/trunk/test/Analysis/ScalarEvolution/2009-04-22-TruncCast.ll
+END
+zext-wrap.ll
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/llvm-project/!svn/ver/187756/llvm/trunk/test/Analysis/ScalarEvolution/zext-wrap.ll
+END
+2007-11-14-SignedAddRec.ll
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/llvm-project/!svn/ver/188971/llvm/trunk/test/Analysis/ScalarEvolution/2007-11-14-SignedAddRec.ll
+END
+2008-07-12-UnneededSelect2.ll
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/llvm-project/!svn/ver/188971/llvm/trunk/test/Analysis/ScalarEvolution/2008-07-12-UnneededSelect2.ll
+END
+trip-count.ll
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/llvm-project/!svn/ver/187756/llvm/trunk/test/Analysis/ScalarEvolution/trip-count.ll
+END
+trip-count11.ll
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/llvm-project/!svn/ver/193102/llvm/trunk/test/Analysis/ScalarEvolution/trip-count11.ll
+END
+smax.ll
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/llvm-project/!svn/ver/187756/llvm/trunk/test/Analysis/ScalarEvolution/smax.ll
+END
+2011-03-09-ExactNoMaxBECount.ll
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/llvm-project/!svn/ver/171250/llvm/trunk/test/Analysis/ScalarEvolution/2011-03-09-ExactNoMaxBECount.ll
+END
+2009-05-09-PointerEdgeCount.ll
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/llvm-project/!svn/ver/188971/llvm/trunk/test/Analysis/ScalarEvolution/2009-05-09-PointerEdgeCount.ll
+END
+2010-09-03-RequiredTransitive.ll
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/llvm-project/!svn/ver/171248/llvm/trunk/test/Analysis/ScalarEvolution/2010-09-03-RequiredTransitive.ll
+END
+2008-11-02-QuadraticCrash.ll
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/llvm-project/!svn/ver/94574/llvm/trunk/test/Analysis/ScalarEvolution/2008-11-02-QuadraticCrash.ll
+END
+sext-inreg.ll
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/llvm-project/!svn/ver/159525/llvm/trunk/test/Analysis/ScalarEvolution/sext-inreg.ll
+END
+trip-count2.ll
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/llvm-project/!svn/ver/187756/llvm/trunk/test/Analysis/ScalarEvolution/trip-count2.ll
+END
+2008-11-15-CubicOOM.ll
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/llvm-project/!svn/ver/94574/llvm/trunk/test/Analysis/ScalarEvolution/2008-11-15-CubicOOM.ll
+END
+trip-count6.ll
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/llvm-project/!svn/ver/187756/llvm/trunk/test/Analysis/ScalarEvolution/trip-count6.ll
+END
+nsw-offset.ll
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/llvm-project/!svn/ver/200203/llvm/trunk/test/Analysis/ScalarEvolution/nsw-offset.ll
+END
+sext-iv-2.ll
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/llvm-project/!svn/ver/94574/llvm/trunk/test/Analysis/ScalarEvolution/sext-iv-2.ll
+END
+2007-08-06-MisinterpretBranch.ll
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/llvm-project/!svn/ver/188971/llvm/trunk/test/Analysis/ScalarEvolution/2007-08-06-MisinterpretBranch.ll
+END
+2008-12-15-DontUseSDiv.ll
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/llvm-project/!svn/ver/194116/llvm/trunk/test/Analysis/ScalarEvolution/2008-12-15-DontUseSDiv.ll
+END
+2008-07-12-UnneededSelect1.ll
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/llvm-project/!svn/ver/188971/llvm/trunk/test/Analysis/ScalarEvolution/2008-07-12-UnneededSelect1.ll
+END
+trip-count10.ll
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/llvm-project/!svn/ver/183017/llvm/trunk/test/Analysis/ScalarEvolution/trip-count10.ll
+END
+pr3909.ll
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/llvm-project/!svn/ver/133371/llvm/trunk/test/Analysis/ScalarEvolution/pr3909.ll
+END
+2008-02-12-SMAXTripCount.ll
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/llvm-project/!svn/ver/145363/llvm/trunk/test/Analysis/ScalarEvolution/2008-02-12-SMAXTripCount.ll
+END
+nsw.ll
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/llvm-project/!svn/ver/193514/llvm/trunk/test/Analysis/ScalarEvolution/nsw.ll
+END
+2008-07-29-SMinExpr.ll
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/llvm-project/!svn/ver/106306/llvm/trunk/test/Analysis/ScalarEvolution/2008-07-29-SMinExpr.ll
+END
+avoid-infinite-recursion-1.ll
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/llvm-project/!svn/ver/133371/llvm/trunk/test/Analysis/ScalarEvolution/avoid-infinite-recursion-1.ll
+END
+2007-07-15-NegativeStride.ll
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/llvm-project/!svn/ver/187756/llvm/trunk/test/Analysis/ScalarEvolution/2007-07-15-NegativeStride.ll
+END
+2008-02-11-ReversedCondition.ll
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/llvm-project/!svn/ver/188971/llvm/trunk/test/Analysis/ScalarEvolution/2008-02-11-ReversedCondition.ll
+END
+2007-11-18-OrInstruction.ll
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/llvm-project/!svn/ver/94574/llvm/trunk/test/Analysis/ScalarEvolution/2007-11-18-OrInstruction.ll
+END
+div-overflow.ll
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/llvm-project/!svn/ver/188971/llvm/trunk/test/Analysis/ScalarEvolution/div-overflow.ll
+END
+2008-07-19-WrappingIV.ll
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/llvm-project/!svn/ver/188971/llvm/trunk/test/Analysis/ScalarEvolution/2008-07-19-WrappingIV.ll
+END
+trip-count5.ll
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/llvm-project/!svn/ver/159525/llvm/trunk/test/Analysis/ScalarEvolution/trip-count5.ll
+END
+2009-01-02-SignedNegativeStride.ll
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/llvm-project/!svn/ver/188971/llvm/trunk/test/Analysis/ScalarEvolution/2009-01-02-SignedNegativeStride.ll
+END
+SolveQuadraticEquation.ll
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/llvm-project/!svn/ver/187756/llvm/trunk/test/Analysis/ScalarEvolution/SolveQuadraticEquation.ll
+END
+trip-count9.ll
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/llvm-project/!svn/ver/194116/llvm/trunk/test/Analysis/ScalarEvolution/trip-count9.ll
+END
+sext-iv-1.ll
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/llvm-project/!svn/ver/159525/llvm/trunk/test/Analysis/ScalarEvolution/sext-iv-1.ll
+END
+2008-12-14-StrideAndSigned.ll
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/llvm-project/!svn/ver/188971/llvm/trunk/test/Analysis/ScalarEvolution/2008-12-14-StrideAndSigned.ll
+END
+undefined.ll
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/llvm-project/!svn/ver/102042/llvm/trunk/test/Analysis/ScalarEvolution/undefined.ll
+END
+2008-02-15-UMax.ll
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/llvm-project/!svn/ver/188971/llvm/trunk/test/Analysis/ScalarEvolution/2008-02-15-UMax.ll
+END
+max-trip-count-address-space.ll
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/llvm-project/!svn/ver/190425/llvm/trunk/test/Analysis/ScalarEvolution/max-trip-count-address-space.ll
+END
+2008-11-18-LessThanOrEqual.ll
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/llvm-project/!svn/ver/188971/llvm/trunk/test/Analysis/ScalarEvolution/2008-11-18-LessThanOrEqual.ll
+END
+2007-09-27-LargeStepping.ll
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/llvm-project/!svn/ver/188971/llvm/trunk/test/Analysis/ScalarEvolution/2007-09-27-LargeStepping.ll
+END
+avoid-smax-1.ll
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/llvm-project/!svn/ver/153256/llvm/trunk/test/Analysis/ScalarEvolution/avoid-smax-1.ll
+END
+2008-11-18-Stride2.ll
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/llvm-project/!svn/ver/194116/llvm/trunk/test/Analysis/ScalarEvolution/2008-11-18-Stride2.ll
+END
+2008-07-29-SGTTripCount.ll
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/llvm-project/!svn/ver/94574/llvm/trunk/test/Analysis/ScalarEvolution/2008-07-29-SGTTripCount.ll
+END
+and-xor.ll
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/llvm-project/!svn/ver/200203/llvm/trunk/test/Analysis/ScalarEvolution/and-xor.ll
+END
+2008-12-08-FiniteSGE.ll
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/llvm-project/!svn/ver/188971/llvm/trunk/test/Analysis/ScalarEvolution/2008-12-08-FiniteSGE.ll
+END
+avoid-infinite-recursion-0.ll
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/llvm-project/!svn/ver/94574/llvm/trunk/test/Analysis/ScalarEvolution/avoid-infinite-recursion-0.ll
+END
+2008-06-12-BinomialInt64.ll
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/llvm-project/!svn/ver/81537/llvm/trunk/test/Analysis/ScalarEvolution/2008-06-12-BinomialInt64.ll
+END
+2009-07-04-GroupConstantsWidthMismatch.ll
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/llvm-project/!svn/ver/81537/llvm/trunk/test/Analysis/ScalarEvolution/2009-07-04-GroupConstantsWidthMismatch.ll
+END
+2011-04-26-FoldAddRec.ll
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/llvm-project/!svn/ver/186263/llvm/trunk/test/Analysis/ScalarEvolution/2011-04-26-FoldAddRec.ll
+END
+scev-aa.ll
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/llvm-project/!svn/ver/159544/llvm/trunk/test/Analysis/ScalarEvolution/scev-aa.ll
+END
+2012-03-26-LoadConstant.ll
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/llvm-project/!svn/ver/180743/llvm/trunk/test/Analysis/ScalarEvolution/2012-03-26-LoadConstant.ll
+END
+2011-10-04-ConstEvolve.ll
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/llvm-project/!svn/ver/141166/llvm/trunk/test/Analysis/ScalarEvolution/2011-10-04-ConstEvolve.ll
+END
+trip-count4.ll
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/llvm-project/!svn/ver/187756/llvm/trunk/test/Analysis/ScalarEvolution/trip-count4.ll
+END
+trip-count8.ll
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/llvm-project/!svn/ver/187756/llvm/trunk/test/Analysis/ScalarEvolution/trip-count8.ll
+END
+2012-05-29-MulAddRec.ll
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/llvm-project/!svn/ver/162097/llvm/trunk/test/Analysis/ScalarEvolution/2012-05-29-MulAddRec.ll
+END
+sext-iv-0.ll
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/llvm-project/!svn/ver/127638/llvm/trunk/test/Analysis/ScalarEvolution/sext-iv-0.ll
+END
+unsimplified-loop.ll
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/llvm-project/!svn/ver/101030/llvm/trunk/test/Analysis/ScalarEvolution/unsimplified-loop.ll
+END
+2008-08-04-LongAddRec.ll
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/llvm-project/!svn/ver/94574/llvm/trunk/test/Analysis/ScalarEvolution/2008-08-04-LongAddRec.ll
+END
+2008-08-04-IVOverflow.ll
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/llvm-project/!svn/ver/94574/llvm/trunk/test/Analysis/ScalarEvolution/2008-08-04-IVOverflow.ll
+END
+how-far-to-zero.ll
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/llvm-project/!svn/ver/159393/llvm/trunk/test/Analysis/ScalarEvolution/how-far-to-zero.ll
+END
+2008-07-19-InfiniteLoop.ll
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/llvm-project/!svn/ver/188971/llvm/trunk/test/Analysis/ScalarEvolution/2008-07-19-InfiniteLoop.ll
+END
+avoid-smax-0.ll
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/llvm-project/!svn/ver/188971/llvm/trunk/test/Analysis/ScalarEvolution/avoid-smax-0.ll
+END
+2012-05-18-LoopPredRecurse.ll
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/llvm-project/!svn/ver/200018/llvm/trunk/test/Analysis/ScalarEvolution/2012-05-18-LoopPredRecurse.ll
+END
+2008-11-18-Stride1.ll
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/llvm-project/!svn/ver/194116/llvm/trunk/test/Analysis/ScalarEvolution/2008-11-18-Stride1.ll
+END
+trip-count12.ll
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/llvm-project/!svn/ver/144173/llvm/trunk/test/Analysis/ScalarEvolution/trip-count12.ll
+END
