@@ -1,9 +1,6 @@
 //===- Test.cpp ----------------===//
-//
-//                     The LLVM Compiler Infrastructure
-//
-// This file is distributed under the University of Illinois Open Source
-// License. See LICENSE.TXT for details.
+// Joe Battaglia, jabat@cmu.edu
+// Oulin Yao, oyao@cmu.edu
 //
 //===----------------------------------------------------------------------===//
 //
@@ -18,6 +15,8 @@
 #include "llvm/IR/BasicBlock.h"
 #include "llvm/Pass.h"
 #include "llvm/Support/raw_ostream.h"
+#include "llvm/Support/InstIterator.h"
+
 using namespace llvm;
 
 STATISTIC(TestCounter, "Counts number of functions greeted");
@@ -32,9 +31,26 @@ namespace {
             ++TestCounter;
             errs() << "Test: ";
             errs().write_escaped(F.getName()) << '\n';
-            for (Function::iterator I = F.begin(), E = F.end(); I != E; ++I)
+            for (inst_iterator I = inst_begin(F), E = inst_end(F); I != E; ++I)
             {
-                runOnBasicBlock(*I);
+                if (CallInst* callInst = dyn_cast<CallInst>(&*I)) {
+                    // We know we've encountered a call instruction, so we
+                    // need to determine if it's a call to the
+                    // function pointed to by m_func or not.
+                    errs() << "\tCall: " << callInst->getCalledFunction() << '\n';
+                }
+                if (BranchInst* brInst = dyn_cast<BranchInst>(&*I)) {
+                    //Each branch can go to a number of sucessors
+                    unsigned numTarget = brInst->getNumSuccessors();
+                    errs() << "\tBranch: " << brInst->getCondition() << '\n';
+                    for(unsigned i = 0; i < numTarget; i++)
+                    {
+                        errs() << "\t\t" << i << " " << brInst->getSuccessor(i) << '\n';
+                    }               
+                }
+                if (ReturnInst* retInst = dyn_cast<ReturnInst>(&*I)) {
+                    errs() << "\tRet: " << retInst->getReturnValue() << '\n';
+                }
             }
            return false;
         }
@@ -48,8 +64,7 @@ namespace {
         }
         
         virtual bool runOnInstruction(Instruction &I) {
-                errs().write_escaped(I.getOpcodeName()) << '\n';
-                return false;
+            return false;
         }
     };
 }
