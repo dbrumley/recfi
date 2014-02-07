@@ -20,7 +20,7 @@ int testing(int (*f)(int, int), int a, int b)
 
 int main()
 {
-    int x = 5;
+    int x = 15;
     int y = 25;
     global_var2 = 6;
 
