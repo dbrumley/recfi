@@ -1,0 +1,151 @@
+#-------------------------------------------------------------------------------
+# Makefile for building the code samples. Read inline comments for
+# documentation.
+#
+# Eli Bendersky (eliben@gmail.com)
+# This code is in the public domain
+#-------------------------------------------------------------------------------
+
+# The following variables will likely need to be customized, depending on where
+# and how you built LLVM & Clang. They can be overridden by setting them on the
+# make command line: "make VARNAME=VALUE", etc.
+
+# LLVM_SRC_PATH is the path to the root of the checked out source code. This
+# directory should contain the configure script, the include/ and lib/
+# directories of LLVM, Clang in tools/clang/, etc.
+# Alternatively, if you're building vs. a binary download of LLVM, then
+# LLVM_SRC_PATH can point to the main untarred directory.
+LLVM_SRC_PATH := $$HOME/llvm/llvm_svn_rw
+
+# LLVM_BUILD_PATH is the directory in which you built LLVM - where you ran
+# configure or cmake.
+# For linking vs. a binary build of LLVM, point to the main untarred directory.
+# LLVM_BIN_PATH is the directory where binaries are placed by the LLVM build
+# process. It should contain the tools like opt, llc and clang. The default
+# reflects a debug build with autotools (configure & make).
+LLVM_BUILD_PATH := $$HOME/llvm/build/svn-make-debug
+LLVM_BIN_PATH := $(LLVM_BUILD_PATH)/Debug+Asserts/bin
+
+# Run make BUILD_NINJA=1 to enable these paths
+ifdef BUILD_NINJA
+	LLVM_BUILD_PATH := $$HOME/llvm/build/svn-ninja-release
+	LLVM_BIN_PATH 	:= $(LLVM_BUILD_PATH)/bin
+endif
+
+$(info -----------------------------------------------)
+$(info Using LLVM_SRC_PATH = $(LLVM_SRC_PATH))
+$(info Using LLVM_BUILD_PATH = $(LLVM_BUILD_PATH))
+$(info Using LLVM_BIN_PATH = $(LLVM_BIN_PATH))
+$(info -----------------------------------------------)
+
+# It's recommended that CXX matches the compiler you used to build LLVM itself.
+CXX := g++
+CXXFLAGS := -fno-rtti -O0 -g
+PLUGIN_CXXFLAGS := -fpic
+
+LLVM_CXXFLAGS := `$(LLVM_BIN_PATH)/llvm-config --cxxflags`
+LLVM_LDFLAGS := `$(LLVM_BIN_PATH)/llvm-config --ldflags --libs --system-libs`
+
+# Plugins shouldn't link LLVM and Clang libs statically, because they are
+# already linked into the main executable (opt or clang). LLVM doesn't like its
+# libs to be linked more than once because it uses globals for configuration
+# and plugin registration, and these trample over each other.
+LLVM_LDFLAGS_NOLIBS := `$(LLVM_BIN_PATH)/llvm-config --ldflags`
+PLUGIN_LDFLAGS := -shared
+
+CLANG_INCLUDES := \
+	-I$(LLVM_SRC_PATH)/tools/clang/include \
+	-I$(LLVM_BUILD_PATH)/tools/clang/include
+
+# List of Clang libraries to link. The proper -L will be provided by the
+# call to llvm-config
+# Note that I'm using -Wl,--{start|end}-group around the Clang libs; this is
+# because there are circular dependencies that make the correct order difficult
+# to specify and maintain. The linker group options make the linking somewhat
+# slower, but IMHO they're still perfectly fine for tools that link with Clang.
+CLANG_LIBS := \
+	-Wl,--start-group \
+	-lclangAST \
+	-lclangAnalysis \
+	-lclangBasic \
+	-lclangDriver \
+	-lclangFrontend \
+	-lclangLex \
+	-lclangParse \
+	-lclangSema \
+	-lclangEdit \
+	-lclangASTMatchers \
+	-lclangRewriteCore \
+	-lclangRewriteFrontend \
+	-lclangStaticAnalyzerFrontend \
+	-lclangStaticAnalyzerCheckers \
+	-lclangStaticAnalyzerCore \
+	-lclangSerialization \
+	-lclangTooling \
+	-Wl,--end-group
+
+# Internal paths in this project: where to find sources, and where to put
+# build artifacts.
+SRC_LLVM_DIR := src_llvm
+SRC_CLANG_DIR := src_clang
+BUILDDIR := build
+
+.PHONY: all
+all: make_builddir \
+	emit_build_config \
+	$(BUILDDIR)/bb_toposort_sccs \
+	$(BUILDDIR)/simple_module_pass \
+	$(BUILDDIR)/simple_bb_pass \
+	$(BUILDDIR)/hello_pass.so \
+	$(BUILDDIR)/replace_threadidx_with_call \
+	$(BUILDDIR)/access_debug_metadata \
+	$(BUILDDIR)/clang-check \
+	$(BUILDDIR)/plugin_print_funcnames.so \
+	$(BUILDDIR)/rewritersample
+
+.PHONY: test
+test: emit_build_config
+	python3 test/all_tests.py
+
+.PHONY: emit_build_config
+emit_build_config: make_builddir
+	@echo $(LLVM_BIN_PATH) > $(BUILDDIR)/_build_config
+
+.PHONY: make_builddir
+make_builddir:
+	@test -d $(BUILDDIR) || mkdir $(BUILDDIR)
+
+$(BUILDDIR)/simple_bb_pass: $(SRC_LLVM_DIR)/simple_bb_pass.cpp
+	$(CXX) $(CXXFLAGS) $(LLVM_CXXFLAGS) $^ $(LLVM_LDFLAGS) -o $@
+
+$(BUILDDIR)/replace_threadidx_with_call: $(SRC_LLVM_DIR)/replace_threadidx_with_call.cpp
+	$(CXX) $(CXXFLAGS) $(LLVM_CXXFLAGS) $^ $(LLVM_LDFLAGS) -o $@
+
+$(BUILDDIR)/simple_module_pass: $(SRC_LLVM_DIR)/simple_module_pass.cpp
+	$(CXX) $(CXXFLAGS) $(LLVM_CXXFLAGS) $^ $(LLVM_LDFLAGS) -o $@
+
+$(BUILDDIR)/access_debug_metadata: $(SRC_LLVM_DIR)/access_debug_metadata.cpp
+	$(CXX) $(CXXFLAGS) $(LLVM_CXXFLAGS) $^ $(LLVM_LDFLAGS) -o $@
+
+$(BUILDDIR)/bb_toposort_sccs: $(SRC_LLVM_DIR)/bb_toposort_sccs.cpp
+	$(CXX) $(CXXFLAGS) $(LLVM_CXXFLAGS) $^ $(LLVM_LDFLAGS) -o $@
+
+$(BUILDDIR)/hello_pass.so: $(SRC_LLVM_DIR)/hello_pass.cpp
+	$(CXX) $(PLUGIN_CXXFLAGS) $(CXXFLAGS) $(LLVM_CXXFLAGS) \
+		$^ $(PLUGIN_LDFLAGS) $(LLVM_LDFLAGS_NOLIBS) -o $@
+
+$(BUILDDIR)/clang-check: $(SRC_CLANG_DIR)/ClangCheck.cpp
+	$(CXX) $(CXXFLAGS) $(LLVM_CXXFLAGS) $(CLANG_INCLUDES) $^ \
+		$(CLANG_LIBS) $(LLVM_LDFLAGS) -o $@
+
+$(BUILDDIR)/rewritersample: $(SRC_CLANG_DIR)/rewritersample.cpp
+	$(CXX) $(CXXFLAGS) $(LLVM_CXXFLAGS) $(CLANG_INCLUDES) $^ \
+		$(CLANG_LIBS) $(LLVM_LDFLAGS) -o $@
+
+$(BUILDDIR)/plugin_print_funcnames.so: $(SRC_CLANG_DIR)/plugin_print_funcnames.cpp
+	$(CXX) $(PLUGIN_CXXFLAGS) $(CXXFLAGS) $(LLVM_CXXFLAGS) $(CLANG_INCLUDES) $^ \
+		$(PLUGIN_LDFLAGS) $(LLVM_LDFLAGS_NOLIBS) -o $@
+
+.PHONY: clean
+clean:
+	rm -rf $(BUILDDIR)/* *.dot test/*.pyc test/__pycache__
