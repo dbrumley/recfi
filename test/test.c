@@ -23,7 +23,37 @@ int main()
     int x = 15;
     int y = 25;
     global_var2 = 6;
-
+/*
+    switch(x)
+    {
+      case 10:
+        y = 20;
+	break;
+      case 15:
+        y = 16;
+	break;
+      case 16:
+        y = 21;
+	break;
+      case 28:
+        y = 31;
+	break;
+      case 29:
+        y = 68;
+	break;
+      case 50:
+        y = 89;
+	break;
+      case 70:
+        y = 89;
+	break;
+      case 71:
+        y = 82;
+	break;
+      default:
+        break;
+    }
+*/
     if(x < 10)
     {
         sum_func = sum;
