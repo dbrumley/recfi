@@ -1,214 +1,0 @@
-10
-
-dir
-200402
-https://llvm.org/svn/llvm-project/llvm/trunk/test/Transforms
-https://llvm.org/svn/llvm-project
-
-
-
-2014-01-29T13:16:53.679143Z
-200393
-chandlerc
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-91177308-0d34-0410-b5e6-96231b3b80d8
-
-LoopStrengthReduce
-dir
-
-IPConstantProp
-dir
-
-CodeGenPrepare
-dir
-
-StructurizeCFG
-dir
-
-GlobalOpt
-dir
-
-CorrelatedValuePropagation
-dir
-
-LowerAtomic
-dir
-
-ConstProp
-dir
-
-LoopRotate
-dir
-
-SCCP
-dir
-
-LoopReroll
-dir
-
-ArgumentPromotion
-dir
-
-InstSimplify
-dir
-
-LoopIdiom
-dir
-
-Scalarizer
-dir
-
-DeadStoreElimination
-dir
-
-ObjCARC
-dir
-
-Sink
-dir
-
-SROA
-dir
-
-LoopVectorize
-dir
-
-EarlyCSE
-dir
-
-ConstantMerge
-dir
-
-StripSymbols
-dir
-
-LowerSwitch
-dir
-
-SLPVectorizer
-dir
-
-MemCpyOpt
-dir
-
-Inline
-dir
-
-BBVectorize
-dir
-
-DebugIR
-dir
-
-Internalize
-dir
-
-LICM
-dir
-
-LowerExpectIntrinsic
-dir
-
-LoopSimplify
-dir
-
-ScalarRepl
-dir
-
-GVN
-dir
-
-PhaseOrdering
-dir
-
-TailCallElim
-dir
-
-ADCE
-dir
-
-LoopDeletion
-dir
-
-LoopUnswitch
-dir
-
-ConstantHoisting
-dir
-
-Reg2Mem
-dir
-
-Mem2Reg
-dir
-
-DeadArgElim
-dir
-
-IndVarSimplify
-dir
-
-BranchFolding
-dir
-
-MetaRenamer
-dir
-
-JumpThreading
-dir
-
-Reassociate
-dir
-
-SampleProfile
-dir
-
-TailDup
-dir
-
-FunctionAttrs
-dir
-
-LowerInvoke
-dir
-
-LCSSA
-dir
-
-LoopUnroll
-dir
-
-PruneEH
-dir
-
-CodeExtractor
-dir
-
-GCOVProfiling
-dir
-
-InstCombine
-dir
-
-MergeFunc
-dir
-
-GlobalDCE
-dir
-
-SimplifyCFG
-dir
-

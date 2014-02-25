@@ -1,52 +1,0 @@
-10
-
-dir
-200402
-https://llvm.org/svn/llvm-project/llvm/trunk/test/MC/Disassembler
-https://llvm.org/svn/llvm-project
-
-
-
-2014-01-24T05:24:01.031367Z
-199974
-venkatra
-has-props
-
-
-
-
-
-
-
-
-
-
-
-
-
-91177308-0d34-0410-b5e6-96231b3b80d8
-
-X86
-dir
-
-AArch64
-dir
-
-Mips
-dir
-
-Sparc
-dir
-
-SystemZ
-dir
-
-ARM
-dir
-
-PowerPC
-dir
-
-XCore
-dir
-

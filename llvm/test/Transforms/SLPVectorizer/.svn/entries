@@ -1,40 +1,0 @@
-10
-
-dir
-200402
-https://llvm.org/svn/llvm-project/llvm/trunk/test/Transforms/SLPVectorizer
-https://llvm.org/svn/llvm-project
-
-
-
-2014-01-11T21:06:00.077444Z
-199016
-d0k
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-91177308-0d34-0410-b5e6-96231b3b80d8
-
-X86
-dir
-
-R600
-dir
-
-ARM
-dir
-
-XCore
-dir
-

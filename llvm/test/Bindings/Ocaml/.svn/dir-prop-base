@@ -1,9 +1,0 @@
-K 10
-svn:ignore
-V 25
-Output
-*.cmi
-*.cmo
-*.cmx
-
-END
