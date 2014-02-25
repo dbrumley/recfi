@@ -6,7 +6,7 @@
 	.eabi_attribute	23, 3	@ Tag_ABI_FP_number_model
 	.eabi_attribute	24, 1	@ Tag_ABI_align_needed
 	.eabi_attribute	25, 1	@ Tag_ABI_align_preserved
-	.file	"test.bc"
+	.file	"testPass.bc"
 	.text
 	.globl	sum
 	.align	2
@@ -33,6 +33,7 @@ sum:                                    @ @sum
 	.type	other_sum,%function
 other_sum:                              @ @other_sum
 	.fnstart
+	.long	2425393296              @ 0x90909090
 @ BB#0:                                 @ %entry
 	sub	sp, sp, #8
 	str	r0, [sp, #4]
@@ -53,6 +54,7 @@ other_sum:                              @ @other_sum
 	.type	testing,%function
 testing:                                @ @testing
 	.fnstart
+	.long	2425393296              @ 0x90909090
 @ BB#0:                                 @ %entry
 	push	{r11, lr}
 	mov	r11, sp
@@ -81,6 +83,7 @@ testing:                                @ @testing
 	.type	main,%function
 main:                                   @ @main
 	.fnstart
+	.long	2425393296              @ 0x90909090
 @ BB#0:                                 @ %entry
 	push	{r11, lr}
 	mov	r11, sp

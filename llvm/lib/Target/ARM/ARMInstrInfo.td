@@ -1703,6 +1703,9 @@ def : InstAlias<"sevl$p", (HINT 5, pred:$p)>, Requires<[IsARM, HasV8]>;
 
 def : Pat<(int_arm_sevl), (HINT 5)>;
 
+//CMU.CFI
+def : Pat<(int_arm_cfi_id), (HINT 5)>;
+
 def SEL : AI<(outs GPR:$Rd), (ins GPR:$Rn, GPR:$Rm), DPFrm, NoItinerary, "sel",
              "\t$Rd, $Rn, $Rm", []>, Requires<[IsARM, HasV6]> {
   bits<4> Rd;
@@ -4646,6 +4649,7 @@ def CLREX : AXI<(outs), (ins), MiscFrm, NoItinerary, "clrex",
             Requires<[IsARM, HasV7]>  {
   let Inst{31-0} = 0b11110101011111111111000000011111;
 }
+
 
 def : ARMPat<(and (ldrex_1 addr_offset_none:$addr), 0xff),
              (LDREXB addr_offset_none:$addr)>;
