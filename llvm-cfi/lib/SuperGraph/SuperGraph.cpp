@@ -15,8 +15,8 @@
 #define DEBUG_TYPE "SuperGraph_pass"
 
 #include "llvm/ADT/Statistic.h"
-#include "llvm/Function.h"
-#include "llvm/Module.h"
+#include "llvm/IR/Function.h"
+#include "llvm/IR/Module.h"
 #include "llvm/Pass.h"
 #include "llvm/Support/raw_ostream.h"
 
@@ -29,7 +29,7 @@ namespace {
     static char ID; 
     SuperGraph() : ModulePass(ID) {}
 
-    typedef dsa::CallTargetFinder<Function *> CTF;
+    typedef dsa::CallTargetFinder<EQTDDataStructures> CTF;
     typedef std::map<Instruction *, std::set<BasicBlock *> > DestMap;
 
     typedef std::list<CallSite>::iterator CallSiteIterator;
