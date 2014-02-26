@@ -8,6 +8,6 @@ LEVEL=..
 #
 # List all of the subdirectories that we will compile.
 #
-DIRS=sample
+DIRS=sample cfi_pass
 
 include $(LEVEL)/Makefile.common
