@@ -25,7 +25,7 @@
 #include "llvm/IR/DerivedTypes.h"
 #include "llvm/IR/Intrinsics.h"
 #include "llvm/IR/LLVMContext.h"                                                                                                                       
-#include "llvm/IR/Verifier.h"
+#include "llvm/Analysis/Verifier.h"
 #include "llvm/PassManager.h"
 #include "llvm/Support/Dwarf.h"
 #include "llvm/Support/TargetSelect.h"

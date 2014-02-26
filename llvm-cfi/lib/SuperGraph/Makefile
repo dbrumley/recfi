@@ -8,23 +8,17 @@
 ##===----------------------------------------------------------------------===##
 
 LEVEL = ../../
-LLVMSRC = /Users/oulinyao/Desktop/MSISTM/CFI/project/boeing-cfi/llvm-3.3/
 
 LIBRARYNAME = LLVMSuperGraph
 LOADABLE_MODULE = 1
 USEDLIBS =
 
-# If we don't need RTTI or EH, there's no reason to export anything
-# from the hello plugin.
-#ifneq ($(REQUIRES_RTTI), 1)
-#ifneq ($(REQUIRES_EH), 1)
-#EXPORTED_SYMBOL_FILE = $(PROJ_SRC_DIR)/SuperGraph.exports
-#endif
-#endif
+#FIXME: ununsed on ubuntu??
+#LLVMSRC = /home/jabat/Documents/projects/boeing/boeing-cfi/llvm-3.3
+#POOLALLOC_SRCDIR := $(LLVMSRC)/projects/poolalloc
+#SC_FLAGS = -I$(POOLALLOC_SRCDIR)/include -lpoolalloc -lLLVMDataStructure -I/usr/include/i386-linux-gnu/c++/4.7
 
-POOLALLOC_SRCDIR := $(LLVMSRC)/projects/poolalloc
-
-SC_FLAGS = -I$(POOLALLOC_SRCDIR)/include -lpoolalloc -lLLVMDataStructure
+SC_FLAGS = -I/usr/include/i386-linux-gnu/c++/4.7
 CFLAGS   += $(SC_FLAGS)
 CPPFLAGS += $(SC_FLAGS)
 CXXFLAGS += $(SC_FLAGS)
