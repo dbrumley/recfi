@@ -7,7 +7,6 @@
 #
 ##===----------------------------------------------------------------------===##
 
-LEVEL = ../../..
 LIBRARYNAME = LLVMSuperGraph
 LOADABLE_MODULE = 1
 USEDLIBS =
