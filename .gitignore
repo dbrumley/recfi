@@ -1,4 +1,10 @@
 build
+
 llvm-3.3/test
+
 llvm-cfi/autoconf/autom4te.cache
 llvm-cfi/autoconf/aclocal.m4
+llvm-cfi/Makefile.common
+llvm-cfi/configure
+llvm-cfi/configure.out
+llvm-cfi/config.log
