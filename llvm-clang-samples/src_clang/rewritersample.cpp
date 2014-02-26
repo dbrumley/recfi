@@ -56,7 +56,7 @@ public:
       Stmt *FuncBody = f->getBody();
 
       // Type name as string
-      QualType QT = f->getCallResultType();
+      QualType QT = f->getResultType();
       std::string TypeStr = QT.getAsString();
 
       // Function name

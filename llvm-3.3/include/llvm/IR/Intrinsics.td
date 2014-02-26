@@ -473,6 +473,11 @@ def int_convertus  : Intrinsic<[llvm_anyint_ty],
 def int_convertuu  : Intrinsic<[llvm_anyint_ty],
                                [llvm_anyint_ty, llvm_i32_ty, llvm_i32_ty]>;
 
+//===--------------------- CMU.CFI Intrinsics ----------------------===//
+//
+def int_cfiid : Intrinsic<[], [llvm_i32_ty], [IntrNoMem]>;
+
+
 //===----------------------------------------------------------------------===//
 // Target-specific intrinsics
 //===----------------------------------------------------------------------===//

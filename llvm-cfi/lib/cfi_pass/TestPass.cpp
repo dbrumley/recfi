@@ -48,7 +48,6 @@ namespace {
         static char ID; // Pass identification, replacement for typeid
         Test() : FunctionPass(ID) {}
 
-/*
 
         typedef std::vector<std::string> ArgNames;
         typedef std::vector<llvm::Type*> ArgTypes;
@@ -87,19 +86,17 @@ namespace {
             Function *checkReturnFunc = NULL;
             Function *cfiid_intrinsic = NULL;
             llvm::IRBuilder<> *builder = NULL;
-*/
 
             virtual bool doInitialization(Module &M){
-/*
                 llvm::IRBuilder<> theBuilder(M.getContext());
                 builder = &theBuilder;
 
                 ArgNames argNames;
                 ArgTypes argTypes;
                 llvm::Type *retType;
+
                 argTypes.push_back(builder->getInt32Ty());
                 retType = builder->getVoidTy();
-
                 argNames.push_back("inserted_id");
                 insertFunc = createFunction(M,
                         retType,
@@ -138,8 +135,7 @@ namespace {
                         llvm::Function::ExternalLinkage,
                         true,
                         false);
-*/
-                //M.dump();
+                M.dump();
                 return true; 
             }
 
@@ -151,10 +147,9 @@ namespace {
 
                 TestCounter++;
 
-/*
                 llvm::IRBuilder<> theBuilder(F.getContext());
                 builder = &theBuilder;
-                F.setPrefixData(builder->getInt32(2425393296));
+                //F.setPrefixData(builder->getInt32(2425393296));
 
                 Value* functionStartID = llvm::ConstantInt::get(builder->getInt32Ty(), 11111);
                 Value* returnSiteID = llvm::ConstantInt::get(builder->getInt32Ty(), 22222);
@@ -163,7 +158,7 @@ namespace {
                 BasicBlock *BB_begin = &F.getEntryBlock();
                 BasicBlock::iterator insertion_pt = BB_begin->getFirstInsertionPt();
                 builder->SetInsertPoint(BB_begin, insertion_pt);
-                //builder->CreateCall(insertFunc, functionStartID);
+                builder->CreateCall(insertFunc, functionStartID);
                 //builder->CreateCall(cfiid_intrinsic, functionStartID);
 
                 std::string skipStr = "cfi.insertID";
@@ -198,7 +193,6 @@ namespace {
                 }
                 // Print function after modifications
                 //printFunction(F);
-*/  
               return true;
             }
 
