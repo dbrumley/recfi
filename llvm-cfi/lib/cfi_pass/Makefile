@@ -3,6 +3,7 @@
 #
 # Indicate where we are relative to the top of the source tree.
 #
+LEVEL=../..
 
 LIBRARYNAME = LLVMcfi_pass
 LOADABLE_MODULE = 1
