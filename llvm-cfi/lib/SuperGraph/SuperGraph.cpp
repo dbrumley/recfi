@@ -88,9 +88,14 @@ namespace {
         CallSite cs = *CB;
         Instruction *I = cs.getInstruction();
 
+        //errs() << "called function: " << cs.getCalledFunction() << "\n";
+	//errs() << "is complete: " << ctf->isComplete(cs) << "\n";
+	//errs() << "call target size: " << ctf->size(cs) << "\n";
+
         //only consider calls that are indirect, complete, and have targets
-	if (!cs.getCalledFunction() && ctf->isComplete(cs) && ctf->begin(cs) != ctf->end(cs))
+	if (!cs.getCalledFunction() && ctf->begin(cs) != ctf->end(cs))//&& ctf->isComplete(cs) && ctf->begin(cs) != ctf->end(cs))
 	{
+	  //errs() << "call was indirect, complete, and has targets\n";
 	  //for all targets of call site, add to indCallDestMap
 	  for (CSTargetIterator FB = ctf->begin(cs), 
 	       FE = ctf->end(cs); FB != FE; FB++)
@@ -107,6 +112,7 @@ namespace {
     {
       errs() << "Indirect Branch Destination Map:\n";
       DestMap& bm = indBrDestMap;
+      errs() << bm.size() << "\n";
       for (DestMap::iterator MB = bm.begin(), ME = bm.end(); MB != ME; MB++)
       {
         MB->first->dump();
@@ -114,6 +120,7 @@ namespace {
 
       errs() << "Indirect Call Destination Map:\n";
       DestMap& cm = indCallDestMap;
+      errs() << cm.size() << "\n";
       for (DestMap::iterator MB = cm.begin(), ME = cm.end(); MB != ME; MB++)
       {
         MB->first->dump();
@@ -132,7 +139,7 @@ namespace {
       }
       
       findIndCallTargets();
-      print_maps();
+//      print_maps();
       return false;
     }
 
