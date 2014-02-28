@@ -96,7 +96,7 @@ namespace {
 
             // Intrinsic return type
             llvm::Type *retType;
-            retType = builder->getInt32Ty();
+            retType = builder->getVoidTy();
 
             // Intrinsic argument name
             ArgNames argNames;
@@ -104,7 +104,7 @@ namespace {
 
             //Intrinsic  argument type
             ArgTypes argTypes;
-            argTypes.push_back(builder->getVoidTy());
+            argTypes.push_back(builder->getInt32Ty());
 
             // call void @llvm.arm.cfiid(i32 111)
             cfiid_intrinsic = createFunction(M,

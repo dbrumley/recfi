@@ -5281,8 +5281,8 @@ def ARMCFIID : AXI<(outs), (ins i32imm:$opt), MiscFrm, NoItinerary,
   bits<32> opt;
   let Inst{31-0} = opt;
 }*/
-//def : Pat<(i32 (int_arm_cfiid (i32 imm))),
-//                   (TRAP)>;
+def : Pat<(int_arm_cfiid (i32 imm)),
+                   (TRAP)>;
 /*
 def QADD    : AAI<0b00010000, 0b00000101, "qadd",
                   [(set GPRnopc:$Rd, (int_arm_qadd GPRnopc:$Rm, GPRnopc:$Rn))],
