@@ -948,6 +948,7 @@ void SelectionDAGBuilder::AssignOrderingToNode(const SDNode *Node) {
 
 void SelectionDAGBuilder::visit(const Instruction &I) {
   // Set up outgoing PHI node register values before emitting the terminator.
+  //I.dump();
   if (isa<TerminatorInst>(&I))
     HandlePHINodesInSuccessorBlocks(I.getParent());
 
@@ -3578,6 +3579,8 @@ void SelectionDAGBuilder::visitTargetIntrinsic(const CallInst &I,
                                                unsigned Intrinsic) {
   bool HasChain = !I.doesNotAccessMemory();
   bool OnlyLoad = HasChain && I.onlyReadsMemory();
+  errs() << "visitTargetIntrinsic:: I= " << I << '\n';
+  errs() << "visitTargetIntrinsic:: I.getType= " << *I.getType() << '\n';
 
   // Build the operand list.
   SmallVector<SDValue, 8> Ops;
@@ -3603,6 +3606,7 @@ void SelectionDAGBuilder::visitTargetIntrinsic(const CallInst &I,
   for (unsigned i = 0, e = I.getNumArgOperands(); i != e; ++i) {
     SDValue Op = getValue(I.getArgOperand(i));
     Ops.push_back(Op);
+    errs() << "visitTargetIntrinsic:: operand " << i << " " << *I.getArgOperand(i) << '\n';
   }
 
   SmallVector<EVT, 4> ValueVTs;
@@ -4434,6 +4438,9 @@ const char *
 SelectionDAGBuilder::visitIntrinsicCall(const CallInst &I, unsigned Intrinsic) {
   DebugLoc dl = getCurDebugLoc();
   SDValue Res;
+
+ // errs() << "visitIntrinsicCall:: I= " << I << '\n';
+  //errs() << "visitIntrinsicCall:: I.getType= " << I.getType() << '\n';
 
   switch (Intrinsic) {
   default:

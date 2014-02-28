@@ -81,136 +81,148 @@ namespace {
                 return(ret);
         }
 
-            Function *insertFunc = NULL;
-            Function *checkCallFunc = NULL;
-            Function *checkReturnFunc = NULL;
-            Function *cfiid_intrinsic = NULL;
-            llvm::IRBuilder<> *builder = NULL;
+        /*
+           Function *insertFunc = NULL;
+           Function *checkCallFunc = NULL;
+           Function *checkReturnFunc = NULL;
+         */  
+        Function *cfiid_intrinsic = NULL;
+        llvm::IRBuilder<> *builder = NULL;
 
-            virtual bool doInitialization(Module &M){
-                llvm::IRBuilder<> theBuilder(M.getContext());
-                builder = &theBuilder;
+        virtual bool doInitialization(Module &M){
+            llvm::IRBuilder<> theBuilder(M.getContext());
+            builder = &theBuilder;
 
-                ArgNames argNames;
-                ArgTypes argTypes;
-                llvm::Type *retType;
 
-                argTypes.push_back(builder->getInt32Ty());
-                retType = builder->getVoidTy();
-                argNames.push_back("inserted_id");
-                insertFunc = createFunction(M,
-                        retType,
-                        argTypes,
-                        argNames,
-                        "cfi.insertID",
-                        llvm::Function::ExternalLinkage,
-                        true,
-                        false);
+            // Intrinsic return type
+            llvm::Type *retType;
+            retType = builder->getInt32Ty();
 
-                argNames.clear();
-                argNames.push_back("dest_id");
-                checkCallFunc = createFunction(M,
-                        retType,
-                        argTypes,
-                        argNames,
-                        "cfi.checkCall",
-                        llvm::Function::ExternalLinkage,
-                        true,
-                        false);
+            // Intrinsic argument name
+            ArgNames argNames;
+            argNames.push_back("dest_id");
 
-                checkReturnFunc = createFunction(M,
-                        retType,
-                        argTypes,
-                        argNames,
-                        "cfi.checkReturn",
-                        llvm::Function::ExternalLinkage,
-                        true,
-                        false);
-                //argTypes.clear();
-                cfiid_intrinsic = createFunction(M,
-                        retType,
-                        argTypes,
-                        argNames,
-                        "llvm.cfiid",
-                        llvm::Function::ExternalLinkage,
-                        true,
-                        false);
-                M.dump();
-                return true; 
+            //Intrinsic  argument type
+            ArgTypes argTypes;
+            argTypes.push_back(builder->getVoidTy());
+
+            // call void @llvm.arm.cfiid(i32 111)
+            cfiid_intrinsic = createFunction(M,
+                    retType,
+                    argTypes,
+                    argNames,
+                    "llvm.arm.cfiid",
+                    llvm::Function::ExternalLinkage,
+                    true,
+                    false);
+            //M.dump();
+            /*
+               argNames.push_back("inserted_id");
+               insertFunc = createFunction(M,
+               retType,
+               argTypes,
+               argNames,
+               "cfi.insertID",
+               llvm::Function::ExternalLinkage,
+               true,
+               false);
+
+               argNames.clear();
+               checkCallFunc = createFunction(M,
+               retType,
+               argTypes,
+               argNames,
+               "cfi.checkCall",
+               llvm::Function::ExternalLinkage,
+               true,
+               false);
+
+               checkReturnFunc = createFunction(M,
+               retType,
+               argTypes,
+               argNames,
+               "cfi.checkReturn",
+               llvm::Function::ExternalLinkage,
+               true,
+               false);
+             */  
+            return true; 
+        }
+
+        //Iterate over each callSite
+        //   put an insertID at the beginning on each function, after each call
+        //   put an checkCall before each call
+        //insert a checkReturn before each return
+        virtual bool runOnFunction(Function &F) {
+
+            TestCounter++;
+
+            llvm::IRBuilder<> theBuilder(F.getContext());
+            builder = &theBuilder;
+            //F.setPrefixData(builder->getInt32(2425393296));
+
+            Value* functionStartID = llvm::ConstantInt::get(builder->getInt32Ty(), 111);
+            Value* returnSiteID = llvm::ConstantInt::get(builder->getInt32Ty(), 222);
+
+            // Insert ID at function start
+            BasicBlock *BB_begin = &F.getEntryBlock();
+            BasicBlock::iterator insertion_pt = BB_begin->getFirstInsertionPt();
+            builder->SetInsertPoint(BB_begin, insertion_pt);
+            //builder->CreateCall(insertFunc, functionStartID);
+            builder->CreateCall(cfiid_intrinsic, functionStartID);
+
+            /*
+               std::string skipStr = "cfi.insertID";
+
+
+            // Insert check before/after each call instruction, and before each return
+            for (Function::iterator  BB = F.begin(), BE = F.end(); BB != BE; ++BB){
+            for(BasicBlock::iterator I = BB->begin(), E = BB->end(); I != E; ++I)
+            {
+            if (CallInst* callInst = dyn_cast<CallInst>(&*I)) {
+            // We know we've encountered a call instruction
+            Function * calledFunction = callInst->getCalledFunction();
+            if(calledFunction != NULL)
+            {
+            if(skipStr.compare(calledFunction->getName()) == 0)
+            continue;
+            } 
+            //callInst->setCFIData(builder->getInt32(2425393296));
+
+            builder->SetInsertPoint(I);
+            builder->CreateCall(checkCallFunc, functionStartID);
+            I++;
+            builder->SetInsertPoint(I);
+            builder->CreateCall(insertFunc, returnSiteID);
+            I--;
+            } 
+            else if (ReturnInst* retInst = dyn_cast<ReturnInst>(&*I)) {
+            //builder->SetInsertPoint(I);
+            //builder->CreateCall(checkReturnFunc, returnSiteID);
             }
-
-            //Iterate over each callSite
-            //   put an insertID at the beginning on each function, after each call
-            //   put an checkCall before each call
-            //insert a checkReturn before each return
-            virtual bool runOnFunction(Function &F) {
-
-                TestCounter++;
-
-                llvm::IRBuilder<> theBuilder(F.getContext());
-                builder = &theBuilder;
-                //F.setPrefixData(builder->getInt32(2425393296));
-
-                Value* functionStartID = llvm::ConstantInt::get(builder->getInt32Ty(), 11111);
-                Value* returnSiteID = llvm::ConstantInt::get(builder->getInt32Ty(), 22222);
-
-                // Insert ID at function start
-                BasicBlock *BB_begin = &F.getEntryBlock();
-                BasicBlock::iterator insertion_pt = BB_begin->getFirstInsertionPt();
-                builder->SetInsertPoint(BB_begin, insertion_pt);
-                builder->CreateCall(insertFunc, functionStartID);
-                //builder->CreateCall(cfiid_intrinsic, functionStartID);
-
-                std::string skipStr = "cfi.insertID";
-
-
-                // Insert check before/after each call instruction, and before each return
-                for (Function::iterator  BB = F.begin(), BE = F.end(); BB != BE; ++BB){
-                    for(BasicBlock::iterator I = BB->begin(), E = BB->end(); I != E; ++I)
-                    {
-                        if (CallInst* callInst = dyn_cast<CallInst>(&*I)) {
-                            // We know we've encountered a call instruction
-                            Function * calledFunction = callInst->getCalledFunction();
-                            if(calledFunction != NULL)
-                            {
-                                if(skipStr.compare(calledFunction->getName()) == 0)
-                                    continue;
-                            } 
-                            //callInst->setCFIData(builder->getInt32(2425393296));
-
-                            builder->SetInsertPoint(I);
-                            builder->CreateCall(checkCallFunc, functionStartID);
-                            I++;
-                            builder->SetInsertPoint(I);
-                            builder->CreateCall(insertFunc, returnSiteID);
-                            I--;
-                        } 
-                        else if (ReturnInst* retInst = dyn_cast<ReturnInst>(&*I)) {
-                            //builder->SetInsertPoint(I);
-                            //builder->CreateCall(checkReturnFunc, returnSiteID);
-                        }
-                    }
-                }
-                // Print function after modifications
-                //printFunction(F);
-              return true;
             }
+            }
+             */
+            // Print function after modifications
+            //printFunction(F);
+            return true;
+        }
 
-            virtual bool printFunction(Function &F) {
-                errs() << F.getName() << '\n';
-                for(Function::iterator BB = F.begin(), EE = F.end(); BB != EE; ++BB)
+        virtual bool printFunction(Function &F) {
+            errs() << F.getName() << '\n';
+            for(Function::iterator BB = F.begin(), EE = F.end(); BB != EE; ++BB)
+            {
+                errs() << "\t[Block]" << '\n';
+                for (BasicBlock::iterator I = BB->begin(), E = BB->end(); I != E; ++I)
                 {
-                    errs() << "\t[Block]" << '\n';
-                    for (BasicBlock::iterator I = BB->begin(), E = BB->end(); I != E; ++I)
-                    {
-                        errs() << "\t\t" << *I << '\n'; 
-                    }
+                    errs() << "\t\t" << *I << '\n'; 
                 }
-                return false;
             }
+            return false;
+        }
 
-        };
-    }
+    };
+}
 
-    char Test::ID = 0;
-    static RegisterPass<Test> X("test", "Test Pass for CFI");
+char Test::ID = 0;
+static RegisterPass<Test> X("cfi_pass", "Test Pass for CFI");

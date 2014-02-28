@@ -1706,6 +1706,7 @@ def ATOMUMAX6432  : PseudoInst<(outs GPR:$dst1, GPR:$dst2),
                               NoItinerary, []>;
 }
 
+
 def HINT : AI<(outs), (ins imm0_4:$imm), MiscFrm, NoItinerary,
               "hint", "\t$imm", []>, Requires<[IsARM, HasV6]> {
   bits<3> imm;
@@ -5270,3 +5271,46 @@ def : InstAlias<"umull${s}${p} $RdLo, $RdHi, $Rn, $Rm",
 // 'it' blocks in ARM mode just validate the predicates. The IT itself
 // is discarded.
 def ITasm : ARMAsmPseudo<"it$mask $cc", (ins it_pred:$cc, it_mask:$mask)>;
+
+//===--------------------- CMU.CFI Intrinsics ----------------------===//
+//
+/*
+def ARMCFIID : AXI<(outs), (ins i32imm:$opt), MiscFrm, NoItinerary,
+                "cfiid", "\t$opt", [(int_arm_cfiid i32imm:$opt)]>,
+                Requires<[IsARM, HasDB]> {
+  bits<32> opt;
+  let Inst{31-0} = opt;
+}*/
+//def : Pat<(i32 (int_arm_cfiid (i32 imm))),
+//                   (TRAP)>;
+/*
+def QADD    : AAI<0b00010000, 0b00000101, "qadd",
+                  [(set GPRnopc:$Rd, (int_arm_qadd GPRnopc:$Rm, GPRnopc:$Rn))],
+def ARMCFIID : AInoP<
+            (outs), // oops
+            (ins nohash_imm:$imm), // iops
+            MiscFrm, // Format
+            NoItinerary, // InstrItinClass
+                "cfiid", // opc
+            "\t$imm", // asm
+            [(int_arm_cfiid (i32:$imm))]>, // pattern
+                Requires<[IsARM]> {
+  bits<32> imm;
+  let Inst{31-0} = imm;
+}
+*/
+//def : Pat<(int_trax_printi (i32 GPR:$in)),(PRINT GPR:$in)>;
+
+//def : ARMPat<(or GPR:$src, 0xffff0000), (MOVTi16 GPR:$src, 0xffff)>,
+//      Requires<[IsARM, HasV6T2]>;
+//
+/*
+def MOVi : AsI1<0b1101, (outs GPR:$Rd), (ins so_imm:$imm), DPFrm, IIC_iMOVi,
+                "mov", "\t$Rd, $imm", [(set GPR:$Rd, so_imm:$imm)]>, UnaryDP {
+  bits<4> Rd;
+  bits<12> imm;
+  let Inst{25} = 1;
+  let Inst{15-12} = Rd;
+  let Inst{19-16} = 0b0000;
+  let Inst{11-0} = imm;
+}*/

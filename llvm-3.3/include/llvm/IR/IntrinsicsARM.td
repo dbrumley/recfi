@@ -20,6 +20,10 @@ let TargetPrefix = "arm" in {  // All intrinsics start with "llvm.arm.".
 def int_arm_thread_pointer : GCCBuiltin<"__builtin_thread_pointer">,
             Intrinsic<[llvm_ptr_ty], [], [IntrNoMem]>;
 
+//===--------------------- CMU.CFI Intrinsics ----------------------===//
+//
+def int_arm_cfiid : Intrinsic<[llvm_i32_ty], [llvm_i32_ty], [IntrNoMem]>;
+
 //===----------------------------------------------------------------------===//
 // Saturating Arithmentic
 
