@@ -32,6 +32,7 @@ class Instruction : public User, public ilist_node<Instruction> {
   void operator=(const Instruction &) LLVM_DELETED_FUNCTION;
   Instruction(const Instruction &) LLVM_DELETED_FUNCTION;
 
+  Constant *cfi_data;
   BasicBlock *Parent;
   DebugLoc DbgLoc;                         // 'dbg' Metadata cache.
 
