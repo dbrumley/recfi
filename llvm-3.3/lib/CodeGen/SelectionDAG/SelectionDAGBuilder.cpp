@@ -3611,6 +3611,11 @@ void SelectionDAGBuilder::visitTargetIntrinsic(const CallInst &I,
 
   SmallVector<EVT, 4> ValueVTs;
   ComputeValueVTs(TLI, I.getType(), ValueVTs);
+  for(unsigned k = 0; k < ValueVTs.size(); k++)
+  {
+    errs() << (ValueVTs.data()[k]).getEVTString() << '\n';
+  }
+    errs() << '\n';
 
   if (HasChain)
     ValueVTs.push_back(MVT::Other);
