@@ -30,7 +30,10 @@ namespace {
     SuperGraph() : ModulePass(ID) {}
 
     typedef dsa::CallTargetFinder<EQTDDataStructures> CTF;
-    typedef std::map<Instruction *, std::set<BasicBlock *> > DestMap;
+
+    typedef std::set<BasicBlock *> BBSet;
+    typedef std::map<Instruction *, BBSet> DestMap;
+    typedef std::map<BasicBlock *, int> BBIDMap;
 
     typedef std::list<CallSite>::iterator CallSiteIterator;
     typedef std::vector<const Function *>::iterator CSTargetIterator; 
@@ -39,13 +42,12 @@ namespace {
       AU.addRequired<CTF>();
     }
 
-    //mappings of indirect branch instructions to their 
-    //destination basic blocks (for calls it will be entry blocks)
-    DestMap indBrDestMap;
+    //mapping of indirect target (branch or call) instructions to
+    //their destinations
+    DestMap indDestMap;
 
-    //mappings of indirect call instructions to their destination
-    //basic blocks
-    DestMap indCallDestMap;
+    //mappings of indirect targets to their IDs
+    BBIDMap targetIDs;
 
     /*
      * find all indirect branch targets and add them to indBrDestMap
@@ -67,7 +69,7 @@ namespace {
             int n = IBI->getNumSuccessors();
 	    for (int j = 0; j < n; j++)
 	    {
-	      indBrDestMap[IBI].insert(IBI->getSuccessor(j));
+	      indDestMap[IBI].insert(IBI->getSuccessor(j));
 	    }
 	  }
         }
@@ -88,42 +90,120 @@ namespace {
         CallSite cs = *CB;
         Instruction *I = cs.getInstruction();
 
-        //errs() << "called function: " << cs.getCalledFunction() << "\n";
-	//errs() << "is complete: " << ctf->isComplete(cs) << "\n";
-	//errs() << "call target size: " << ctf->size(cs) << "\n";
-
-        //only consider calls that are indirect, complete, and have targets
+        //only consider calls that are indirect and have targets
 	if (!cs.getCalledFunction() && ctf->begin(cs) != ctf->end(cs))//&& ctf->isComplete(cs) && ctf->begin(cs) != ctf->end(cs))
 	{
-	  //errs() << "call was indirect, complete, and has targets\n";
 	  //for all targets of call site, add to indCallDestMap
 	  for (CSTargetIterator FB = ctf->begin(cs), 
 	       FE = ctf->end(cs); FB != FE; FB++)
 	  {
 	    const Function *F = *FB;
 	    BasicBlock *B = const_cast<BasicBlock *>(&F->getEntryBlock());
-	    indCallDestMap[I].insert(B);
+	    indDestMap[I].insert(B);
 	  }
 	}
       }
     }
 
-    void print_maps()
+    /*
+     * merges target destination sets, generates an ID for each set, and adds
+     * all targets to targetIDs 
+     */
+    void generateTargetIDs()
     {
-      errs() << "Indirect Branch Destination Map:\n";
-      DestMap& bm = indBrDestMap;
-      errs() << bm.size() << "\n";
-      for (DestMap::iterator MB = bm.begin(), ME = bm.end(); MB != ME; MB++)
+      std::list<BBSet> bbSetList;
+
+      //merge target destination sets
+      DestMap& m = indDestMap;
+      for (DestMap::iterator MB = m.begin(), ME = m.end(); MB != ME; MB++)
       {
-        MB->first->dump();
+        BBSet mset = MB->second;
+
+        //add first set to basic block sets
+        if (bbSetList.size() == 0)
+	{
+	  bbSetList.push_back(mset);
+	}
+	else
+	{
+	  //check if current destination set intersects with previous sets,
+	  //if so, merge them
+	  BBSet intersect;
+	  for (std::list<BBSet>::iterator LB = bbSetList.begin(), 
+	    LE = bbSetList.end(); LB != LE; LB++)
+	  {
+	    BBSet lset = *LB;
+
+	    set_intersection(mset.begin(), mset.end(), lset.begin(),
+	      lset.end(), std::inserter(intersect, intersect.begin()));
+	    if (intersect.size() > 0)
+	    {
+	      lset.insert(mset.begin(), mset.end());
+	      break;
+	    }
+	  }
+
+          //if no intersections found, add mset to list
+          if (intersect.size() == 0)
+	  {
+	    bbSetList.push_back(mset);
+	  }
+        }
       }
 
-      errs() << "Indirect Call Destination Map:\n";
-      DestMap& cm = indCallDestMap;
-      errs() << cm.size() << "\n";
+      //generate ID for each set in bbSetList, then add each block
+      //and their ID to targetIDs
+      for (std::list<BBSet>::iterator LB = bbSetList.begin(),
+        LE = bbSetList.end(); LB != LE; LB++)
+      {
+        BBSet lset = *LB;
+	int ID = rand();
+
+        for (BBSet::iterator SB = lset.begin(), SE = lset.end();
+	  SB != SE; SB++)
+	{
+	  BasicBlock *B = *SB;
+	  targetIDs[B] = ID;
+	}
+      }
+    }
+
+    /*
+     * prints out the destination map
+     */
+    void print_dest_map()
+    {
+      errs() << "Indirect Destination Map:\n";
+      DestMap& cm = indDestMap;
       for (DestMap::iterator MB = cm.begin(), ME = cm.end(); MB != ME; MB++)
       {
+        errs() << "Instruction:\n\t";
         MB->first->dump();
+
+        errs() << "Targets:\n";
+	for (BBSet::iterator SB = MB->second.begin(), SE = MB->second.end();
+	  SB != SE; SB++)
+	{
+	  BasicBlock *B = *SB;
+	  B->dump();
+	}
+	errs() << "\n";
+      }
+    }
+
+    /*
+     * prints out the target ID map
+     */
+    void print_target_map()
+    {
+      errs() << "Target ID Map:\n";
+
+      int count = 0;
+      for (BBIDMap::iterator BB = targetIDs.begin(), BE = targetIDs.end();
+        BB != BE; BB++)
+      {
+        count++;
+	errs() << "BasicBlock " << count << ": ID = " << BB->second << "\n";
       }
     }
 
@@ -138,8 +218,14 @@ namespace {
 	findIndBrTargets(F);
       }
       
-      findIndCallTargets();
-//      print_maps();
+      findIndCallTargets(); 
+      
+      print_dest_map();
+
+      generateTargetIDs();
+      
+      print_target_map();
+
       return false;
     }
 
