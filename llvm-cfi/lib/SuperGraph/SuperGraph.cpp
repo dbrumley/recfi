@@ -31,10 +31,20 @@ namespace {
 
     typedef dsa::CallTargetFinder<EQTDDataStructures> CTF;
 
+    //set types
     typedef std::set<BasicBlock *> BBSet;
-    typedef std::map<Instruction *, BBSet> DestMap;
-    typedef std::map<BasicBlock *, int> BBIDMap;
+    typedef std::set<Instruction *> InstSet;
 
+    //helper map types
+    typedef std::map<Instruction *, BBSet> DestMap;
+    typedef std::map<Function *, InstSet> RetMap;
+
+    //id map types
+    typedef std::map<BasicBlock *, int> BBIDMap;
+    typedef std::map<Instruction *, int> InstrIDMap;
+    typedef std::map<Function *, int> FuncIDMap;
+
+    //iterator types
     typedef std::list<CallSite>::iterator CallSiteIterator;
     typedef std::vector<const Function *>::iterator CSTargetIterator; 
 
@@ -46,11 +56,23 @@ namespace {
     //their destinations
     DestMap indDestMap;
 
-    //mappings of indirect targets to their IDs
+    //mapping of functions to their call sites
+    RetMap retMap;
+
+    //maps of ID inline sites to IDs:
+    //mappings of indirect targets to their IDs for branch/call checking
     BBIDMap targetIDs;
+    //mappings of callsites to their IDs for return checking
+    InstrIDMap callSiteIDs;
+
+    //maps of ID check sites to IDs:
+    //mappings of callsites/branch sites to IDs that need to be checked against
+    InstrIDMap targetCheckIDs;
+    //mappings of return sites to IDs that need to be checked against
+    FuncIDMap returnCheckIDs;
 
     /*
-     * find all indirect branch targets and add them to indBrDestMap
+     * find all indirect branch targets and add them to indDestMap
      */
     void findIndBrTargets(Function *F)
     {
@@ -77,11 +99,12 @@ namespace {
     }
 
     /*
-     * finds all indirect call targets and add them to indCallDestMap 
+     * finds all indirect call targets and add them to indDestMap,
+     * and find all return targets and add them to retTargets
      */
-    void findIndCallTargets()
+    void findIndCallAndRetTargets()
     {
-      //get dsa call target analysis
+      //do dsa call target analysis
       CTF *ctf = &getAnalysis<CTF>();
 
       //for all call sites
@@ -90,16 +113,24 @@ namespace {
         CallSite cs = *CB;
         Instruction *I = cs.getInstruction();
 
-        //only consider calls that are indirect and have targets
-	if (!cs.getCalledFunction() && ctf->begin(cs) != ctf->end(cs))//&& ctf->isComplete(cs) && ctf->begin(cs) != ctf->end(cs))
+        //only consider calls that have targets
+	if (ctf->begin(cs) != ctf->end(cs))//&& ctf->isComplete(cs) && ctf->begin(cs) != ctf->end(cs))
 	{
-	  //for all targets of call site, add to indCallDestMap
+	  //for all call site targets
 	  for (CSTargetIterator FB = ctf->begin(cs), 
-	       FE = ctf->end(cs); FB != FE; FB++)
+	    FE = ctf->end(cs); FB != FE; FB++)
 	  {
 	    const Function *F = *FB;
-	    BasicBlock *B = const_cast<BasicBlock *>(&F->getEntryBlock());
-	    indDestMap[I].insert(B);
+
+            //add indirect call targets to indCallDestMap
+	    if (!cs.getCalledFunction())
+	    {
+	      BasicBlock *B = const_cast<BasicBlock *>(&F->getEntryBlock());
+	      indDestMap[I].insert(B);
+	    }
+
+            //add call site to retMap
+	    retMap[const_cast<Function *>(F)].insert(I);
 	  }
 	}
       }
@@ -109,30 +140,31 @@ namespace {
      * merges target destination sets, generates an ID for each set, and adds
      * all targets to targetIDs 
      */
-    void generateTargetIDs()
+    template<typename SetType, typename MapType, typename KeyType, typename IDMapType>
+    void generateIDs(MapType& m, IDMapType& idmap)
     {
-      std::list<BBSet> bbSetList;
+      std::list<SetType> setList;
 
       //merge target destination sets
-      DestMap& m = indDestMap;
-      for (DestMap::iterator MB = m.begin(), ME = m.end(); MB != ME; MB++)
+      for (typename MapType::iterator MB = m.begin(), ME = m.end(); 
+        MB != ME; MB++)
       {
-        BBSet mset = MB->second;
+        SetType mset = MB->second;
 
         //add first set to basic block sets
-        if (bbSetList.size() == 0)
+        if (setList.size() == 0)
 	{
-	  bbSetList.push_back(mset);
+	  setList.push_back(mset);
 	}
 	else
 	{
 	  //check if current destination set intersects with previous sets,
 	  //if so, merge them
-	  BBSet intersect;
-	  for (std::list<BBSet>::iterator LB = bbSetList.begin(), 
-	    LE = bbSetList.end(); LB != LE; LB++)
+	  SetType intersect;
+	  for (typename std::list<SetType>::iterator LB = setList.begin(), 
+	    LE = setList.end(); LB != LE; LB++)
 	  {
-	    BBSet lset = *LB;
+	    SetType lset = *LB;
 
 	    set_intersection(mset.begin(), mset.end(), lset.begin(),
 	      lset.end(), std::inserter(intersect, intersect.begin()));
@@ -146,25 +178,45 @@ namespace {
           //if no intersections found, add mset to list
           if (intersect.size() == 0)
 	  {
-	    bbSetList.push_back(mset);
+	    setList.push_back(mset);
 	  }
         }
       }
 
       //generate ID for each set in bbSetList, then add each block
       //and their ID to targetIDs
-      for (std::list<BBSet>::iterator LB = bbSetList.begin(),
-        LE = bbSetList.end(); LB != LE; LB++)
+      for (typename std::list<SetType>::iterator LB = setList.begin(),
+        LE = setList.end(); LB != LE; LB++)
       {
-        BBSet lset = *LB;
+        SetType lset = *LB;
 	int ID = rand();
 
-        for (BBSet::iterator SB = lset.begin(), SE = lset.end();
+        for (typename SetType::iterator SB = lset.begin(), SE = lset.end();
 	  SB != SE; SB++)
 	{
-	  BasicBlock *B = *SB;
-	  targetIDs[B] = ID;
+	  KeyType K = *SB;
+	  idmap[K] = ID;
 	}
+      }
+    }
+
+    /*
+     * generates a map of constraint check sites and the ID to be checked
+     * against
+     */
+    template<typename TargetMap, typename Key, typename TargetIDMap, typename TargetCheckMap>
+    void generateCheckIDs(TargetMap& targetMap, TargetIDMap& targetIDMap, TargetCheckMap& targetCMap)
+    {
+      for (typename TargetMap::iterator MB = targetMap.begin(), ME = targetMap.end(); 
+        MB != ME; MB++)
+      {
+        //get the first target of the target set; ID of all targets in set is same
+	//(there should always be an element in second)
+        Key k = *MB->second.begin(); 
+        int ID = targetIDMap[k];
+
+        //map check site to target set ID
+	targetCMap[MB->first] = ID;
       }
     }
 
@@ -189,14 +241,29 @@ namespace {
 	}
 	errs() << "\n";
       }
+
+      errs() << "Return Map:\n";
+      RetMap& rm = retMap;
+      for (RetMap::iterator RB = rm.begin(), RE = rm.end(); RB != RE; RB++)
+      {
+        errs() << "Function: " << RB->first->getName() << "\n";
+
+	errs() << "Call Sites:\n";
+	for (InstSet::iterator SB = RB->second.begin(), SE = RB->second.end();
+	  SB != SE; SB++)
+	{
+	  Instruction *I = *SB;
+	  I->dump();
+	}
+      }
     }
 
     /*
-     * prints out the target ID map
+     * prints out the ID maps
      */
-    void print_target_map()
+    void print_ID_maps()
     {
-      errs() << "Target ID Map:\n";
+      errs() << "\nTarget ID Map:\n";
 
       int count = 0;
       for (BBIDMap::iterator BB = targetIDs.begin(), BE = targetIDs.end();
@@ -205,6 +272,40 @@ namespace {
         count++;
 	errs() << "BasicBlock " << count << ": ID = " << BB->second << "\n";
       }
+
+      errs() << "\nCall Site ID Map:\n";
+
+      for (InstrIDMap::iterator BB = callSiteIDs.begin(), BE = callSiteIDs.end();
+        BB != BE; BB++)
+      {
+	BB->first->dump();
+	errs() << ": ID = " << BB->second << "\n";
+      }
+    }
+
+    /*
+     * prints out the ID check maps
+     */
+    void print_ID_check_maps()
+    {
+      errs() << "\nTarget ID Check Map:\n";
+
+      for (InstrIDMap::iterator MB = targetCheckIDs.begin(), ME = targetCheckIDs.end();
+        MB != ME; MB++)
+      {
+        errs() << "Br/Call Instr: ";
+	MB->first->dump();
+	errs() << "ID = " << MB->second << "\n";
+      }
+
+      errs() << "\nReturn ID Check Map:\n";
+
+      for (FuncIDMap::iterator FB = returnCheckIDs.begin(), FE = returnCheckIDs.end();
+        FB != FE; FB++)
+      {
+        errs() << "Function: " << FB->first->getName() << "\n";
+	errs() << "ID = " << FB->second << "\n";
+      }
     }
 
     /*
@@ -212,19 +313,34 @@ namespace {
      */
     virtual bool runOnModule(Module &M) 
     {  
+      //seed rand with current time
+      srand(time(NULL));
+
       for (Module::iterator MB = M.begin(), ME = M.end(); MB != ME; MB++)
       {
         Function *F = &*MB;
 	findIndBrTargets(F);
       }
       
-      findIndCallTargets(); 
+      findIndCallAndRetTargets(); 
       
-      print_dest_map();
+      //print_dest_map();
 
-      generateTargetIDs();
+      //generate IDs for branch/call targets
+      generateIDs<BBSet, DestMap, BasicBlock *, BBIDMap>(indDestMap, targetIDs);
+      //generate IDs for return targets
+      generateIDs<InstSet, RetMap, Instruction *, InstrIDMap>(retMap, callSiteIDs);
       
-      print_target_map();
+      //print_ID_maps();
+
+      //generate IDs for target checking
+      generateCheckIDs<DestMap, BasicBlock *, BBIDMap, InstrIDMap>
+        (indDestMap, targetIDs, targetCheckIDs);
+      //generate IDs for return checking
+      generateCheckIDs<RetMap, Instruction *, InstrIDMap, FuncIDMap>
+        (retMap, callSiteIDs, returnCheckIDs);
+
+      //print_ID_check_maps();
 
       return false;
     }
