@@ -161,50 +161,52 @@ namespace {
             builder = &theBuilder;
             //F.setPrefixData(builder->getInt32(2425393296));
 
-            Value* functionStartID = llvm::ConstantInt::get(builder->getInt32Ty(), 111);
-            Value* returnSiteID = llvm::ConstantInt::get(builder->getInt32Ty(), 222);
+            Value* functionStartID = llvm::ConstantInt::get(builder->getInt32Ty(), 0x55555555);
+            Value* returnSiteID = llvm::ConstantInt::get(builder->getInt32Ty(), 0x44444444);
 
             // Insert ID at function start
             BasicBlock *BB_begin = &F.getEntryBlock();
             BasicBlock::iterator insertion_pt = BB_begin->getFirstInsertionPt();
             builder->SetInsertPoint(BB_begin, insertion_pt);
-            //builder->CreateCall(insertFunc, functionStartID);
             builder->CreateCall(cfiid_intrinsic, functionStartID);
 
-            /*
-               std::string skipStr = "cfi.insertID";
+            std::string skipStr = "llvm.arm.cfiid";
 
 
             // Insert check before/after each call instruction, and before each return
             for (Function::iterator  BB = F.begin(), BE = F.end(); BB != BE; ++BB){
-            for(BasicBlock::iterator I = BB->begin(), E = BB->end(); I != E; ++I)
-            {
-            if (CallInst* callInst = dyn_cast<CallInst>(&*I)) {
-            // We know we've encountered a call instruction
-            Function * calledFunction = callInst->getCalledFunction();
-            if(calledFunction != NULL)
-            {
-            if(skipStr.compare(calledFunction->getName()) == 0)
-            continue;
-            } 
-            //callInst->setCFIData(builder->getInt32(2425393296));
+                for(BasicBlock::iterator I = BB->begin(), E = BB->end(); I != E; ++I)
+                {
+                    if (CallInst* callInst = dyn_cast<CallInst>(&*I)) {
+                        // We know we've encountered a call instruction
+                        Function * calledFunction = callInst->getCalledFunction();
+                        if(calledFunction != NULL)
+                        {
+                            if(skipStr.compare(calledFunction->getName()) == 0)
+                                continue;
+                        } 
 
-            builder->SetInsertPoint(I);
-            builder->CreateCall(checkCallFunc, functionStartID);
-            I++;
-            builder->SetInsertPoint(I);
-            builder->CreateCall(insertFunc, returnSiteID);
-            I--;
-            } 
-            else if (ReturnInst* retInst = dyn_cast<ReturnInst>(&*I)) {
-            //builder->SetInsertPoint(I);
-            //builder->CreateCall(checkReturnFunc, returnSiteID);
+                        //Add Metadata
+                        LLVMContext& C = callInst->getContext();
+                        MDNode* N = MDNode::get(C, MDString::get(C, "This is a call instruction"));
+                        callInst->setMetadata("cmu.cfi.call", N);
+
+
+                        builder->SetInsertPoint(I);
+                        //builder->CreateCall(checkCallFunc, functionStartID);
+                        I++;
+                        builder->SetInsertPoint(I);
+                        builder->CreateCall(cfiid_intrinsic, returnSiteID);
+                        I--;
+                    } 
+                    else if (ReturnInst* retInst = dyn_cast<ReturnInst>(&*I)) {
+                        //builder->SetInsertPoint(I);
+                        //builder->CreateCall(checkReturnFunc, returnSiteID);
+                    }
+                }
             }
-            }
-            }
-             */
             // Print function after modifications
-            //printFunction(F);
+            printFunction(F);
             return true;
         }
 

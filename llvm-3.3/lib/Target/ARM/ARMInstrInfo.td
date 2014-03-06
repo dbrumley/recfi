@@ -5274,37 +5274,20 @@ def ITasm : ARMAsmPseudo<"it$mask $cc", (ins it_pred:$cc, it_mask:$mask)>;
 
 //===--------------------- CMU.CFI Intrinsics ----------------------===//
 //
-/*
-def ARMCFIID : AXI<(outs), (ins i32imm:$opt), MiscFrm, NoItinerary,
-                "cfiid", "\t$opt", [(int_arm_cfiid i32imm:$opt)]>,
-                Requires<[IsARM, HasDB]> {
-  bits<32> opt;
-  let Inst{31-0} = opt;
-}*/
-def : Pat<(int_arm_cfiid (i32 imm)),
-                   (TRAP)>;
-/*
-def QADD    : AAI<0b00010000, 0b00000101, "qadd",
-                  [(set GPRnopc:$Rd, (int_arm_qadd GPRnopc:$Rm, GPRnopc:$Rn))],
-def ARMCFIID : AInoP<
-            (outs), // oops
-            (ins nohash_imm:$imm), // iops
-            MiscFrm, // Format
-            NoItinerary, // InstrItinClass
-                "cfiid", // opc
-            "\t$imm", // asm
-            [(int_arm_cfiid (i32:$imm))]>, // pattern
-                Requires<[IsARM]> {
-  bits<32> imm;
-  let Inst{31-0} = imm;
+def ImmMaxAsmOperand: ImmAsmOperand { let Name = "ImmMax"; }
+def immMax : Operand<i32>, ImmLeaf<i32, [{
+  return Imm >= -2147483648 && Imm < 2147483648;
+}]> {
+  let ParserMatchClass = ImmMaxAsmOperand;
 }
-*/
-//def : Pat<(int_trax_printi (i32 GPR:$in)),(PRINT GPR:$in)>;
+let isTerminator = 1 in
+def CFITRAP : AXI<(outs), (ins immMax:$id), MiscFrm, NoItinerary,
+              "cfiid\t$id", [(int_arm_cfiid immMax:$id)]>,
+           Requires<[IsARM]> {
+  bits<32> id;
+  let Inst = id;
+}
 
-//def : ARMPat<(or GPR:$src, 0xffff0000), (MOVTi16 GPR:$src, 0xffff)>,
-//      Requires<[IsARM, HasV6T2]>;
-//
-/*
 def MOVi : AsI1<0b1101, (outs GPR:$Rd), (ins so_imm:$imm), DPFrm, IIC_iMOVi,
                 "mov", "\t$Rd, $imm", [(set GPR:$Rd, so_imm:$imm)]>, UnaryDP {
   bits<4> Rd;
@@ -5313,4 +5296,4 @@ def MOVi : AsI1<0b1101, (outs GPR:$Rd), (ins so_imm:$imm), DPFrm, IIC_iMOVi,
   let Inst{15-12} = Rd;
   let Inst{19-16} = 0b0000;
   let Inst{11-0} = imm;
-}*/
+}
