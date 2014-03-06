@@ -11,6 +11,5 @@ echo "generating target specific assembly..."
 llc -O0 -march arm $1_opt.bc
 #echo "generating target specific object..."
 #llc -O0 -march arm -filetype obj test_opt.bc
-#../build/Release+Debug+Asserts/bin/opt -dot-callgraph < test.bc > /dev/null
 #dot -Tpng callgraph.dot  -o outpng
 #eog outpng

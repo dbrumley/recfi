@@ -5287,13 +5287,3 @@ def CFITRAP : AXI<(outs), (ins immMax:$id), MiscFrm, NoItinerary,
   bits<32> id;
   let Inst = id;
 }
-
-def MOVi : AsI1<0b1101, (outs GPR:$Rd), (ins so_imm:$imm), DPFrm, IIC_iMOVi,
-                "mov", "\t$Rd, $imm", [(set GPR:$Rd, so_imm:$imm)]>, UnaryDP {
-  bits<4> Rd;
-  bits<12> imm;
-  let Inst{25} = 1;
-  let Inst{15-12} = Rd;
-  let Inst{19-16} = 0b0000;
-  let Inst{11-0} = imm;
-}
