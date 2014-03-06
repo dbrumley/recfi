@@ -14,8 +14,10 @@
 #include "llvm/Support/raw_ostream.h"
 
 #include "dsa/CallTargets.h"
+#include "CFILowering.h"
 
 using namespace llvm;
+using namespace cfilowering;
 
 namespace {
     struct SuperGraph : public ModulePass {
@@ -23,7 +25,7 @@ namespace {
         SuperGraph() : ModulePass(ID) {}
 
         typedef dsa::CallTargetFinder<EQTDDataStructures> CTF;
-
+        
         //set types
         typedef std::set<BasicBlock *> BBSet;
         typedef std::set<Instruction *> InstSet;
@@ -59,7 +61,8 @@ namespace {
         InstrIDMap callSiteIDs;
 
         //maps of ID check sites to IDs:
-        //mappings of callsites/branch sites to IDs that need to be checked against
+        //mappings of callsites/branch sites to IDs that need to be
+        //checked against
         InstrIDMap targetCheckIDs;
         //mappings of return sites to IDs that need to be checked against
         FuncIDMap returnCheckIDs;
@@ -265,54 +268,33 @@ namespace {
             }
         }
 
-        /********** Functions for inserting IDs and checking code **********/
+        /********** Functions for inserting IDs and ID check code **********/
 
         /*
          * Inserts IDs into their respective sites
-         *//*
+         */
         void insertIDs(Module &M) 
         {
-          //initialize cfiid_intrinsic function
-          Function *cfiid_intrinsic = NULL;
-          llvm::IRBuilder<> builder(M.getContext());
+            CFILowering cfil = CFILowering(M);
+            Function *cfiid_intrinsic = cfil.get_cfiid();
+            
+            for (BBIDMap::iterator BB = targetIDs.begin(), BE = targetIDs.end();
+                 BB != BE; BB++)
+            {
+                llvm::IRBuilder<> builder(BB->first);
+                Value * ID = llvm::ConstantInt::get(builder.getInt32Ty(),
+                                                    BB->second);
 
-          //function return
-          llvm::Type *retType = builder.getVoidTy();
-
-          //function arg names
-          ArgNames argNames;
-          argNames.push_back("dest_id");
-
-          //function args
-          ArgTypes argTypes;
-          argTypes.push_back(builder.getInt32Ty());
-
-          //call void @llvm.arm.cfiid(i32 dest_id)
-          cfiid_intrinsic = createFunction(M,
-              retType,
-              argTypes,
-              argNames,
-              "llvm.arm.cfiid",
-              llvm::Function::ExternalLinkage,
-              true,
-              false);
-
-          for (BBIDMap::iterator BB = targetIDs.begin(), BE = targetIDs.end();
-            BB != BE; BB++)
-          {
-            llvm::IRBuilder<> builder(BB->first);
-        Value * ID = llvm::ConstantInt::get(builder.getInt32Ty(), BB->second);
-
-        builder.SetInsertPoint(BB->first->begin());
-        builder.CreateCall(cfiid_intrinsic, ID);
-          }
-        }*/
+                builder.SetInsertPoint(BB->first->begin());
+                builder.CreateCall(cfiid_intrinsic, ID);
+            }
+        }
 
         /********** Debug Functions **********/
 
         /*
-        * prints out the destination map
-        */
+         * prints out the destination map
+         */
         void print_dest_map()
         {
             errs() << "Indirect Destination Map:\n";
