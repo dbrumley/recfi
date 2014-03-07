@@ -9,12 +9,13 @@ LIBRARYNAME = LLVMcfi_pass
 LOADABLE_MODULE = 1
 USEDLIBS =
 
-SC_FLAGS = -I/usr/include/i386-linux-gnu/c++/4.7
-CFLAGS += $(SC_FLAGS)
+#FIXME: ununsed on ubuntu??
+LLVMSRC = /Users/jabat/Documents/workspace/boeing/boeing-cfi/llvm-3.3/
+POOLALLOC_SRCDIR := $(LLVMSRC)/projects/poolalloc
+SC_FLAGS = -I$(POOLALLOC_SRCDIR)/include
+
+CFLAGS   += $(SC_FLAGS)
+CPPFLAGS += $(SC_FLAGS)
 CXXFLAGS += $(SC_FLAGS)
 
-#
-# Include Makefile.common so we know what to do.
-#
 include $(LEVEL)/Makefile.common
-

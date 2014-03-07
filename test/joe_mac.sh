@@ -9,7 +9,5 @@ echo "generating transformed llvm ir"
 llvm-dis $1_opt.bc
 echo "generating target specific assembly..."
 llc -O0 -march arm $1_opt.bc
-#echo "generating target specific object..."
-#llc -O0 -march arm -filetype obj test_opt.bc
-#dot -Tpng callgraph.dot  -o outpng
-#eog outpng
+echo "generating target specific object..."
+llc -O0 -march arm -filetype obj test_opt.bc
