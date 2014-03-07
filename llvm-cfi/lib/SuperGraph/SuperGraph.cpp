@@ -17,7 +17,7 @@
 #include "CFILowering.h"
 
 using namespace llvm;
-using namespace cfilowering;
+using namespace cfi;
 
 namespace {
     struct SuperGraph : public ModulePass {
@@ -276,13 +276,15 @@ namespace {
         void insertIDs(Module &M) 
         {
             CFILowering cfil = CFILowering(M);
-            Function *cfiid_intrinsic = cfil.get_cfiid();
-            
-            for (BBIDMap::iterator BB = targetIDs.begin(), BE = targetIDs.end();
+            Function *cfiid_intrinsic = cfil.get_cfiid_intrinsic();
+           
+            BBIDMap::iterator BB, BE;
+            for (BB = targetIDs.begin(), BE = targetIDs.end();
                  BB != BE; BB++)
             {
+                errs() << "inserting ID\n";
                 llvm::IRBuilder<> builder(BB->first);
-                Value * ID = llvm::ConstantInt::get(builder.getInt32Ty(),
+                Value *ID = llvm::ConstantInt::get(builder.getInt32Ty(),
                                                     BB->second);
 
                 builder.SetInsertPoint(BB->first->begin());
@@ -425,6 +427,8 @@ namespace {
             //generate IDs for return checking
             generateCheckIDs<RetMap, Instruction *, InstrIDMap, FuncIDMap>
                 (retMap, callSiteIDs, returnCheckIDs);
+            
+            insertIDs(M);
 
             return false;
         }

@@ -8,6 +8,6 @@ LEVEL=..
 #
 # List all of the subdirectories that we will compile.
 #
-DIRS=sample cfi_pass SuperGraph
+DIRS=sample cfi_pass SuperGraph CFIUtil
 
 include $(LEVEL)/Makefile.common

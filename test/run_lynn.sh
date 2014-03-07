@@ -9,7 +9,10 @@ clang -O0 -emit-llvm $1.c -S -o $1.ll
 #llvm-as $1.ll -o $1.bc
 echo "running $2 pass..."
 #opt -load ../build/projects/poolalloc/Release+Debug+Asserts/lib/LLVMDataStructure.dylib -load ../llvm-cfi/build/Release+Asserts/lib/LLVM$2.dylib -$2 < $1.bc > $1_opt.bc
-opt -load ../build/projects/poolalloc/Release+Debug+Asserts/lib/LLVMDataStructure.dylib -load ../build/Release+Debug+Asserts/lib/LLVM$2.dylib -$2 < $1.bc > $1_opt.bc
+opt -load ../build/projects/poolalloc/Release+Debug+Asserts/lib/LLVMDataStructure.dylib \
+    -load ../build/Release+Debug+Asserts/lib/LLVM$2.dylib -$2 < $1.bc > $1_opt.bc
+echo "disassembling optimized bitcode..."
+llvm-dis $1_opt.bc
 echo "generating target specific assembly..."
 llc -O0 -march arm $1_opt.bc -o $1.s
 
