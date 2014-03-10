@@ -86,8 +86,10 @@ namespace {
            Function *checkCallFunc = NULL;
            Function *checkReturnFunc = NULL;
          */  
-        Function *cfiid_intrinsic = NULL;
-        llvm::IRBuilder<> *builder = NULL;
+        Function *cfiid;
+        Function *cfichecktar;
+        Function *cficheckret;
+        llvm::IRBuilder<> *builder;
 
         virtual bool doInitialization(Module &M){
             llvm::IRBuilder<> theBuilder(M.getContext());
@@ -107,7 +109,7 @@ namespace {
             argTypes.push_back(builder->getInt32Ty());
 
             // call void @llvm.arm.cfiid(i32 111)
-            cfiid_intrinsic = createFunction(M,
+            cfiid = createFunction(M,
                     retType,
                     argTypes,
                     argNames,
@@ -115,37 +117,24 @@ namespace {
                     llvm::Function::ExternalLinkage,
                     true,
                     false);
+            // call void @llvm.arm.cfiid(i32 111)
+            cfichecktar = createFunction(M,
+                    retType,
+                    argTypes,
+                    argNames,
+                    "llvm.arm.cfichecktar",
+                    llvm::Function::ExternalLinkage,
+                    true,
+                    false);
+            cficheckret = createFunction(M,
+                    retType,
+                    argTypes,
+                    argNames,
+                    "llvm.arm.cficheckret",
+                    llvm::Function::ExternalLinkage,
+                    true,
+                    false);
             //M.dump();
-            /*
-               argNames.push_back("inserted_id");
-               insertFunc = createFunction(M,
-               retType,
-               argTypes,
-               argNames,
-               "cfi.insertID",
-               llvm::Function::ExternalLinkage,
-               true,
-               false);
-
-               argNames.clear();
-               checkCallFunc = createFunction(M,
-               retType,
-               argTypes,
-               argNames,
-               "cfi.checkCall",
-               llvm::Function::ExternalLinkage,
-               true,
-               false);
-
-               checkReturnFunc = createFunction(M,
-               retType,
-               argTypes,
-               argNames,
-               "cfi.checkReturn",
-               llvm::Function::ExternalLinkage,
-               true,
-               false);
-             */  
             return true; 
         }
 
@@ -168,7 +157,7 @@ namespace {
             BasicBlock *BB_begin = &F.getEntryBlock();
             BasicBlock::iterator insertion_pt = BB_begin->getFirstInsertionPt();
             builder->SetInsertPoint(BB_begin, insertion_pt);
-            builder->CreateCall(cfiid_intrinsic, functionStartID);
+            builder->CreateCall(cfiid, functionStartID);
 
             std::string skipStr = "llvm.arm.cfiid";
 
@@ -182,9 +171,10 @@ namespace {
                         Function * calledFunction = callInst->getCalledFunction();
                         if(calledFunction != NULL)
                         {
-                            if(skipStr.compare(calledFunction->getName()) == 0)
+                            errs() << "skipping " << callInst<< '\n';
                                 continue;
                         } 
+
 
                         //Add Metadata
                         LLVMContext& C = callInst->getContext();
@@ -193,15 +183,15 @@ namespace {
 
 
                         builder->SetInsertPoint(I);
-                        //builder->CreateCall(checkCallFunc, functionStartID);
+                        builder->CreateCall(cfichecktar, functionStartID);
                         I++;
                         builder->SetInsertPoint(I);
-                        builder->CreateCall(cfiid_intrinsic, returnSiteID);
+                        builder->CreateCall(cfiid, returnSiteID);
                         I--;
                     } 
                     else if (ReturnInst* retInst = dyn_cast<ReturnInst>(&*I)) {
-                        //builder->SetInsertPoint(I);
-                        //builder->CreateCall(checkReturnFunc, returnSiteID);
+                        builder->SetInsertPoint(I);
+                        builder->CreateCall(cficheckret, returnSiteID);
                     }
                 }
             }

@@ -5281,8 +5281,20 @@ def immMax : Operand<i32>, ImmLeaf<i32, [{
   let ParserMatchClass = ImmMaxAsmOperand;
 }
 let isTerminator = 1 in
-def CFITRAP : AXI<(outs), (ins immMax:$id), MiscFrm, NoItinerary,
+def CFI_ID : AXI<(outs), (ins immMax:$id), MiscFrm, NoItinerary,
               "cfiid\t$id", [(int_arm_cfiid immMax:$id)]>,
+           Requires<[IsARM]> {
+  bits<32> id;
+  let Inst = id;
+}
+def CFI_CHK_TAR : AXI<(outs), (ins immMax:$id), MiscFrm, NoItinerary,
+              "cfichecktar\t$id", [(int_arm_cfichecktar immMax:$id)]>,
+           Requires<[IsARM]> {
+  bits<32> id;
+  let Inst = id;
+}
+def CFI_CHK_RET : AXI<(outs), (ins immMax:$id), MiscFrm, NoItinerary,
+              "cficheckret\t$id", [(int_arm_cficheckret immMax:$id)]>,
            Requires<[IsARM]> {
   bits<32> id;
   let Inst = id;

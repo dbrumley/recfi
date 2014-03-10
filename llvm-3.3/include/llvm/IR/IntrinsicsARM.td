@@ -23,6 +23,8 @@ def int_arm_thread_pointer : GCCBuiltin<"__builtin_thread_pointer">,
 //===--------------------- CMU.CFI Intrinsics ----------------------===//
 //
 def int_arm_cfiid : Intrinsic<[], [llvm_i32_ty], [IntrNoReturn]>;
+def int_arm_cfichecktar : Intrinsic<[], [llvm_i32_ty], [IntrNoReturn]>;
+def int_arm_cficheckret : Intrinsic<[], [llvm_i32_ty], [IntrNoReturn]>;
 
 //===----------------------------------------------------------------------===//
 // Saturating Arithmentic

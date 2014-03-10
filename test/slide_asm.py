@@ -5,50 +5,108 @@ from optparse import OptionParser
 
 skip_instruction = '\tmov pc, pc\n'
 
+
 def main(opt):
-	#new_asm = do_transformation(opt.file_name)
-	new_asm = do_slide_all(opt.file_name)
-	print ''.join(new_asm)
+	
+	fd = open(opt.file_name)
+	asm_raw = fd.readlines()
+	asm_pass_1 = do_slide_ids(asm_raw)
+	asm_pass_2 = do_lower_checks(asm_pass_1)
+	#print ''.join(new_asm)
+	fd = open('test_slide.s', 'w')
+	fd.write(''.join(asm_pass_2))
+	fd.close()
 	print opt.file_name + ' has been emitted'
 
-def do_slide_all(file_name):
-	with open(file_name) as fd:
-		asm_raw = fd.readlines()
-		asm_raw.reverse()
+def do_lower_checks(asm_lines):
+	
+	holding = bool(0)
+	i = 0
 
+	while i < len(asm_lines):
+		if not holding:
+			line = asm_lines[i]
+			if 'cfiidcheck' in line: # TODO: This has potential false positives
+				print i, line.strip()
+				asm_lines.pop(i)
+				holding = bool(1)
+				i = i -1
+		else:
+			dest_ins = asm_lines[i]
+			print 'checking for callsite' + dest_ins.strip()
+			if is_callsite(dest_ins):
+				print 'callsite found:', dest_ins
+				asm_lines.insert(i,skip_instruction)
+				asm_lines.insert(i,line)
+				holding = bool(0)
+		i = i + 1
+
+	asm_lines.reverse()
+	return asm_lines
+	
+
+def do_slide_ids(asm_lines):
+
+		asm_lines.reverse()
 		holding = bool(0)
 		i = 0
 
-		while i < len(asm_raw):
+		while i < len(asm_lines):
 			if not holding:
-				line = asm_raw[i]
-				if 'cfiid' in line:
+				line = asm_lines[i]
+				if 'cfiid' in line: # TODO: This has potential false positives
 					print i, line.strip()
-					asm_raw.pop(i)
+					asm_lines.pop(i)
 					holding = bool(1)
 					i = i -1
 			else:
-				dest_ins = asm_raw[i]
-				print 'checking ' + dest_ins.strip()
-				if is_callsite(dest_ins):
-					print i, dest_ins
-					asm_raw.insert(i,skip_instruction)
-					asm_raw.insert(i,line)
+				dest_ins = asm_lines[i]
+				print 'checking for bb start' + dest_ins.strip()
+				if is_callsite(dest_ins) or is_labelsite(dest_ins):
+					print 'bb start found:', dest_ins
+					asm_lines.insert(i,skip_instruction)
+					asm_lines.insert(i,line)
 					holding = bool(0)
 			i = i + 1
 
-		asm_raw.reverse()
-		return asm_raw
+		asm_lines.reverse()
+		return asm_lines
 
-def is_callsite(line):
-	if 'pc' in line:
-		return 1
-	elif ':' in line.split()[0]:
-		return 1
-	elif line.split()[0] == 'bl':
+def is_labelsite(line):
+	words = line.split()
+
+	#case: all whitespace
+	if len(words) <= 0:
+		return 0
+	
+	op = words[0]
+	
+	#case: label
+	if ':' in op and '@' != op[0]:
 		return 1
 	else:
 		return 0
+
+def is_callsite(line):
+	words = line.split()
+
+	#case: all whitespace
+	if len(words) <= 0:
+		return 0
+	
+	op = words[0]
+	reg_dest = words[1]
+
+	#case: branch instr	
+	if 'b' == op or 'bl' == op or 'bx' == op:
+		return 1
+	#case: move/load instr
+	elif 'pc' in reg_dest:
+		return 1
+	#case: load multiple
+	elif 'ldm' in op and'pc' in line:
+			return 1
+	return 0
 
 '''
 this function is has been replaced by do_slide_all
