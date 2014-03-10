@@ -3579,8 +3579,8 @@ void SelectionDAGBuilder::visitTargetIntrinsic(const CallInst &I,
                                                unsigned Intrinsic) {
   bool HasChain = !I.doesNotAccessMemory();
   bool OnlyLoad = HasChain && I.onlyReadsMemory();
-  errs() << "visitTargetIntrinsic:: I= " << I << '\n';
-  errs() << "visitTargetIntrinsic:: I.getType= " << *I.getType() << '\n';
+  //errs() << "visitTargetIntrinsic:: I= " << I << '\n';
+  //errs() << "visitTargetIntrinsic:: I.getType= " << *I.getType() << '\n';
 
   // Build the operand list.
   SmallVector<SDValue, 8> Ops;
@@ -3606,16 +3606,16 @@ void SelectionDAGBuilder::visitTargetIntrinsic(const CallInst &I,
   for (unsigned i = 0, e = I.getNumArgOperands(); i != e; ++i) {
     SDValue Op = getValue(I.getArgOperand(i));
     Ops.push_back(Op);
-    errs() << "visitTargetIntrinsic:: operand " << i << " " << *I.getArgOperand(i) << '\n';
+    //errs() << "visitTargetIntrinsic:: operand " << i << " " << *I.getArgOperand(i) << '\n';
   }
 
   SmallVector<EVT, 4> ValueVTs;
   ComputeValueVTs(TLI, I.getType(), ValueVTs);
   for(unsigned k = 0; k < ValueVTs.size(); k++)
   {
-    errs() << (ValueVTs.data()[k]).getEVTString() << '\n';
+    //errs() << (ValueVTs.data()[k]).getEVTString() << '\n';
   }
-    errs() << '\n';
+    //errs() << '\n';
 
   if (HasChain)
     ValueVTs.push_back(MVT::Other);

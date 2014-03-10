@@ -26,22 +26,20 @@ def do_lower_checks(asm_lines):
 	while i < len(asm_lines):
 		if not holding:
 			line = asm_lines[i]
-			if 'cfiidcheck' in line: # TODO: This has potential false positives
-				print i, line.strip()
+			if 'cficheck' in line: # TODO: This has potential false positives
+				print str(i)+ ':', line.strip()
 				asm_lines.pop(i)
 				holding = bool(1)
 				i = i -1
 		else:
 			dest_ins = asm_lines[i]
-			print 'checking for callsite' + dest_ins.strip()
+			print str(i)+': ?callsite', dest_ins.strip()
 			if is_callsite(dest_ins):
-				print 'callsite found:', dest_ins
-				asm_lines.insert(i,skip_instruction)
+				print str(i)+': callsite:', dest_ins
+				#asm_lines.insert(i,skip_instruction)
 				asm_lines.insert(i,line)
 				holding = bool(0)
 		i = i + 1
-
-	asm_lines.reverse()
 	return asm_lines
 	
 
@@ -55,15 +53,15 @@ def do_slide_ids(asm_lines):
 			if not holding:
 				line = asm_lines[i]
 				if 'cfiid' in line: # TODO: This has potential false positives
-					print i, line.strip()
+					print str(i)+':', line.strip()
 					asm_lines.pop(i)
 					holding = bool(1)
 					i = i -1
 			else:
 				dest_ins = asm_lines[i]
-				print 'checking for bb start' + dest_ins.strip()
+				print str(i)+': ?bb start', dest_ins.strip()
 				if is_callsite(dest_ins) or is_labelsite(dest_ins):
-					print 'bb start found:', dest_ins
+					print str(i)+': bb start:', dest_ins
 					asm_lines.insert(i,skip_instruction)
 					asm_lines.insert(i,line)
 					holding = bool(0)
