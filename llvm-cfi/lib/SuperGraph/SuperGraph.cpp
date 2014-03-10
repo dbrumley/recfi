@@ -275,32 +275,106 @@ namespace {
          *
          * @return void
          *
+         * @arg cfil - cfi lowering
          * @arg M - current module
          */
-        void insertIDs(Module &M) 
+        void insertIDs(CFILowering cfil, Module &M)
         {
-            CFILowering cfil = CFILowering(M);
-            Function *cfiCheckID = cfil.getCfiInsertID();
+            Function *cfiInsertID = cfil.getCfiInsertID();
            
+            //insert IDs before target sites
             BBIDMap::iterator BB, BE;
             for (BB = targetIDs.begin(), BE = targetIDs.end();
                  BB != BE; BB++)
             {
-                errs() << "inserting ID\n";
                 llvm::IRBuilder<> builder(BB->first);
                 Value *ID = llvm::ConstantInt::get(builder.getInt32Ty(),
-                                                    BB->second);
+                                                   BB->second);
 
                 builder.SetInsertPoint(BB->first->begin());
-                builder.CreateCall(cfiCheckID, ID);
+                builder.CreateCall(cfiInsertID, ID);
             }
             
-            //TODO - insert callSiteIDs
+            //insert IDs after call sites
+            InstrIDMap::iterator IB, IE;
+            for (IB = callSiteIDs.begin(), IE = callSiteIDs.end();
+                 IB != IE; IB++)
+            {
+                llvm::IRBuilder<> builder(IB->first->getParent());
+                Value *ID = llvm::ConstantInt::get(builder.getInt32Ty(),
+                                                   IB->second);
+
+                //get next instruction
+                BasicBlock::iterator II(IB->first);
+                II++;
+                
+                builder.SetInsertPoint(II);
+                builder.CreateCall(cfiInsertID, ID);
+            }
         }
         
-        void insertChecks(Module &M)
+        /**
+         * @brief Inserts checks into their respective sites
+         *
+         * @return void
+         *
+         * @arg cfil - cfi lowering
+         * @arg M - current module
+         */
+
+        void insertChecks(CFILowering cfil, Module &M)
         {
-        
+            Function *cfiCheckTarget = cfil.getCfiCheckTarget();
+            Function *cfiCheckReturn = cfil.getCfiCheckReturn();
+            
+            //insert ID checks before call sites
+            InstrIDMap::iterator IB, IE;
+            for (IB = targetCheckIDs.begin(), IE = targetCheckIDs.end();
+                 IB != IE; IB++)
+            {
+                llvm::IRBuilder<> builder(IB->first->getParent());
+                Value *ID = llvm::ConstantInt::get(builder.getInt32Ty(),
+                                                   IB->second);
+                
+                BasicBlock::iterator II(IB->first);
+                
+                //insert before current instruction
+                builder.SetInsertPoint(II);
+                builder.CreateCall(cfiCheckTarget, ID);
+            }
+            
+            //insert ID checks at return sites
+            FuncIDMap::iterator FB, FE;
+            for (FB = returnCheckIDs.begin(), FE = returnCheckIDs.end();
+                 FB != FE; FB++)
+            {
+                Function *F = FB->first;
+                
+                //find all returns
+                Function::iterator BB, BE;
+                for (BB = F->begin(), BE = F->end();
+                     BB != BE; BB++)
+                {
+                    BasicBlock *B = &*BB;
+                    
+                    //check if basic block ends with return
+                    if (TerminatorInst *TI = B->getTerminator())
+                    {
+                        if (ReturnInst *RI = dyn_cast<ReturnInst>(TI))
+                        {
+                            llvm::IRBuilder<> builder(B);
+                            Value *ID = llvm::ConstantInt::get(builder.getInt32Ty(),
+                                                               IB->second);
+                            
+                            BasicBlock::iterator II(RI);
+                            
+                            //insert before return instruction
+                            builder.SetInsertPoint(II);
+                            builder.CreateCall(cfiCheckReturn, ID);
+                        }
+                    }
+                }
+            }
         }
 
         /********** Debug Functions **********/
@@ -439,7 +513,10 @@ namespace {
             generateCheckIDs<RetMap, Instruction *, InstrIDMap, FuncIDMap>
                 (retMap, callSiteIDs, returnCheckIDs);
             
-            insertIDs(M);
+            CFILowering cfil = CFILowering(M);
+
+            insertIDs(cfil, M);
+            insertChecks(cfil, M);
 
             return false;
         }
