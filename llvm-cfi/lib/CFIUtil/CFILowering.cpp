@@ -17,8 +17,26 @@ namespace cfi{
         typedef std::vector<llvm::Type*> ArgTypes;
         typedef std::vector<llvm::Value*> ArgVals;
         
-        Function *cfiid_intrinsic;
+        //cfi intrinsic functions, all are of the form:
+        //@llvm.arm.cfiid(i32 dest_id)
+        Function *cfiInsertID;
+        Function *cfiCheckTarget;
+        Function *cfiCheckReturn;
         
+        /**
+         * @brief Creates a function
+         *
+         * @return Function pointer to newly created function
+         *
+         * @arg module - current function
+         * @arg retType - return type of function
+         * @arg theArgTypes - types for function args
+         * @arg theArgNames - names for function args
+         * @arg functName - name of function
+         * @arg linkage - linkage type
+         * @arg declarationOnly - if the function is only a declaration
+         * @arg isVarArg - if function has variable number of arguments
+         */
         Function *createFunction(llvm::Module &module,
                                  llvm::Type *retType,
                                  const ArgTypes &theArgTypes,
@@ -36,7 +54,15 @@ namespace cfi{
             return NULL;
         }
         
-        void createCfiid(Module &M)
+        /**
+         * @brief creates a CFI intrinsic function
+         *
+         * @return Function pointer
+         *
+         * @arg funcName - name of llvm intrinsic function
+         * @arg M - current module
+         */
+        Function *createCfiFunc(std::string funcName, Module &M)
         {
             //create the cfiid_intrinsic function
             llvm::IRBuilder<> builder(M.getContext());
@@ -52,26 +78,40 @@ namespace cfi{
             ArgTypes argTypes;
             argTypes.push_back(builder.getInt32Ty());
             
-            //call void @llvm.arm.cfiid(i32 dest_id)
-            CFILowering::cfiid_intrinsic = createFunction(M,
-                                             retType,
-                                             argTypes,
-                                             argNames,
-                                             "llvm.arm.cfiid",
-                                             llvm::Function::ExternalLinkage,
-                                             true,
-                                             false);
+            //ex. call void @llvm.arm.cfiid(i32 dest_id)
+            Function *cfiFunc = createFunction(M,
+                                               retType,
+                                               argTypes,
+                                               argNames,
+                                               funcName,
+                                               llvm::Function::ExternalLinkage,
+                                               true,
+                                               false);
+            return cfiFunc;
         }
         
     public:
+        //initialize intrinsic functions
         CFILowering(Module &M)
         {
-            createCfiid(M);
+            cfiInsertID = createCfiFunc("llvm.arm.cfiid", M);
+            cfiCheckTarget = createCfiFunc("llvm.arm.cfichecktar", M);
+            cfiCheckReturn = createCfiFunc("llvm.arm.cficheckret", M);
         }
         
-        Function *get_cfiid_intrinsic()
+        Function *getCfiInsertID()
         {
-            return cfiid_intrinsic;
+            return cfiInsertID;
+        }
+        
+        Function *getCfiCheckTarget()
+        {
+            return cfiCheckTarget;
+        }
+        
+        Function *getCfiCheckReturn()
+        {
+            return cfiCheckReturn;
         }
     };
 }
