@@ -15,32 +15,36 @@
 using namespace llvm;
 
 namespace cfi{
-    class CFILowering {/*
-        
-        //type definitions for creating a function
-        typedef std::vector<std::string> ArgNames;
-        typedef std::vector<llvm::Type*> ArgTypes;
-        typedef std::vector<llvm::Value*> ArgVals;
-        
-        //cfi ID insert intrinsic
-        Function *cfiid_intrinsic;
-        
-        //create a function
-        Function *createFunction(llvm::Module &module,
-                                 llvm::Type *retType,
-                                 const ArgTypes &theArgTypes,
-                                 const ArgNames &theArgNames,
-                                 const std::string &functName,
-                                 llvm::GlobalValue::LinkageTypes linkage,
-                                 bool declarationOnly,
-                                 bool isVarArg);
-        
-        //create cfiid_intrinsic
-        void createCfiid(Module &M);*/
-
+    class CFILowering {
+    
     public:
+        /**
+         * @brief constructor - creates CFILowering object
+         *
+         * @arg M - current module
+         */
         CFILowering(Module &M);
-        Function *get_cfiid_intrinsic();
+        
+        /**
+         * @brief gets the cfiInsertID function pointer
+         *
+         * @return Function pointer
+         */
+        Function *getCfiInsertID();
+        
+        /**
+         * @brief gets the cfiCheckTarget function pointer
+         *
+         * @return Function pointer
+         */
+        Function *getCfiCheckTarget();
+        
+        /**
+         * @brief gets the cfiCheckReturn function pointer
+         *
+         * @return Function pointer
+         */
+        Function *getCfiCheckReturn();
     };
 }
 

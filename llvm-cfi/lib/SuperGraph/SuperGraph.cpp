@@ -270,13 +270,17 @@ namespace {
 
         /********** Functions for inserting IDs and ID check code **********/
 
-        /*
-         * Inserts IDs into their respective sites
+        /**
+         * @brief Inserts IDs into their respective sites
+         *
+         * @return void
+         *
+         * @arg M - current module
          */
         void insertIDs(Module &M) 
         {
             CFILowering cfil = CFILowering(M);
-            Function *cfiid_intrinsic = cfil.get_cfiid_intrinsic();
+            Function *cfiCheckID = cfil.getCfiInsertID();
            
             BBIDMap::iterator BB, BE;
             for (BB = targetIDs.begin(), BE = targetIDs.end();
@@ -288,8 +292,15 @@ namespace {
                                                     BB->second);
 
                 builder.SetInsertPoint(BB->first->begin());
-                builder.CreateCall(cfiid_intrinsic, ID);
+                builder.CreateCall(cfiCheckID, ID);
             }
+            
+            //TODO - insert callSiteIDs
+        }
+        
+        void insertChecks(Module &M)
+        {
+        
         }
 
         /********** Debug Functions **********/
