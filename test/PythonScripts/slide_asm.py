@@ -41,7 +41,6 @@ def do_lower_checks(asm_lines):
 				holding = bool(0)
 		i = i + 1
 	return asm_lines
-	
 
 def do_slide_ids(asm_lines):
 
@@ -105,72 +104,6 @@ def is_callsite(line):
 	elif 'ldm' in op and'pc' in line:
 			return 1
 	return 0
-
-'''
-this function is has been replaced by do_slide_all
-'''
-def do_transformation(file_name):
-
-	with open(file_name) as fd:
-		asm_raw = fd.readlines()
-		print 'getting label id map'
-		label_id_map = do_get_label_id_pairs(asm_raw)
-		print 'inserting ids'
-		asm_pass_1 = do_insert_label_ids(asm_raw, label_id_map)
-
-		asm_pass_2 = do_slide_ret_ids(asm_pass_1)
-
-		print 'done with transformation'
-		return asm_pass_2
-
-def do_get_label_id_pairs(asm_lines):
-	id_dict = dict()
-	for line in asm_lines:
-		if ':' in line:
-			if '@ BB#' in line:
-				continue
-			label = line.strip().split(':')[0]
-		if 'cfiidibr' in line:
-			if label in id_dict:
-				print 'OH SHIT'
-				raise Exception 
-			print label, line.strip()
-			id_dict[label] = line
-			asm_lines.remove(line)
-	return id_dict
-
-def do_insert_label_ids(asm_lines, id_map):
-	b_ins = '\tmov pc, pc\n'
-	for label, id_ins in id_map.items():
-		for i,line in enumerate(asm_lines[:]):
-			if ':' in line:
-				if '@ BB#' in line:
-					continue
-				found = line.strip().split(':')[0]
-				if label == found:
-					asm_lines.insert(i+1, id_ins)
-					asm_lines.insert(i+1, b_ins)
-					break
-	return asm_lines
-
-def do_slide_ret_ids(asm_lines):
-	asm_copy = list(asm_lines)
-	for i in range(len(asm_copy)):
-		line = asm_lines[i]
-		print 'next line is ' + line
-		if 'cfiidret' in line:
-			print line
-			j = i-1
-			while 1:
-				prev = asm_copy[j]
-				print 'looking at ' + prev.strip() 
-				if is_callsite(prev):
-					print 'found! ' +prev.strip()
-					break
-				j = j -1
-
-	return asm_copy
-
 
 if __name__ == "__main__":
         #    Process command line args
