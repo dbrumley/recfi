@@ -18,7 +18,6 @@ def main():
         usage()
         sys.exit(1)
 
-    id_encode = False
     encode_type = ""
     arch = "arm"
     infile = ""
@@ -31,7 +30,6 @@ def main():
             sys.exit(0)
         elif o in ("-i", "--id_encoding"):
             optind += 2
-            id_encode = True
             encode_type = a
         elif o in ("-a", "--arch"):
             optind += 2
@@ -58,7 +56,7 @@ def main():
         outfile = os.path.dirname(os.path.abspath(infile)) + "/" + \
                   filename + "_edited" + extension
 
-    #create AsmSlider object and AsmInliner object
+    #create AsmSlider object
     #slider slides IDs UP to beginning of basic blocks and ID Checks DOWN to end of basic blocks
     #inliner changes IDs based on encoding and ID Checks, both are done based on architecture
 
@@ -67,17 +65,18 @@ def main():
     cfi_check_tar = "cfichecktar"
     cfi_check_ret = "cficheckret"
 
-    asm_slider_class = None
+    asm_editor_class = None
     if arch == "arm":
-        from ARMAsmSlider import ARMAsmSlider
-        asm_slider_class = ARMAsmSlider
+        from ARMAsmEditor import ARMAsmEditor
+        asm_editor_class = ARMAsmEditor
     else:
         asm_editor_error("Currently not supporting architectures other than arm")
         sys.exit(1)
 
-    asm_slider = asm_slider_class(infile, outfile,
+    asm_editor = asm_editor_class(infile, outfile, encode_type,
                                   cfi_insert, cfi_check_tar, cfi_check_ret)
-    asm_slider.slide_ids()
+    asm_editor.lower_ids()
+    asm_editor.generate_output()
 
 
 
