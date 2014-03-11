@@ -8,3 +8,4 @@ llvm-cfi/Makefile.common
 llvm-cfi/configure
 llvm-cfi/configure.out
 llvm-cfi/config.log
+llvm-cfi/lib/PythonScripts/.idea

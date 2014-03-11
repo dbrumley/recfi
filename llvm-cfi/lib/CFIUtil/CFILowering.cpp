@@ -9,6 +9,10 @@
 #include "llvm/IR/Function.h"
 #include "llvm/IR/Module.h"
 
+#define CFI_INSERT_INTRINSIC "llvm.arm.cfiid"
+#define CFI_CHECK_TAR_INTRINSIC "llvm.arm.cfichecktar"
+#define CFI_CHECK_RET_INTRINSIC "llvm.arm.cficheckret"
+
 using namespace llvm;
 
 namespace cfi{
@@ -94,9 +98,9 @@ namespace cfi{
         //initialize intrinsic functions
         CFILowering(Module &M)
         {
-            cfiInsertID = createCfiFunc("llvm.arm.cfiid", M);
-            cfiCheckTarget = createCfiFunc("llvm.arm.cfichecktar", M);
-            cfiCheckReturn = createCfiFunc("llvm.arm.cficheckret", M);
+            cfiInsertID = createCfiFunc(CFI_INSERT_INTRINSIC, M);
+            cfiCheckTarget = createCfiFunc(CFI_CHECK_TAR_INTRINSIC, M);
+            cfiCheckReturn = createCfiFunc(CFI_CHECK_RET_INTRINSIC, M);
         }
         
         Function *getCfiInsertID()
