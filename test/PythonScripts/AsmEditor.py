@@ -30,7 +30,7 @@ def main():
             sys.exit(0)
         elif o in ("-i", "--id_encoding"):
             optind += 2
-            encode_type = a
+            encode_type = a.lower()
         elif o in ("-a", "--arch"):
             optind += 2
             if a.lower() not in "arm":
@@ -76,6 +76,7 @@ def main():
     asm_editor = asm_editor_class(infile, outfile, encode_type,
                                   cfi_insert, cfi_check_tar, cfi_check_ret)
     asm_editor.lower_ids()
+    asm_editor.lower_checks()
     asm_editor.generate_output()
 
 

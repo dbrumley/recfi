@@ -8,31 +8,47 @@
 	.globl	_sum
 	.align	2
 _sum:                                   @ @sum
+	mov pc, pc
+	.long #784865139
 @ BB#0:
 	sub	sp, sp, #8
-	cfiid	#784865139
 	str	r0, [sp, #4]
 	str	r1, [sp]
 	ldr	r0, [sp, #4]
-	cficheckret	#1383831299
 	add	r0, r0, r1
 	add	sp, sp, #8
-	mov	pc, lr
+	mov	r12, lr
+	push r0
+	ldr r0, #1383831299
+	add r12, r12, #4
+	cmp r12, r0
+	pop r0
+	bne abort
+	add r12, r12, #4
+	mov pc, r12
 
 	.globl	_other_sum
 	.align	2
 _other_sum:                             @ @other_sum
+	mov pc, pc
+	.long #784865139
 @ BB#0:
 	sub	sp, sp, #8
-	cfiid	#784865139
 	str	r0, [sp, #4]
 	str	r1, [sp]
 	ldr	r0, [sp, #4]
-	cficheckret	#1383831299
 	add	r0, r0, r1
 	add	r0, r0, #1
 	add	sp, sp, #8
-	mov	pc, lr
+	mov	r12, lr
+	push r0
+	ldr r0, #1383831299
+	add r12, r12, #4
+	cmp r12, r0
+	pop r0
+	bne abort
+	add r12, r12, #4
+	mov pc, r12
 
 	.globl	_testing
 	.align	2
@@ -46,15 +62,31 @@ _testing:                               @ @testing
 	str	r0, [sp, #8]
 	str	r2, [sp]
 	ldmib	sp, {r0, r3}
-	cfichecktar	#784865139
 	mov	r1, r2
 	mov	lr, pc
-	mov	pc, r3
-	cfiid	#1383831299
-	cficheckret	#804745283
+	mov	r12, r3
+	push r0
+	ldr r0, #784865139
+	add r12, r12, #4
+	cmp r12, r0
+	pop r0
+	bne abort
+	add r12, r12, #4
+	mov lr, pc
+	mov pc, r12
+	mov pc, pc
+	.long #1383831299
 	mov	sp, r7
 	pop	{r7, lr}
-	mov	pc, lr
+	mov	r12, lr
+	push r0
+	ldr r0, #804745283
+	add r12, r12, #4
+	cmp r12, r0
+	pop r0
+	bne abort
+	add r12, r12, #4
+	mov pc, r12
 
 	.globl	_main
 	.align	2
@@ -99,10 +131,19 @@ LPC3_7:
 	ldr	r4, [pc, r0]
 	ldr	r0, [sp, #4]
 	ldr	r2, [r4]
-	cfichecktar	#784865139
 	mov	lr, pc
-	mov	pc, r2
-	cfiid	#1383831299
+	mov	r12, r2
+	push r0
+	ldr r0, #784865139
+	add r12, r12, #4
+	cmp r12, r0
+	pop r0
+	bne abort
+	add r12, r12, #4
+	mov lr, pc
+	mov pc, r12
+	mov pc, pc
+	.long #1383831299
 	ldr	r1, [sp, #4]
 	add	r0, r1, r0
 	str	r0, [sp, #4]
@@ -114,7 +155,8 @@ LPC3_5:
 LPC3_6:
 	ldr	r0, [pc, r0]
 	bl	_sum
-	cfiid	#1383831299
+	mov pc, pc
+	.long #1383831299
 	ldr	r1, [sp, #4]
 	mov	r2, #4
 	add	r0, r1, r0
@@ -122,7 +164,8 @@ LPC3_6:
 	str	r0, [sp, #4]
 	ldr	r0, [r4]
 	bl	_testing
-	cfiid	#804745283
+	mov pc, pc
+	.long #804745283
 	mov	r0, #0
 	add	sp, sp, #12
 	pop	{r4, lr}
