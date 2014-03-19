@@ -106,10 +106,14 @@ class ARMAsmEditor:
         #check if line is beginning of basic block, if so, insert ID
         if self.modifies_pc(split) or self.is_labelsite(split):
             #default encoding is ".long <id>"
-            if self.encode_type == "":
+            if self.encode_type in ["", "long"]:
                 asm_new.append("\t.long " + id_str + "\n")
                 #jump over id if run normally
                 asm_new.append("\tmov pc, pc\n")
+                return True
+            elif self.encode_type in "mov":
+                #make sure id is only 16 bits long
+                asm_new.append("\tmov r12, " + id_str + "\n")
                 return True
             else:
                 self.error("Not supporting encoding type of \"" +
@@ -174,12 +178,14 @@ class ARMAsmEditor:
             #add r2, r2, #4
             #bl r2
 
+            asm_new.append("\t@ check begin\n")
             asm_new.append("\tldr r12, " + id_str + "\n")
             asm_new.append("\tadd " + dest + ", " + dest + "#4\n")
             asm_new.append("\tcmp r12, " + dest + "\n")
-            asm_new.append("\tbne abort\n")
+            asm_new.append("\tbne cfi_abort\n")
             asm_new.append("\tadd " + dest + ", " + dest + "#4\n")
             asm_new.append("\t" + op + " " + dest + "\n")
+            asm_new.append("\t@ check end\n")
 
             return True
         #case: move/load/arithmetic instr
@@ -197,17 +203,19 @@ class ARMAsmEditor:
 
             line = line.replace(dest, "r12", 1)
 
+            asm_new.append("\t@ check begin\n")
             asm_new.append(line)
             asm_new.append("\tpush r0\n")
             asm_new.append("\tldr r0, " + id_str + "\n")
             asm_new.append("\tadd r12, r12, #4\n")
             asm_new.append("\tcmp r12, r0\n")
             asm_new.append("\tpop r0\n")
-            asm_new.append("\tbne abort\n")
+            asm_new.append("\tbne cfi_abort\n")
             asm_new.append("\tadd r12, r12, #4\n")
             if check_tar:
                 asm_new.append("\tmov lr, pc\n")
             asm_new.append("\tmov pc, r12\n")
+            asm_new.append("\t@ check end\n")
 
             return True
         #case: load multiple
@@ -227,17 +235,19 @@ class ARMAsmEditor:
 
                     line = re.sub("pc|r15", "r12", line)
 
+                    asm_new.append("\t@ check begin\n")
                     asm_new.append(line)
                     asm_new.append("\tpush r0\n")
                     asm_new.append("\tldr r0, " + id_str + "\n")
                     asm_new.append("\tadd r12, r12, #4\n")
                     asm_new.append("\tcmp r12, r0\n")
                     asm_new.append("\tpop r0\n")
-                    asm_new.append("\tbne abort\n")
+                    asm_new.append("\tbne cfi_abort\n")
                     asm_new.append("\tadd r12, r12, #4\n")
                     if check_tar:
                         asm_new.append("\tmov lr, pc\n")
                     asm_new.append("\tmov pc, r12\n")
+                    asm_new.append("\t@ check end\n")
 
                     return True
         return False

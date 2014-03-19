@@ -5,7 +5,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#define DEBUG_TYPE "SuperGraph_pass"
+#define DEBUG_TYPE "SuperGraph"
 
 #include "llvm/ADT/Statistic.h"
 #include "llvm/IR/IRBuilder.h"
@@ -22,6 +22,7 @@ using namespace llvm;
 #define CFI_INSERT_INTRINSIC "llvm.arm.cfiid"
 #define CFI_CHECK_TAR_INTRINSIC "llvm.arm.cfichecktar"
 #define CFI_CHECK_RET_INTRINSIC "llvm.arm.cficheckret"
+#define CFI_ABORT "cfi_abort"
 
 namespace {
     /**
@@ -62,9 +63,9 @@ namespace {
                                  bool declarationOnly,
                                  bool isVarArg) {
             llvm::FunctionType *functType =
-            llvm::FunctionType::get(retType, theArgTypes, isVarArg);
+                llvm::FunctionType::get(retType, theArgTypes, isVarArg);
             llvm::Function *ret =
-            llvm::Function::Create(functType, linkage, functName, &module);
+                llvm::Function::Create(functType, linkage, functName, &module);
             if (!ret || declarationOnly)
                 return(ret);
             return NULL;
@@ -107,7 +108,12 @@ namespace {
         }
         
     public:
-        //initialize intrinsic functions
+        /**
+         * @brief initializes CFILowering object by initializing cfi
+         * intrinsic functions
+         *
+         * @arg M - module
+         */
         CFILowering(Module &M)
         {
             cfiInsertID = createCfiFunc(CFI_INSERT_INTRINSIC, M);
@@ -115,19 +121,65 @@ namespace {
             cfiCheckReturn = createCfiFunc(CFI_CHECK_RET_INTRINSIC, M);
         }
         
+        /**
+         * @brief gets cfiInsertID function
+         *
+         * @return pointer to function
+         */
         Function *getCfiInsertID()
         {
             return cfiInsertID;
         }
         
+        /**
+         * @brief gets cfiCheckTarget function
+         *
+         * @return pointer to function
+         */
         Function *getCfiCheckTarget()
         {
             return cfiCheckTarget;
         }
         
+        /**
+         * @brief gets cfiCheckReturn function
+         *
+         * @return pointer to function
+         */
         Function *getCfiCheckReturn()
         {
             return cfiCheckReturn;
+        }
+        
+        /**
+         * @brief create cfi_abort function:
+         *
+         * void abort()
+         * {
+         *   while(1);
+         * }
+         *
+         * @return void
+         * 
+         * @arg M - module to create function in
+         */
+        void createAbort(Module &M)
+        {
+            Constant *c = M.getOrInsertFunction(CFI_ABORT,
+                                                Type::getVoidTy(M.getContext()),
+                                                NULL);
+            Function *abort = dyn_cast<Function>(c);
+            abort->setCallingConv(CallingConv::C);
+            BasicBlock* entry = BasicBlock::Create(getGlobalContext(),
+                                                   "entry",
+                                                   abort);
+            BasicBlock* loop = BasicBlock::Create(getGlobalContext(),
+                                                  "loop",
+                                                  abort);
+            IRBuilder<> builder(entry);
+            builder.CreateBr(loop);
+            builder.SetInsertPoint(loop);
+            builder.CreateBr(loop);
         }
     };
     
@@ -436,7 +488,6 @@ namespace {
          * @arg cfil - cfi lowering
          * @arg M - current module
          */
-
         void insertChecks(CFILowering cfil, Module &M)
         {
             Function *cfiCheckTarget = cfil.getCfiCheckTarget();
@@ -605,13 +656,14 @@ namespace {
             //seed rand with current time
             srand(time(NULL));
 
+            //find indirect branch targets
             Module::iterator MB, ME;
             for (MB = M.begin(), ME = M.end(); MB != ME; MB++)
             {
                 Function *F = &*MB;
                 findIndBrTargets(F);
             }
-
+            //find indirect call and return targets
             findIndCallAndRetTargets();
 
             //generate IDs for branch/call targets
@@ -628,11 +680,14 @@ namespace {
             generateCheckIDs<RetMap, Instruction *, InstrIDMap, FuncIDMap>
                 (retMap, callSiteIDs, returnCheckIDs);
             
+            //insert IDs and checks into IR
             CFILowering cfil = CFILowering(M);
-
             insertIDs(cfil, M);
             insertChecks(cfil, M);
-
+            
+            //create cfi_abort function:
+            cfil.createAbort(M);
+            
             return false;
         }
     };

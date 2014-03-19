@@ -36,6 +36,7 @@ def main():
             if a.lower() not in "arm":
                 asm_editor_error("Currently not supporting architectures other than arm")
                 sys.exit(1)
+            arch = a.lower()
         elif o in ("-o", "--outfile"):
             optind += 2
             outfile = a
@@ -55,10 +56,6 @@ def main():
         filename = os.path.basename(filename)
         outfile = os.path.dirname(os.path.abspath(infile)) + "/" + \
                   filename + "_edited" + extension
-
-    #create AsmSlider object
-    #slider slides IDs UP to beginning of basic blocks and ID Checks DOWN to end of basic blocks
-    #inliner changes IDs based on encoding and ID Checks, both are done based on architecture
 
     #cfi intrinsic names in assembly
     cfi_insert = "cfiid"
@@ -93,8 +90,11 @@ Usage: Python AsmEditor.py <options> file\n\
 Options:\n\
 --help (-h): Shows this usage\n\
 --id_encoding (-i): ID encoding type, default none\n\
+            Supported encodings:\n\
+                \"long\" - .long <ID>\n\
+                \"mov\" - mov r12, <ID>\n\
 --arch (-a): target architecture, default arm\n\
-             ***currently only supporting arm***\n\
+            ***currently only supporting arm***\n\
 --outfile (-o): outfile name, default is <file>_edited.<ext>\n"
 
     print(msg)
