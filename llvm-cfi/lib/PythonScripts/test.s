@@ -10,27 +10,19 @@
 _sum:                                   @ @sum
 @ BB#0:
 	add	r0, r1, r0
+	cfiid	#1819686100
+	cficheckret	#1149665773
 	mov	pc, lr
 
 	.globl	_other_sum
 	.align	2
 _other_sum:                             @ @other_sum
-	mov pc, pc
-	.long #924665765
 @ BB#0:
 	add	r0, r0, r1
 	add	r0, r0, #1
-	@ check begin
-	mov	r12, lr
-	push r0
-	ldr r0, #1665842663
-	add r12, r12, #4
-	cmp r12, r0
-	pop r0
-	bne abort
-	add r12, r12, #4
-	mov pc, r12
-	@ check end
+	cfiid	#1819686100
+	cficheckret	#1149665773
+	mov	pc, lr
 
 	.globl	_testing
 	.align	2
@@ -38,23 +30,14 @@ _testing:                               @ @testing
 @ BB#0:
 	push	{lr}
 	mov	r3, r0
+	cfiid	#1819686100
+	cfichecktar	#1819686100
 	mov	r0, r1
 	mov	r1, r2
 	mov	lr, pc
-	@ check begin
-	mov	r12, r3
-	push r0
-	ldr r0, #924665765
-	add r12, r12, #4
-	cmp r12, r0
-	pop r0
-	bne abort
-	add r12, r12, #4
-	mov lr, pc
-	mov pc, r12
-	@ check end
-	mov pc, pc
-	.long #1665842663
+	mov	pc, r3
+	cfiid	#1149665773
+	cficheckret	#1149665773
 	pop	{lr}
 	mov	pc, lr
 
@@ -86,6 +69,14 @@ LCPI3_1:
 LCPI3_2:
 	.long	_other_sum-(LPC3_1+8)
 	.end_data_region
+
+	.globl	_cfi_abort
+	.align	2
+_cfi_abort:                             @ @cfi_abort
+@ BB#0:                                 @ %entry
+LBB4_1:                                 @ %loop
+                                        @ =>This Inner Loop Header: Depth=1
+	b	LBB4_1
 
 	.section	__DATA,__data
 	.globl	_global_var             @ @global_var

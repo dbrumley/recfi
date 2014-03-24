@@ -252,7 +252,7 @@ class ARMAsmEditor:
                     return True
         return False
 
-
+    #TODO - check for mov lr, pc
     #lowers cfi intrinsic checks into assembly
     def lower_checks(self):
         check_found = False
