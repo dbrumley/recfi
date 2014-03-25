@@ -292,12 +292,15 @@ namespace {
                     Instruction *I = &*BB;
                     if (CallInst* callInst = dyn_cast<CallInst>(I))
                     {
-                        //Only handle indirect calls
-                        if(callInst->getCalledFunction() != NULL)
-                            continue;
+                        Function *calledFunc = callInst->getCalledFunction();
                         
-                        builder.SetInsertPoint(BB);
-                        builder.CreateCall(cfiCheckTarget, targetID);
+                        //Only insert checks before indirect calls
+                        if (calledFunc == NULL)
+                        {
+                            builder.SetInsertPoint(BB);
+                            builder.CreateCall(cfiCheckTarget, targetID);
+                        }
+                        
                         BB++;
                         builder.SetInsertPoint(BB);
                         builder.CreateCall(cfiInsertID, returnID);
@@ -363,14 +366,14 @@ namespace {
             cfiCheckReturn = cfil.getCfiCheckReturn();
             
             //insert IDs and checks
-            insertTargetIDs(M, builder);
-            
             Module::iterator MB, ME;
             for (MB = M.begin(), ME = M.end(); MB != ME; MB++)
             {
                 Function &F = *MB;
                 insertChecksAndRetIDs(F, builder);
             }
+            
+            insertTargetIDs(M, builder);
             
             //create abort function
             cfil.createAbort(M);

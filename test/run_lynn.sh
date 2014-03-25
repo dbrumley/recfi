@@ -17,7 +17,6 @@ llvm-dis $1_opt.bc
 echo "generating target specific assembly..."
 llc -O3 -march arm $1_opt.bc -o $1.s
 
-
 #opt -dot-callgraph < test.bc > /dev/null
 #dot -Tpng callgraph.dot  -o outpng
 #eog outpng

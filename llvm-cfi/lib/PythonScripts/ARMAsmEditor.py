@@ -76,12 +76,12 @@ class ARMAsmEditor:
         return False
 
 
-    #check if a line is a label
+    #check if a line is a label (function label to be specific)
     #
     #split - line.split()
     #
     #return - True if line is label, False otherwise
-    def is_labelsite(self, split):
+    def is_func_begin(self, split):
         #ignore white spaces
         if len(split) < 1:
             return False
@@ -89,7 +89,7 @@ class ARMAsmEditor:
         label = split[0]
 
         #make sure label is a label and not a comment
-        if ":" in label and "@" not in label:
+        if label.startswith("_") and ":" in label and "@" not in label:
             return True
         return False
 
@@ -104,7 +104,7 @@ class ARMAsmEditor:
     #return - True if ID inserted, False otherwise
     def insert_id(self, split, asm_new, id_str):
         #check if line is beginning of basic block, if so, insert ID
-        if self.modifies_pc(split) or self.is_labelsite(split):
+        if self.modifies_pc(split) or self.is_func_begin(split):
             #default encoding is ".long <id>"
             if self.encode_type in ["", "long"]:
                 asm_new.append("\t.long " + id_str + "\n")
