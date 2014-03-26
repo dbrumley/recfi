@@ -599,6 +599,7 @@ void PoolAllocate::MicroOptimizePoolCalls() {
 //                     DSNodes reachable from globals.  DSNodes are *added* to
 //                     this container; it is not cleared by this function.
 //                     DSNodes from both the local and globals graph are added.
+/*
 static inline void
 GetNodesReachableFromGlobals (DSGraph* G,
                               DenseSet<const DSNode*> &NodesFromGlobals) {
@@ -649,6 +650,7 @@ GetNodesReachableFromGlobals (DSGraph* G,
     }
   }
 }
+*/
 
 //
 // Method: FindPoolArgs()

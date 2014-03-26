@@ -13,8 +13,8 @@ LIBRARYNAME = LLVMSuperGraph
 LOADABLE_MODULE = 1
 USEDLIBS =
 
-#LLVMSRC = /home/jabat/Documents/projects/boeing/boeing-cfi/llvm-3.3
-LLVMSRC = /Users/oulinyao/Desktop/MSISTM/CFI/project/boeing-cfi/llvm-3.3
+LLVMSRC = /Users/jabat/Documents/workspace/CMU/boeing/boeing-cfi/llvm-3.3
+#LLVMSRC = /Users/oulinyao/Desktop/MSISTM/CFI/project/boeing-cfi/llvm-3.3
 POOLALLOC_SRCDIR := $(LLVMSRC)/projects/poolalloc
 SC_FLAGS = -I$(POOLALLOC_SRCDIR)/include  
 
