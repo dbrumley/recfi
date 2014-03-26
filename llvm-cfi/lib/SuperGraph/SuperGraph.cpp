@@ -298,11 +298,23 @@ namespace {
                         //add indirect call targets to indCallDestMap
                         if (!cs.getCalledFunction())
                         {
+                            //function that is declaration only
+                            if (F->begin() == F->end())
+                            {
+                                errs() << "SuperGraphError: "
+                                    << "Indirect function "
+                                    << I->getParent()->getName() << " "
+                                    << "calls declaration only target "
+                                    << F->getName() << "; cannot insert ID "
+                                    << "before declaration only targets\n";
+                                continue;
+                            }
+                                
                             BasicBlock *B = const_cast<BasicBlock *>
                                 (&F->getEntryBlock());
                             indDestMap[I].insert(B);
                         }
-
+                        
                         //add call site to retMap
                         retMap[const_cast<Function *>(F)].insert(I);
                     }
@@ -652,7 +664,7 @@ namespace {
          * @arg M - module reference
          */
         virtual bool runOnModule(Module &M) 
-        {  
+        {
             //seed rand with current time
             srand(time(NULL));
 
@@ -665,7 +677,7 @@ namespace {
             }
             //find indirect call and return targets
             findIndCallAndRetTargets();
-
+            
             //generate IDs for branch/call targets
             generateIDs<BBSet, DestMap, BasicBlock *, BBIDMap>
                 (indDestMap, targetIDs);
