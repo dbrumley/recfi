@@ -48,7 +48,7 @@ cl::opt<CfiLevel> PrecisionLevel(cl::desc("Choose level of CFI precision:"),
 /*
  * Command-line flag for printing precision statistics 
  */
-cl::opt<bool> PrintPrecStats("p", cl::desc("Print precision statistics"));
+cl::opt<bool> PrintPrecStats("s", cl::desc("Print precision statistics"));
 
 /*
  * Command-line flag for printing debug
@@ -324,6 +324,8 @@ namespace {
                     CallTargetIterator FB, FE;
                     for (FB = ctf->begin(cs), FE = ctf->end(cs); FB != FE; FB++)
                     {
+                        errs() << "Handling Function: " << *FB << "\n";
+
                         const Function *F = *FB;
 
                         //add indirect call targets to indCallDestMap
@@ -345,9 +347,21 @@ namespace {
                                 (&F->getEntryBlock());
                             indDestMap[I].insert(B);
                         }
-                        
+
                         //add call site to retMap
                         retMap[const_cast<Function *>(F)].insert(I);
+
+                        //Joe added this stuff
+                        /*
+                        if( F->getBasicBlockList().empty() )
+                            continue;
+                        BasicBlock *B = const_cast<BasicBlock *>
+                                (&F->back());
+                        Instruction *backInst = const_cast<Instruction*>
+                                (&B->back());
+                        errs() << "Back instr: " <<  *backInst << "\n";
+                        */
+                        
                     }
                 }
             }
