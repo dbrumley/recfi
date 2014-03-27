@@ -314,7 +314,6 @@ namespace {
                                 (&F->getEntryBlock());
                             indDestMap[I].insert(B);
                         }
-                        
                         //add call site to retMap
                         if (!F->isIntrinsic())
                             retMap[const_cast<Function *>(F)].insert(I);
