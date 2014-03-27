@@ -14,8 +14,8 @@
 #include "llvm/IR/Module.h"
 #include "llvm/Pass.h"
 #include "llvm/Support/raw_ostream.h"
-
 #include "dsa/CallTargets.h"
+#include "llvm/Support/CommandLine.h"
 
 using namespace llvm;
 
@@ -23,6 +23,37 @@ using namespace llvm;
 #define CFI_CHECK_TAR_INTRINSIC "llvm.arm.cfichecktar"
 #define CFI_CHECK_RET_INTRINSIC "llvm.arm.cficheckret"
 #define CFI_ABORT "cfi_abort"
+
+/*
+ * Levels of CFI precision
+ */
+enum CfiLevel{
+    TwoId,          /* Abadi's basic "Two-ID CFI" */
+    MultiSimple,    /* Abadi's main "Multi-ID CFI" */ 
+    MultiPlus,      /* Multi-ID with a white list for solving destination equivalence */
+    MultiClone      /* Multi-ID with cloning for context sensitivity */
+};
+
+/*
+ * Command-line flag for the level of CFI precision
+ */
+cl::opt<CfiLevel> PrecisionLevel(cl::desc("Choose level of CFI precision:"),
+        cl::values(
+            clEnumValN(TwoId, "two", "No optimizations, enable debugging"),
+            clEnumValN(MultiSimple, "multi", "No optimizations, enable debugging"),
+            clEnumValN(MultiPlus, "plus", "No optimizations, enable debugging"),
+            clEnumValN(MultiClone, "clone", "No optimizations, enable debugging"),
+            clEnumValEnd));
+
+/*
+ * Command-line flag for printing precision statistics 
+ */
+cl::opt<bool> PrintPrecStats("p", cl::desc("Print precision statistics"));
+
+/*
+ * Command-line flag for printing debug
+ */
+cl::opt<bool> Debug("d", cl::desc("Useful for debugging"));
 
 namespace {
     /**
