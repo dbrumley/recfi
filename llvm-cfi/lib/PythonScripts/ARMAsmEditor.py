@@ -55,7 +55,8 @@ class ARMAsmEditor:
         op = split[0]
         dest = split[1]
 
-        branch_inst = ["b", "bl", "bx", "blx"]
+        #TODO - make more comprehensive
+        branch_inst = ["b", "bl", "bx", "blx", "bne", "beq", ]
         str_inst = ["str"]
         pc_names = ["pc", "r15"]
 

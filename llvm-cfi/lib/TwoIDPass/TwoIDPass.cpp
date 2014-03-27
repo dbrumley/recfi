@@ -301,10 +301,12 @@ namespace {
                             builder.CreateCall(cfiCheckTarget, targetID);
                         }
                         
-                        BB++;
-                        builder.SetInsertPoint(BB);
-                        builder.CreateCall(cfiInsertID, returnID);
-                        BB--;
+                        if (calledFunc != NULL && !calledFunc->isIntrinsic())
+                        {
+                            BB++;
+                            builder.SetInsertPoint(BB);
+                            builder.CreateCall(cfiInsertID, returnID);
+                        }
                     }
                     else if (dyn_cast<IndirectBrInst>(I))
                     {
