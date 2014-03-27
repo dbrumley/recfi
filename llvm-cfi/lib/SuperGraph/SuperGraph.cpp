@@ -299,7 +299,7 @@ namespace {
                         if (!cs.getCalledFunction())
                         {
                             //function that is declaration only
-                            if (F->begin() == F->end())
+                            if (F->isDeclaration())
                             {
                                 errs() << "SuperGraphError: "
                                     << "Indirect function "
@@ -316,7 +316,8 @@ namespace {
                         }
                         
                         //add call site to retMap
-                        retMap[const_cast<Function *>(F)].insert(I);
+                        if (!F->isIntrinsic())
+                            retMap[const_cast<Function *>(F)].insert(I);
                     }
                 }
             }
