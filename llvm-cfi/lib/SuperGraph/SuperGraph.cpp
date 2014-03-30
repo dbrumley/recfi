@@ -332,7 +332,7 @@ namespace {
                         if (!cs.getCalledFunction())
                         {
                             //function that is declaration only
-                            if (F->begin() == F->end())
+                            if (F->isDeclaration())
                             {
                                 errs() << "SuperGraphError: "
                                     << "Indirect function "
@@ -348,9 +348,6 @@ namespace {
                             indDestMap[I].insert(B);
                         }
 
-                        //add call site to retMap
-                        retMap[const_cast<Function *>(F)].insert(I);
-
                         //Joe added this stuff
                         /*
                         if( F->getBasicBlockList().empty() )
@@ -362,6 +359,9 @@ namespace {
                         errs() << "Back instr: " <<  *backInst << "\n";
                         */
                         
+                        //add call site to retMap
+                        if (!F->isIntrinsic())
+                            retMap[const_cast<Function *>(F)].insert(I);
                     }
                 }
             }
