@@ -324,10 +324,8 @@ namespace {
                     CallTargetIterator FB, FE;
                     for (FB = ctf->begin(cs), FE = ctf->end(cs); FB != FE; FB++)
                     {
-                        errs() << "Handling Function: " << *FB << "\n";
-
                         const Function *F = *FB;
-
+                        errs() << "target function: " << F->getName() << "\n";
                         //add indirect call targets to indCallDestMap
                         if (!cs.getCalledFunction())
                         {
@@ -347,7 +345,13 @@ namespace {
                                 (&F->getEntryBlock());
                             indDestMap[I].insert(B);
                         }
-
+<<<<<<< Updated upstream
+=======
+                        
+                        //add call site to retMap
+                        if (!F->isIntrinsic())
+                            retMap[const_cast<Function *>(F)].insert(I);
+                        
                         //Joe added this stuff
                         /*
                         if( F->getBasicBlockList().empty() )
@@ -358,10 +362,6 @@ namespace {
                                 (&B->back());
                         errs() << "Back instr: " <<  *backInst << "\n";
                         */
-                        
-                        //add call site to retMap
-                        if (!F->isIntrinsic())
-                            retMap[const_cast<Function *>(F)].insert(I);
                     }
                 }
             }
@@ -723,6 +723,8 @@ namespace {
             //find indirect call and return targets
             findIndCallAndRetTargets();
             
+            print_dest_map();
+
             //generate IDs for branch/call targets
             generateIDs<BBSet, DestMap, BasicBlock *, BBIDMap>
                 (indDestMap, targetIDs);
