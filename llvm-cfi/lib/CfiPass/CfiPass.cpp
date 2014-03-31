@@ -464,24 +464,28 @@ namespace {
             errs() << "Precision Level: " << CfiLevelStrings[PrecisionLevel] << "\n";
             
             
-            /* mapping ibranch/icall/ret instructions to dest instructions */
+
+            do_BU_DSA_Stuff(M);
+            /*
+            */
+            // mapping ibranch/icall/ret instructions to dest instructions
             InstDestMap instDestMap;
             findIndBrTargets(M, instDestMap);
             findIndCallAndRetTargets(instDestMap);
             
             print_dest_map(instDestMap);
             
-            /* mappings of instructions to their IDs */
+            // mappings of instructions to their IDs
             InstIDMap instrIDs;
             genUniqueTargetIDs(instDestMap, instrIDs); 
             print_ID_maps(instrIDs);
 
-            /* maps of transfer sites to target IDs */
+            // maps of transfer sites to target IDs
             InstIDSetMap targetCheckIDs;
             generateCheckIDs(instDestMap, instrIDs, targetCheckIDs);
             print_ID_check_maps(targetCheckIDs);
 
-            /* insert IDs and checks into IR as instrinsics */
+            // insert IDs and checks into IR as instrinsics
             CFILowering cfil = CFILowering(M);
             cfil.insertChecks(targetCheckIDs);
             cfil.insertIDs(instrIDs);
@@ -492,26 +496,35 @@ namespace {
 
         void do_BU_DSA_Stuff(Module &M)
         {
+            errs() << "\n/==================== CTF Print ========================================/\n\n";
+            CTF *ctf = &getAnalysis<CTF>();
+            ctf->print(errs(), &M);
+
+            errs() << "\n/=================== BU Graph Print ====================================/\n\n";
             /* get the Analysis Object */
             DataStructures *Graphs = &getAnalysis<EquivBUDataStructures>();
             Graphs->dumpCallGraph();
             Graphs->print(errs(), &M);
 
+            errs() << "\n/=================== GlobalGraphs Function Names =======================/\n\n";
             /* get the global graph object */
             DSGraph *GlobalGraphs = Graphs->getGlobalsGraph();
             errs() << GlobalGraphs->getFunctionNames() << "\n";
-            
+           
+            errs() << "\n/=================== Graph CallGraph ===================================/\n\n";
             /* get the callgraph object */
             DSCallGraph CallGraph = Graphs->getCallGraph();
             CallGraph.dump();
 
+            errs() << "\n/=================== CallGraph Iterator ================================/\n\n";
             DSCallGraph::callee_key_iterator key_begin = CallGraph.key_begin();
             DSCallGraph::callee_key_iterator key_end = CallGraph.key_end();
             for (; key_begin != key_end; key_begin++)
             {
-                errs() << "callee key" << "\n";
+                errs() << "callee key: " << *key_begin << "\n";
 
             }
+            errs() << "\n/========================================================================/\n\n";
         }
 
         
@@ -527,15 +540,16 @@ namespace {
            InstDestMap::iterator DB, DE;
             for (DB = instDestMap.begin(), DE = instDestMap.end(); DB != DE; DB++)
             {
-                errs() << "Instruction:\n\t";
+                errs() << "\tInstruction: ";
                 DB->first->dump();
 
-                errs() << "Targets:\n";
+                errs() << "\tTargets:\n";
                 InstSet::iterator SB, SE;
                 for (SB = DB->second.begin(), SE = DB->second.end();
                      SB != SE; SB++)
                 {
                     Instruction *B = *SB;
+                    errs() << "\t\t";
                     B->dump();
                 }
                 errs() << "\n";
@@ -555,8 +569,9 @@ namespace {
             for (IB = callSiteIDs.begin(), IE = callSiteIDs.end();
                  IB != IE; IB++)
             {
+                errs() << "\tTarget Instr: ";
                 IB->first->dump();
-                errs() << "\tID = " << IB->second << "\n";
+                errs() << "\t\tID = " << IB->second << "\n";
             }
         }
 
@@ -571,14 +586,14 @@ namespace {
             for (IB = targetCheckIDs.begin(), IE = targetCheckIDs.end();
                  IB != IE; IB++)
             {
-                errs() << "Transfer Instr: ";
+                errs() << "\tTransfer Instr: ";
                 IB->first->dump();
                 std::set<int>::iterator setB, setE;
                 for(setB = IB->second.begin(), setE = IB->second.end();
                         setB != setE; setB++)
                 {
                     int intID = *setB;
-                    errs() << "\tID = " << intID << "\n";
+                    errs() << "\t\tTarget ID = " << intID << "\n";
                 }
             }
         }
