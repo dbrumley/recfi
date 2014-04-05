@@ -1,72 +1,46 @@
 #include <stdio.h>
 #include <string.h>
 
-int function_Y(int y)
+
+void function_X()
 {
-    return y+2;
+    printf("function X");
 }
 
-int function_Z(int z)
+void function_Y()
 {
-    return z+3;
+    printf("function Y");
 }
 
-int function_X(int x)
+void function_Z()
 {
-    return x+1;
+    printf("function Z");
 }
 
-int function_W(int w)
+void function_B(int b)
 {
-    return w+4;
-}
-
-int function_A( int (*fptr)(int), int a)
-{
-    int (*func_ptr)();
-    func_ptr = fptr;
-    int res = func_ptr(a);
-    return 0;
-}
-
-int function_B(int b)
-{
-    int (*func_ptr2)();
-    if( b == 0 )
-    {
-        func_ptr2 = function_Y;
-    }
+    void (*func_ptr)();
+    if(b)
+        func_ptr = function_X;
     else
-    {
-        func_ptr2 = function_Z;
-    }
-    int res = func_ptr2(b);
-    return 0;
+        func_ptr = function_Y;
+    func_ptr(b);
 }
 
-int function_C(int c)
+void function_C(int c)
 {
-    int (*func_ptr2)();
-    if( c == 0 )
-    {
-        func_ptr2 = function_Y;
-    }
+    void (*func_ptr)();
+    if(c)
+        func_ptr = function_X;
     else
-    {
-        func_ptr2 = function_X;
-    }
-    int res = func_ptr2(c);
-    return 0;
+        func_ptr = function_Z;
+    func_ptr(c);
 }
-
 int main()
 {
-    int x = 4;
-    function_A(function_W, x);
-    function_A(function_W, x);
-    printf("Hello world\n");
-    x = 0;
-    int y = 40 * 2;
-    function_B(x);
+    int x = 0;
+    //function_B(x);
+    //function_C(x);
+    //function_Z();
     return 0;
 }

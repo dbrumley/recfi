@@ -19,6 +19,8 @@
 #include "dsa/DSGraph.h"
 #include "dsa/DSCallGraph.h"
 
+#include "llvm/Analysis/AliasAnalysis.h"
+
 using namespace llvm;
 
 #define CFI_INSERT_INTRINSIC "llvm.arm.cfiid"
@@ -283,6 +285,7 @@ namespace {
 
         virtual void getAnalysisUsage(AnalysisUsage &AU) const {
           AU.addRequired<EquivBUDataStructures>();
+          AU.addRequired<AliasAnalysis>();
           AU.addRequired<CTF>();
         }
 
@@ -335,6 +338,8 @@ namespace {
          */
         void findIndCallAndRetTargets(InstDestMap& instDestMap)
         {
+            llvm::AliasAnalysis *AA = &getAnalysis<AliasAnalysis>();
+
             //do dsa call target analysis
             CTF *ctf = &getAnalysis<CTF>();
 
@@ -345,6 +350,10 @@ namespace {
                 CallSite cs = *CB;
                 Instruction *I = cs.getInstruction();
 
+                CallInst *call = dyn_cast<CallInst>(I);
+                Value * cval = call->getCalledValue();
+
+
                 //only consider calls that have targets
                 if (ctf->begin(cs) != ctf->end(cs))
                 {
@@ -353,6 +362,13 @@ namespace {
                     for (FB = ctf->begin(cs), FE = ctf->end(cs); FB != FE; FB++)
                     {
                         const Function *F = *FB;
+
+
+                        llvm::AliasAnalysis::AliasResult res = AA->alias(F, cval);
+                        std::string name = "[indrect]";
+                        if(cs.getCalledFunction())
+                            name = cs.getCalledFunction()->getName();
+                        errs() << name << " " << F->getName() << " " << res << "\n";
 
                         if (F->isIntrinsic())
                         {
@@ -460,14 +476,13 @@ namespace {
         {  
             srand(time(NULL));
 
+            /*
             errs() << "\n/========================================================================/\n";
             errs() << "Precision Level: " << CfiLevelStrings[PrecisionLevel] << "\n";
             
             
 
-            do_BU_DSA_Stuff(M);
-            /*
-            */
+            do_Analysis_Stuff(M);
             // mapping ibranch/icall/ret instructions to dest instructions
             InstDestMap instDestMap;
             findIndBrTargets(M, instDestMap);
@@ -490,29 +505,30 @@ namespace {
             cfil.insertChecks(targetCheckIDs);
             cfil.insertIDs(instrIDs);
             errs() << "/========================================================================/\n\n";
-            
+            */
             return false;
         }
 
-        void do_BU_DSA_Stuff(Module &M)
+        void do_Analysis_Stuff(Module &M)
         {
+
             errs() << "\n/==================== CTF Print ========================================/\n\n";
             CTF *ctf = &getAnalysis<CTF>();
             ctf->print(errs(), &M);
 
-            errs() << "\n/=================== BU Graph Print ====================================/\n\n";
-            /* get the Analysis Object */
+            errs() << "\n/=================== BU Graph Dump  ====================================/\n\n";
             DataStructures *Graphs = &getAnalysis<EquivBUDataStructures>();
             Graphs->dumpCallGraph();
+            
+            /*
+            errs() << "\n/=================== BU Graph Print ====================================/\n\n";
             Graphs->print(errs(), &M);
 
             errs() << "\n/=================== GlobalGraphs Function Names =======================/\n\n";
-            /* get the global graph object */
             DSGraph *GlobalGraphs = Graphs->getGlobalsGraph();
             errs() << GlobalGraphs->getFunctionNames() << "\n";
            
             errs() << "\n/=================== Graph CallGraph ===================================/\n\n";
-            /* get the callgraph object */
             DSCallGraph CallGraph = Graphs->getCallGraph();
             CallGraph.dump();
 
@@ -524,6 +540,8 @@ namespace {
                 errs() << "callee key: " << *key_begin << "\n";
 
             }
+            */
+
             errs() << "\n/========================================================================/\n\n";
         }
 

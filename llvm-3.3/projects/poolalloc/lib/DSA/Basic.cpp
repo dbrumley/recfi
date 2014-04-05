@@ -33,59 +33,71 @@ X("dsa-basic", "Basic Data Structure Analysis(No Analysis)");
 char BasicDataStructures::ID = 0;
 
 bool BasicDataStructures::runOnModule(Module &M) {
-  init(&getAnalysis<DataLayout>());
+    init(&getAnalysis<DataLayout>());
 
-  //
-  // Create a void pointer type.  This is simply a pointer to an 8 bit value.
-  //
+    //
+    // Create a void pointer type.  This is simply a pointer to an 8 bit value.
+    //
 
-  DSNode * GVNodeInternal = new DSNode(GlobalsGraph);
-  DSNode * GVNodeExternal = new DSNode(GlobalsGraph);
-  for (Module::global_iterator I = M.global_begin(), E = M.global_end();
-       I != E; ++I) {
-    if (I->isDeclaration() || (!(I->hasInternalLinkage()))) {
-      GlobalsGraph->getNodeForValue(&*I).mergeWith(GVNodeExternal);
-    } else {
-      GlobalsGraph->getNodeForValue(&*I).mergeWith(GVNodeInternal);
-    }
-  }
-
-  GVNodeInternal->foldNodeCompletely();
-  GVNodeInternal->maskNodeTypes(DSNode::IncompleteNode);
-
-  GVNodeExternal->foldNodeCompletely();
-  GVNodeExternal->setExternalMarker();
-
-  // Next step, iterate through the nodes in the globals graph, unioning
-  // together the globals into equivalence classes.
-  formGlobalECs();
-
-  for (Module::iterator F = M.begin(), E = M.end(); F != E; ++F) {
-    if (!F->isDeclaration()) {
-      DSGraph* G = new DSGraph(GlobalECs, getDataLayout(), *TypeSS, GlobalsGraph);
-      DSNode * Node = new DSNode(G);
-          
-      if (!F->hasInternalLinkage())
-        Node->setExternalMarker();
-
-      // Create scalar nodes for all pointer arguments...
-      for (Function::arg_iterator I = F->arg_begin(), E = F->arg_end();
-          I != E; ++I) {
-        if (isa<PointerType>(I->getType())) {
-          G->getNodeForValue(&*I).mergeWith(Node);
+    DSNode * GVNodeInternal = new DSNode(GlobalsGraph);
+    DSNode * GVNodeExternal = new DSNode(GlobalsGraph);
+    errs() << "Global Value Iterator" << "\n";
+    for (Module::global_iterator I = M.global_begin(), E = M.global_end();
+            I != E; ++I) {
+        errs() << "\t" << *I << "\n";
+        if (I->isDeclaration() || (!(I->hasInternalLinkage()))) {
+            GlobalsGraph->getNodeForValue(&*I).mergeWith(GVNodeExternal);
+        } else {
+            GlobalsGraph->getNodeForValue(&*I).mergeWith(GVNodeInternal);
         }
-      }
-
-      for (inst_iterator I = inst_begin(F), E = inst_end(F); I != E; ++I) {
-        G->getNodeForValue(&*I).mergeWith(Node);
-      }
-
-      Node->foldNodeCompletely();
-      Node->maskNodeTypes(DSNode::IncompleteNode);
-
-      setDSGraph(*F, G);
     }
-  }
- 
-  return false;
+
+    GVNodeInternal->foldNodeCompletely();
+    GVNodeInternal->maskNodeTypes(DSNode::IncompleteNode);
+
+    GVNodeExternal->foldNodeCompletely();
+    GVNodeExternal->setExternalMarker();
+
+    // Next step, iterate through the nodes in the globals graph, unioning
+    // together the globals into equivalence classes.
+    formGlobalECs();
+
+    errs() << "Function Iterator" << "\n";
+    for (Module::iterator F = M.begin(), E = M.end(); F != E; ++F) {
+        if (!F->isDeclaration()) {
+            errs() << "" << F->getName() << ":\n";
+            DSGraph* G = new DSGraph(GlobalECs, getDataLayout(), *TypeSS, GlobalsGraph);
+            DSNode * Node = new DSNode(G);
+
+            if (!F->hasInternalLinkage())
+            {
+                Node->setExternalMarker();
+            }
+            // Create scalar nodes for all pointer arguments...
+            for (Function::arg_iterator I = F->arg_begin(), E = F->arg_end();
+                    I != E; ++I) {
+                if (isa<PointerType>(I->getType())) {
+                    G->getNodeForValue(&*I).mergeWith(Node);
+                }
+            }
+
+            for (inst_iterator I = inst_begin(F), E = inst_end(F); I != E; ++I) 
+            {
+                
+                errs() << "\tinst: " << *I << "\n";
+                DSNodeHandle handl = G->getNodeForValue(&*I);
+                handl.mergeWith(Node);
+            }
+
+                Node->dump();
+            Node->foldNodeCompletely();
+                Node->dump();
+            Node->maskNodeTypes(DSNode::IncompleteNode);
+                Node->dump();
+
+            setDSGraph(*F, G);
+        }
+    }
+
+    return false;
 }

@@ -16,7 +16,7 @@
 
 using std::cerr;
 
-#define DEBUG (0)
+#define DEBUG (1)
 
 #if ( __WORDSIZE == 64 )
 #define ARCH_64 1
