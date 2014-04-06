@@ -51,6 +51,7 @@ class ARMAsmEditor(AsmEditorBase):
         if not self.is_transfer_instr(split):
             return False
 
+        print line
         is_br = False
         uses_pc = False
 
