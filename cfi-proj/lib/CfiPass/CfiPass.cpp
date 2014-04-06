@@ -28,39 +28,6 @@ using namespace llvm;
 #define CFI_CHECK_RET_INTRINSIC "llvm.arm.cficheckret"
 #define CFI_ABORT "cfi_abort"
 
-/*
- * Levels of CFI precision
- */
-enum CfiLevel{
-    TwoId,          /* Abadi's basic "Two-ID CFI" */
-    MultiSimple,    /* Abadi's main "Multi-ID CFI" */ 
-    MultiPlus,      /* Multi-ID with a white list for solving destination equivalence */
-    MultiClone      /* Multi-ID with cloning for context sensitivity */
-};
-
-static const char * CfiLevelStrings[] = {"Two-ID", "Multi-Simple",  "Multi-Plus", "Multi-Clone"};
-
-/*
- * Command-line flag for the level of CFI precision
- */
-cl::opt<CfiLevel> PrecisionLevel(cl::desc("Choose level of CFI precision:"),
-        cl::values(
-            clEnumValN(TwoId, "two", "No optimizations, enable debugging"),
-            clEnumValN(MultiSimple, "multi", "No optimizations, enable debugging"),
-            clEnumValN(MultiPlus, "plus", "No optimizations, enable debugging"),
-            clEnumValN(MultiClone, "clone", "No optimizations, enable debugging"),
-            clEnumValEnd));
-
-/*
- * Command-line flag for printing precision statistics 
- */
-cl::opt<bool> PrintPrecStats("s", cl::desc("Print precision statistics"));
-
-/*
- * Command-line flag for printing debug
- */
-cl::opt<bool> Debug("d", cl::desc("Useful for debugging"));
-
 namespace {
 
     typedef dsa::CallTargetFinder<EQTDDataStructures> CTF;
@@ -474,28 +441,22 @@ namespace {
          */
         virtual bool runOnModule(Module &M) 
         {  
+            errs() << "/========================================================================/\n\n";
+            
             srand(time(NULL));
 
-            /*
-            errs() << "\n/========================================================================/\n";
-            errs() << "Precision Level: " << CfiLevelStrings[PrecisionLevel] << "\n";
-            
-            
-
-            do_Analysis_Stuff(M);
-            // mapping ibranch/icall/ret instructions to dest instructions
+            // mapping ( TRANSFER => DESTINATION ) instructions
             InstDestMap instDestMap;
             findIndBrTargets(M, instDestMap);
             findIndCallAndRetTargets(instDestMap);
-            
             print_dest_map(instDestMap);
             
-            // mappings of instructions to their IDs
+            // mapping destination ( INSTRUCTION => ID )
             InstIDMap instrIDs;
             genUniqueTargetIDs(instDestMap, instrIDs); 
             print_ID_maps(instrIDs);
 
-            // maps of transfer sites to target IDs
+            // mapping transfer ( INSTRUCTION => ID_SET )
             InstIDSetMap targetCheckIDs;
             generateCheckIDs(instDestMap, instrIDs, targetCheckIDs);
             print_ID_check_maps(targetCheckIDs);
@@ -504,47 +465,10 @@ namespace {
             CFILowering cfil = CFILowering(M);
             cfil.insertChecks(targetCheckIDs);
             cfil.insertIDs(instrIDs);
+            
             errs() << "/========================================================================/\n\n";
-            */
             return false;
         }
-
-        void do_Analysis_Stuff(Module &M)
-        {
-
-            errs() << "\n/==================== CTF Print ========================================/\n\n";
-            CTF *ctf = &getAnalysis<CTF>();
-            ctf->print(errs(), &M);
-
-            errs() << "\n/=================== BU Graph Dump  ====================================/\n\n";
-            DataStructures *Graphs = &getAnalysis<EquivBUDataStructures>();
-            Graphs->dumpCallGraph();
-            
-            /*
-            errs() << "\n/=================== BU Graph Print ====================================/\n\n";
-            Graphs->print(errs(), &M);
-
-            errs() << "\n/=================== GlobalGraphs Function Names =======================/\n\n";
-            DSGraph *GlobalGraphs = Graphs->getGlobalsGraph();
-            errs() << GlobalGraphs->getFunctionNames() << "\n";
-           
-            errs() << "\n/=================== Graph CallGraph ===================================/\n\n";
-            DSCallGraph CallGraph = Graphs->getCallGraph();
-            CallGraph.dump();
-
-            errs() << "\n/=================== CallGraph Iterator ================================/\n\n";
-            DSCallGraph::callee_key_iterator key_begin = CallGraph.key_begin();
-            DSCallGraph::callee_key_iterator key_end = CallGraph.key_end();
-            for (; key_begin != key_end; key_begin++)
-            {
-                errs() << "callee key: " << *key_begin << "\n";
-
-            }
-            */
-
-            errs() << "\n/========================================================================/\n\n";
-        }
-
         
         /********** Debug Functions **********/
 
