@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+
+import os, sys
+
+def main():
+    args = []
+    action = ""
+
+    for arg in sys.argv[1:]:
+        #arg is a file
+	if '.' in arg:
+	    args.append(arg)
+        else:
+            action = arg
+
+    os.execvp("ar", ["ar", action,
+	"--plugin", 
+	"/home/lynn/boeing-cfi/build/Release+Debug+Asserts/lib/LLVMgold.so"] 
+	+ args)
+   
+    return 1
+
+if __name__ == '__main__':
+    main()
