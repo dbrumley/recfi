@@ -89,7 +89,7 @@ class AsmEditorBase:
             elif self.is_cfi_intrinsic(split, "insert"):
                 id_found = True
                 id_str = split[1]
-                continue # don't append
+                continue # don't append intrinsic
             asm_new.append(asm_line)
 
         asm_new.reverse()

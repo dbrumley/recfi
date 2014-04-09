@@ -13,11 +13,18 @@ class ARMAsmEditor(AsmEditorBase):
     cond_codes = ['eq', 'ne', 'cs', 'hs',\
                 'cc', 'lo', 'mi', 'pl',\
                 'vs', 'vc', 'hi', 'ls',\
-                'ge', 'lt', 'gt', 'le', 'al']
+                'ge', 'lt', 'gt', 'le',\
+                'al', '']
+    gpr_names = ['r0', 'r1', 'r2', 'r3',\
+                    'r4', 'r5', 'r6', 'r7',\
+                    'r8', 'r9', 'r10', 'r11',\
+                    'r12', 'r13', 'r14', 'r15'\
+                    'sp', 'lr', 'pc']
 
     branch_codes = [a + b for a, b in itertools.product(branch_bases, cond_codes)]
     str_codes = [a + b for a, b in itertools.product(str_bases, cond_codes)] 
-        
+    transfers = set()
+
     def error(self, msg):
         print("\nARMAsmEditorError: " + msg)
 
@@ -51,9 +58,9 @@ class ARMAsmEditor(AsmEditorBase):
         if not self.is_transfer_instr(split):
             return False
 
-        print line
         is_br = False
         uses_pc = False
+        src_lbl = False
 
         opcode  = split[0]
         operand = split[1]
@@ -65,6 +72,8 @@ class ARMAsmEditor(AsmEditorBase):
 
         if is_br or uses_pc:
             
+            r_temp = 'r0'
+
             #get source register
             if is_br:
                 r_src = operand
@@ -74,25 +83,37 @@ class ARMAsmEditor(AsmEditorBase):
                 r_src = split[2]
             
             if r_src == 'r0' or r_src == 'r12':
-                raise Exception('indirect branch to r0 or r12... \
-                        we need to insert a special case in check lowering')
+                r_temp = 'r1'
+                #raise Exception('indirect branch to r0 or r12... \
+                #        we need to insert a special case in check lowering')
+            
+            if not r_src in self.gpr_names:
+                if not 'lbb' in r_src:
+                    print '\tassume direct (no check needed):' + ' '.join(split)
+                return False
 
-            asm_new.append("\t@ [ ====== CFI check begin ===== ]\n")
-            asm_new.append("\tpush r0\n")
-            asm_new.append("\tldr r0, [" + r_src + ", #4] \t@ get destination ID\n")
+
+            if check_tar:
+                asm_new.append("\t@ [ ====== CFI checktar begin ====== ]\n")
+            else:
+                asm_new.append("\t@ [ ====== CFI checkret begin ====== ]\n")
+            asm_new.append("\t@ [ ====== " + ' '.join(split) + " ====== ]\n")
+            asm_new.append("\tpush "+r_temp+"\n")
+            asm_new.append("\tldr "+r_temp+", [" + r_src + ", #4] \t@ get destination ID\n")
             asm_new.append("\tldr r12, " + ids.pop(0) + " \t@ ID first\n")
-            asm_new.append("\tcmp r0, r12\n")
+            asm_new.append("\tcmp "+r_temp+", r12\n")
             for extra_id in ids:
                 asm_new.append("\tldrne r12, " + extra_id + " \t@ ID extra\n")
-                asm_new.append("\tcmpne r0, r12\n")
+                asm_new.append("\tcmpne "+r_temp+", r12\n")
             asm_new.append("\tbne cfi_abort\n")
-            asm_new.append("\tpop r0\n")
-            asm_new.append("\tadd " + r_src + ", " + r_src + ", #4\n")
+            asm_new.append("\tpop "+r_temp+"\n")
+            asm_new.append("\tadd " + r_src + ", " + r_src + ", #8\n")
             if uses_pc and check_tar:
                 asm_new.append("\tmov lr, pc \t@ this is sorta sketch\n")
             asm_new.append(line)
-            asm_new.append("\t@ [ ====== CFI check end ===== ]\n")
+            asm_new.append("\t@ [ ====== CFI check end ====== ]\n")
 
+            self.transfers.add(' '.join(split))
             return True
 
         #TODO: pop instructions also
@@ -113,7 +134,11 @@ class ARMAsmEditor(AsmEditorBase):
                     '''
                     new_load = re.sub('|'.join(self.pc_names), "r12", line)
 
-                    asm_new.append("\t@ [ ====== CFI check start ===== ]\n")
+                    if check_tar:
+                        asm_new.append("\t@ [ ====== CFI checktar begin ====== ]\n")
+                    else:
+                        asm_new.append("\t@ [ ====== CFI checkret begin ====== ]\n")
+                    asm_new.append("\t@ [ ====== " + ' '.join(split) + " ====== ]\n")
                     asm_new.append(new_load)
                     asm_new.append("\tpush r0\n")
                     asm_new.append("\tpush r1\n")
@@ -129,7 +154,8 @@ class ARMAsmEditor(AsmEditorBase):
                     if check_tar:
                         asm_new.append("\tmov lr, pc \t@ this is sorta sketch\n")
                     asm_new.append("\tmov pc, [r12, #8]\n")
-                    asm_new.append("\t@ [ ====== CFI check end ===== ]\n")
+                    asm_new.append("\t@ [ ====== CFI check end ====== ]\n")
+                    self.transfers.add(' '.join(split))
                     return True
         return False
                     
@@ -137,16 +163,16 @@ class ARMAsmEditor(AsmEditorBase):
     def insert_id(self, asm_new, id_str):
         #default encoding is ".long <id>"
         if self.encode_type in ["", "long"]:
-            asm_new.append("\t@ [ ====== CFI ID ===== ]\n")
+            asm_new.append("\t@ [ ====== CFI ID begin ====== ]\n")
             asm_new.append("\t.long " + id_str + "\n")
             #jump over id if run normally
             asm_new.append("\tmov pc, pc\n")
-            asm_new.append("\t@ [ ====== CFI ID ===== ]\n")
+            asm_new.append("\t@ [ ====== CFI ID end ====== ]\n")
         elif self.encode_type in "mov":
             #TODO: make sure id is only 16 bits long
-            asm_new.append("\t@ [ ====== CFI ID ===== ]\n")
+            asm_new.append("\t@ [ ====== CFI ID begin ====== ]\n")
             asm_new.append("\tmov r12, " + id_str + "\n")
-            asm_new.append("\t@ [ ====== CFI ID ===== ]\n")
+            asm_new.append("\t@ [ ====== CFI ID end ====== ]\n")
         else:
             self.error("Not supporting encoding type of \"" +
                        self.encode_type + "\"")

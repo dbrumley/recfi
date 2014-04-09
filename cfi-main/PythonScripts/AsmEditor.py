@@ -28,8 +28,14 @@ def main(opt):
         with open(opt.outfile, "w") as outfile:
             asm = infile.readlines()
             asm_editor = asm_editor_class(asm, opt.id_encoding, intrinsics)
+            print 'lowering ids...'
             asm_editor.lower_ids()
+            print '\tdone'
+            print 'lowering checks...'
             asm_editor.lower_checks()
+            print '\tdone'
+            print 'transfer instr:\n\t',
+            print '\n\t'.join(asm_editor.transfers)
             outfile.writelines( asm_editor.asm)
 
 #Prints an AsmEditorError message
@@ -38,6 +44,7 @@ def asm_editor_error(msg):
 
 if __name__ == "__main__":
         #    Process command line args
+        # TODO: change to argparse (optparse depreciated)
         parser = OptionParser()
         parser.add_option("-f", "--filename", type="string", dest="filename", 
                 help="The path of the asm file to transform")
@@ -56,6 +63,7 @@ if __name__ == "__main__":
 
         # filename only required arg
         if not options.filename:
+            parser.print_help()
             parser.error('Filename not given')
         
         if not options.outfile:
@@ -63,6 +71,6 @@ if __name__ == "__main__":
             filename = os.path.basename(filename)
             options.outfile = os.path.dirname(os.path.abspath(options.filename)) + "/" + \
                       filename + "_edited" + extension
-        print options
 
+        print options
         main(options)

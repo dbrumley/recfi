@@ -24,36 +24,7 @@ using namespace llvm;
 #define CFI_CHECK_RET_INTRINSIC "llvm.arm.cficheckret"
 #define CFI_ABORT "cfi_abort"
 
-/*
- * Levels of CFI precision
- */
-enum CfiLevel{
-    TwoId,          /* Abadi's basic "Two-ID CFI" */
-    MultiSimple,    /* Abadi's main "Multi-ID CFI" */ 
-    MultiPlus,      /* Multi-ID with a white list for solving destination equivalence */
-    MultiClone      /* Multi-ID with cloning for context sensitivity */
-};
-
-/*
- * Command-line flag for the level of CFI precision
- */
-cl::opt<CfiLevel> PrecisionLevel(cl::desc("Choose level of CFI precision:"),
-        cl::values(
-            clEnumValN(TwoId, "two", "No optimizations, enable debugging"),
-            clEnumValN(MultiSimple, "multi", "No optimizations, enable debugging"),
-            clEnumValN(MultiPlus, "plus", "No optimizations, enable debugging"),
-            clEnumValN(MultiClone, "clone", "No optimizations, enable debugging"),
-            clEnumValEnd));
-
-/*
- * Command-line flag for printing precision statistics 
- */
-cl::opt<bool> PrintPrecStats("s", cl::desc("Print precision statistics"));
-
-/*
- * Command-line flag for printing debug
- */
-cl::opt<bool> Debug("d", cl::desc("Useful for debugging"));
+STATISTIC(MergeCounter, "Counts number of times destination sets are merged");
 
 namespace {
     /**
@@ -325,7 +296,7 @@ namespace {
                     for (FB = ctf->begin(cs), FE = ctf->end(cs); FB != FE; FB++)
                     {
                         const Function *F = *FB;
-                        errs() << "target function: " << F->getName() << "\n";
+                        //errs() << "target function: " << F->getName() << "\n";
                         //add indirect call targets to indCallDestMap
                         if (!cs.getCalledFunction())
                         {
@@ -420,6 +391,7 @@ namespace {
                                                        intersect.begin()));
                         if (intersect.size() > 0)
                         {
+                            MergeCounter++;
                             lset.insert(mset.begin(), mset.end());
                             break;
                         }
@@ -721,7 +693,7 @@ namespace {
             //find indirect call and return targets
             findIndCallAndRetTargets();
             
-            print_dest_map();
+            //print_dest_map();
 
             //generate IDs for branch/call targets
             generateIDs<BBSet, DestMap, BasicBlock *, BBIDMap>
