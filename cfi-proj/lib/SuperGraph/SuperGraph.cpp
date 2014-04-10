@@ -24,6 +24,8 @@ using namespace llvm;
 #define CFI_CHECK_RET_INTRINSIC "llvm.arm.cficheckret"
 #define CFI_ABORT "cfi_abort"
 
+#define MAX 0xFFFF
+
 STATISTIC(MergeCounter, "Counts number of times destination sets are merged");
 
 namespace {
@@ -411,7 +413,7 @@ namespace {
             for (LB = setList.begin(), LE = setList.end(); LB != LE; LB++)
             {
                 TargetSet lset = *LB;
-                int ID = rand();
+                int ID = rand() % MAX;
 
                 typename TargetSet::iterator SB, SE;
                 for (SB = lset.begin(), SE = lset.end(); SB != SE; SB++)

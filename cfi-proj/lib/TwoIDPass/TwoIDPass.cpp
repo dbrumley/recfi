@@ -26,6 +26,8 @@ using namespace llvm;
 #define CFI_CHECK_RET_INTRINSIC "llvm.arm.cficheckret"
 #define CFI_ABORT "cfi_abort"
 
+#define MAX 0xFFFF
+
 namespace {
     /**
      * @brief CFILowering class - handles creation of llvm intrinsic
@@ -356,9 +358,9 @@ namespace {
             //generate IDs
             llvm::IRBuilder<> builder(M.getContext());
             targetID = llvm::ConstantInt::get(builder.getInt32Ty(),
-                                              rand());
+                                              rand() % MAX);
             returnID = llvm::ConstantInt::get(builder.getInt32Ty(),
-                                              rand());
+                                              rand() % MAX);
             
             //generate intrinsic functions
             CFILowering cfil = CFILowering(M);

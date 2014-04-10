@@ -163,17 +163,17 @@ class ARMAsmEditor(AsmEditorBase):
 
     def insert_id(self, asm_new, id_str):
         #default encoding is ".long <id>"
-        if self.encode_type in ["", "long"]:
-            asm_new.append("\t@ [ ====== CFI ID begin ====== ]\n")
-            asm_new.append("\t.word " + id_str + "\n")
+        #if self.encode_type in ["", "long"]:
+        #    asm_new.append("\t@ [ ====== CFI ID end ====== ]\n")
+        #    asm_new.append("\t.word " + id_str + "\n")
             #jump over id if run normally
-            asm_new.append("\tmov pc, pc\n")
-            asm_new.append("\t@ [ ====== CFI ID end ====== ]\n")
-        elif self.encode_type in "mov":
+        #    asm_new.append("\tmov pc, pc\n")
+        #    asm_new.append("\t@ [ ====== CFI ID begin ====== ]\n")
+        if self.encode_type in ["", "mov"]:
             #TODO: make sure id is only 16 bits long
-            asm_new.append("\t@ [ ====== CFI ID begin ====== ]\n")
-            asm_new.append("\tmov r12, " + id_str + "\n")
             asm_new.append("\t@ [ ====== CFI ID end ====== ]\n")
+            asm_new.append("\tmov r12, " + id_str + "\n")
+            asm_new.append("\t@ [ ====== CFI ID begin ====== ]\n")
         else:
             self.error("Not supporting encoding type of \"" +
                        self.encode_type + "\"")

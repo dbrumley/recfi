@@ -28,6 +28,8 @@ using namespace llvm;
 #define CFI_CHECK_RET_INTRINSIC "llvm.arm.cficheckret"
 #define CFI_ABORT "cfi_abort"
 
+#define MAX 0xFFFF
+
 namespace {
 
     typedef dsa::CallTargetFinder<EQTDDataStructures> CTF;
@@ -401,7 +403,7 @@ namespace {
             InstSet::iterator LB, LE;
             for (LB = visitedSet.begin(), LE = visitedSet.end(); LB != LE; LB++)
             {
-                int ID = rand() % 100;
+                int ID = rand() % MAX;
                 Instruction* K = *LB;
                 idmap[K] = ID;
             }
