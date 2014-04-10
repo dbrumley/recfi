@@ -28,15 +28,9 @@ def main(opt):
         with open(opt.outfile, "w") as outfile:
             asm = infile.readlines()
             asm_editor = asm_editor_class(asm, opt.id_encoding, intrinsics)
-            print 'lowering ids...'
             asm_editor.lower_ids()
-            print '\tdone'
-            print 'lowering checks...'
             asm_editor.lower_checks()
-            print '\tdone'
-            print 'transfer instr:\n\t',
-            print '\n\t'.join(asm_editor.transfers)
-            outfile.writelines( asm_editor.asm)
+            outfile.writelines(asm_editor.asm)
 
 #Prints an AsmEditorError message
 def asm_editor_error(msg):
@@ -72,5 +66,4 @@ if __name__ == "__main__":
             options.outfile = os.path.dirname(os.path.abspath(options.filename)) + "/" + \
                       filename + "_edited" + extension
 
-        print options
         main(options)

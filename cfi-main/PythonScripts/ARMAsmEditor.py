@@ -98,7 +98,7 @@ class ARMAsmEditor(AsmEditorBase):
             else:
                 asm_new.append("\t@ [ ====== CFI checkret begin ====== ]\n")
             asm_new.append("\t@ [ ====== " + ' '.join(split) + " ====== ]\n")
-            asm_new.append("\tpush "+r_temp+"\n")
+            asm_new.append("\tpush {"+r_temp+"}\n")
             asm_new.append("\tldr "+r_temp+", [" + r_src + ", #4] \t@ get destination ID\n")
             asm_new.append("\tldr r12, " + ids.pop(0) + " \t@ ID first\n")
             asm_new.append("\tcmp "+r_temp+", r12\n")
@@ -106,7 +106,7 @@ class ARMAsmEditor(AsmEditorBase):
                 asm_new.append("\tldrne r12, " + extra_id + " \t@ ID extra\n")
                 asm_new.append("\tcmpne "+r_temp+", r12\n")
             asm_new.append("\tbne cfi_abort\n")
-            asm_new.append("\tpop "+r_temp+"\n")
+            asm_new.append("\tpop {"+r_temp+"}\n")
             asm_new.append("\tadd " + r_src + ", " + r_src + ", #8\n")
             if uses_pc and check_tar:
                 asm_new.append("\tmov lr, pc \t@ this is sorta sketch\n")
@@ -140,8 +140,8 @@ class ARMAsmEditor(AsmEditorBase):
                         asm_new.append("\t@ [ ====== CFI checkret begin ====== ]\n")
                     asm_new.append("\t@ [ ====== " + ' '.join(split) + " ====== ]\n")
                     asm_new.append(new_load)
-                    asm_new.append("\tpush r0\n")
-                    asm_new.append("\tpush r1\n")
+                    asm_new.append("\tpush {r0}\n")
+                    asm_new.append("\tpush {r1}\n")
                     asm_new.append("\tldr r0, " + ids.pop(0) + " \t@ ID first\n")
                     asm_new.append("\tldr r1, [r12, #4] \t@ get destination ID\n")
                     asm_new.append("\tcmp r0, r1\n")
@@ -149,8 +149,8 @@ class ARMAsmEditor(AsmEditorBase):
                         asm_new.append("\tldrne r12, " + extra_id + " \t@ ID extra\n")
                         asm_new.append("\tcmpne r0, r12\n")
                     asm_new.append("\tbne cfi_abort\n")
-                    asm_new.append("\tpop r1\n")
-                    asm_new.append("\tpop r0\n")
+                    asm_new.append("\tpop {r1}\n")
+                    asm_new.append("\tpop {r0}\n")
                     if check_tar:
                         asm_new.append("\tmov lr, pc \t@ this is sorta sketch\n")
                     asm_new.append("\tmov pc, [r12, #8]\n")
@@ -164,7 +164,7 @@ class ARMAsmEditor(AsmEditorBase):
         #default encoding is ".long <id>"
         if self.encode_type in ["", "long"]:
             asm_new.append("\t@ [ ====== CFI ID begin ====== ]\n")
-            asm_new.append("\t.long " + id_str + "\n")
+            asm_new.append("\t.word " + id_str + "\n")
             #jump over id if run normally
             asm_new.append("\tmov pc, pc\n")
             asm_new.append("\t@ [ ====== CFI ID end ====== ]\n")
