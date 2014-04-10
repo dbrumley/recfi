@@ -3,6 +3,7 @@
 // This file inserts IDs and checks for a CFI implementation based on the
 // control flow graphs and the call graph of a module.
 //
+// TODO: Insert Comments
 //===----------------------------------------------------------------------===//
 
 #define DEBUG_TYPE "CfiPass"
@@ -307,8 +308,6 @@ namespace {
          */
         void findIndCallAndRetTargets(InstDestMap& instDestMap)
         {
-            llvm::AliasAnalysis *AA = &getAnalysis<AliasAnalysis>();
-
             //do dsa call target analysis
             CTF *ctf = &getAnalysis<CTF>();
 
@@ -319,10 +318,6 @@ namespace {
                 CallSite cs = *CB;
                 Instruction *I = cs.getInstruction();
 
-                CallInst *call = dyn_cast<CallInst>(I);
-                Value * cval = call->getCalledValue();
-
-
                 //only consider calls that have targets
                 if (ctf->begin(cs) != ctf->end(cs))
                 {
@@ -332,21 +327,14 @@ namespace {
                     {
                         const Function *F = *FB;
 
-
-                        llvm::AliasAnalysis::AliasResult res = AA->alias(F, cval);
-                        std::string name = "[indrect]";
-                        if(cs.getCalledFunction())
-                            name = cs.getCalledFunction()->getName();
-                        errs() << name << " " << F->getName() << " " << res << "\n";
-
                         if (F->isIntrinsic())
                         {
-                            errs() << "Skipping intrinsic: " << F->getName()  << "\n";
+                            //errs() << "Skipping intrinsic: " << F->getName()  << "\n";
                             continue;
                         }
                         if( F->getBasicBlockList().empty() )
                         {
-                            errs() << "Skipping declaration: " << F->getName()  << "\n";
+                            //errs() << "Skipping declaration: " << F->getName()  << "\n";
                             continue;
                         }
 
@@ -354,7 +342,7 @@ namespace {
                         if (!cs.getCalledFunction())
                         {
                             //function that is declaration only
-                            if (F->begin() == F->end())
+                            if (F->isDeclaration())
                             {
                                 errs() << "SuperGraphError: "
                                     << "Indirect function "
@@ -371,12 +359,24 @@ namespace {
                             Instruction *destInstr = &*destBlockStart;
                             instDestMap[I].insert(destInstr);
                         }
+                        
+			//Find all returns
+                        Function::iterator BB, BE;
+                        Function* ncF = const_cast<Function*>(F);
+                        for (BB = ncF->begin(), BE = ncF->end(); BB != BE; BB++)
+                        {
+                            BasicBlock *B = &*BB;
 
-                        //retMap[const_cast<Function *>(F)].insert(I);
-                        BasicBlock *B = const_cast<BasicBlock *>
-                                (&F->back());
-                        Instruction *retI = &B->back();
-                        instDestMap[retI].insert(I);
+                            //check if basic block ends with return
+                            if (TerminatorInst *TI = B->getTerminator())
+                            {
+                                if (ReturnInst *RI = dyn_cast<ReturnInst>(TI))
+                                {
+                                    instDestMap[RI].insert(I);
+                                }
+                            }
+                        }
+
                     }
                 }
             }
@@ -451,17 +451,17 @@ namespace {
             InstDestMap instDestMap;
             findIndBrTargets(M, instDestMap);
             findIndCallAndRetTargets(instDestMap);
-            print_dest_map(instDestMap);
+            //print_dest_map(instDestMap);
             
             // mapping destination ( INSTRUCTION => ID )
             InstIDMap instrIDs;
             genUniqueTargetIDs(instDestMap, instrIDs); 
-            print_ID_maps(instrIDs);
+            //print_ID_maps(instrIDs);
 
             // mapping transfer ( INSTRUCTION => ID_SET )
             InstIDSetMap targetCheckIDs;
             generateCheckIDs(instDestMap, instrIDs, targetCheckIDs);
-            print_ID_check_maps(targetCheckIDs);
+            //print_ID_check_maps(targetCheckIDs);
 
             // insert IDs and checks into IR as instrinsics
             CFILowering cfil = CFILowering(M);
