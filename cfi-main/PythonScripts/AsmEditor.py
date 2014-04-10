@@ -25,12 +25,12 @@ def main(opt):
         sys.exit(1)
 
     with open(opt.filename, "r") as infile:
-        with open(opt.outfile, "w") as outfile:
-            asm = infile.readlines()
-            asm_editor = asm_editor_class(asm, opt.id_encoding, intrinsics)
-            asm_editor.lower_ids()
-            asm_editor.lower_checks()
-            outfile.writelines(asm_editor.asm)
+        asm = infile.readlines()
+    asm_editor = asm_editor_class(asm, opt.id_encoding, intrinsics)
+    asm_editor.lower_ids()
+    asm_editor.lower_checks()
+    with open(opt.outfile, "w") as outfile:
+        outfile.writelines(asm_editor.asm)
 
 #Prints an AsmEditorError message
 def asm_editor_error(msg):

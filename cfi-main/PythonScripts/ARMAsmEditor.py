@@ -89,7 +89,8 @@ class ARMAsmEditor(AsmEditorBase):
             
             if not r_src in self.gpr_names:
                 if not 'lbb' in r_src:
-                    print '\tassume direct (no check needed):' + ' '.join(split)
+                    pass
+                    #print '\tassume direct (no check needed):' + ' '.join(split)
                 return False
 
 
