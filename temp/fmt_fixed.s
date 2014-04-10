@@ -62,6 +62,9 @@
 	.type	usage,%function
 usage:                                  @ @usage
 .Lfunc_begin0:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.file	30 "/home/lynn/coreutils-6.11/obj-llvm/src/../../src/fmt.c"
 	.loc	30 266 0                @ ../../src/fmt.c:266:0
 @ BB#0:                                 @ %entry
@@ -70,7 +73,6 @@ usage:                                  @ @usage
 	mov	r11, sp
 	sub	sp, sp, #48
 	@DEBUG_VALUE: usage:status <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	mov	r1, r0
 	.loc	30 267 0 prologue_end   @ ../../src/fmt.c:267:0
@@ -86,8 +88,10 @@ usage:                                  @ @usage
 	ldr	r2, [r1]
 	ldr	r1, .LCPI0_11
 	bl	fprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-12]         @ 4-byte Spill
-	cfiid	#39122
 	b	.LBB0_3
 .LBB0_2:                                @ %if.else
 	.loc	30 272 0                @ ../../src/fmt.c:272:0
@@ -96,8 +100,10 @@ usage:                                  @ @usage
 	ldr	r1, [r0]
 	ldr	r0, .LCPI0_1
 	bl	printf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 273 0                @ ../../src/fmt.c:273:0
-	cfiid	#39122
 	ldr	r1, .LCPI0_2
 	ldr	r2, [r1]
 	ldr	r3, .LCPI0_3
@@ -106,56 +112,70 @@ usage:                                  @ @usage
 	str	r1, [r11, #-20]         @ 4-byte Spill
 	mov	r1, r2
 	bl	fputs_unlocked
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 278 0                @ ../../src/fmt.c:278:0
-	cfiid	#39122
 	ldr	r1, [r11, #-20]         @ 4-byte Reload
 	ldr	r1, [r1]
 	ldr	r2, .LCPI0_4
 	str	r0, [sp, #24]           @ 4-byte Spill
 	mov	r0, r2
 	bl	fputs_unlocked
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 281 0                @ ../../src/fmt.c:281:0
-	cfiid	#39122
 	ldr	r1, [r11, #-20]         @ 4-byte Reload
 	ldr	r1, [r1]
 	ldr	r2, .LCPI0_5
 	str	r0, [sp, #20]           @ 4-byte Spill
 	mov	r0, r2
 	bl	fputs_unlocked
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 288 0                @ ../../src/fmt.c:288:0
-	cfiid	#39122
 	ldr	r1, [r11, #-20]         @ 4-byte Reload
 	ldr	r1, [r1]
 	ldr	r2, .LCPI0_6
 	str	r0, [sp, #16]           @ 4-byte Spill
 	mov	r0, r2
 	bl	fputs_unlocked
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 293 0                @ ../../src/fmt.c:293:0
-	cfiid	#39122
 	ldr	r1, [r11, #-20]         @ 4-byte Reload
 	ldr	r1, [r1]
 	ldr	r2, .LCPI0_7
 	str	r0, [sp, #12]           @ 4-byte Spill
 	mov	r0, r2
 	bl	fputs_unlocked
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 294 0                @ ../../src/fmt.c:294:0
-	cfiid	#39122
 	ldr	r1, [r11, #-20]         @ 4-byte Reload
 	ldr	r1, [r1]
 	ldr	r2, .LCPI0_8
 	str	r0, [sp, #8]            @ 4-byte Spill
 	mov	r0, r2
 	bl	fputs_unlocked
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 295 0                @ ../../src/fmt.c:295:0
-	cfiid	#39122
 	ldr	r1, [r11, #-20]         @ 4-byte Reload
 	ldr	r1, [r1]
 	ldr	r2, .LCPI0_9
 	str	r0, [sp, #4]            @ 4-byte Spill
 	mov	r0, r2
 	bl	fputs_unlocked
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 299 0                @ ../../src/fmt.c:299:0
-	cfiid	#39122
 	str	r0, [sp]                @ 4-byte Spill
 	bl	emit_bug_reporting_address
 .Ltmp1:
@@ -163,7 +183,9 @@ usage:                                  @ @usage
 	.loc	30 301 0                @ ../../src/fmt.c:301:0
 	ldr	r0, [r11, #-4]
 	bl	exit
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .Ltmp2:
 	.align	2
 @ BB#4:
@@ -199,6 +221,9 @@ usage:                                  @ @usage
 	.type	emit_bug_reporting_address,%function
 emit_bug_reporting_address:             @ @emit_bug_reporting_address
 .Lfunc_begin1:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.file	31 "/home/lynn/coreutils-6.11/obj-llvm/src/../../src/system.h"
 	.loc	31 606 0                @ ../../src/system.h:606:0
 @ BB#0:                                 @ %entry
@@ -206,14 +231,15 @@ emit_bug_reporting_address:             @ @emit_bug_reporting_address
 	push	{r11, lr}
 	mov	r11, sp
 	sub	sp, sp, #8
-	cfiid	#40645
 	ldr	r0, .LCPI1_0
 	ldr	r1, .LCPI1_1
 	bl	printf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	31 612 0                @ ../../src/system.h:612:0
 	str	r0, [sp, #4]            @ 4-byte Spill
 	pop	{r11, lr}
-	cfiid	#39122
 	mov	sp, r11
 	mov	pc, lr
 .Ltmp4:
@@ -264,8 +290,10 @@ main:                                   @ @main
 	str	r2, [r11, #-48]         @ 4-byte Spill
 	str	r12, [r11, #-52]        @ 4-byte Spill
 	bl	setlocale
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 332 0                @ ../../src/fmt.c:332:0
-	cfiid	#39122
 	ldr	r1, .LCPI2_2
 	str	r0, [r11, #-56]         @ 4-byte Spill
 	mov	r0, r1
@@ -352,7 +380,9 @@ main:                                   @ @main
 	ldr	r2, .LCPI2_12
 	ldr	r3, .LCPI2_13
 	bl	getopt_long
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-16]
 	cmn	r0, #1
 	beq	.LBB2_25
@@ -430,13 +460,17 @@ main:                                   @ @main
 	str	r0, [sp, #40]           @ 4-byte Spill
 	ldr	r1, [sp, #40]           @ 4-byte Reload
 	bl	error
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB2_15:                               @ %if.end22
                                         @   in Loop: Header=BB2_5 Depth=1
 	mov	r0, #1
 	.loc	30 360 0                @ ../../src/fmt.c:360:0
 	bl	usage
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB2_16:                               @ %sw.bb
                                         @   in Loop: Header=BB2_5 Depth=1
 	mov	r0, #1
@@ -483,15 +517,19 @@ main:                                   @ @main
 	ldr	r0, .LCPI2_28
 	ldr	r0, [r0]
 	bl	set_prefix
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 384 0                @ ../../src/fmt.c:384:0
-	cfiid	#39122
 	b	.LBB2_24
 .LBB2_22:                               @ %sw.bb28
                                         @   in Loop: Header=BB2_5 Depth=1
 	mov	r0, #0
 	.loc	30 386 0                @ ../../src/fmt.c:386:0
 	bl	usage
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	b	.LBB2_24
 .LBB2_23:                               @ %sw.bb29
 	.loc	30 388 0                @ ../../src/fmt.c:388:0
@@ -510,7 +548,9 @@ main:                                   @ @main
 	mov	r2, r3
 	mov	r3, r12
 	bl	version_etc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r0, [sp, #36]           @ 4-byte Reload
 	bl	exit
 .LBB2_24:                               @ %sw.epilog
@@ -536,7 +576,9 @@ main:                                   @ @main
 	mov	r2, #10
 	sub	r3, r11, #28
 	bl	xstrtoul
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	cmp	r0, #0
 	bne	.LBB2_28
 	b	.LBB2_27
@@ -551,7 +593,9 @@ main:                                   @ @main
 	.loc	30 400 0                @ ../../src/fmt.c:400:0
 	ldr	r0, [r11, #-24]
 	bl	quote
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	mov	r1, #1
 	mov	r2, #0
 	ldr	r3, .LCPI2_14
@@ -592,7 +636,9 @@ main:                                   @ @main
 	ldr	r0, .LCPI2_22
 	ldr	r0, [r0]
 	bl	fmt
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	b	.LBB2_45
 .LBB2_32:                               @ %if.else
 .LBB2_33:                               @ %for.cond
@@ -618,7 +664,9 @@ main:                                   @ @main
 	.loc	30 413 0                @ ../../src/fmt.c:413:0
 	ldr	r1, .LCPI2_18
 	bl	strcmp
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	cmp	r0, #0
 	bne	.LBB2_36
 	b	.LBB2_35
@@ -628,7 +676,9 @@ main:                                   @ @main
 	ldr	r0, .LCPI2_22
 	ldr	r0, [r0]
 	bl	fmt
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	b	.LBB2_42
 .LBB2_36:                               @ %if.else52
                                         @   in Loop: Header=BB2_33 Depth=1
@@ -638,7 +688,9 @@ main:                                   @ @main
 	ldr	r0, [r11, #-32]
 	ldr	r1, .LCPI2_19
 	bl	fopen
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-36]
 	.loc	30 419 0                @ ../../src/fmt.c:419:0
 	cmp	r0, #0
@@ -650,11 +702,15 @@ main:                                   @ @main
 .Ltmp15:
 	ldr	r0, [r11, #-36]
 	bl	fmt
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 422 0                @ ../../src/fmt.c:422:0
-	cfiid	#39122
 	ldr	r0, [r11, #-36]
 	bl	fclose
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	cmn	r0, #1
 	bne	.LBB2_39
 	b	.LBB2_38
@@ -663,15 +719,19 @@ main:                                   @ @main
 	.loc	30 424 0                @ ../../src/fmt.c:424:0
 .Ltmp16:
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [r0]
 	ldr	r3, [r11, #-32]
 	mov	r0, #0
 	ldr	r2, .LCPI2_21
 	str	r0, [sp, #24]           @ 4-byte Spill
 	bl	error
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 425 0                @ ../../src/fmt.c:425:0
-	cfiid	#39122
 	ldr	r0, [sp, #24]           @ 4-byte Reload
 	strb	r0, [r11, #-17]
 .Ltmp17:
@@ -684,13 +744,17 @@ main:                                   @ @main
                                         @   in Loop: Header=BB2_33 Depth=1
 	.loc	30 430 0                @ ../../src/fmt.c:430:0
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [r0]
 	.loc	30 431 0                @ ../../src/fmt.c:431:0
 	ldr	r0, [r11, #-32]
 	str	r1, [sp, #20]           @ 4-byte Spill
 	bl	quote
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	mov	r1, #0
 	ldr	r2, .LCPI2_20
 	str	r0, [sp, #16]           @ 4-byte Spill
@@ -724,7 +788,9 @@ main:                                   @ @main
 	mov	r1, #1
 	bic	r0, r1, r0
 	bl	exit
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .Ltmp21:
 	.align	2
 @ BB#46:
@@ -797,6 +863,9 @@ main:                                   @ @main
 	.type	set_prefix,%function
 set_prefix:                             @ @set_prefix
 .Lfunc_begin3:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 446 0                @ ../../src/fmt.c:446:0
 @ BB#0:                                 @ %entry
 	.loc	30 445 0                @ ../../src/fmt.c:445:0
@@ -804,7 +873,6 @@ set_prefix:                             @ @set_prefix
 	mov	r11, sp
 	sub	sp, sp, #16
 	@DEBUG_VALUE: set_prefix:p <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	mov	r1, #0
 	.loc	30 449 0 prologue_end   @ ../../src/fmt.c:449:0
@@ -842,7 +910,9 @@ set_prefix:                             @ @set_prefix
 	.loc	30 456 0                @ ../../src/fmt.c:456:0
 	ldr	r0, [r11, #-4]
 	bl	strlen
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, .LCPI3_2
 	str	r0, [r1]
 	.loc	30 457 0                @ ../../src/fmt.c:457:0
@@ -893,10 +963,19 @@ set_prefix:                             @ @set_prefix
 	ldr	r1, .LCPI3_3
 	str	r0, [r1]
 	.loc	30 462 0                @ ../../src/fmt.c:462:0
-	cficheckret	#39122
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp25:
 	.align	2
 @ BB#9:
@@ -916,6 +995,9 @@ set_prefix:                             @ @set_prefix
 	.type	fmt,%function
 fmt:                                    @ @fmt
 .Lfunc_begin4:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 468 0                @ ../../src/fmt.c:468:0
 @ BB#0:                                 @ %entry
 	.loc	30 467 0                @ ../../src/fmt.c:467:0
@@ -923,7 +1005,6 @@ fmt:                                    @ @fmt
 	mov	r11, sp
 	sub	sp, sp, #16
 	@DEBUG_VALUE: fmt:f <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	mov	r1, #0
 	.loc	30 469 0 prologue_end   @ ../../src/fmt.c:469:0
@@ -937,7 +1018,9 @@ fmt:                                    @ @fmt
 	str	r0, [sp, #8]            @ 4-byte Spill
 	mov	r0, r1
 	bl	get_prefix
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, .LCPI4_2
 	str	r0, [r1]
 	ldr	r0, [sp, #8]            @ 4-byte Reload
@@ -947,7 +1030,9 @@ fmt:                                    @ @fmt
 	.loc	30 472 0                @ ../../src/fmt.c:472:0
 	ldr	r0, [r11, #-4]
 	bl	get_paragraph
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	cmp	r0, #1
 	bne	.LBB4_3
 	b	.LBB4_2
@@ -956,21 +1041,34 @@ fmt:                                    @ @fmt
 	.loc	30 474 0                @ ../../src/fmt.c:474:0
 .Ltmp27:
 	bl	fmt_paragraph
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 475 0                @ ../../src/fmt.c:475:0
-	cfiid	#39122
 	ldr	r0, .LCPI4_3
 	ldr	r0, [r0]
 	bl	put_paragraph
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 476 0                @ ../../src/fmt.c:476:0
-	cfiid	#39122
 	b	.LBB4_1
 .Ltmp28:
 .LBB4_3:                                @ %while.end
 	.loc	30 477 0                @ ../../src/fmt.c:477:0
-	cficheckret	#39122
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp29:
 	.align	2
 @ BB#4:
@@ -990,6 +1088,9 @@ fmt:                                    @ @fmt
 	.type	get_prefix,%function
 get_prefix:                             @ @get_prefix
 .Lfunc_begin5:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 703 0                @ ../../src/fmt.c:703:0
 @ BB#0:                                 @ %entry
 	.loc	30 702 0                @ ../../src/fmt.c:702:0
@@ -997,7 +1098,6 @@ get_prefix:                             @ @get_prefix
 	mov	r11, sp
 	sub	sp, sp, #40
 	@DEBUG_VALUE: get_prefix:f <- undef
-	cfiid	#40645
 	str	r0, [r11, #-8]
 	mov	r1, #0
 	.loc	30 706 0 prologue_end   @ ../../src/fmt.c:706:0
@@ -1009,7 +1109,9 @@ get_prefix:                             @ @get_prefix
 	mov	r0, r1
 	str	r1, [sp, #12]           @ 4-byte Spill
 	bl	getc_unlocked
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #12]           @ 4-byte Reload
 	str	r0, [sp, #8]            @ 4-byte Spill
 	mov	r0, r1
@@ -1096,7 +1198,9 @@ get_prefix:                             @ @get_prefix
 	.loc	30 721 0                @ ../../src/fmt.c:721:0
 	ldr	r0, [r11, #-8]
 	bl	getc_unlocked
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-12]
 .Ltmp34:
 @ BB#10:                                @ %for.inc
@@ -1112,7 +1216,9 @@ get_prefix:                             @ @get_prefix
 	ldr	r0, [r11, #-8]
 	ldr	r1, [r11, #-12]
 	bl	get_space
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-12]
 .Ltmp36:
 .LBB5_12:                               @ %if.end11
@@ -1122,10 +1228,19 @@ get_prefix:                             @ @get_prefix
 .LBB5_13:                               @ %return
 	.loc	30 726 0                @ ../../src/fmt.c:726:0
 	ldr	r0, [r11, #-4]
-	cficheckret	#39122
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp37:
 	.align	2
 @ BB#14:
@@ -1147,6 +1262,9 @@ get_prefix:                             @ @get_prefix
 	.type	get_paragraph,%function
 get_paragraph:                          @ @get_paragraph
 .Lfunc_begin6:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 529 0                @ ../../src/fmt.c:529:0
 @ BB#0:                                 @ %entry
 	.loc	30 528 0                @ ../../src/fmt.c:528:0
@@ -1154,7 +1272,6 @@ get_paragraph:                          @ @get_paragraph
 	mov	r11, sp
 	sub	sp, sp, #40
 	@DEBUG_VALUE: get_paragraph:f <- undef
-	cfiid	#40645
 	str	r0, [r11, #-8]
 	mov	r1, #0
 	.loc	30 532 0 prologue_end   @ ../../src/fmt.c:532:0
@@ -1219,7 +1336,9 @@ get_paragraph:                          @ @get_paragraph
 	ldr	r0, [r11, #-8]
 	ldr	r1, [r11, #-12]
 	bl	copy_rest
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-12]
 	.loc	30 542 0                @ ../../src/fmt.c:542:0
 	cmn	r0, #1
@@ -1241,13 +1360,17 @@ get_paragraph:                          @ @get_paragraph
 	mov	r0, #10
 	.loc	30 547 0                @ ../../src/fmt.c:547:0
 	bl	putchar_unlocked
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 548 0                @ ../../src/fmt.c:548:0
-	cfiid	#39122
 	ldr	r1, [r11, #-8]
 	str	r0, [sp, #16]           @ 4-byte Spill
 	mov	r0, r1
 	bl	get_prefix
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-12]
 	.loc	30 549 0                @ ../../src/fmt.c:549:0
 	b	.LBB6_1
@@ -1275,11 +1398,15 @@ get_paragraph:                          @ @get_paragraph
 	ldr	r0, [r11, #-8]
 	ldr	r1, [r11, #-12]
 	bl	get_line
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-12]
 	.loc	30 558 0                @ ../../src/fmt.c:558:0
 	bl	same_para
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	bl	set_other_indent
 	.loc	30 562 0                @ ../../src/fmt.c:562:0
 	ldr	r0, .LCPI6_12
@@ -1304,7 +1431,9 @@ get_paragraph:                          @ @get_paragraph
 .Ltmp45:
 	ldr	r0, [r11, #-12]
 	bl	same_para
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	cmp	r0, #1
 	bne	.LBB6_19
 	b	.LBB6_13
@@ -1316,7 +1445,9 @@ get_paragraph:                          @ @get_paragraph
 	ldr	r0, [r11, #-8]
 	ldr	r1, [r11, #-12]
 	bl	get_line
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-12]
 .Ltmp47:
 @ BB#15:                                @ %do.cond
@@ -1324,7 +1455,9 @@ get_paragraph:                          @ @get_paragraph
 	.loc	30 574 0                @ ../../src/fmt.c:574:0
 	ldr	r0, [r11, #-12]
 	bl	same_para
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	mov	r1, #0
 	cmp	r0, #1
 	str	r1, [sp, #12]           @ 4-byte Spill
@@ -1364,7 +1497,9 @@ get_paragraph:                          @ @get_paragraph
 .Ltmp50:
 	ldr	r0, [r11, #-12]
 	bl	same_para
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	cmp	r0, #1
 	bne	.LBB6_29
 	b	.LBB6_22
@@ -1384,7 +1519,9 @@ get_paragraph:                          @ @get_paragraph
 	ldr	r0, [r11, #-8]
 	ldr	r1, [r11, #-12]
 	bl	get_line
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-12]
 .Ltmp52:
 @ BB#25:                                @ %do.cond27
@@ -1392,7 +1529,9 @@ get_paragraph:                          @ @get_paragraph
 	.loc	30 585 0                @ ../../src/fmt.c:585:0
 	ldr	r0, [r11, #-12]
 	bl	same_para
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	mov	r1, #0
 	cmp	r0, #1
 	str	r1, [sp, #8]            @ 4-byte Spill
@@ -1426,7 +1565,9 @@ get_paragraph:                          @ @get_paragraph
 	.loc	30 590 0                @ ../../src/fmt.c:590:0
 	ldr	r0, [r11, #-12]
 	bl	same_para
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	mov	r1, #0
 	cmp	r0, #1
 	str	r1, [sp, #4]            @ 4-byte Spill
@@ -1454,7 +1595,9 @@ get_paragraph:                          @ @get_paragraph
 	ldr	r0, [r11, #-8]
 	ldr	r1, [r11, #-12]
 	bl	get_line
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-12]
 	b	.LBB6_31
 .Ltmp55:
@@ -1483,10 +1626,19 @@ get_paragraph:                          @ @get_paragraph
 	strb	r0, [r11, #-1]
 .LBB6_39:                               @ %return
 	ldrb	r0, [r11, #-1]
-	cficheckret	#39122
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp56:
 	.align	2
 @ BB#40:
@@ -1530,12 +1682,14 @@ get_paragraph:                          @ @get_paragraph
 	.type	fmt_paragraph,%function
 fmt_paragraph:                          @ @fmt_paragraph
 .Lfunc_begin7:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 834 0                @ ../../src/fmt.c:834:0
 @ BB#0:                                 @ %entry
 	push	{r11, lr}
 	mov	r11, sp
 	sub	sp, sp, #32
-	cfiid	#40645
 	.loc	30 840 0 prologue_end   @ ../../src/fmt.c:840:0
 .Ltmp58:
 	ldr	r0, .LCPI7_0
@@ -1610,7 +1764,9 @@ fmt_paragraph:                          @ @fmt_paragraph
 	.loc	30 859 0                @ ../../src/fmt.c:859:0
 	ldr	r1, [r11, #-12]
 	bl	line_cost
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [r11, #-8]
 	ldr	r1, [r1, #20]
 	add	r0, r0, r1
@@ -1706,7 +1862,9 @@ fmt_paragraph:                          @ @fmt_paragraph
 	str	r0, [sp]                @ 4-byte Spill
 	mov	r0, r1
 	bl	base_cost
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp]                @ 4-byte Reload
 	add	r0, r1, r0
 	ldr	r1, [r11, #-4]
@@ -1727,10 +1885,19 @@ fmt_paragraph:                          @ @fmt_paragraph
 	ldr	r1, [r1]
 	str	r0, [r1, #4]
 	.loc	30 883 0                @ ../../src/fmt.c:883:0
-	cficheckret	#39122
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp67:
 	.align	2
 @ BB#18:
@@ -1754,6 +1921,9 @@ fmt_paragraph:                          @ @fmt_paragraph
 	.type	put_paragraph,%function
 put_paragraph:                          @ @put_paragraph
 .Lfunc_begin8:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 944 0                @ ../../src/fmt.c:944:0
 @ BB#0:                                 @ %entry
 	.loc	30 943 0                @ ../../src/fmt.c:943:0
@@ -1761,7 +1931,6 @@ put_paragraph:                          @ @put_paragraph
 	mov	r11, sp
 	sub	sp, sp, #24
 	@DEBUG_VALUE: put_paragraph:finish <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	.loc	30 947 0 prologue_end   @ ../../src/fmt.c:947:0
 	ldr	r1, .LCPI8_0
@@ -1773,7 +1942,9 @@ put_paragraph:                          @ @put_paragraph
 	bl	put_line
 	.loc	30 948 0                @ ../../src/fmt.c:948:0
 .Ltmp69:
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r0, [sp, #8]            @ 4-byte Reload
 	ldr	r1, [r0, #24]
 	str	r1, [r11, #-8]
@@ -1793,7 +1964,9 @@ put_paragraph:                          @ @put_paragraph
 	ldr	r1, .LCPI8_2
 	ldr	r1, [r1]
 	bl	put_line
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB8_3:                                @ %for.inc
                                         @   in Loop: Header=BB8_1 Depth=1
 	.loc	30 948 0                @ ../../src/fmt.c:948:0
@@ -1804,10 +1977,19 @@ put_paragraph:                          @ @put_paragraph
 .Ltmp70:
 .LBB8_4:                                @ %for.end
 	.loc	30 950 0                @ ../../src/fmt.c:950:0
-	cficheckret	#39122
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp71:
 	.align	2
 @ BB#5:
@@ -1825,6 +2007,9 @@ put_paragraph:                          @ @put_paragraph
 	.type	put_line,%function
 put_line:                               @ @put_line
 .Lfunc_begin9:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 957 0                @ ../../src/fmt.c:957:0
 @ BB#0:                                 @ %entry
 	.loc	30 956 0                @ ../../src/fmt.c:956:0
@@ -1833,7 +2018,6 @@ put_line:                               @ @put_line
 	sub	sp, sp, #40
 	@DEBUG_VALUE: put_line:w <- undef
 	@DEBUG_VALUE: put_line:indent <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	str	r1, [r11, #-8]
 	mov	r2, #0
@@ -1848,15 +2032,19 @@ put_line:                               @ @put_line
 	str	r1, [sp, #20]           @ 4-byte Spill
 	str	r3, [sp, #16]           @ 4-byte Spill
 	bl	put_space
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 962 0                @ ../../src/fmt.c:962:0
-	cfiid	#39122
 	ldr	r0, .LCPI9_2
 	ldr	r0, [r0]
 	ldr	r1, .LCPI9_3
 	ldr	r1, [r1]
 	bl	fputs_unlocked
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 963 0                @ ../../src/fmt.c:963:0
-	cfiid	#39122
 	ldr	r1, .LCPI9_4
 	ldr	r1, [r1]
 	ldr	r2, [sp, #16]           @ 4-byte Reload
@@ -1869,8 +2057,10 @@ put_line:                               @ @put_line
 	str	r0, [sp, #12]           @ 4-byte Spill
 	mov	r0, r1
 	bl	put_space
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 966 0                @ ../../src/fmt.c:966:0
-	cfiid	#39122
 	ldr	r0, [r11, #-4]
 	ldr	r0, [r0, #24]
 	sub	r0, r0, #28
@@ -1894,13 +2084,17 @@ put_line:                               @ @put_line
 .Ltmp74:
 	ldr	r0, [r11, #-4]
 	bl	put_word
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 970 0                @ ../../src/fmt.c:970:0
-	cfiid	#39122
 	ldr	r0, [r11, #-4]
 	ldr	r0, [r0, #8]
 	bl	put_space
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 971 0                @ ../../src/fmt.c:971:0
-	cfiid	#39122
 .Ltmp75:
 .LBB9_3:                                @ %for.inc
                                         @   in Loop: Header=BB9_1 Depth=1
@@ -1914,8 +2108,10 @@ put_line:                               @ @put_line
 	.loc	30 972 0                @ ../../src/fmt.c:972:0
 	ldr	r0, [r11, #-4]
 	bl	put_word
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 973 0                @ ../../src/fmt.c:973:0
-	cfiid	#39122
 	ldr	r0, .LCPI9_0
 	ldr	r0, [r0]
 	ldr	r1, .LCPI9_5
@@ -1923,10 +2119,12 @@ put_line:                               @ @put_line
 	mov	r0, #10
 	.loc	30 974 0                @ ../../src/fmt.c:974:0
 	bl	putchar_unlocked
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 975 0                @ ../../src/fmt.c:975:0
 	str	r0, [sp]                @ 4-byte Spill
 	pop	{r11, lr}
-	cfiid	#39122
 	mov	sp, r11
 	mov	pc, lr
 .Ltmp77:
@@ -1952,6 +2150,9 @@ put_line:                               @ @put_line
 	.type	put_space,%function
 put_space:                              @ @put_space
 .Lfunc_begin10:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 995 0                @ ../../src/fmt.c:995:0
 @ BB#0:                                 @ %entry
 	.loc	30 994 0                @ ../../src/fmt.c:994:0
@@ -1959,7 +2160,6 @@ put_space:                              @ @put_space
 	mov	r11, sp
 	sub	sp, sp, #24
 	@DEBUG_VALUE: put_space:space <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	.loc	30 998 0 prologue_end   @ ../../src/fmt.c:998:0
 	ldr	r1, .LCPI10_0
@@ -2004,8 +2204,10 @@ put_space:                              @ @put_space
 	.loc	30 1005 0               @ ../../src/fmt.c:1005:0
 .Ltmp80:
 	bl	putchar_unlocked
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 1006 0               @ ../../src/fmt.c:1006:0
-	cfiid	#39122
 	ldr	r1, .LCPI10_0
 	ldr	r2, [r1]
 	asr	r3, r2, #31
@@ -2036,8 +2238,10 @@ put_space:                              @ @put_space
 	.loc	30 1011 0               @ ../../src/fmt.c:1011:0
 .Ltmp82:
 	bl	putchar_unlocked
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 1012 0               @ ../../src/fmt.c:1012:0
-	cfiid	#39122
 	ldr	r1, .LCPI10_0
 	ldr	r2, [r1]
 	add	r2, r2, #1
@@ -2048,10 +2252,19 @@ put_space:                              @ @put_space
 .Ltmp83:
 .LBB10_10:                              @ %while.end12
 	.loc	30 1014 0               @ ../../src/fmt.c:1014:0
-	cficheckret	#39122
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp84:
 	.align	2
 @ BB#11:
@@ -2067,6 +2280,9 @@ put_space:                              @ @put_space
 	.type	put_word,%function
 put_word:                               @ @put_word
 .Lfunc_begin11:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 981 0                @ ../../src/fmt.c:981:0
 @ BB#0:                                 @ %entry
 	.loc	30 980 0                @ ../../src/fmt.c:980:0
@@ -2074,7 +2290,6 @@ put_word:                               @ @put_word
 	mov	r11, sp
 	sub	sp, sp, #24
 	@DEBUG_VALUE: put_word:w <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	.loc	30 985 0 prologue_end   @ ../../src/fmt.c:985:0
 	ldr	r1, [r0]
@@ -2099,8 +2314,10 @@ put_word:                               @ @put_word
 	str	r1, [r11, #-8]
 	ldrb	r0, [r0]
 	bl	putchar_unlocked
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #4]            @ 4-byte Spill
-	cfiid	#39122
 .LBB11_3:                               @ %for.inc
                                         @   in Loop: Header=BB11_1 Depth=1
 	.loc	30 986 0                @ ../../src/fmt.c:986:0
@@ -2118,10 +2335,19 @@ put_word:                               @ @put_word
 	add	r0, r2, r0
 	str	r0, [r1]
 	.loc	30 989 0                @ ../../src/fmt.c:989:0
-	cficheckret	#39122
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp88:
 	.align	2
 @ BB#5:
@@ -2135,13 +2361,15 @@ put_word:                               @ @put_word
 	.type	line_cost,%function
 line_cost:                              @ @line_cost
 .Lfunc_begin12:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 923 0                @ ../../src/fmt.c:923:0
 @ BB#0:                                 @ %entry
 	.loc	30 922 0                @ ../../src/fmt.c:922:0
 	sub	sp, sp, #28
 	@DEBUG_VALUE: line_cost:next <- undef
 	@DEBUG_VALUE: line_cost:len <- undef
-	cfiid	#40645
 	str	r0, [sp, #20]
 	str	r1, [sp, #16]
 	.loc	30 927 0 prologue_end   @ ../../src/fmt.c:927:0
@@ -2201,9 +2429,18 @@ line_cost:                              @ @line_cost
 .LBB12_5:                               @ %return
 	.loc	30 937 0                @ ../../src/fmt.c:937:0
 	ldr	r0, [sp, #24]
-	cficheckret	#39122
 	add	sp, sp, #28
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp92:
 	.align	2
 @ BB#6:
@@ -2219,6 +2456,9 @@ line_cost:                              @ @line_cost
 	.type	base_cost,%function
 base_cost:                              @ @base_cost
 .Lfunc_begin13:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 890 0                @ ../../src/fmt.c:890:0
 @ BB#0:                                 @ %entry
 	.loc	30 889 0                @ ../../src/fmt.c:889:0
@@ -2226,7 +2466,6 @@ base_cost:                              @ @base_cost
 	mov	r11, sp
 	sub	sp, sp, #24
 	@DEBUG_VALUE: base_cost:this <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	mov	r1, #804
 	orr	r1, r1, #4096
@@ -2364,10 +2603,19 @@ base_cost:                              @ @base_cost
 .LBB13_19:                              @ %if.end54
 	.loc	30 915 0                @ ../../src/fmt.c:915:0
 	ldr	r0, [r11, #-8]
-	cficheckret	#39122
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp98:
 	.align	2
 @ BB#20:
@@ -2383,6 +2631,9 @@ base_cost:                              @ @base_cost
 	.type	copy_rest,%function
 copy_rest:                              @ @copy_rest
 .Lfunc_begin14:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 605 0                @ ../../src/fmt.c:605:0
 @ BB#0:                                 @ %entry
 	.loc	30 604 0                @ ../../src/fmt.c:604:0
@@ -2391,7 +2642,6 @@ copy_rest:                              @ @copy_rest
 	sub	sp, sp, #40
 	@DEBUG_VALUE: copy_rest:f <- undef
 	@DEBUG_VALUE: copy_rest:c <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	str	r1, [r11, #-8]
 	mov	r2, #0
@@ -2426,7 +2676,9 @@ copy_rest:                              @ @copy_rest
 	bl	put_space
 	.loc	30 612 0                @ ../../src/fmt.c:612:0
 .Ltmp101:
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r0, .LCPI14_3
 	ldr	r0, [r0]
 	str	r0, [r11, #-12]
@@ -2462,8 +2714,10 @@ copy_rest:                              @ @copy_rest
 	str	r1, [r11, #-12]
 	ldrb	r0, [r0]
 	bl	putchar_unlocked
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #12]           @ 4-byte Spill
-	cfiid	#39122
 .LBB14_8:                               @ %for.inc
                                         @   in Loop: Header=BB14_4 Depth=1
 	.loc	30 612 0                @ ../../src/fmt.c:612:0
@@ -2492,7 +2746,9 @@ copy_rest:                              @ @copy_rest
 	ldr	r1, [r1]
 	sub	r0, r0, r1
 	bl	put_space
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB14_12:                              @ %if.end
 	.loc	30 616 0                @ ../../src/fmt.c:616:0
 	ldr	r0, [r11, #-8]
@@ -2514,8 +2770,10 @@ copy_rest:                              @ @copy_rest
 	mov	r0, #10
 	.loc	30 617 0                @ ../../src/fmt.c:617:0
 	bl	putchar_unlocked
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #8]            @ 4-byte Spill
-	cfiid	#39122
 .Ltmp103:
 .LBB14_15:                              @ %if.end18
 .LBB14_16:                              @ %if.end19
@@ -2547,13 +2805,17 @@ copy_rest:                              @ @copy_rest
 .Ltmp104:
 	ldr	r0, [r11, #-8]
 	bl	putchar_unlocked
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 622 0                @ ../../src/fmt.c:622:0
-	cfiid	#39122
 	ldr	r1, [r11, #-4]
 	str	r0, [sp]                @ 4-byte Spill
 	mov	r0, r1
 	bl	getc_unlocked
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-8]
 	.loc	30 623 0                @ ../../src/fmt.c:623:0
 	b	.LBB14_17
@@ -2561,10 +2823,19 @@ copy_rest:                              @ @copy_rest
 .LBB14_21:                              @ %while.end
 	.loc	30 624 0                @ ../../src/fmt.c:624:0
 	ldr	r0, [r11, #-8]
-	cficheckret	#39122
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp106:
 	.align	2
 @ BB#22:
@@ -2586,6 +2857,9 @@ copy_rest:                              @ @copy_rest
 	.type	get_line,%function
 get_line:                               @ @get_line
 .Lfunc_begin15:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 649 0                @ ../../src/fmt.c:649:0
 @ BB#0:                                 @ %entry
 	.loc	30 648 0                @ ../../src/fmt.c:648:0
@@ -2594,7 +2868,6 @@ get_line:                               @ @get_line
 	sub	sp, sp, #64
 	@DEBUG_VALUE: get_line:f <- undef
 	@DEBUG_VALUE: get_line:c <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	str	r1, [r11, #-8]
 	mov	r2, #904
@@ -2638,8 +2911,10 @@ get_line:                               @ @get_line
 	.loc	30 667 0                @ ../../src/fmt.c:667:0
 .Ltmp110:
 	bl	set_other_indent
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 668 0                @ ../../src/fmt.c:668:0
-	cfiid	#39122
 	bl	flush_paragraph
 .Ltmp111:
 .LBB15_4:                               @ %if.end
@@ -2654,7 +2929,9 @@ get_line:                               @ @get_line
 	.loc	30 671 0                @ ../../src/fmt.c:671:0
 	ldr	r0, [r11, #-4]
 	bl	getc_unlocked
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-8]
 @ BB#5:                                 @ %do.cond
                                         @   in Loop: Header=BB15_2 Depth=2
@@ -2672,7 +2949,9 @@ get_line:                               @ @get_line
 	.loc	30 673 0                @ ../../src/fmt.c:673:0
 	str	r0, [sp, #28]           @ 4-byte Spill
 	bl	__ctype_b_loc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r0, [r0]
 	ldr	r1, [sp, #28]           @ 4-byte Reload
 	add	r0, r0, r1, lsl #1
@@ -2706,8 +2985,10 @@ get_line:                               @ @get_line
 	str	r2, [sp, #24]           @ 4-byte Spill
 	str	r1, [sp, #20]           @ 4-byte Spill
 	bl	check_punctuation
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 679 0                @ ../../src/fmt.c:679:0
-	cfiid	#39122
 	ldr	r0, [sp, #24]           @ 4-byte Reload
 	ldr	r1, [r0]
 	str	r1, [r11, #-12]
@@ -2715,7 +2996,9 @@ get_line:                               @ @get_line
 	ldr	r0, [r11, #-4]
 	ldr	r1, [r11, #-8]
 	bl	get_space
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-8]
 	.loc	30 681 0                @ ../../src/fmt.c:681:0
 	ldr	r0, [sp, #24]           @ 4-byte Reload
@@ -2821,8 +3104,10 @@ get_line:                               @ @get_line
 	.loc	30 689 0                @ ../../src/fmt.c:689:0
 .Ltmp113:
 	bl	set_other_indent
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 690 0                @ ../../src/fmt.c:690:0
-	cfiid	#39122
 	bl	flush_paragraph
 .Ltmp114:
 .LBB15_20:                              @ %if.end41
@@ -2859,8 +3144,10 @@ get_line:                               @ @get_line
 	.loc	30 695 0                @ ../../src/fmt.c:695:0
 	ldr	r0, [r11, #-4]
 	bl	get_prefix
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	pop	{r11, lr}
-	cfiid	#39122
 	mov	sp, r11
 	mov	pc, lr
 .Ltmp116:
@@ -2886,12 +3173,14 @@ get_line:                               @ @get_line
 	.type	set_other_indent,%function
 set_other_indent:                       @ @set_other_indent
 .Lfunc_begin16:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 484 0                @ ../../src/fmt.c:484:0
 @ BB#0:                                 @ %entry
 	.loc	30 483 0                @ ../../src/fmt.c:483:0
 	sub	sp, sp, #12
 	@DEBUG_VALUE: set_other_indent:same_paragraph <- undef
-	cfiid	#40645
 	strb	r0, [sp, #11]
 	.loc	30 485 0 prologue_end   @ ../../src/fmt.c:485:0
 	ldr	r1, .LCPI16_0
@@ -3003,9 +3292,18 @@ set_other_indent:                       @ @set_other_indent
 .LBB16_17:                              @ %if.end17
 .LBB16_18:                              @ %if.end18
 	.loc	30 510 0                @ ../../src/fmt.c:510:0
-	cficheckret	#39122
 	add	sp, sp, #12
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp125:
 	.align	2
 @ BB#19:
@@ -3029,12 +3327,14 @@ set_other_indent:                       @ @set_other_indent
 	.type	same_para,%function
 same_para:                              @ @same_para
 .Lfunc_begin17:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 633 0                @ ../../src/fmt.c:633:0
 @ BB#0:                                 @ %entry
 	.loc	30 632 0                @ ../../src/fmt.c:632:0
 	sub	sp, sp, #12
 	@DEBUG_VALUE: same_para:c <- undef
-	cfiid	#40645
 	str	r0, [sp, #8]
 	.loc	30 634 0 prologue_end   @ ../../src/fmt.c:634:0
 	ldr	r1, .LCPI17_0
@@ -3076,10 +3376,19 @@ same_para:                              @ @same_para
 .LBB17_4:                               @ %land.end
 	ldr	r0, [sp]                @ 4-byte Reload
 	.loc	30 637 0                @ ../../src/fmt.c:637:0
-	cficheckret	#39122
 	and	r0, r0, #1
 	add	sp, sp, #12
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp127:
 	.align	2
 @ BB#5:
@@ -3099,12 +3408,14 @@ same_para:                              @ @same_para
 	.type	flush_paragraph,%function
 flush_paragraph:                        @ @flush_paragraph
 .Lfunc_begin18:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 770 0                @ ../../src/fmt.c:770:0
 @ BB#0:                                 @ %entry
 	push	{r11, lr}
 	mov	r11, sp
 	sub	sp, sp, #56
-	cfiid	#40645
 	.loc	30 778 0 prologue_end   @ ../../src/fmt.c:778:0
 .Ltmp129:
 	ldr	r0, .LCPI18_0
@@ -3131,8 +3442,10 @@ flush_paragraph:                        @ @flush_paragraph
 	str	r2, [sp, #28]           @ 4-byte Spill
 	mov	r2, r12
 	bl	fwrite_unlocked
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 781 0                @ ../../src/fmt.c:781:0
-	cfiid	#39122
 	ldr	r1, [sp, #28]           @ 4-byte Reload
 	ldr	r2, [r11, #-20]         @ 4-byte Reload
 	str	r1, [r2]
@@ -3143,8 +3456,10 @@ flush_paragraph:                        @ @flush_paragraph
 .LBB18_2:                               @ %if.end
 	.loc	30 791 0                @ ../../src/fmt.c:791:0
 	bl	fmt_paragraph
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 795 0                @ ../../src/fmt.c:795:0
-	cfiid	#39122
 	ldr	r0, .LCPI18_0
 	ldr	r0, [r0]
 	str	r0, [r11, #-4]
@@ -3219,8 +3534,10 @@ flush_paragraph:                        @ @flush_paragraph
 	.loc	30 807 0                @ ../../src/fmt.c:807:0
 	ldr	r0, [r11, #-4]
 	bl	put_paragraph
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 812 0                @ ../../src/fmt.c:812:0
-	cfiid	#39122
 	ldr	r0, [r11, #-4]
 	ldr	r0, [r0]
 	ldr	r1, .LCPI18_2
@@ -3303,10 +3620,19 @@ flush_paragraph:                        @ @flush_paragraph
 	add	r2, r2, r3, lsl #2
 	str	r2, [r0]
 .LBB18_15:                              @ %return
-	cficheckret	#39122
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp140:
 	.align	2
 @ BB#16:
@@ -3330,6 +3656,9 @@ flush_paragraph:                        @ @flush_paragraph
 	.type	check_punctuation,%function
 check_punctuation:                      @ @check_punctuation
 .Lfunc_begin19:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 753 0                @ ../../src/fmt.c:753:0
 @ BB#0:                                 @ %entry
 	.loc	30 752 0                @ ../../src/fmt.c:752:0
@@ -3337,7 +3666,6 @@ check_punctuation:                      @ @check_punctuation
 	mov	r11, sp
 	sub	sp, sp, #32
 	@DEBUG_VALUE: check_punctuation:w <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	.loc	30 754 0 prologue_end   @ ../../src/fmt.c:754:0
 	ldr	r1, [r0]
@@ -3358,7 +3686,9 @@ check_punctuation:                      @ @check_punctuation
 	str	r0, [sp, #12]           @ 4-byte Spill
 	mov	r0, r2
 	bl	strchr
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [r11, #-4]
 	cmp	r0, #0
 	movne	r0, #1
@@ -3370,7 +3700,9 @@ check_punctuation:                      @ @check_punctuation
 	ldrb	r0, [r11, #-13]
 	str	r0, [sp, #8]            @ 4-byte Spill
 	bl	__ctype_b_loc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r0, [r0]
 	ldr	r1, [sp, #8]            @ 4-byte Reload
 	add	r0, r0, r1, lsl #1
@@ -3399,7 +3731,9 @@ check_punctuation:                      @ @check_punctuation
 	ldrb	r1, [r0]
 	ldr	r0, .LCPI19_1
 	bl	strchr
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	cmp	r0, #0
 	movne	r0, #1
 	str	r0, [sp]                @ 4-byte Spill
@@ -3422,7 +3756,9 @@ check_punctuation:                      @ @check_punctuation
 	ldrb	r1, [r0]
 	ldr	r0, .LCPI19_2
 	bl	strchr
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [r11, #-4]
 	cmp	r0, #0
 	movne	r0, #1
@@ -3431,10 +3767,19 @@ check_punctuation:                      @ @check_punctuation
 	orr	r0, r2, r0, lsl #1
 	strb	r0, [r1, #12]
 	.loc	30 763 0                @ ../../src/fmt.c:763:0
-	cficheckret	#39122
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp142:
 	.align	2
 @ BB#6:
@@ -3452,6 +3797,9 @@ check_punctuation:                      @ @check_punctuation
 	.type	get_space,%function
 get_space:                              @ @get_space
 .Lfunc_begin20:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	30 733 0                @ ../../src/fmt.c:733:0
 @ BB#0:                                 @ %entry
 	.loc	30 732 0                @ ../../src/fmt.c:732:0
@@ -3460,7 +3808,6 @@ get_space:                              @ @get_space
 	sub	sp, sp, #16
 	@DEBUG_VALUE: get_space:f <- undef
 	@DEBUG_VALUE: get_space:c <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	str	r1, [sp, #8]
 	str	r1, [sp, #4]            @ 4-byte Spill
@@ -3509,10 +3856,19 @@ get_space:                              @ @get_space
 .LBB20_5:                               @ %if.else3
 	.loc	30 744 0                @ ../../src/fmt.c:744:0
 	ldr	r0, [sp, #8]
-	cficheckret	#39122
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .LBB20_6:                               @ %if.end
                                         @   in Loop: Header=BB20_1 Depth=1
 .LBB20_7:                               @ %if.end4
@@ -3520,7 +3876,9 @@ get_space:                              @ @get_space
 	.loc	30 745 0                @ ../../src/fmt.c:745:0
 	ldr	r0, [r11, #-4]
 	bl	getc_unlocked
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #8]
 	.loc	30 746 0                @ ../../src/fmt.c:746:0
 	b	.LBB20_1
@@ -3539,6 +3897,9 @@ get_space:                              @ @get_space
 	.type	version_etc_va,%function
 version_etc_va:                         @ @version_etc_va
 .Lfunc_begin21:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	7 43 0                  @ ../../lib/version-etc.c:43:0
 @ BB#0:                                 @ %entry
 	.loc	7 40 0                  @ ../../lib/version-etc.c:40:0
@@ -3550,7 +3911,6 @@ version_etc_va:                         @ @version_etc_va
 	@DEBUG_VALUE: version_etc_va:package <- undef
 	@DEBUG_VALUE: version_etc_va:version <- undef
 	@DEBUG_VALUE: version_etc_va:authors <- undef
-	cfiid	#40645
 	str	r0, [r11, #-8]
 	str	r1, [r11, #-12]
 	str	r2, [r11, #-16]
@@ -3608,8 +3968,10 @@ version_etc_va:                         @ @version_etc_va
 	str	r1, [r12]
 	ldr	r1, .LCPI21_1
 	bl	fprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-52]         @ 4-byte Spill
-	cfiid	#39122
 	b	.LBB21_6
 .LBB21_5:                               @ %if.else
 	.loc	7 60 0                  @ ../../lib/version-etc.c:60:0
@@ -3618,8 +3980,10 @@ version_etc_va:                         @ @version_etc_va
 	ldr	r3, [r11, #-20]
 	ldr	r1, .LCPI21_0
 	bl	fprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #56]           @ 4-byte Spill
-	cfiid	#39122
 .LBB21_6:                               @ %if.end
 	.loc	7 65 0                  @ ../../lib/version-etc.c:65:0
 	ldr	r0, [r11, #-8]
@@ -3628,15 +3992,19 @@ version_etc_va:                         @ @version_etc_va
 	ldr	r1, .LCPI21_2
 	ldr	r2, .LCPI21_3
 	bl	fprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	7 67 0                  @ ../../lib/version-etc.c:67:0
-	cfiid	#39122
 	ldr	r1, [r11, #-8]
 	ldr	r2, .LCPI21_4
 	str	r0, [sp, #52]           @ 4-byte Spill
 	mov	r0, r2
 	bl	fputs_unlocked
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	7 76 0                  @ ../../lib/version-etc.c:76:0
-	cfiid	#39122
 	ldr	r1, [r11, #-28]
 	cmp	r1, #9
 	str	r0, [sp, #48]           @ 4-byte Spill
@@ -3663,7 +4031,9 @@ version_etc_va:                         @ @version_etc_va
 	.loc	7 80 0                  @ ../../lib/version-etc.c:80:0
 .Ltmp151:
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB21_9:                               @ %sw.bb4
 	.loc	7 83 0                  @ ../../lib/version-etc.c:83:0
 	ldr	r0, [r11, #-8]
@@ -3676,9 +4046,11 @@ version_etc_va:                         @ @version_etc_va
 	orr	r2, r1, r3, lsl #16
 	ldr	r1, .LCPI21_13
 	bl	rpl_vfprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	7 84 0                  @ ../../lib/version-etc.c:84:0
 	str	r0, [sp, #40]           @ 4-byte Spill
-	cfiid	#39122
 	b	.LBB21_19
 .LBB21_10:                              @ %sw.bb6
 	.loc	7 87 0                  @ ../../lib/version-etc.c:87:0
@@ -3692,9 +4064,11 @@ version_etc_va:                         @ @version_etc_va
 	orr	r2, r1, r3, lsl #16
 	ldr	r1, .LCPI21_12
 	bl	rpl_vfprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	7 88 0                  @ ../../lib/version-etc.c:88:0
 	str	r0, [sp, #36]           @ 4-byte Spill
-	cfiid	#39122
 	b	.LBB21_19
 .LBB21_11:                              @ %sw.bb8
 	.loc	7 91 0                  @ ../../lib/version-etc.c:91:0
@@ -3708,9 +4082,11 @@ version_etc_va:                         @ @version_etc_va
 	orr	r2, r1, r3, lsl #16
 	ldr	r1, .LCPI21_11
 	bl	rpl_vfprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	7 92 0                  @ ../../lib/version-etc.c:92:0
 	str	r0, [sp, #32]           @ 4-byte Spill
-	cfiid	#39122
 	b	.LBB21_19
 .LBB21_12:                              @ %sw.bb10
 	.loc	7 97 0                  @ ../../lib/version-etc.c:97:0
@@ -3724,9 +4100,11 @@ version_etc_va:                         @ @version_etc_va
 	orr	r2, r1, r3, lsl #16
 	ldr	r1, .LCPI21_10
 	bl	rpl_vfprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	7 98 0                  @ ../../lib/version-etc.c:98:0
 	str	r0, [sp, #28]           @ 4-byte Spill
-	cfiid	#39122
 	b	.LBB21_19
 .LBB21_13:                              @ %sw.bb12
 	.loc	7 103 0                 @ ../../lib/version-etc.c:103:0
@@ -3740,9 +4118,11 @@ version_etc_va:                         @ @version_etc_va
 	orr	r2, r1, r3, lsl #16
 	ldr	r1, .LCPI21_9
 	bl	rpl_vfprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	7 104 0                 @ ../../lib/version-etc.c:104:0
 	str	r0, [sp, #24]           @ 4-byte Spill
-	cfiid	#39122
 	b	.LBB21_19
 .LBB21_14:                              @ %sw.bb14
 	.loc	7 109 0                 @ ../../lib/version-etc.c:109:0
@@ -3756,9 +4136,11 @@ version_etc_va:                         @ @version_etc_va
 	orr	r2, r1, r3, lsl #16
 	ldr	r1, .LCPI21_8
 	bl	rpl_vfprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	7 111 0                 @ ../../lib/version-etc.c:111:0
 	str	r0, [sp, #20]           @ 4-byte Spill
-	cfiid	#39122
 	b	.LBB21_19
 .LBB21_15:                              @ %sw.bb16
 	.loc	7 116 0                 @ ../../lib/version-etc.c:116:0
@@ -3772,9 +4154,11 @@ version_etc_va:                         @ @version_etc_va
 	orr	r2, r1, r3, lsl #16
 	ldr	r1, .LCPI21_7
 	bl	rpl_vfprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	7 118 0                 @ ../../lib/version-etc.c:118:0
 	str	r0, [sp, #16]           @ 4-byte Spill
-	cfiid	#39122
 	b	.LBB21_19
 .LBB21_16:                              @ %sw.bb18
 	.loc	7 123 0                 @ ../../lib/version-etc.c:123:0
@@ -3788,9 +4172,11 @@ version_etc_va:                         @ @version_etc_va
 	orr	r2, r1, r3, lsl #16
 	ldr	r1, .LCPI21_6
 	bl	rpl_vfprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	7 126 0                 @ ../../lib/version-etc.c:126:0
 	str	r0, [sp, #12]           @ 4-byte Spill
-	cfiid	#39122
 	b	.LBB21_19
 .LBB21_17:                              @ %sw.bb20
 	.loc	7 131 0                 @ ../../lib/version-etc.c:131:0
@@ -3804,9 +4190,11 @@ version_etc_va:                         @ @version_etc_va
 	orr	r2, r1, r3, lsl #16
 	ldr	r1, .LCPI21_5
 	bl	rpl_vfprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	7 134 0                 @ ../../lib/version-etc.c:134:0
 	str	r0, [sp, #8]            @ 4-byte Spill
-	cfiid	#39122
 	b	.LBB21_19
 .LBB21_18:                              @ %sw.default
 	.loc	7 141 0                 @ ../../lib/version-etc.c:141:0
@@ -3820,16 +4208,27 @@ version_etc_va:                         @ @version_etc_va
 	orr	r2, r1, r3, lsl #16
 	ldr	r1, .LCPI21_14
 	bl	rpl_vfprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	7 144 0                 @ ../../lib/version-etc.c:144:0
 	str	r0, [sp, #4]            @ 4-byte Spill
-	cfiid	#39122
 .Ltmp152:
 .LBB21_19:                              @ %sw.epilog
 	.loc	7 147 0                 @ ../../lib/version-etc.c:147:0
-	cficheckret	#39122
 	sub	sp, r11, #4
 	pop	{r4, r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp153:
 	.align	2
 @ BB#20:
@@ -3872,6 +4271,9 @@ version_etc_va:                         @ @version_etc_va
 	.type	version_etc,%function
 version_etc:                            @ @version_etc
 .Lfunc_begin22:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	7 167 0                 @ ../../lib/version-etc.c:167:0
 @ BB#0:                                 @ %entry
 	.loc	7 164 0                 @ ../../lib/version-etc.c:164:0
@@ -3882,7 +4284,6 @@ version_etc:                            @ @version_etc
 	@DEBUG_VALUE: version_etc:command_name <- undef
 	@DEBUG_VALUE: version_etc:package <- undef
 	@DEBUG_VALUE: version_etc:version <- undef
-	cfiid	#40645
 	str	r0, [r11, #-32]
 	str	r1, [r11, #-36]
 	str	r2, [r11, #-40]
@@ -3913,8 +4314,10 @@ version_etc:                            @ @version_etc
 	str	r3, [sp, #24]           @ 4-byte Spill
 	mov	r3, r5
 	bl	version_etc_va
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	7 172 0                 @ ../../lib/version-etc.c:172:0
-	cfiid	#39122
 	ldr	r0, [sp, #24]           @ 4-byte Reload
 	ldr	r1, [sp, #28]           @ 4-byte Reload
 	ldr	r2, [sp, #32]           @ 4-byte Reload
@@ -3935,21 +4338,32 @@ version_etc:                            @ @version_etc
 	.type	close_stdout_set_file_name,%function
 close_stdout_set_file_name:             @ @close_stdout_set_file_name
 .Lfunc_begin23:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	9 41 0                  @ ../../lib/closeout.c:41:0
 @ BB#0:                                 @ %entry
 	.loc	9 40 0                  @ ../../lib/closeout.c:40:0
 	sub	sp, sp, #8
 	@DEBUG_VALUE: close_stdout_set_file_name:file <- undef
-	cfiid	#40645
 	str	r0, [sp, #4]
 	.loc	9 42 0 prologue_end     @ ../../lib/closeout.c:42:0
 	ldr	r1, .LCPI23_0
 	str	r0, [r1]
 	.loc	9 43 0                  @ ../../lib/closeout.c:43:0
-	cficheckret	#39122
 	str	r0, [sp]                @ 4-byte Spill
 	add	sp, sp, #8
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp157:
 	.align	2
 @ BB#1:
@@ -3963,18 +4377,22 @@ close_stdout_set_file_name:             @ @close_stdout_set_file_name
 	.type	close_stdout,%function
 close_stdout:                           @ @close_stdout
 .Lfunc_begin24:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	9 70 0                  @ ../../lib/closeout.c:70:0
 @ BB#0:                                 @ %entry
 	push	{r11, lr}
 	mov	r11, sp
 	sub	sp, sp, #16
-	cfiid	#40645
 	.loc	9 71 0 prologue_end     @ ../../lib/closeout.c:71:0
 .Ltmp159:
 	ldr	r0, .LCPI24_0
 	ldr	r0, [r0]
 	bl	close_stream
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	cmp	r0, #0
 	beq	.LBB24_5
 	b	.LBB24_1
@@ -3993,13 +4411,17 @@ close_stdout:                           @ @close_stdout
 .LBB24_2:                               @ %if.then1
 	.loc	9 75 0                  @ ../../lib/closeout.c:75:0
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [r0]
 	ldr	r0, .LCPI24_4
 	ldr	r0, [r0]
 	str	r1, [sp, #8]            @ 4-byte Spill
 	bl	quotearg_colon
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [r11, #-4]
 	mov	r2, sp
 	str	r1, [r2]
@@ -4010,31 +4432,41 @@ close_stdout:                           @ @close_stdout
 	ldr	r1, [sp, #8]            @ 4-byte Reload
 	ldr	r3, [sp, #4]            @ 4-byte Reload
 	bl	error
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	b	.LBB24_4
 .LBB24_3:                               @ %if.else
 	.loc	9 78 0                  @ ../../lib/closeout.c:78:0
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [r0]
 	ldr	r3, [r11, #-4]
 	mov	r0, #0
 	ldr	r2, .LCPI24_5
 	bl	error
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB24_4:                               @ %if.end
 	.loc	9 80 0                  @ ../../lib/closeout.c:80:0
 	ldr	r0, .LCPI24_2
 	ldr	r0, [r0]
 	bl	_exit
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .Ltmp161:
 .LBB24_5:                               @ %if.end5
 	.loc	9 83 0                  @ ../../lib/closeout.c:83:0
 	ldr	r0, .LCPI24_1
 	ldr	r0, [r0]
 	bl	close_stream
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	cmp	r0, #0
 	beq	.LBB24_7
 	b	.LBB24_6
@@ -4043,13 +4475,24 @@ close_stdout:                           @ @close_stdout
 	ldr	r0, .LCPI24_2
 	ldr	r0, [r0]
 	bl	_exit
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB24_7:                               @ %if.end9
 	.loc	9 85 0                  @ ../../lib/closeout.c:85:0
-	cficheckret	#39122
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp162:
 	.align	2
 @ BB#8:
@@ -4075,6 +4518,9 @@ close_stdout:                           @ @close_stdout
 	.type	quote_n,%function
 quote_n:                                @ @quote_n
 .Lfunc_begin25:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	11 30 0                 @ ../../lib/quote.c:30:0
 @ BB#0:                                 @ %entry
 	.loc	11 29 0                 @ ../../lib/quote.c:29:0
@@ -4083,7 +4529,6 @@ quote_n:                                @ @quote_n
 	sub	sp, sp, #24
 	@DEBUG_VALUE: quote_n:n <- undef
 	@DEBUG_VALUE: quote_n:name <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	str	r1, [r11, #-8]
 	.loc	11 31 0 prologue_end    @ ../../lib/quote.c:31:0
@@ -4095,7 +4540,9 @@ quote_n:                                @ @quote_n
 	mov	r1, r3
 	ldr	r2, [sp, #8]            @ 4-byte Reload
 	bl	quotearg_n_style
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #8]            @ 4-byte Reload
 	ldr	r2, [sp, #12]           @ 4-byte Reload
 	str	r2, [sp, #4]            @ 4-byte Spill
@@ -4112,6 +4559,9 @@ quote_n:                                @ @quote_n
 	.type	quote,%function
 quote:                                  @ @quote
 .Lfunc_begin26:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	11 38 0                 @ ../../lib/quote.c:38:0
 @ BB#0:                                 @ %entry
 	.loc	11 37 0                 @ ../../lib/quote.c:37:0
@@ -4119,7 +4569,6 @@ quote:                                  @ @quote
 	mov	r11, sp
 	sub	sp, sp, #16
 	@DEBUG_VALUE: quote:name <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	mov	r1, #0
 	.loc	11 39 0 prologue_end    @ ../../lib/quote.c:39:0
@@ -4127,7 +4576,9 @@ quote:                                  @ @quote
 	mov	r0, r1
 	ldr	r1, [sp, #8]            @ 4-byte Reload
 	bl	quote_n
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #8]            @ 4-byte Reload
 	str	r1, [sp, #4]            @ 4-byte Spill
 	mov	sp, r11
@@ -4142,6 +4593,9 @@ quote:                                  @ @quote
 	.type	clone_quoting_options,%function
 clone_quoting_options:                  @ @clone_quoting_options
 .Lfunc_begin27:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 111 0                @ ../../lib/quotearg.c:111:0
 @ BB#0:                                 @ %entry
 	.loc	13 110 0                @ ../../lib/quotearg.c:110:0
@@ -4149,12 +4603,13 @@ clone_quoting_options:                  @ @clone_quoting_options
 	mov	r11, sp
 	sub	sp, sp, #32
 	@DEBUG_VALUE: clone_quoting_options:o <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	.loc	13 112 0 prologue_end   @ ../../lib/quotearg.c:112:0
 	str	r0, [sp, #16]           @ 4-byte Spill
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r0, [r0]
 	str	r0, [r11, #-8]
 	.loc	13 113 0                @ ../../lib/quotearg.c:113:0
@@ -4175,21 +4630,34 @@ clone_quoting_options:                  @ @clone_quoting_options
 	ldr	r0, [sp, #8]            @ 4-byte Reload
 	mov	r1, #40
 	bl	xmemdup
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-12]
 	.loc	13 115 0                @ ../../lib/quotearg.c:115:0
 	ldr	r0, [r11, #-8]
 	str	r0, [sp, #4]            @ 4-byte Spill
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #4]            @ 4-byte Reload
 	str	r1, [r0]
 	.loc	13 116 0                @ ../../lib/quotearg.c:116:0
 	ldr	r0, [r11, #-12]
-	cficheckret	#39122
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp168:
 	.align	2
 @ BB#4:
@@ -4203,12 +4671,14 @@ clone_quoting_options:                  @ @clone_quoting_options
 	.type	get_quoting_style,%function
 get_quoting_style:                      @ @get_quoting_style
 .Lfunc_begin28:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 122 0                @ ../../lib/quotearg.c:122:0
 @ BB#0:                                 @ %entry
 	.loc	13 121 0                @ ../../lib/quotearg.c:121:0
 	sub	sp, sp, #12
 	@DEBUG_VALUE: get_quoting_style:o <- undef
-	cfiid	#40645
 	str	r0, [sp, #8]
 	mov	r1, r0
 	.loc	13 123 0 prologue_end   @ ../../lib/quotearg.c:123:0
@@ -4226,9 +4696,18 @@ get_quoting_style:                      @ @get_quoting_style
 .LBB28_3:                               @ %cond.end
 	ldr	r0, [sp]                @ 4-byte Reload
 	ldr	r0, [r0]
-	cficheckret	#39122
 	add	sp, sp, #12
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp170:
 	.align	2
 @ BB#4:
@@ -4242,13 +4721,15 @@ get_quoting_style:                      @ @get_quoting_style
 	.type	set_quoting_style,%function
 set_quoting_style:                      @ @set_quoting_style
 .Lfunc_begin29:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 130 0                @ ../../lib/quotearg.c:130:0
 @ BB#0:                                 @ %entry
 	.loc	13 129 0                @ ../../lib/quotearg.c:129:0
 	sub	sp, sp, #24
 	@DEBUG_VALUE: set_quoting_style:o <- undef
 	@DEBUG_VALUE: set_quoting_style:s <- undef
-	cfiid	#40645
 	str	r0, [sp, #20]
 	str	r1, [sp, #16]
 	.loc	13 131 0 prologue_end   @ ../../lib/quotearg.c:131:0
@@ -4272,9 +4753,18 @@ set_quoting_style:                      @ @set_quoting_style
 	ldr	r1, [sp, #12]           @ 4-byte Reload
 	str	r1, [r0]
 	.loc	13 132 0                @ ../../lib/quotearg.c:132:0
-	cficheckret	#39122
 	add	sp, sp, #24
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp172:
 	.align	2
 @ BB#4:
@@ -4288,6 +4778,9 @@ set_quoting_style:                      @ @set_quoting_style
 	.type	set_char_quoting,%function
 set_char_quoting:                       @ @set_char_quoting
 .Lfunc_begin30:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 141 0                @ ../../lib/quotearg.c:141:0
 @ BB#0:                                 @ %entry
 	.loc	13 140 0                @ ../../lib/quotearg.c:140:0
@@ -4296,7 +4789,6 @@ set_char_quoting:                       @ @set_char_quoting
 	@DEBUG_VALUE: set_char_quoting:o <- undef
 	@DEBUG_VALUE: set_char_quoting:c <- undef
 	@DEBUG_VALUE: set_char_quoting:i <- undef
-	cfiid	#40645
 	str	r0, [sp, #40]
 	strb	r1, [sp, #39]
 	str	r2, [sp, #32]
@@ -4351,10 +4843,19 @@ set_char_quoting:                       @ @set_char_quoting
 	str	r0, [r12]
 	.loc	13 148 0                @ ../../lib/quotearg.c:148:0
 	ldr	r0, [sp, #16]
-	cficheckret	#39122
 	add	sp, sp, #44
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp176:
 	.align	2
 @ BB#4:
@@ -4368,13 +4869,15 @@ set_char_quoting:                       @ @set_char_quoting
 	.type	set_quoting_flags,%function
 set_quoting_flags:                      @ @set_quoting_flags
 .Lfunc_begin31:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 157 0                @ ../../lib/quotearg.c:157:0
 @ BB#0:                                 @ %entry
 	.loc	13 156 0                @ ../../lib/quotearg.c:156:0
 	sub	sp, sp, #20
 	@DEBUG_VALUE: set_quoting_flags:o <- undef
 	@DEBUG_VALUE: set_quoting_flags:i <- undef
-	cfiid	#40645
 	str	r0, [sp, #16]
 	str	r1, [sp, #12]
 	.loc	13 159 0 prologue_end   @ ../../lib/quotearg.c:159:0
@@ -4399,9 +4902,18 @@ set_quoting_flags:                      @ @set_quoting_flags
 	str	r0, [r1, #4]
 	.loc	13 163 0                @ ../../lib/quotearg.c:163:0
 	ldr	r0, [sp, #8]
-	cficheckret	#39122
 	add	sp, sp, #20
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp178:
 	.align	2
 @ BB#3:
@@ -4415,6 +4927,9 @@ set_quoting_flags:                      @ @set_quoting_flags
 	.type	quotearg_buffer,%function
 quotearg_buffer:                        @ @quotearg_buffer
 .Lfunc_begin32:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 599 0                @ ../../lib/quotearg.c:599:0
 @ BB#0:                                 @ %entry
 	.loc	13 596 0                @ ../../lib/quotearg.c:596:0
@@ -4426,7 +4941,6 @@ quotearg_buffer:                        @ @quotearg_buffer
 	@DEBUG_VALUE: quotearg_buffer:arg <- undef
 	@DEBUG_VALUE: quotearg_buffer:argsize <- undef
 	@DEBUG_VALUE: quotearg_buffer:o <- undef
-	cfiid	#40645
 	str	r0, [r11, #-12]
 	str	r1, [r11, #-16]
 	str	r2, [r11, #-20]
@@ -4455,7 +4969,9 @@ quotearg_buffer:                        @ @quotearg_buffer
 	str	r0, [r11, #-32]
 	.loc	13 601 0                @ ../../lib/quotearg.c:601:0
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r0, [r0]
 	str	r0, [r11, #-36]
 	.loc	13 602 0                @ ../../lib/quotearg.c:602:0
@@ -4474,21 +4990,34 @@ quotearg_buffer:                        @ @quotearg_buffer
 	str	r4, [r5, #4]
 	str	lr, [r5]
 	bl	quotearg_buffer_restyled
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #40]
 	.loc	13 604 0                @ ../../lib/quotearg.c:604:0
 	ldr	r0, [r11, #-36]
 	str	r0, [sp, #16]           @ 4-byte Spill
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #16]           @ 4-byte Reload
 	str	r1, [r0]
 	.loc	13 605 0                @ ../../lib/quotearg.c:605:0
 	ldr	r0, [sp, #40]
-	cficheckret	#39122
 	sub	sp, r11, #8
 	pop	{r4, r5, r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp182:
 	.align	2
 @ BB#4:
@@ -4502,6 +5031,9 @@ quotearg_buffer:                        @ @quotearg_buffer
 	.type	quotearg_buffer_restyled,%function
 quotearg_buffer_restyled:               @ @quotearg_buffer_restyled
 .Lfunc_begin33:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 206 0                @ ../../lib/quotearg.c:206:0
 @ BB#0:                                 @ %entry
 	.loc	13 202 0                @ ../../lib/quotearg.c:202:0
@@ -4515,7 +5047,6 @@ quotearg_buffer_restyled:               @ @quotearg_buffer_restyled
 	@DEBUG_VALUE: quotearg_buffer_restyled:quoting_style <- undef
 	@DEBUG_VALUE: quotearg_buffer_restyled:flags <- undef
 	@DEBUG_VALUE: quotearg_buffer_restyled:quote_these_too <- undef
-	cfiid	#40645
 	str	r0, [r11, #-16]
 	str	r1, [r11, #-20]
 	str	r2, [r11, #-24]
@@ -4541,7 +5072,9 @@ quotearg_buffer_restyled:               @ @quotearg_buffer_restyled
 	str	r1, [sp, #76]           @ 4-byte Spill
 	str	r0, [sp, #72]           @ 4-byte Spill
 	bl	__ctype_get_mb_cur_max
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	cmp	r0, #1
 	movne	r0, #0
 	strb	r0, [r11, #-58]
@@ -4639,7 +5172,9 @@ quotearg_buffer_restyled:               @ @quotearg_buffer_restyled
 	ldr	r1, [r11, #-32]
 	ldr	r0, .LCPI33_1
 	bl	gettext_quote
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-64]
 	.loc	13 267 0                @ ../../lib/quotearg.c:267:0
 	ldr	r1, [r11, #-32]
@@ -4647,7 +5182,9 @@ quotearg_buffer_restyled:               @ @quotearg_buffer_restyled
 	@DEBUG_VALUE: right <- [r11+#-68]+#0
 	ldr	r0, .LCPI33_0
 	bl	gettext_quote
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-68]
 	.loc	13 268 0                @ ../../lib/quotearg.c:268:0
 	ldrb	r0, [r11, #-59]
@@ -4710,7 +5247,9 @@ quotearg_buffer_restyled:               @ @quotearg_buffer_restyled
 	str	r0, [r11, #-52]
 	.loc	13 273 0                @ ../../lib/quotearg.c:273:0
 	bl	strlen
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-56]
 .Ltmp193:
 	.loc	13 275 0                @ ../../lib/quotearg.c:275:0
@@ -4766,7 +5305,9 @@ quotearg_buffer_restyled:               @ @quotearg_buffer_restyled
 .LBB33_31:                              @ %sw.default
 	.loc	13 293 0                @ ../../lib/quotearg.c:293:0
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .Ltmp196:
 .LBB33_32:                              @ %sw.epilog
 	mov	r0, #0
@@ -4842,7 +5383,9 @@ quotearg_buffer_restyled:               @ @quotearg_buffer_restyled
 	ldr	r1, [r11, #-52]
 	ldr	r2, [r11, #-56]
 	bl	memcmp
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	cmp	r0, #0
 	bne	.LBB33_48
 	b	.LBB33_41
@@ -5657,7 +6200,9 @@ quotearg_buffer_restyled:               @ @quotearg_buffer_restyled
 	ldrb	r0, [r11, #-69]
 	str	r0, [sp, #28]           @ 4-byte Spill
 	bl	__ctype_b_loc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r0, [r0]
 	ldr	r1, [sp, #28]           @ 4-byte Reload
 	add	r0, r0, r1, lsl #1
@@ -5691,7 +6236,9 @@ quotearg_buffer_restyled:               @ @quotearg_buffer_restyled
 	.loc	13 473 0                @ ../../lib/quotearg.c:473:0
 	ldr	r0, [r11, #-24]
 	bl	strlen
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-28]
 .LBB33_161:                             @ %if.end290
                                         @   in Loop: Header=BB33_33 Depth=1
@@ -5713,7 +6260,9 @@ quotearg_buffer_restyled:               @ @quotearg_buffer_restyled
 	sub	r0, r11, #92
 	sub	r3, r11, #88
 	bl	mbrtowc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #96]
 	.loc	13 480 0                @ ../../lib/quotearg.c:480:0
 	cmp	r0, #0
@@ -5883,7 +6432,9 @@ quotearg_buffer_restyled:               @ @quotearg_buffer_restyled
 	.loc	13 516 0                @ ../../lib/quotearg.c:516:0
 	ldr	r0, [r11, #-92]
 	bl	iswprint
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	cmp	r0, #0
 	bne	.LBB33_188
 	b	.LBB33_187
@@ -5911,7 +6462,9 @@ quotearg_buffer_restyled:               @ @quotearg_buffer_restyled
 	sub	r0, r11, #88
 	.loc	13 521 0                @ ../../lib/quotearg.c:521:0
 	bl	mbsinit
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	cmp	r0, #0
 	beq	.LBB33_162
 	b	.LBB33_193
@@ -6319,15 +6872,26 @@ quotearg_buffer_restyled:               @ @quotearg_buffer_restyled
 	str	lr, [r5, #4]
 	str	r12, [r5]
 	bl	quotearg_buffer_restyled
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-12]
 .LBB33_262:                             @ %return
 	.loc	13 584 0                @ ../../lib/quotearg.c:584:0
 	ldr	r0, [r11, #-12]
-	cficheckret	#39122
 	sub	sp, r11, #8
 	pop	{r4, r5, r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp264:
 	.align	2
 @ BB#263:
@@ -6348,6 +6912,9 @@ quotearg_buffer_restyled:               @ @quotearg_buffer_restyled
 	.type	quotearg_alloc,%function
 quotearg_alloc:                         @ @quotearg_alloc
 .Lfunc_begin34:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 612 0                @ ../../lib/quotearg.c:612:0
 @ BB#0:                                 @ %entry
 	.loc	13 610 0                @ ../../lib/quotearg.c:610:0
@@ -6357,7 +6924,6 @@ quotearg_alloc:                         @ @quotearg_alloc
 	@DEBUG_VALUE: quotearg_alloc:arg <- undef
 	@DEBUG_VALUE: quotearg_alloc:argsize <- undef
 	@DEBUG_VALUE: quotearg_alloc:o <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	str	r1, [r11, #-8]
 	str	r2, [r11, #-12]
@@ -6373,7 +6939,9 @@ quotearg_alloc:                         @ @quotearg_alloc
 	mov	r2, lr
 	ldr	r3, [sp, #16]           @ 4-byte Reload
 	bl	quotearg_alloc_mem
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #16]           @ 4-byte Reload
 	ldr	r2, [sp, #20]           @ 4-byte Reload
 	ldr	r3, [r11, #-16]         @ 4-byte Reload
@@ -6392,6 +6960,9 @@ quotearg_alloc:                         @ @quotearg_alloc
 	.type	quotearg_alloc_mem,%function
 quotearg_alloc_mem:                     @ @quotearg_alloc_mem
 .Lfunc_begin35:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 625 0                @ ../../lib/quotearg.c:625:0
 @ BB#0:                                 @ %entry
 	.loc	13 623 0                @ ../../lib/quotearg.c:623:0
@@ -6402,7 +6973,6 @@ quotearg_alloc_mem:                     @ @quotearg_alloc_mem
 	@DEBUG_VALUE: quotearg_alloc_mem:argsize <- undef
 	@DEBUG_VALUE: quotearg_alloc_mem:size <- undef
 	@DEBUG_VALUE: quotearg_alloc_mem:o <- undef
-	cfiid	#40645
 	str	r0, [r11, #-12]
 	str	r1, [r11, #-16]
 	str	r2, [r11, #-20]
@@ -6430,7 +7000,9 @@ quotearg_alloc_mem:                     @ @quotearg_alloc_mem
 	str	r0, [r11, #-28]
 	.loc	13 627 0                @ ../../lib/quotearg.c:627:0
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r0, [r0]
 	str	r0, [r11, #-32]
 	.loc	13 629 0                @ ../../lib/quotearg.c:629:0
@@ -6462,14 +7034,18 @@ quotearg_alloc_mem:                     @ @quotearg_alloc_mem
 	ldr	r2, [sp, #28]           @ 4-byte Reload
 	ldr	r3, [sp, #24]           @ 4-byte Reload
 	bl	quotearg_buffer_restyled
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	r0, r0, #1
 	str	r0, [r11, #-40]
 .Ltmp271:
 	@DEBUG_VALUE: buf <- [r11+#-44]+#0
 	.loc	13 632 0                @ ../../lib/quotearg.c:632:0
 	bl	xcharalloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-44]
 	.loc	13 633 0                @ ../../lib/quotearg.c:633:0
 	ldr	r1, [r11, #-40]
@@ -6483,13 +7059,17 @@ quotearg_alloc_mem:                     @ @quotearg_alloc_mem
 	str	lr, [r5, #4]
 	str	r4, [r5]
 	bl	quotearg_buffer_restyled
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 635 0                @ ../../lib/quotearg.c:635:0
-	cfiid	#39122
 	ldr	r1, [r11, #-32]
 	str	r0, [sp, #20]           @ 4-byte Spill
 	str	r1, [sp, #16]           @ 4-byte Spill
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #16]           @ 4-byte Reload
 	str	r1, [r0]
 	.loc	13 636 0                @ ../../lib/quotearg.c:636:0
@@ -6506,10 +7086,19 @@ quotearg_alloc_mem:                     @ @quotearg_alloc_mem
 .LBB35_5:                               @ %if.end
 	.loc	13 638 0                @ ../../lib/quotearg.c:638:0
 	ldr	r0, [r11, #-44]
-	cficheckret	#39122
 	sub	sp, r11, #8
 	pop	{r4, r5, r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp272:
 	.align	2
 @ BB#6:
@@ -6523,12 +7112,14 @@ quotearg_alloc_mem:                     @ @quotearg_alloc_mem
 	.type	quotearg_free,%function
 quotearg_free:                          @ @quotearg_free
 .Lfunc_begin36:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 657 0                @ ../../lib/quotearg.c:657:0
 @ BB#0:                                 @ %entry
 	push	{r11, lr}
 	mov	r11, sp
 	sub	sp, sp, #8
-	cfiid	#40645
 	.loc	13 658 0 prologue_end   @ ../../lib/quotearg.c:658:0
 .Ltmp274:
 	ldr	r0, .LCPI36_0
@@ -6554,7 +7145,9 @@ quotearg_free:                          @ @quotearg_free
 	add	r0, r1, r0, lsl #3
 	ldr	r0, [r0, #4]
 	bl	free
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB36_3:                               @ %for.inc
                                         @   in Loop: Header=BB36_1 Depth=1
 	.loc	13 660 0                @ ../../lib/quotearg.c:660:0
@@ -6577,8 +7170,10 @@ quotearg_free:                          @ @quotearg_free
 	ldr	r0, [sp, #4]
 	ldr	r0, [r0, #4]
 	bl	free
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 665 0                @ ../../lib/quotearg.c:665:0
-	cfiid	#39122
 	mov	r0, #256
 	ldr	r1, .LCPI36_3
 	str	r0, [r1]
@@ -6598,8 +7193,10 @@ quotearg_free:                          @ @quotearg_free
 .Ltmp279:
 	ldr	r0, [sp, #4]
 	bl	free
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 671 0                @ ../../lib/quotearg.c:671:0
-	cfiid	#39122
 	ldr	r0, .LCPI36_0
 	ldr	r1, .LCPI36_3
 	str	r1, [r0]
@@ -6610,10 +7207,19 @@ quotearg_free:                          @ @quotearg_free
 	ldr	r1, .LCPI36_1
 	str	r0, [r1]
 	.loc	13 674 0                @ ../../lib/quotearg.c:674:0
-	cficheckret	#39122
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp281:
 	.align	2
 @ BB#9:
@@ -6633,6 +7239,9 @@ quotearg_free:                          @ @quotearg_free
 	.type	quotearg_n,%function
 quotearg_n:                             @ @quotearg_n
 .Lfunc_begin37:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 742 0                @ ../../lib/quotearg.c:742:0
 @ BB#0:                                 @ %entry
 	.loc	13 741 0                @ ../../lib/quotearg.c:741:0
@@ -6641,7 +7250,6 @@ quotearg_n:                             @ @quotearg_n
 	sub	sp, sp, #24
 	@DEBUG_VALUE: quotearg_n:n <- undef
 	@DEBUG_VALUE: quotearg_n:arg <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	str	r1, [r11, #-8]
 	.loc	13 743 0 prologue_end   @ ../../lib/quotearg.c:743:0
@@ -6654,7 +7262,9 @@ quotearg_n:                             @ @quotearg_n
 	mov	r2, r3
 	mov	r3, r12
 	bl	quotearg_n_options
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #8]            @ 4-byte Reload
 	ldr	r2, [sp, #12]           @ 4-byte Reload
 	str	r2, [sp, #4]            @ 4-byte Spill
@@ -6675,6 +7285,9 @@ quotearg_n:                             @ @quotearg_n
 	.type	quotearg_n_options,%function
 quotearg_n_options:                     @ @quotearg_n_options
 .Lfunc_begin38:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 687 0                @ ../../lib/quotearg.c:687:0
 @ BB#0:                                 @ %entry
 	.loc	13 685 0                @ ../../lib/quotearg.c:685:0
@@ -6685,7 +7298,6 @@ quotearg_n_options:                     @ @quotearg_n_options
 	@DEBUG_VALUE: quotearg_n_options:arg <- undef
 	@DEBUG_VALUE: quotearg_n_options:argsize <- undef
 	@DEBUG_VALUE: quotearg_n_options:options <- undef
-	cfiid	#40645
 	str	r0, [r11, #-12]
 	str	r1, [r11, #-16]
 	str	r2, [r11, #-20]
@@ -6696,7 +7308,9 @@ quotearg_n_options:                     @ @quotearg_n_options
 	str	r1, [sp, #48]           @ 4-byte Spill
 	str	r0, [sp, #44]           @ 4-byte Spill
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r0, [r0]
 	str	r0, [r11, #-28]
 	.loc	13 690 0                @ ../../lib/quotearg.c:690:0
@@ -6722,7 +7336,9 @@ quotearg_n_options:                     @ @quotearg_n_options
 .LBB38_1:                               @ %if.then
 	.loc	13 694 0                @ ../../lib/quotearg.c:694:0
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB38_2:                               @ %if.end
 	.loc	13 696 0                @ ../../lib/quotearg.c:696:0
 	ldr	r0, .LCPI38_1
@@ -6755,7 +7371,9 @@ quotearg_n_options:                     @ @quotearg_n_options
 .LBB38_4:                               @ %if.then5
 	.loc	13 707 0                @ ../../lib/quotearg.c:707:0
 	bl	xalloc_die
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB38_5:                               @ %if.end6
 	.loc	13 709 0                @ ../../lib/quotearg.c:709:0
 	ldrb	r0, [r11, #-41]
@@ -6774,7 +7392,9 @@ quotearg_n_options:                     @ @quotearg_n_options
 	ldr	r1, [r11, #-40]
 	lsl	r1, r1, #3
 	bl	xrealloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-36]
 	ldr	r1, .LCPI38_0
 	str	r0, [r1]
@@ -6850,7 +7470,9 @@ quotearg_n_options:                     @ @quotearg_n_options
 	mov	r2, r3
 	mov	r3, r12
 	bl	quotearg_buffer_restyled
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #60]
 	.loc	13 725 0                @ ../../lib/quotearg.c:725:0
 	ldr	r1, [r11, #-48]
@@ -6876,12 +7498,16 @@ quotearg_n_options:                     @ @quotearg_n_options
 	.loc	13 729 0                @ ../../lib/quotearg.c:729:0
 	ldr	r0, [r11, #-52]
 	bl	free
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB38_14:                              @ %if.end25
 	.loc	13 730 0                @ ../../lib/quotearg.c:730:0
 	ldr	r0, [r11, #-48]
 	bl	xcharalloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-52]
 	ldr	r1, [r11, #-12]
 	ldr	r2, [r11, #-36]
@@ -6900,24 +7526,37 @@ quotearg_n_options:                     @ @quotearg_n_options
 	str	lr, [r5, #4]
 	str	r4, [r5]
 	bl	quotearg_buffer_restyled
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 733 0                @ ../../lib/quotearg.c:733:0
 	str	r0, [sp, #16]           @ 4-byte Spill
-	cfiid	#39122
 .Ltmp292:
 .LBB38_15:                              @ %if.end33
 	.loc	13 735 0                @ ../../lib/quotearg.c:735:0
 	ldr	r0, [r11, #-28]
 	str	r0, [sp, #12]           @ 4-byte Spill
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #12]           @ 4-byte Reload
 	str	r1, [r0]
 	.loc	13 736 0                @ ../../lib/quotearg.c:736:0
 	ldr	r0, [r11, #-52]
-	cficheckret	#39122
 	sub	sp, r11, #8
 	pop	{r4, r5, r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp293:
 	.align	2
 @ BB#16:
@@ -6937,6 +7576,9 @@ quotearg_n_options:                     @ @quotearg_n_options
 	.type	quotearg_n_mem,%function
 quotearg_n_mem:                         @ @quotearg_n_mem
 .Lfunc_begin39:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 748 0                @ ../../lib/quotearg.c:748:0
 @ BB#0:                                 @ %entry
 	.loc	13 747 0                @ ../../lib/quotearg.c:747:0
@@ -6946,7 +7588,6 @@ quotearg_n_mem:                         @ @quotearg_n_mem
 	@DEBUG_VALUE: quotearg_n_mem:n <- undef
 	@DEBUG_VALUE: quotearg_n_mem:arg <- undef
 	@DEBUG_VALUE: quotearg_n_mem:argsize <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	str	r1, [r11, #-8]
 	str	r2, [r11, #-12]
@@ -6961,7 +7602,9 @@ quotearg_n_mem:                         @ @quotearg_n_mem
 	str	r2, [sp, #16]           @ 4-byte Spill
 	mov	r3, lr
 	bl	quotearg_n_options
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #16]           @ 4-byte Reload
 	ldr	r2, [sp, #20]           @ 4-byte Reload
 	ldr	r3, [r11, #-16]         @ 4-byte Reload
@@ -6984,6 +7627,9 @@ quotearg_n_mem:                         @ @quotearg_n_mem
 	.type	quotearg,%function
 quotearg:                               @ @quotearg
 .Lfunc_begin40:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 754 0                @ ../../lib/quotearg.c:754:0
 @ BB#0:                                 @ %entry
 	.loc	13 753 0                @ ../../lib/quotearg.c:753:0
@@ -6991,7 +7637,6 @@ quotearg:                               @ @quotearg
 	mov	r11, sp
 	sub	sp, sp, #16
 	@DEBUG_VALUE: quotearg:arg <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	mov	r1, #0
 	.loc	13 755 0 prologue_end   @ ../../lib/quotearg.c:755:0
@@ -6999,7 +7644,9 @@ quotearg:                               @ @quotearg
 	mov	r0, r1
 	ldr	r1, [sp, #8]            @ 4-byte Reload
 	bl	quotearg_n
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #8]            @ 4-byte Reload
 	str	r1, [sp, #4]            @ 4-byte Spill
 	mov	sp, r11
@@ -7014,6 +7661,9 @@ quotearg:                               @ @quotearg
 	.type	quotearg_mem,%function
 quotearg_mem:                           @ @quotearg_mem
 .Lfunc_begin41:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 760 0                @ ../../lib/quotearg.c:760:0
 @ BB#0:                                 @ %entry
 	.loc	13 759 0                @ ../../lib/quotearg.c:759:0
@@ -7022,7 +7672,6 @@ quotearg_mem:                           @ @quotearg_mem
 	sub	sp, sp, #24
 	@DEBUG_VALUE: quotearg_mem:arg <- undef
 	@DEBUG_VALUE: quotearg_mem:argsize <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	str	r1, [r11, #-8]
 	.loc	13 761 0 prologue_end   @ ../../lib/quotearg.c:761:0
@@ -7034,7 +7683,9 @@ quotearg_mem:                           @ @quotearg_mem
 	mov	r1, r2
 	ldr	r2, [sp, #8]            @ 4-byte Reload
 	bl	quotearg_n_mem
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #8]            @ 4-byte Reload
 	ldr	r2, [sp, #12]           @ 4-byte Reload
 	str	r2, [sp, #4]            @ 4-byte Spill
@@ -7051,6 +7702,9 @@ quotearg_mem:                           @ @quotearg_mem
 	.type	quotearg_n_style,%function
 quotearg_n_style:                       @ @quotearg_n_style
 .Lfunc_begin42:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 766 0                @ ../../lib/quotearg.c:766:0
 @ BB#0:                                 @ %entry
 	.loc	13 765 0                @ ../../lib/quotearg.c:765:0
@@ -7060,7 +7714,6 @@ quotearg_n_style:                       @ @quotearg_n_style
 	@DEBUG_VALUE: quotearg_n_style:n <- undef
 	@DEBUG_VALUE: quotearg_n_style:s <- undef
 	@DEBUG_VALUE: quotearg_n_style:arg <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	str	r1, [r11, #-8]
 	str	r2, [r11, #-12]
@@ -7074,14 +7727,18 @@ quotearg_n_style:                       @ @quotearg_n_style
 	str	r2, [sp, #20]           @ 4-byte Spill
 	str	r12, [sp, #16]          @ 4-byte Spill
 	bl	quoting_options_from_style
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 768 0                @ ../../lib/quotearg.c:768:0
-	cfiid	#39122
 	ldr	r0, [r11, #-4]
 	ldr	r1, [r11, #-12]
 	mvn	r2, #0
 	ldr	r3, [sp, #16]           @ 4-byte Reload
 	bl	quotearg_n_options
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #20]           @ 4-byte Reload
 	ldr	r2, [sp, #24]           @ 4-byte Reload
 	ldr	r3, [sp, #28]           @ 4-byte Reload
@@ -7100,13 +7757,15 @@ quotearg_n_style:                       @ @quotearg_n_style
 	.type	quoting_options_from_style,%function
 quoting_options_from_style:             @ @quoting_options_from_style
 .Lfunc_begin43:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 169 0                @ ../../lib/quotearg.c:169:0
 @ BB#0:                                 @ %entry
 	.loc	13 168 0                @ ../../lib/quotearg.c:168:0
 	push	{r4, r5, r11, lr}
 	sub	sp, sp, #56
 	@DEBUG_VALUE: quoting_options_from_style:style <- undef
-	cfiid	#40645
 	str	r1, [sp, #52]
 	.loc	13 171 0 prologue_end   @ ../../lib/quotearg.c:171:0
 	str	r1, [sp, #8]
@@ -7143,12 +7802,21 @@ quoting_options_from_style:             @ @quoting_options_from_style
 	str	r12, [r0, #32]
 	str	r3, [r0, #28]
 	str	r2, [r0, #24]
-	cficheckret	#39122
 	str	r1, [sp, #4]            @ 4-byte Spill
 	str	r0, [sp]                @ 4-byte Spill
 	add	sp, sp, #56
 	pop	{r4, r5, r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp303:
 .Ltmp304:
 	.size	quoting_options_from_style, .Ltmp304-quoting_options_from_style
@@ -7158,6 +7826,9 @@ quoting_options_from_style:             @ @quoting_options_from_style
 	.type	quotearg_n_style_mem,%function
 quotearg_n_style_mem:                   @ @quotearg_n_style_mem
 .Lfunc_begin44:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 774 0                @ ../../lib/quotearg.c:774:0
 @ BB#0:                                 @ %entry
 	.loc	13 772 0                @ ../../lib/quotearg.c:772:0
@@ -7168,7 +7839,6 @@ quotearg_n_style_mem:                   @ @quotearg_n_style_mem
 	@DEBUG_VALUE: quotearg_n_style_mem:s <- undef
 	@DEBUG_VALUE: quotearg_n_style_mem:arg <- undef
 	@DEBUG_VALUE: quotearg_n_style_mem:argsize <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	str	r1, [r11, #-8]
 	str	r2, [r11, #-12]
@@ -7184,14 +7854,18 @@ quotearg_n_style_mem:                   @ @quotearg_n_style_mem
 	str	r2, [sp, #24]           @ 4-byte Spill
 	str	lr, [sp, #20]           @ 4-byte Spill
 	bl	quoting_options_from_style
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 776 0                @ ../../lib/quotearg.c:776:0
-	cfiid	#39122
 	ldr	r0, [r11, #-4]
 	ldr	r1, [r11, #-12]
 	ldr	r2, [r11, #-16]
 	ldr	r3, [sp, #20]           @ 4-byte Reload
 	bl	quotearg_n_options
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #28]           @ 4-byte Reload
 	ldr	r2, [sp, #24]           @ 4-byte Reload
 	ldr	r3, [sp, #32]           @ 4-byte Reload
@@ -7212,6 +7886,9 @@ quotearg_n_style_mem:                   @ @quotearg_n_style_mem
 	.type	quotearg_style,%function
 quotearg_style:                         @ @quotearg_style
 .Lfunc_begin45:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 781 0                @ ../../lib/quotearg.c:781:0
 @ BB#0:                                 @ %entry
 	.loc	13 780 0                @ ../../lib/quotearg.c:780:0
@@ -7220,7 +7897,6 @@ quotearg_style:                         @ @quotearg_style
 	sub	sp, sp, #24
 	@DEBUG_VALUE: quotearg_style:s <- undef
 	@DEBUG_VALUE: quotearg_style:arg <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	str	r1, [r11, #-8]
 	.loc	13 782 0 prologue_end   @ ../../lib/quotearg.c:782:0
@@ -7232,7 +7908,9 @@ quotearg_style:                         @ @quotearg_style
 	mov	r1, r2
 	ldr	r2, [sp, #8]            @ 4-byte Reload
 	bl	quotearg_n_style
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #8]            @ 4-byte Reload
 	ldr	r2, [sp, #12]           @ 4-byte Reload
 	str	r2, [sp, #4]            @ 4-byte Spill
@@ -7249,6 +7927,9 @@ quotearg_style:                         @ @quotearg_style
 	.type	quotearg_style_mem,%function
 quotearg_style_mem:                     @ @quotearg_style_mem
 .Lfunc_begin46:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 787 0                @ ../../lib/quotearg.c:787:0
 @ BB#0:                                 @ %entry
 	.loc	13 786 0                @ ../../lib/quotearg.c:786:0
@@ -7258,7 +7939,6 @@ quotearg_style_mem:                     @ @quotearg_style_mem
 	@DEBUG_VALUE: quotearg_style_mem:s <- undef
 	@DEBUG_VALUE: quotearg_style_mem:arg <- undef
 	@DEBUG_VALUE: quotearg_style_mem:argsize <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	str	r1, [r11, #-8]
 	str	r2, [r11, #-12]
@@ -7274,7 +7954,9 @@ quotearg_style_mem:                     @ @quotearg_style_mem
 	mov	r2, r12
 	ldr	r3, [sp, #16]           @ 4-byte Reload
 	bl	quotearg_n_style_mem
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #16]           @ 4-byte Reload
 	ldr	r2, [sp, #20]           @ 4-byte Reload
 	ldr	r3, [r11, #-16]         @ 4-byte Reload
@@ -7293,6 +7975,9 @@ quotearg_style_mem:                     @ @quotearg_style_mem
 	.type	quotearg_char_mem,%function
 quotearg_char_mem:                      @ @quotearg_char_mem
 .Lfunc_begin47:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 793 0                @ ../../lib/quotearg.c:793:0
 @ BB#0:                                 @ %entry
 	.loc	13 792 0                @ ../../lib/quotearg.c:792:0
@@ -7302,7 +7987,6 @@ quotearg_char_mem:                      @ @quotearg_char_mem
 	@DEBUG_VALUE: quotearg_char_mem:arg <- undef
 	@DEBUG_VALUE: quotearg_char_mem:argsize <- undef
 	@DEBUG_VALUE: quotearg_char_mem:ch <- undef
-	cfiid	#40645
 	str	r0, [r11, #-24]
 	str	r1, [r11, #-28]
 	add	r3, sp, #32
@@ -7340,8 +8024,10 @@ quotearg_char_mem:                      @ @quotearg_char_mem
 	mov	r2, lr
 	str	r3, [sp, #16]           @ 4-byte Spill
 	bl	set_char_quoting
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 797 0                @ ../../lib/quotearg.c:797:0
-	cfiid	#39122
 	ldr	r1, [r11, #-24]
 	ldr	r2, [r11, #-28]
 	mov	r3, #0
@@ -7349,7 +8035,9 @@ quotearg_char_mem:                      @ @quotearg_char_mem
 	mov	r0, r3
 	ldr	r3, [sp, #16]           @ 4-byte Reload
 	bl	quotearg_n_options
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #20]           @ 4-byte Reload
 	ldr	r2, [sp, #24]           @ 4-byte Reload
 	ldr	r3, [sp, #28]           @ 4-byte Reload
@@ -7372,6 +8060,9 @@ quotearg_char_mem:                      @ @quotearg_char_mem
 	.type	quotearg_char,%function
 quotearg_char:                          @ @quotearg_char
 .Lfunc_begin48:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 802 0                @ ../../lib/quotearg.c:802:0
 @ BB#0:                                 @ %entry
 	.loc	13 801 0                @ ../../lib/quotearg.c:801:0
@@ -7380,7 +8071,6 @@ quotearg_char:                          @ @quotearg_char
 	sub	sp, sp, #24
 	@DEBUG_VALUE: quotearg_char:arg <- undef
 	@DEBUG_VALUE: quotearg_char:ch <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	strb	r1, [r11, #-5]
 	.loc	13 803 0 prologue_end   @ ../../lib/quotearg.c:803:0
@@ -7393,7 +8083,9 @@ quotearg_char:                          @ @quotearg_char
 	mov	r1, r12
 	mov	r2, r3
 	bl	quotearg_char_mem
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #8]            @ 4-byte Reload
 	ldr	r2, [sp, #12]           @ 4-byte Reload
 	str	r2, [sp, #4]            @ 4-byte Spill
@@ -7410,6 +8102,9 @@ quotearg_char:                          @ @quotearg_char
 	.type	quotearg_colon,%function
 quotearg_colon:                         @ @quotearg_colon
 .Lfunc_begin49:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 808 0                @ ../../lib/quotearg.c:808:0
 @ BB#0:                                 @ %entry
 	.loc	13 807 0                @ ../../lib/quotearg.c:807:0
@@ -7417,13 +8112,14 @@ quotearg_colon:                         @ @quotearg_colon
 	mov	r11, sp
 	sub	sp, sp, #16
 	@DEBUG_VALUE: quotearg_colon:arg <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	mov	r1, #58
 	.loc	13 809 0 prologue_end   @ ../../lib/quotearg.c:809:0
 	str	r0, [sp, #8]            @ 4-byte Spill
 	bl	quotearg_char
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #8]            @ 4-byte Reload
 	str	r1, [sp, #4]            @ 4-byte Spill
 	mov	sp, r11
@@ -7438,6 +8134,9 @@ quotearg_colon:                         @ @quotearg_colon
 	.type	quotearg_colon_mem,%function
 quotearg_colon_mem:                     @ @quotearg_colon_mem
 .Lfunc_begin50:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 814 0                @ ../../lib/quotearg.c:814:0
 @ BB#0:                                 @ %entry
 	.loc	13 813 0                @ ../../lib/quotearg.c:813:0
@@ -7446,7 +8145,6 @@ quotearg_colon_mem:                     @ @quotearg_colon_mem
 	sub	sp, sp, #24
 	@DEBUG_VALUE: quotearg_colon_mem:arg <- undef
 	@DEBUG_VALUE: quotearg_colon_mem:argsize <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	str	r1, [r11, #-8]
 	.loc	13 815 0 prologue_end   @ ../../lib/quotearg.c:815:0
@@ -7457,7 +8155,9 @@ quotearg_colon_mem:                     @ @quotearg_colon_mem
 	str	r1, [sp, #8]            @ 4-byte Spill
 	mov	r2, r3
 	bl	quotearg_char_mem
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #8]            @ 4-byte Reload
 	ldr	r2, [sp, #12]           @ 4-byte Reload
 	str	r2, [sp, #4]            @ 4-byte Spill
@@ -7474,13 +8174,15 @@ quotearg_colon_mem:                     @ @quotearg_colon_mem
 	.type	gettext_quote,%function
 gettext_quote:                          @ @gettext_quote
 .Lfunc_begin51:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	13 181 0                @ ../../lib/quotearg.c:181:0
 @ BB#0:                                 @ %entry
 	.loc	13 180 0                @ ../../lib/quotearg.c:180:0
 	sub	sp, sp, #20
 	@DEBUG_VALUE: gettext_quote:msgid <- undef
 	@DEBUG_VALUE: gettext_quote:s <- undef
-	cfiid	#40645
 	str	r0, [sp, #16]
 	str	r1, [sp, #12]
 	.loc	13 182 0 prologue_end   @ ../../lib/quotearg.c:182:0
@@ -7505,9 +8207,18 @@ gettext_quote:                          @ @gettext_quote
 .LBB51_3:                               @ %if.end
 	.loc	13 185 0                @ ../../lib/quotearg.c:185:0
 	ldr	r0, [sp, #8]
-	cficheckret	#39122
 	add	sp, sp, #20
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp319:
 	.align	2
 @ BB#4:
@@ -7521,6 +8232,9 @@ gettext_quote:                          @ @gettext_quote
 	.type	rpl_vfprintf,%function
 rpl_vfprintf:                           @ @rpl_vfprintf
 .Lfunc_begin52:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	14 37 0                 @ ../../lib/vfprintf.c:37:0
 @ BB#0:                                 @ %entry
 	.loc	14 36 0                 @ ../../lib/vfprintf.c:36:0
@@ -7530,7 +8244,6 @@ rpl_vfprintf:                           @ @rpl_vfprintf
 	@DEBUG_VALUE: rpl_vfprintf:fp <- undef
 	@DEBUG_VALUE: rpl_vfprintf:format <- undef
 	@DEBUG_VALUE: rpl_vfprintf:args <- undef
-	cfiid	#40645
 	str	r0, [r11, #-32]
 	str	r1, [r11, #-36]
 	mov	r3, #2000
@@ -7562,7 +8275,9 @@ rpl_vfprintf:                           @ @rpl_vfprintf
 	mov	r2, lr
 	mov	r3, r4
 	bl	vasnprintf
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #44]
 	.loc	14 44 0                 @ ../../lib/vfprintf.c:44:0
 	ldr	r0, [sp, #36]
@@ -7583,8 +8298,10 @@ rpl_vfprintf:                           @ @rpl_vfprintf
 .Ltmp321:
 	ldr	r0, [r11, #-32]
 	bl	fseterr
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	14 49 0                 @ ../../lib/vfprintf.c:49:0
-	cfiid	#39122
 	mvn	r0, #0
 	str	r0, [r11, #-28]
 	b	.LBB52_9
@@ -7596,7 +8313,9 @@ rpl_vfprintf:                           @ @rpl_vfprintf
 	ldr	r3, [r11, #-32]
 	mov	r1, #1
 	bl	fwrite
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #40]
 	cmp	r0, r1
 	bhs	.LBB52_6
@@ -7614,18 +8333,24 @@ rpl_vfprintf:                           @ @rpl_vfprintf
 	@DEBUG_VALUE: saved_errno <- [sp+#32]+#0
 	.loc	14 56 0                 @ ../../lib/vfprintf.c:56:0
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r0, [r0]
 	str	r0, [sp, #32]
 	.loc	14 57 0                 @ ../../lib/vfprintf.c:57:0
 	ldr	r0, [sp, #44]
 	bl	free
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	14 58 0                 @ ../../lib/vfprintf.c:58:0
-	cfiid	#39122
 	ldr	r0, [sp, #32]
 	str	r0, [sp, #4]            @ 4-byte Spill
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #4]            @ 4-byte Reload
 	str	r1, [r0]
 .Ltmp325:
@@ -7645,14 +8370,18 @@ rpl_vfprintf:                           @ @rpl_vfprintf
 	.loc	14 65 0                 @ ../../lib/vfprintf.c:65:0
 .Ltmp327:
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	mov	r1, #75
 	str	r1, [r0]
 	.loc	14 66 0                 @ ../../lib/vfprintf.c:66:0
 	ldr	r0, [r11, #-32]
 	bl	fseterr
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	14 67 0                 @ ../../lib/vfprintf.c:67:0
-	cfiid	#39122
 	mvn	r0, #0
 	str	r0, [r11, #-28]
 	b	.LBB52_9
@@ -7664,10 +8393,19 @@ rpl_vfprintf:                           @ @rpl_vfprintf
 .LBB52_9:                               @ %return
 	.loc	14 71 0                 @ ../../lib/vfprintf.c:71:0
 	ldr	r0, [r11, #-28]
-	cficheckret	#39122
 	sub	sp, r11, #24
 	pop	{r4, r5, r6, r7, r8, r9, r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp329:
 .Ltmp330:
 	.size	rpl_vfprintf, .Ltmp330-rpl_vfprintf
@@ -7677,6 +8415,9 @@ rpl_vfprintf:                           @ @rpl_vfprintf
 	.type	xnmalloc,%function
 xnmalloc:                               @ @xnmalloc
 .Lfunc_begin53:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	16 113 0                @ ../../lib/xalloc.h:113:0
 @ BB#0:                                 @ %entry
 	.loc	16 112 0                @ ../../lib/xalloc.h:112:0
@@ -7685,7 +8426,6 @@ xnmalloc:                               @ @xnmalloc
 	sub	sp, sp, #32
 	@DEBUG_VALUE: xnmalloc:n <- undef
 	@DEBUG_VALUE: xnmalloc:s <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	str	r1, [r11, #-8]
 	mvn	r2, #0
@@ -7707,7 +8447,9 @@ xnmalloc:                               @ @xnmalloc
 .LBB53_1:                               @ %if.then
 	.loc	16 115 0                @ ../../lib/xalloc.h:115:0
 	bl	xalloc_die
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB53_2:                               @ %if.end
 	.loc	16 116 0                @ ../../lib/xalloc.h:116:0
 	ldr	r0, [r11, #-4]
@@ -7715,8 +8457,10 @@ xnmalloc:                               @ @xnmalloc
 	mul	r2, r0, r1
 	mov	r0, r2
 	bl	xmalloc
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	pop	{r11, lr}
-	cfiid	#39122
 	mov	sp, r11
 	mov	pc, lr
 .Ltmp331:
@@ -7728,6 +8472,9 @@ xnmalloc:                               @ @xnmalloc
 	.type	xmalloc,%function
 xmalloc:                                @ @xmalloc
 .Lfunc_begin54:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	15 48 0                 @ ../../lib/xmalloc.c:48:0
 @ BB#0:                                 @ %entry
 	.loc	15 47 0                 @ ../../lib/xmalloc.c:47:0
@@ -7735,12 +8482,13 @@ xmalloc:                                @ @xmalloc
 	mov	r11, sp
 	sub	sp, sp, #16
 	@DEBUG_VALUE: xmalloc:n <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	.loc	15 49 0 prologue_end    @ ../../lib/xmalloc.c:49:0
 	str	r0, [sp, #4]            @ 4-byte Spill
 	bl	malloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #8]
 	ldr	r1, [sp, #4]            @ 4-byte Reload
 	.loc	15 50 0                 @ ../../lib/xmalloc.c:50:0
@@ -7756,14 +8504,25 @@ xmalloc:                                @ @xmalloc
 .LBB54_2:                               @ %if.then
 	.loc	15 51 0                 @ ../../lib/xmalloc.c:51:0
 	bl	xalloc_die
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB54_3:                               @ %if.end
 	.loc	15 52 0                 @ ../../lib/xmalloc.c:52:0
 	ldr	r0, [sp, #8]
-	cficheckret	#39122
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp333:
 .Ltmp334:
 	.size	xmalloc, .Ltmp334-xmalloc
@@ -7773,6 +8532,9 @@ xmalloc:                                @ @xmalloc
 	.type	xnrealloc,%function
 xnrealloc:                              @ @xnrealloc
 .Lfunc_begin55:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	16 124 0                @ ../../lib/xalloc.h:124:0
 @ BB#0:                                 @ %entry
 	.loc	16 123 0                @ ../../lib/xalloc.h:123:0
@@ -7782,7 +8544,6 @@ xnrealloc:                              @ @xnrealloc
 	@DEBUG_VALUE: xnrealloc:p <- undef
 	@DEBUG_VALUE: xnrealloc:n <- undef
 	@DEBUG_VALUE: xnrealloc:s <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	str	r1, [r11, #-8]
 	str	r2, [r11, #-12]
@@ -7809,7 +8570,9 @@ xnrealloc:                              @ @xnrealloc
 .LBB55_1:                               @ %if.then
 	.loc	16 126 0                @ ../../lib/xalloc.h:126:0
 	bl	xalloc_die
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB55_2:                               @ %if.end
 	.loc	16 127 0                @ ../../lib/xalloc.h:127:0
 	ldr	r0, [r11, #-4]
@@ -7818,8 +8581,10 @@ xnrealloc:                              @ @xnrealloc
 	mul	r3, r1, r2
 	mov	r1, r3
 	bl	xrealloc
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	pop	{r11, lr}
-	cfiid	#39122
 	mov	sp, r11
 	mov	pc, lr
 .Ltmp335:
@@ -7831,6 +8596,9 @@ xnrealloc:                              @ @xnrealloc
 	.type	xrealloc,%function
 xrealloc:                               @ @xrealloc
 .Lfunc_begin56:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	15 60 0                 @ ../../lib/xmalloc.c:60:0
 @ BB#0:                                 @ %entry
 	.loc	15 59 0                 @ ../../lib/xmalloc.c:59:0
@@ -7839,7 +8607,6 @@ xrealloc:                               @ @xrealloc
 	sub	sp, sp, #24
 	@DEBUG_VALUE: xrealloc:p <- undef
 	@DEBUG_VALUE: xrealloc:n <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	str	r1, [r11, #-8]
 	.loc	15 61 0 prologue_end    @ ../../lib/xmalloc.c:61:0
@@ -7848,7 +8615,9 @@ xrealloc:                               @ @xrealloc
 	mov	r0, r2
 	str	r1, [sp, #8]            @ 4-byte Spill
 	bl	realloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-4]
 	ldr	r1, [sp, #8]            @ 4-byte Reload
 	ldr	r2, [sp, #12]           @ 4-byte Reload
@@ -7866,14 +8635,25 @@ xrealloc:                               @ @xrealloc
 .LBB56_2:                               @ %if.then
 	.loc	15 63 0                 @ ../../lib/xmalloc.c:63:0
 	bl	xalloc_die
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB56_3:                               @ %if.end
 	.loc	15 64 0                 @ ../../lib/xmalloc.c:64:0
 	ldr	r0, [r11, #-4]
-	cficheckret	#39122
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp337:
 .Ltmp338:
 	.size	xrealloc, .Ltmp338-xrealloc
@@ -7883,6 +8663,9 @@ xrealloc:                               @ @xrealloc
 	.type	x2nrealloc,%function
 x2nrealloc:                             @ @x2nrealloc
 .Lfunc_begin57:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	16 187 0                @ ../../lib/xalloc.h:187:0
 @ BB#0:                                 @ %entry
 	.loc	16 186 0                @ ../../lib/xalloc.h:186:0
@@ -7892,7 +8675,6 @@ x2nrealloc:                             @ @x2nrealloc
 	@DEBUG_VALUE: x2nrealloc:p <- undef
 	@DEBUG_VALUE: x2nrealloc:pn <- undef
 	@DEBUG_VALUE: x2nrealloc:s <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	str	r1, [r11, #-8]
 	str	r2, [r11, #-12]
@@ -7947,7 +8729,9 @@ x2nrealloc:                             @ @x2nrealloc
 .LBB57_5:                               @ %if.then5
 	.loc	16 211 0                @ ../../lib/xalloc.h:211:0
 	bl	xalloc_die
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB57_6:                               @ %if.end6
 	.loc	16 212 0                @ ../../lib/xalloc.h:212:0
 	ldr	r0, [sp, #16]
@@ -7967,8 +8751,10 @@ x2nrealloc:                             @ @x2nrealloc
 	mul	r3, r1, r2
 	mov	r1, r3
 	bl	xrealloc
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	pop	{r11, lr}
-	cfiid	#39122
 	mov	sp, r11
 	mov	pc, lr
 .Ltmp344:
@@ -7984,6 +8770,9 @@ x2nrealloc:                             @ @x2nrealloc
 	.type	xcharalloc,%function
 xcharalloc:                             @ @xcharalloc
 .Lfunc_begin58:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	16 224 0                @ ../../lib/xalloc.h:224:0
 @ BB#0:                                 @ %entry
 	.loc	16 223 0                @ ../../lib/xalloc.h:223:0
@@ -7991,12 +8780,13 @@ xcharalloc:                             @ @xcharalloc
 	mov	r11, sp
 	sub	sp, sp, #16
 	@DEBUG_VALUE: xcharalloc:n <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	.loc	16 225 0 prologue_end   @ ../../lib/xalloc.h:225:0
 	str	r0, [sp, #8]            @ 4-byte Spill
 	bl	xmalloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #8]            @ 4-byte Reload
 	str	r1, [sp, #4]            @ 4-byte Spill
 	mov	sp, r11
@@ -8011,6 +8801,9 @@ xcharalloc:                             @ @xcharalloc
 	.type	x2realloc,%function
 x2realloc:                              @ @x2realloc
 .Lfunc_begin59:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	15 75 0                 @ ../../lib/xmalloc.c:75:0
 @ BB#0:                                 @ %entry
 	.loc	15 74 0                 @ ../../lib/xmalloc.c:74:0
@@ -8019,7 +8812,6 @@ x2realloc:                              @ @x2realloc
 	sub	sp, sp, #24
 	@DEBUG_VALUE: x2realloc:p <- undef
 	@DEBUG_VALUE: x2realloc:pn <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	str	r1, [r11, #-8]
 	.loc	15 76 0 prologue_end    @ ../../lib/xmalloc.c:76:0
@@ -8030,7 +8822,9 @@ x2realloc:                              @ @x2realloc
 	str	r1, [sp, #8]            @ 4-byte Spill
 	mov	r2, r3
 	bl	x2nrealloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #8]            @ 4-byte Reload
 	ldr	r2, [sp, #12]           @ 4-byte Reload
 	str	r2, [sp, #4]            @ 4-byte Spill
@@ -8047,6 +8841,9 @@ x2realloc:                              @ @x2realloc
 	.type	xzalloc,%function
 xzalloc:                                @ @xzalloc
 .Lfunc_begin60:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	15 85 0                 @ ../../lib/xmalloc.c:85:0
 @ BB#0:                                 @ %entry
 	.loc	15 84 0                 @ ../../lib/xmalloc.c:84:0
@@ -8054,24 +8851,34 @@ xzalloc:                                @ @xzalloc
 	mov	r11, sp
 	sub	sp, sp, #16
 	@DEBUG_VALUE: xzalloc:s <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	.loc	15 86 0 prologue_end    @ ../../lib/xmalloc.c:86:0
 	str	r0, [sp, #8]            @ 4-byte Spill
 	bl	xmalloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [r11, #-4]
 	mov	r2, #0
 	str	r0, [sp, #4]            @ 4-byte Spill
 	bl	__aeabi_memset
-	cficheckret	#39122
 	ldr	r0, [sp, #8]            @ 4-byte Reload
 	ldr	r1, [sp, #4]            @ 4-byte Reload
 	str	r0, [sp]                @ 4-byte Spill
 	mov	r0, r1
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp350:
 .Ltmp351:
 	.size	xzalloc, .Ltmp351-xzalloc
@@ -8081,6 +8888,9 @@ xzalloc:                                @ @xzalloc
 	.type	xcalloc,%function
 xcalloc:                                @ @xcalloc
 .Lfunc_begin61:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	15 94 0                 @ ../../lib/xmalloc.c:94:0
 @ BB#0:                                 @ %entry
 	.loc	15 93 0                 @ ../../lib/xmalloc.c:93:0
@@ -8089,7 +8899,6 @@ xcalloc:                                @ @xcalloc
 	sub	sp, sp, #32
 	@DEBUG_VALUE: xcalloc:n <- undef
 	@DEBUG_VALUE: xcalloc:s <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	str	r1, [r11, #-8]
 	.loc	15 101 0 prologue_end   @ ../../lib/xmalloc.c:101:0
@@ -8098,7 +8907,9 @@ xcalloc:                                @ @xcalloc
 	mov	r0, r2
 	str	r1, [sp, #12]           @ 4-byte Spill
 	bl	calloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-12]
 	ldr	r1, [sp, #12]           @ 4-byte Reload
 	ldr	r2, [sp, #16]           @ 4-byte Reload
@@ -8110,14 +8921,25 @@ xcalloc:                                @ @xcalloc
 .LBB61_1:                               @ %if.then
 	.loc	15 102 0                @ ../../lib/xmalloc.c:102:0
 	bl	xalloc_die
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB61_2:                               @ %if.end
 	.loc	15 103 0                @ ../../lib/xmalloc.c:103:0
 	ldr	r0, [r11, #-12]
-	cficheckret	#39122
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp352:
 .Ltmp353:
 	.size	xcalloc, .Ltmp353-xcalloc
@@ -8127,6 +8949,9 @@ xcalloc:                                @ @xcalloc
 	.type	xmemdup,%function
 xmemdup:                                @ @xmemdup
 .Lfunc_begin62:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	15 112 0                @ ../../lib/xmalloc.c:112:0
 @ BB#0:                                 @ %entry
 	.loc	15 111 0                @ ../../lib/xmalloc.c:111:0
@@ -8135,7 +8960,6 @@ xmemdup:                                @ @xmemdup
 	sub	sp, sp, #32
 	@DEBUG_VALUE: xmemdup:p <- undef
 	@DEBUG_VALUE: xmemdup:s <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	str	r1, [r11, #-8]
 	.loc	15 113 0 prologue_end   @ ../../lib/xmalloc.c:113:0
@@ -8143,12 +8967,13 @@ xmemdup:                                @ @xmemdup
 	mov	r0, r1
 	str	r1, [sp, #16]           @ 4-byte Spill
 	bl	xmalloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [r11, #-4]
 	ldr	r2, [r11, #-8]
 	str	r0, [sp, #12]           @ 4-byte Spill
 	bl	__aeabi_memcpy
-	cficheckret	#39122
 	ldr	r0, [sp, #16]           @ 4-byte Reload
 	ldr	r1, [r11, #-12]         @ 4-byte Reload
 	ldr	r2, [sp, #12]           @ 4-byte Reload
@@ -8157,7 +8982,17 @@ xmemdup:                                @ @xmemdup
 	str	r1, [sp, #4]            @ 4-byte Spill
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp354:
 .Ltmp355:
 	.size	xmemdup, .Ltmp355-xmemdup
@@ -8167,6 +9002,9 @@ xmemdup:                                @ @xmemdup
 	.type	xstrdup,%function
 xstrdup:                                @ @xstrdup
 .Lfunc_begin63:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	15 120 0                @ ../../lib/xmalloc.c:120:0
 @ BB#0:                                 @ %entry
 	.loc	15 119 0                @ ../../lib/xmalloc.c:119:0
@@ -8174,16 +9012,19 @@ xstrdup:                                @ @xstrdup
 	mov	r11, sp
 	sub	sp, sp, #16
 	@DEBUG_VALUE: xstrdup:string <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	.loc	15 121 0 prologue_end   @ ../../lib/xmalloc.c:121:0
 	str	r0, [sp, #8]            @ 4-byte Spill
 	bl	strlen
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	r1, r0, #1
 	ldr	r0, [sp, #8]            @ 4-byte Reload
 	bl	xmemdup
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #8]            @ 4-byte Reload
 	str	r1, [sp, #4]            @ 4-byte Spill
 	mov	sp, r11
@@ -8198,6 +9039,9 @@ xstrdup:                                @ @xstrdup
 	.type	xstrtoul,%function
 xstrtoul:                               @ @xstrtoul
 .Lfunc_begin64:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	18 77 0                 @ ../../lib/xstrtol.c:77:0
 @ BB#0:                                 @ %entry
 	.loc	18 75 0                 @ ../../lib/xstrtol.c:75:0
@@ -8209,7 +9053,6 @@ xstrtoul:                               @ @xstrtoul
 	@DEBUG_VALUE: xstrtoul:strtol_base <- undef
 	@DEBUG_VALUE: xstrtoul:val <- undef
 	@DEBUG_VALUE: xstrtoul:valid_suffixes <- undef
-	cfiid	#40645
 	str	r0, [r11, #-8]
 	str	r1, [r11, #-12]
 	str	r2, [r11, #-16]
@@ -8241,7 +9084,9 @@ xstrtoul:                               @ @xstrtoul
 	ldr	r1, .LCPI64_1
 	ldr	r3, .LCPI64_2
 	bl	__assert_fail
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB64_4:                               @ %cond.end
 	.loc	18 85 0                 @ ../../lib/xstrtol.c:85:0
 	ldr	r0, [r11, #-12]
@@ -8275,7 +9120,9 @@ xstrtoul:                               @ @xstrtoul
 	ldrb	r0, [r11, #-45]
 	str	r0, [sp, #20]           @ 4-byte Spill
 	bl	__ctype_b_loc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r0, [r0]
 	ldr	r1, [sp, #20]           @ 4-byte Reload
 	add	r0, r0, r1, lsl #1
@@ -8307,7 +9154,9 @@ xstrtoul:                               @ @xstrtoul
 .LBB64_12:                              @ %if.end
 	.loc	18 97 0                 @ ../../lib/xstrtol.c:97:0
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	mov	r1, #0
 	str	r1, [r0]
 	.loc	18 98 0                 @ ../../lib/xstrtol.c:98:0
@@ -8315,7 +9164,9 @@ xstrtoul:                               @ @xstrtoul
 	ldr	r1, [r11, #-32]
 	ldr	r2, [r11, #-16]
 	bl	strtoul
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-36]
 	.loc	18 100 0                @ ../../lib/xstrtol.c:100:0
 	ldr	r0, [r11, #-32]
@@ -8344,7 +9195,9 @@ xstrtoul:                               @ @xstrtoul
 	ldr	r1, [r1]
 	ldrb	r1, [r1]
 	bl	strchr
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	cmp	r0, #0
 	beq	.LBB64_17
 	b	.LBB64_16
@@ -8365,7 +9218,9 @@ xstrtoul:                               @ @xstrtoul
 .LBB64_19:                              @ %if.else28
 	.loc	18 109 0                @ ../../lib/xstrtol.c:109:0
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r0, [r0]
 	cmp	r0, #0
 	beq	.LBB64_23
@@ -8374,7 +9229,9 @@ xstrtoul:                               @ @xstrtoul
 	.loc	18 111 0                @ ../../lib/xstrtol.c:111:0
 .Ltmp364:
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r0, [r0]
 	cmp	r0, #34
 	beq	.LBB64_22
@@ -8435,7 +9292,9 @@ xstrtoul:                               @ @xstrtoul
 	ldr	r1, [r1]
 	ldrb	r1, [r1]
 	bl	strchr
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	cmp	r0, #0
 	bne	.LBB64_29
 	b	.LBB64_28
@@ -8456,7 +9315,9 @@ xstrtoul:                               @ @xstrtoul
 	ldr	r0, [r11, #-24]
 	mov	r1, #48
 	bl	strchr
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	cmp	r0, #0
 	beq	.LBB64_38
 	b	.LBB64_30
@@ -8629,7 +9490,9 @@ xstrtoul:                               @ @xstrtoul
 	.loc	18 164 0                @ ../../lib/xstrtol.c:164:0
 .Ltmp377:
 	bl	bkm_scale
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #44]
 	.loc	18 165 0                @ ../../lib/xstrtol.c:165:0
 	b	.LBB64_67
@@ -8638,7 +9501,9 @@ xstrtoul:                               @ @xstrtoul
 	mov	r1, #1024
 	.loc	18 168 0                @ ../../lib/xstrtol.c:168:0
 	bl	bkm_scale
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #44]
 	.loc	18 169 0                @ ../../lib/xstrtol.c:169:0
 	b	.LBB64_67
@@ -8654,7 +9519,9 @@ xstrtoul:                               @ @xstrtoul
 	sub	r0, r11, #36
 	mov	r2, #6
 	bl	bkm_scale_by_power
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #44]
 	.loc	18 177 0                @ ../../lib/xstrtol.c:177:0
 	b	.LBB64_67
@@ -8664,7 +9531,9 @@ xstrtoul:                               @ @xstrtoul
 	sub	r0, r11, #36
 	mov	r2, #3
 	bl	bkm_scale_by_power
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #44]
 	.loc	18 182 0                @ ../../lib/xstrtol.c:182:0
 	b	.LBB64_67
@@ -8674,7 +9543,9 @@ xstrtoul:                               @ @xstrtoul
 	sub	r0, r11, #36
 	mov	r2, #1
 	bl	bkm_scale_by_power
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #44]
 	.loc	18 187 0                @ ../../lib/xstrtol.c:187:0
 	b	.LBB64_67
@@ -8684,7 +9555,9 @@ xstrtoul:                               @ @xstrtoul
 	sub	r0, r11, #36
 	mov	r2, #2
 	bl	bkm_scale_by_power
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #44]
 	.loc	18 192 0                @ ../../lib/xstrtol.c:192:0
 	b	.LBB64_67
@@ -8694,7 +9567,9 @@ xstrtoul:                               @ @xstrtoul
 	sub	r0, r11, #36
 	mov	r2, #5
 	bl	bkm_scale_by_power
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #44]
 	.loc	18 196 0                @ ../../lib/xstrtol.c:196:0
 	b	.LBB64_67
@@ -8704,7 +9579,9 @@ xstrtoul:                               @ @xstrtoul
 	sub	r0, r11, #36
 	mov	r2, #4
 	bl	bkm_scale_by_power
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #44]
 	.loc	18 201 0                @ ../../lib/xstrtol.c:201:0
 	b	.LBB64_67
@@ -8713,7 +9590,9 @@ xstrtoul:                               @ @xstrtoul
 	mov	r1, #2
 	.loc	18 204 0                @ ../../lib/xstrtol.c:204:0
 	bl	bkm_scale
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #44]
 	.loc	18 205 0                @ ../../lib/xstrtol.c:205:0
 	b	.LBB64_67
@@ -8723,7 +9602,9 @@ xstrtoul:                               @ @xstrtoul
 	sub	r0, r11, #36
 	mov	r2, #8
 	bl	bkm_scale_by_power
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #44]
 	.loc	18 209 0                @ ../../lib/xstrtol.c:209:0
 	b	.LBB64_67
@@ -8733,7 +9614,9 @@ xstrtoul:                               @ @xstrtoul
 	sub	r0, r11, #36
 	mov	r2, #7
 	bl	bkm_scale_by_power
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #44]
 	.loc	18 213 0                @ ../../lib/xstrtol.c:213:0
 	b	.LBB64_67
@@ -8785,10 +9668,19 @@ xstrtoul:                               @ @xstrtoul
 .LBB64_71:                              @ %return
 	.loc	18 228 0                @ ../../lib/xstrtol.c:228:0
 	ldr	r0, [r11, #-4]
-	cficheckret	#39122
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp380:
 	.align	2
 @ BB#72:
@@ -8806,6 +9698,9 @@ xstrtoul:                               @ @xstrtoul
 	.type	bkm_scale,%function
 bkm_scale:                              @ @bkm_scale
 .Lfunc_begin65:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	18 48 0                 @ ../../lib/xstrtol.c:48:0
 @ BB#0:                                 @ %entry
 	.loc	18 47 0                 @ ../../lib/xstrtol.c:47:0
@@ -8814,7 +9709,6 @@ bkm_scale:                              @ @bkm_scale
 	sub	sp, sp, #32
 	@DEBUG_VALUE: bkm_scale:x <- undef
 	@DEBUG_VALUE: bkm_scale:scale_factor <- undef
-	cfiid	#40645
 	str	r0, [r11, #-8]
 	str	r1, [r11, #-12]
 	mvn	r2, #0
@@ -8857,10 +9751,19 @@ bkm_scale:                              @ @bkm_scale
 	str	r0, [r11, #-4]
 .LBB65_3:                               @ %return
 	ldr	r0, [r11, #-4]
-	cficheckret	#39122
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp384:
 .Ltmp385:
 	.size	bkm_scale, .Ltmp385-bkm_scale
@@ -8870,6 +9773,9 @@ bkm_scale:                              @ @bkm_scale
 	.type	bkm_scale_by_power,%function
 bkm_scale_by_power:                     @ @bkm_scale_by_power
 .Lfunc_begin66:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	18 65 0                 @ ../../lib/xstrtol.c:65:0
 @ BB#0:                                 @ %entry
 	.loc	18 64 0                 @ ../../lib/xstrtol.c:64:0
@@ -8879,7 +9785,6 @@ bkm_scale_by_power:                     @ @bkm_scale_by_power
 	@DEBUG_VALUE: bkm_scale_by_power:x <- undef
 	@DEBUG_VALUE: bkm_scale_by_power:base <- undef
 	@DEBUG_VALUE: bkm_scale_by_power:power <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	str	r1, [r11, #-8]
 	str	r2, [r11, #-12]
@@ -8904,7 +9809,9 @@ bkm_scale_by_power:                     @ @bkm_scale_by_power
 	ldr	r0, [r11, #-4]
 	ldr	r1, [r11, #-8]
 	bl	bkm_scale
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #16]
 	orr	r0, r1, r0
 	str	r0, [sp, #16]
@@ -8912,10 +9819,19 @@ bkm_scale_by_power:                     @ @bkm_scale_by_power
 .LBB66_3:                               @ %while.end
 	.loc	18 69 0                 @ ../../lib/xstrtol.c:69:0
 	ldr	r0, [sp, #16]
-	cficheckret	#39122
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp386:
 .Ltmp387:
 	.size	bkm_scale_by_power, .Ltmp387-bkm_scale_by_power
@@ -8925,22 +9841,33 @@ bkm_scale_by_power:                     @ @bkm_scale_by_power
 	.type	fseterr,%function
 fseterr:                                @ @fseterr
 .Lfunc_begin67:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	19 26 0                 @ ../../lib/fseterr.c:26:0
 @ BB#0:                                 @ %entry
 	.loc	19 25 0                 @ ../../lib/fseterr.c:25:0
 	sub	sp, sp, #8
 	@DEBUG_VALUE: fseterr:fp <- undef
-	cfiid	#40645
 	str	r0, [sp, #4]
 	.loc	19 31 0 prologue_end    @ ../../lib/fseterr.c:31:0
 	ldr	r1, [r0]
 	orr	r1, r1, #32
 	str	r1, [r0]
 	.loc	19 84 0                 @ ../../lib/fseterr.c:84:0
-	cficheckret	#39122
 	str	r0, [sp]                @ 4-byte Spill
 	add	sp, sp, #8
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp388:
 .Ltmp389:
 	.size	fseterr, .Ltmp389-fseterr
@@ -8950,20 +9877,24 @@ fseterr:                                @ @fseterr
 	.type	xalloc_die,%function
 xalloc_die:                             @ @xalloc_die
 .Lfunc_begin68:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	20 33 0                 @ ../../lib/xalloc-die.c:33:0
 @ BB#0:                                 @ %entry
 	.loc	20 34 0 prologue_end    @ ../../lib/xalloc-die.c:34:0
 	push	{r11, lr}
 	mov	r11, sp
-	cfiid	#40645
 	ldr	r0, .LCPI68_0
 	ldr	r0, [r0]
 	mov	r1, #0
 	ldr	r2, .LCPI68_1
 	ldr	r3, .LCPI68_2
 	bl	error
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	.loc	20 40 0                 @ ../../lib/xalloc-die.c:40:0
-	cfiid	#39122
 	bl	abort
 .Ltmp390:
 	.align	2
@@ -8982,6 +9913,9 @@ xalloc_die:                             @ @xalloc_die
 	.type	close_stream,%function
 close_stream:                           @ @close_stream
 .Lfunc_begin69:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	21 54 0                 @ ../../lib/close-stream.c:54:0
 @ BB#0:                                 @ %entry
 	.loc	21 53 0                 @ ../../lib/close-stream.c:53:0
@@ -8989,26 +9923,31 @@ close_stream:                           @ @close_stream
 	mov	r11, sp
 	sub	sp, sp, #24
 	@DEBUG_VALUE: close_stream:stream <- undef
-	cfiid	#40645
 	str	r0, [r11, #-8]
 	.loc	21 55 0 prologue_end    @ ../../lib/close-stream.c:55:0
 	str	r0, [sp, #8]            @ 4-byte Spill
 	bl	__fpending
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	cmp	r0, #0
 	movne	r0, #1
 	strb	r0, [r11, #-9]
 	.loc	21 56 0                 @ ../../lib/close-stream.c:56:0
 	ldr	r0, [r11, #-8]
 	bl	ferror_unlocked
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	cmp	r0, #0
 	movne	r0, #1
 	strb	r0, [r11, #-10]
 	.loc	21 57 0                 @ ../../lib/close-stream.c:57:0
 	ldr	r0, [r11, #-8]
 	bl	fclose
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	cmp	r0, #0
 	movne	r0, #1
 	strb	r0, [r11, #-11]
@@ -9031,7 +9970,9 @@ close_stream:                           @ @close_stream
 	b	.LBB69_3
 .LBB69_3:                               @ %lor.lhs.false9
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r0, [r0]
 	cmp	r0, #9
 	beq	.LBB69_7
@@ -9046,7 +9987,9 @@ close_stream:                           @ @close_stream
 .LBB69_5:                               @ %if.then13
 	.loc	21 70 0                 @ ../../lib/close-stream.c:70:0
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	mov	r1, #0
 	str	r1, [r0]
 .LBB69_6:                               @ %if.end
@@ -9061,10 +10004,19 @@ close_stream:                           @ @close_stream
 	str	r0, [r11, #-4]
 .LBB69_8:                               @ %return
 	ldr	r0, [r11, #-4]
-	cficheckret	#39122
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp394:
 .Ltmp395:
 	.size	close_stream, .Ltmp395-close_stream
@@ -9074,6 +10026,9 @@ close_stream:                           @ @close_stream
 	.type	vasnprintf,%function
 vasnprintf:                             @ @vasnprintf
 .Lfunc_begin70:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	22 1412 0               @ ../../lib/vasnprintf.c:1412:0
 @ BB#0:                                 @ %entry
 	.loc	22 1410 0               @ ../../lib/vasnprintf.c:1410:0
@@ -9085,7 +10040,6 @@ vasnprintf:                             @ @vasnprintf
 	@DEBUG_VALUE: vasnprintf:lengthp <- undef
 	@DEBUG_VALUE: vasnprintf:format <- undef
 	@DEBUG_VALUE: vasnprintf:args <- undef
-	cfiid	#40645
 	str	r0, [r11, #-28]
 	str	r1, [r11, #-32]
 	str	r2, [r11, #-36]
@@ -9108,7 +10062,9 @@ vasnprintf:                             @ @vasnprintf
 	mov	r2, r4
 	str	r3, [r11, #-1120]       @ 4-byte Spill
 	bl	printf_parse
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [r11, #-1120]       @ 4-byte Reload
 	ldr	r2, [r11, #-1116]       @ 4-byte Reload
 	ldr	r3, [r11, #-1112]       @ 4-byte Reload
@@ -9137,7 +10093,9 @@ vasnprintf:                             @ @vasnprintf
 	orr	r0, r0, r2, lsl #16
 	mov	r1, r12
 	bl	printf_fetchargs
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	cmp	r0, #0
 	bge	.LBB70_6
 	b	.LBB70_3
@@ -9146,7 +10104,9 @@ vasnprintf:                             @ @vasnprintf
 .Ltmp396:
 	ldr	r0, [r11, #-52]
 	bl	free
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r0, [r11, #-60]
 	cmp	r0, #0
 	beq	.LBB70_5
@@ -9154,11 +10114,15 @@ vasnprintf:                             @ @vasnprintf
 .LBB70_4:                               @ %if.then4
 	ldr	r0, [r11, #-60]
 	bl	free
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB70_5:                               @ %if.end6
 	.loc	22 1428 0               @ ../../lib/vasnprintf.c:1428:0
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	mov	r1, #22
 	str	r1, [r0]
 	mov	r0, #0
@@ -9182,7 +10146,9 @@ vasnprintf:                             @ @vasnprintf
 	mov	r0, #7
 	mov	r3, #6
 	bl	xsum4
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-68]
 	.loc	22 1449 0               @ ../../lib/vasnprintf.c:1449:0
 	lsr	r0, r0, #5
@@ -9233,7 +10199,9 @@ vasnprintf:                             @ @vasnprintf
 	.loc	22 1460 0               @ ../../lib/vasnprintf.c:1460:0
 	ldr	r0, [r11, #-104]
 	bl	malloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-72]
 	.loc	22 1461 0               @ ../../lib/vasnprintf.c:1461:0
 	cmp	r0, #0
@@ -9320,7 +10288,9 @@ vasnprintf:                             @ @vasnprintf
 	mov	r0, r1
 	ldr	r1, [r11, #-1144]       @ 4-byte Reload
 	bl	xsum
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-112]
 	.loc	22 1513 0               @ ../../lib/vasnprintf.c:1513:0
 	ldr	r1, [r11, #-96]
@@ -9415,7 +10385,9 @@ vasnprintf:                             @ @vasnprintf
                                         @   in Loop: Header=BB70_20 Depth=1
 	ldr	r0, [r11, #-116]
 	bl	malloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-120]
 	b	.LBB70_39
 .LBB70_38:                              @ %if.else60
@@ -9423,7 +10395,9 @@ vasnprintf:                             @ @vasnprintf
 	ldr	r0, [r11, #-92]
 	ldr	r1, [r11, #-116]
 	bl	realloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-120]
 .LBB70_39:                              @ %if.end62
                                         @   in Loop: Header=BB70_20 Depth=1
@@ -9502,14 +10476,18 @@ vasnprintf:                             @ @vasnprintf
 .LBB70_50:                              @ %if.then81
 	.loc	22 1538 0               @ ../../lib/vasnprintf.c:1538:0
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB70_51:                              @ %if.end82
                                         @   in Loop: Header=BB70_20 Depth=1
 	.loc	22 1539 25              @ ../../lib/vasnprintf.c:1539:25
 	ldr	r0, [r11, #-100]
 	mov	r1, #1
 	bl	xsum
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-124]
 	.loc	22 1540 0               @ ../../lib/vasnprintf.c:1540:0
 	ldr	r1, [r11, #-96]
@@ -9604,7 +10582,9 @@ vasnprintf:                             @ @vasnprintf
                                         @   in Loop: Header=BB70_20 Depth=1
 	ldr	r0, [r11, #-128]
 	bl	malloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-132]
 	b	.LBB70_69
 .LBB70_68:                              @ %if.else124
@@ -9612,7 +10592,9 @@ vasnprintf:                             @ @vasnprintf
 	ldr	r0, [r11, #-92]
 	ldr	r1, [r11, #-128]
 	bl	realloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-132]
 .LBB70_69:                              @ %if.end126
                                         @   in Loop: Header=BB70_20 Depth=1
@@ -9670,7 +10652,9 @@ vasnprintf:                             @ @vasnprintf
 .LBB70_77:                              @ %if.then144
 	.loc	22 1547 0               @ ../../lib/vasnprintf.c:1547:0
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB70_78:                              @ %if.end145
                                         @   in Loop: Header=BB70_20 Depth=1
 	.loc	22 1549 0               @ ../../lib/vasnprintf.c:1549:0
@@ -9770,7 +10754,9 @@ vasnprintf:                             @ @vasnprintf
 .LBB70_86:                              @ %sw.default
 	.loc	22 1571 0               @ ../../lib/vasnprintf.c:1571:0
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .Ltmp418:
 .LBB70_87:                              @ %sw.epilog
                                         @   in Loop: Header=BB70_20 Depth=1
@@ -9856,7 +10842,9 @@ vasnprintf:                             @ @vasnprintf
 	mov	r0, r1
 	ldr	r1, [r11, #-1176]       @ 4-byte Reload
 	bl	is_infinitel
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	cmp	r0, #0
 	beq	.LBB70_233
 	b	.LBB70_98
@@ -9914,7 +10902,9 @@ vasnprintf:                             @ @vasnprintf
 .LBB70_101:                             @ %if.then253
 	.loc	22 2578 0               @ ../../lib/vasnprintf.c:2578:0
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB70_102:                             @ %if.end254
                                         @   in Loop: Header=BB70_20 Depth=1
 	.loc	22 2579 0               @ ../../lib/vasnprintf.c:2579:0
@@ -9987,7 +10977,9 @@ vasnprintf:                             @ @vasnprintf
 	ldrb	r1, [r1]
 	sub	r1, r1, #48
 	bl	xsum
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-144]
 @ BB#111:                               @ %do.cond
                                         @   in Loop: Header=BB70_107 Depth=2
@@ -10044,7 +11036,9 @@ vasnprintf:                             @ @vasnprintf
 .LBB70_117:                             @ %if.then296
 	.loc	22 2610 0               @ ../../lib/vasnprintf.c:2610:0
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB70_118:                             @ %if.end297
                                         @   in Loop: Header=BB70_20 Depth=1
 	.loc	22 2611 0               @ ../../lib/vasnprintf.c:2611:0
@@ -10121,7 +11115,9 @@ vasnprintf:                             @ @vasnprintf
 	ldrb	r1, [r1]
 	sub	r1, r1, #48
 	bl	xsum
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-152]
 	b	.LBB70_122
 .LBB70_127:                             @ %while.end
@@ -10165,7 +11161,9 @@ vasnprintf:                             @ @vasnprintf
 	ldr	r0, [r11, #-156]
 	mov	r1, #12
 	bl	xsum
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-156]
 	.loc	22 2686 0               @ ../../lib/vasnprintf.c:2686:0
 	ldr	r1, [r11, #-144]
@@ -10183,7 +11181,9 @@ vasnprintf:                             @ @vasnprintf
 	ldr	r0, [r11, #-156]
 	mov	r1, #1
 	bl	xsum
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-156]
 	.loc	22 2691 0               @ ../../lib/vasnprintf.c:2691:0
 	cmp	r0, #700
@@ -10229,7 +11229,9 @@ vasnprintf:                             @ @vasnprintf
 	.loc	22 2700 0               @ ../../lib/vasnprintf.c:2700:0
 	ldr	r0, [r11, #-888]
 	bl	malloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-860]
 	.loc	22 2701 0               @ ../../lib/vasnprintf.c:2701:0
 	cmp	r0, #0
@@ -10265,7 +11267,9 @@ vasnprintf:                             @ @vasnprintf
 	ldr	r0, [r11, #-896]
 	ldr	r1, [r11, #-892]
 	bl	rpl_isnanl
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	cmp	r0, #0
 	beq	.LBB70_151
 	b	.LBB70_146
@@ -10535,7 +11539,9 @@ vasnprintf:                             @ @vasnprintf
 .LBB70_172:                             @ %if.else441
 	.loc	22 3063 0               @ ../../lib/vasnprintf.c:3063:0
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .Ltmp452:
 .LBB70_173:                             @ %if.end442
                                         @   in Loop: Header=BB70_20 Depth=1
@@ -10762,7 +11768,9 @@ vasnprintf:                             @ @vasnprintf
 .LBB70_203:                             @ %if.then517
 	.loc	22 3542 0               @ ../../lib/vasnprintf.c:3542:0
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB70_204:                             @ %if.end518
                                         @   in Loop: Header=BB70_20 Depth=1
 	.loc	22 3545 0               @ ../../lib/vasnprintf.c:3545:0
@@ -10781,7 +11789,9 @@ vasnprintf:                             @ @vasnprintf
 	ldr	r0, [r11, #-100]
 	ldr	r1, [r11, #-920]
 	bl	xsum
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-924]
 	.loc	22 3549 0               @ ../../lib/vasnprintf.c:3549:0
 	ldr	r1, [r11, #-96]
@@ -10876,7 +11886,9 @@ vasnprintf:                             @ @vasnprintf
                                         @   in Loop: Header=BB70_20 Depth=1
 	ldr	r0, [r11, #-928]
 	bl	malloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-932]
 	b	.LBB70_223
 .LBB70_222:                             @ %if.else568
@@ -10884,7 +11896,9 @@ vasnprintf:                             @ @vasnprintf
 	ldr	r0, [r11, #-92]
 	ldr	r1, [r11, #-928]
 	bl	realloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-932]
 .LBB70_223:                             @ %if.end570
                                         @   in Loop: Header=BB70_20 Depth=1
@@ -10940,7 +11954,9 @@ vasnprintf:                             @ @vasnprintf
 	.loc	22 3555 0               @ ../../lib/vasnprintf.c:3555:0
 	ldr	r0, [r11, #-860]
 	bl	free
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB70_232:                             @ %if.end590
                                         @   in Loop: Header=BB70_20 Depth=1
 	.loc	22 3556 0               @ ../../lib/vasnprintf.c:3556:0
@@ -11233,7 +12249,9 @@ vasnprintf:                             @ @vasnprintf
 .LBB70_259:                             @ %if.then688
 	.loc	22 4051 0               @ ../../lib/vasnprintf.c:4051:0
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB70_260:                             @ %if.end689
                                         @   in Loop: Header=BB70_20 Depth=1
 	.loc	22 4052 0               @ ../../lib/vasnprintf.c:4052:0
@@ -11270,7 +12288,9 @@ vasnprintf:                             @ @vasnprintf
 .LBB70_263:                             @ %if.then707
 	.loc	22 4057 0               @ ../../lib/vasnprintf.c:4057:0
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB70_264:                             @ %if.end708
                                         @   in Loop: Header=BB70_20 Depth=1
 	.loc	22 4058 0               @ ../../lib/vasnprintf.c:4058:0
@@ -11291,7 +12311,9 @@ vasnprintf:                             @ @vasnprintf
 	ldr	r0, [r11, #-100]
 	mov	r1, #2
 	bl	xsum
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [r11, #-96]
 	cmp	r0, r1
 	bls	.LBB70_289
@@ -11338,7 +12360,9 @@ vasnprintf:                             @ @vasnprintf
 	ldr	r0, [r11, #-100]
 	mov	r1, #2
 	bl	xsum
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [r11, #-96]
 	cmp	r0, r1
 	bls	.LBB70_274
@@ -11348,7 +12372,9 @@ vasnprintf:                             @ @vasnprintf
 	ldr	r0, [r11, #-100]
 	mov	r1, #2
 	bl	xsum
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-96]
 .LBB70_274:                             @ %if.end743
                                         @   in Loop: Header=BB70_20 Depth=1
@@ -11391,7 +12417,9 @@ vasnprintf:                             @ @vasnprintf
                                         @   in Loop: Header=BB70_20 Depth=1
 	ldr	r0, [r11, #-968]
 	bl	malloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-972]
 	b	.LBB70_283
 .LBB70_282:                             @ %if.else762
@@ -11399,7 +12427,9 @@ vasnprintf:                             @ @vasnprintf
 	ldr	r0, [r11, #-92]
 	ldr	r1, [r11, #-968]
 	bl	realloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-972]
 .LBB70_283:                             @ %if.end764
                                         @   in Loop: Header=BB70_20 Depth=1
@@ -11547,8 +12577,10 @@ vasnprintf:                             @ @vasnprintf
 	mov	lr, sp
 	str	r12, [lr]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_301
 .LBB70_298:                             @ %sw.bb800
@@ -11566,8 +12598,10 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r4, #4]
 	str	r12, [r4]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_301
 .LBB70_299:                             @ %sw.bb804
@@ -11587,13 +12621,17 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r5, #4]
 	str	r12, [r5]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #16
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_301
 .LBB70_300:                             @ %sw.default809
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .Ltmp493:
 .LBB70_301:                             @ %sw.epilog810
                                         @   in Loop: Header=BB70_290 Depth=2
@@ -11643,8 +12681,10 @@ vasnprintf:                             @ @vasnprintf
 	mov	lr, sp
 	str	r12, [lr]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_309
 .LBB70_306:                             @ %sw.bb822
@@ -11662,8 +12702,10 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r4, #4]
 	str	r12, [r4]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_309
 .LBB70_307:                             @ %sw.bb826
@@ -11683,13 +12725,17 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r5, #4]
 	str	r12, [r5]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #16
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_309
 .LBB70_308:                             @ %sw.default831
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .Ltmp496:
 .LBB70_309:                             @ %sw.epilog832
                                         @   in Loop: Header=BB70_290 Depth=2
@@ -11739,8 +12785,10 @@ vasnprintf:                             @ @vasnprintf
 	mov	lr, sp
 	str	r12, [lr]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_317
 .LBB70_314:                             @ %sw.bb844
@@ -11758,8 +12806,10 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r4, #4]
 	str	r12, [r4]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_317
 .LBB70_315:                             @ %sw.bb848
@@ -11779,13 +12829,17 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r5, #4]
 	str	r12, [r5]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #16
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_317
 .LBB70_316:                             @ %sw.default853
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .Ltmp499:
 .LBB70_317:                             @ %sw.epilog854
                                         @   in Loop: Header=BB70_290 Depth=2
@@ -11835,8 +12889,10 @@ vasnprintf:                             @ @vasnprintf
 	mov	lr, sp
 	str	r12, [lr]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_325
 .LBB70_322:                             @ %sw.bb866
@@ -11854,8 +12910,10 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r4, #4]
 	str	r12, [r4]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_325
 .LBB70_323:                             @ %sw.bb870
@@ -11875,13 +12933,17 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r5, #4]
 	str	r12, [r5]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #16
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_325
 .LBB70_324:                             @ %sw.default875
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .Ltmp502:
 .LBB70_325:                             @ %sw.epilog876
                                         @   in Loop: Header=BB70_290 Depth=2
@@ -11931,8 +12993,10 @@ vasnprintf:                             @ @vasnprintf
 	mov	lr, sp
 	str	r12, [lr]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_333
 .LBB70_330:                             @ %sw.bb888
@@ -11950,8 +13014,10 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r4, #4]
 	str	r12, [r4]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_333
 .LBB70_331:                             @ %sw.bb892
@@ -11971,13 +13037,17 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r5, #4]
 	str	r12, [r5]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #16
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_333
 .LBB70_332:                             @ %sw.default897
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .Ltmp505:
 .LBB70_333:                             @ %sw.epilog898
                                         @   in Loop: Header=BB70_290 Depth=2
@@ -12027,8 +13097,10 @@ vasnprintf:                             @ @vasnprintf
 	mov	lr, sp
 	str	r12, [lr]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_341
 .LBB70_338:                             @ %sw.bb909
@@ -12046,8 +13118,10 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r4, #4]
 	str	r12, [r4]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_341
 .LBB70_339:                             @ %sw.bb913
@@ -12067,13 +13141,17 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r5, #4]
 	str	r12, [r5]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #16
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_341
 .LBB70_340:                             @ %sw.default918
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .Ltmp508:
 .LBB70_341:                             @ %sw.epilog919
                                         @   in Loop: Header=BB70_290 Depth=2
@@ -12123,8 +13201,10 @@ vasnprintf:                             @ @vasnprintf
 	mov	lr, sp
 	str	r12, [lr]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_349
 .LBB70_346:                             @ %sw.bb930
@@ -12142,8 +13222,10 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r4, #4]
 	str	r12, [r4]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_349
 .LBB70_347:                             @ %sw.bb934
@@ -12163,13 +13245,17 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r5, #4]
 	str	r12, [r5]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #16
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_349
 .LBB70_348:                             @ %sw.default939
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .Ltmp511:
 .LBB70_349:                             @ %sw.epilog940
                                         @   in Loop: Header=BB70_290 Depth=2
@@ -12219,8 +13305,10 @@ vasnprintf:                             @ @vasnprintf
 	mov	lr, sp
 	str	r12, [lr]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_357
 .LBB70_354:                             @ %sw.bb951
@@ -12238,8 +13326,10 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r4, #4]
 	str	r12, [r4]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_357
 .LBB70_355:                             @ %sw.bb955
@@ -12259,13 +13349,17 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r5, #4]
 	str	r12, [r5]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #16
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_357
 .LBB70_356:                             @ %sw.default960
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .Ltmp514:
 .LBB70_357:                             @ %sw.epilog961
                                         @   in Loop: Header=BB70_290 Depth=2
@@ -12320,8 +13414,10 @@ vasnprintf:                             @ @vasnprintf
 	str	r12, [r4, #4]
 	str	r3, [r4]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #16
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_365
 .LBB70_362:                             @ %sw.bb972
@@ -12341,8 +13437,10 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r5, #4]
 	str	r12, [r5]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #16
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_365
 .LBB70_363:                             @ %sw.bb976
@@ -12364,13 +13462,17 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r6, #8]
 	str	r12, [r6]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #24
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_365
 .LBB70_364:                             @ %sw.default981
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .Ltmp517:
 .LBB70_365:                             @ %sw.epilog982
                                         @   in Loop: Header=BB70_290 Depth=2
@@ -12425,8 +13527,10 @@ vasnprintf:                             @ @vasnprintf
 	str	r12, [r4, #4]
 	str	r3, [r4]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #16
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_373
 .LBB70_370:                             @ %sw.bb993
@@ -12446,8 +13550,10 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r5, #4]
 	str	r12, [r5]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #16
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_373
 .LBB70_371:                             @ %sw.bb997
@@ -12469,13 +13575,17 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r6, #8]
 	str	r12, [r6]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #24
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_373
 .LBB70_372:                             @ %sw.default1002
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .Ltmp520:
 .LBB70_373:                             @ %sw.epilog1003
                                         @   in Loop: Header=BB70_290 Depth=2
@@ -12530,8 +13640,10 @@ vasnprintf:                             @ @vasnprintf
 	str	r12, [r4, #4]
 	str	r3, [r4]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #16
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_381
 .LBB70_378:                             @ %sw.bb1014
@@ -12551,8 +13663,10 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r5, #4]
 	str	r12, [r5]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #16
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_381
 .LBB70_379:                             @ %sw.bb1018
@@ -12574,13 +13688,17 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r6, #8]
 	str	r12, [r6]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #24
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_381
 .LBB70_380:                             @ %sw.default1023
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .Ltmp523:
 .LBB70_381:                             @ %sw.epilog1024
                                         @   in Loop: Header=BB70_290 Depth=2
@@ -12635,8 +13753,10 @@ vasnprintf:                             @ @vasnprintf
 	str	r12, [r4, #4]
 	str	r3, [r4]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #16
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_389
 .LBB70_386:                             @ %sw.bb1036
@@ -12656,8 +13776,10 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r5, #4]
 	str	r12, [r5]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #16
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_389
 .LBB70_387:                             @ %sw.bb1040
@@ -12679,13 +13801,17 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r6, #8]
 	str	r12, [r6]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #24
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_389
 .LBB70_388:                             @ %sw.default1045
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .Ltmp526:
 .LBB70_389:                             @ %sw.epilog1046
                                         @   in Loop: Header=BB70_290 Depth=2
@@ -12735,8 +13861,10 @@ vasnprintf:                             @ @vasnprintf
 	mov	lr, sp
 	str	r12, [lr]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_397
 .LBB70_394:                             @ %sw.bb1057
@@ -12754,8 +13882,10 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r4, #4]
 	str	r12, [r4]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_397
 .LBB70_395:                             @ %sw.bb1061
@@ -12775,13 +13905,17 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r5, #4]
 	str	r12, [r5]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #16
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_397
 .LBB70_396:                             @ %sw.default1066
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .Ltmp529:
 .LBB70_397:                             @ %sw.epilog1067
                                         @   in Loop: Header=BB70_290 Depth=2
@@ -12831,8 +13965,10 @@ vasnprintf:                             @ @vasnprintf
 	mov	lr, sp
 	str	r12, [lr]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_405
 .LBB70_402:                             @ %sw.bb1078
@@ -12850,8 +13986,10 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r4, #4]
 	str	r12, [r4]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_405
 .LBB70_403:                             @ %sw.bb1082
@@ -12871,13 +14009,17 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r5, #4]
 	str	r12, [r5]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #16
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_405
 .LBB70_404:                             @ %sw.default1087
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .Ltmp532:
 .LBB70_405:                             @ %sw.epilog1088
                                         @   in Loop: Header=BB70_290 Depth=2
@@ -12927,8 +14069,10 @@ vasnprintf:                             @ @vasnprintf
 	mov	lr, sp
 	str	r12, [lr]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_413
 .LBB70_410:                             @ %sw.bb1099
@@ -12946,8 +14090,10 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r4, #4]
 	str	r12, [r4]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_413
 .LBB70_411:                             @ %sw.bb1103
@@ -12967,13 +14113,17 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r5, #4]
 	str	r12, [r5]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #16
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_413
 .LBB70_412:                             @ %sw.default1108
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .Ltmp535:
 .LBB70_413:                             @ %sw.epilog1109
                                         @   in Loop: Header=BB70_290 Depth=2
@@ -13023,8 +14173,10 @@ vasnprintf:                             @ @vasnprintf
 	mov	lr, sp
 	str	r12, [lr]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_421
 .LBB70_418:                             @ %sw.bb1120
@@ -13042,8 +14194,10 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r4, #4]
 	str	r12, [r4]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_421
 .LBB70_419:                             @ %sw.bb1124
@@ -13063,13 +14217,17 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r5, #4]
 	str	r12, [r5]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #16
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_421
 .LBB70_420:                             @ %sw.default1129
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .Ltmp538:
 .LBB70_421:                             @ %sw.epilog1130
                                         @   in Loop: Header=BB70_290 Depth=2
@@ -13119,8 +14277,10 @@ vasnprintf:                             @ @vasnprintf
 	mov	lr, sp
 	str	r12, [lr]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_429
 .LBB70_426:                             @ %sw.bb1141
@@ -13138,8 +14298,10 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r4, #4]
 	str	r12, [r4]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #8
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_429
 .LBB70_427:                             @ %sw.bb1145
@@ -13159,13 +14321,17 @@ vasnprintf:                             @ @vasnprintf
 	str	lr, [r5, #4]
 	str	r12, [r5]
 	bl	snprintf
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	add	sp, sp, #16
-	cfiid	#39122
 	str	r0, [r11, #-980]
 	b	.LBB70_429
 .LBB70_428:                             @ %sw.default1150
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .Ltmp541:
 .LBB70_429:                             @ %sw.epilog1151
                                         @   in Loop: Header=BB70_290 Depth=2
@@ -13174,7 +14340,9 @@ vasnprintf:                             @ @vasnprintf
 .LBB70_430:                             @ %sw.default1152
 	.loc	22 4242 0               @ ../../lib/vasnprintf.c:4242:0
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .Ltmp542:
 .LBB70_431:                             @ %sw.epilog1153
                                         @   in Loop: Header=BB70_290 Depth=2
@@ -13205,7 +14373,9 @@ vasnprintf:                             @ @vasnprintf
 .LBB70_434:                             @ %if.then1165
 	.loc	22 4256 0               @ ../../lib/vasnprintf.c:4256:0
 	bl	abort
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB70_435:                             @ %if.end1166
                                         @   in Loop: Header=BB70_290 Depth=2
 	.loc	22 4258 0               @ ../../lib/vasnprintf.c:4258:0
@@ -13273,7 +14443,9 @@ vasnprintf:                             @ @vasnprintf
 	ldr	r0, [r11, #-1328]       @ 4-byte Reload
 	mov	r1, #12
 	bl	xsum
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-1072]
 	.loc	22 4284 0               @ ../../lib/vasnprintf.c:4284:0
 	ldr	r1, [r11, #-96]
@@ -13368,7 +14540,9 @@ vasnprintf:                             @ @vasnprintf
                                         @   in Loop: Header=BB70_290 Depth=2
 	ldr	r0, [r11, #-1076]
 	bl	malloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-1080]
 	b	.LBB70_462
 .LBB70_461:                             @ %if.else1233
@@ -13376,7 +14550,9 @@ vasnprintf:                             @ @vasnprintf
 	ldr	r0, [r11, #-92]
 	ldr	r1, [r11, #-1076]
 	bl	realloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-1080]
 .LBB70_462:                             @ %if.end1235
                                         @   in Loop: Header=BB70_290 Depth=2
@@ -13449,7 +14625,9 @@ vasnprintf:                             @ @vasnprintf
 	.loc	22 4297 0               @ ../../lib/vasnprintf.c:4297:0
 	ldr	r0, [r11, #-92]
 	bl	free
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB70_476:                             @ %if.end1261
 	.loc	22 4298 0               @ ../../lib/vasnprintf.c:4298:0
 	ldr	r0, [r11, #-76]
@@ -13460,12 +14638,16 @@ vasnprintf:                             @ @vasnprintf
 	.loc	22 4299 0               @ ../../lib/vasnprintf.c:4299:0
 	ldr	r0, [r11, #-76]
 	bl	free
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB70_478:                             @ %if.end1265
 	.loc	22 4300 0               @ ../../lib/vasnprintf.c:4300:0
 	ldr	r0, [r11, #-52]
 	bl	free
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r0, [r11, #-60]
 	cmp	r0, #0
 	beq	.LBB70_480
@@ -13473,11 +14655,15 @@ vasnprintf:                             @ @vasnprintf
 .LBB70_479:                             @ %if.then1269
 	ldr	r0, [r11, #-60]
 	bl	free
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB70_480:                             @ %if.end1271
 	.loc	22 4301 0               @ ../../lib/vasnprintf.c:4301:0
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	mov	r1, #22
 	str	r1, [r0]
 	mov	r0, #0
@@ -13514,7 +14700,9 @@ vasnprintf:                             @ @vasnprintf
 	ldr	r1, [r11, #-976]
 	add	r1, r1, #2
 	bl	xsum
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [r11, #-96]
 	cmp	r1, #0
 	str	r0, [r11, #-1344]       @ 4-byte Spill
@@ -13538,7 +14726,9 @@ vasnprintf:                             @ @vasnprintf
 	mov	r0, r1
 	ldr	r1, [r11, #-1352]       @ 4-byte Reload
 	bl	xmax
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-1084]
 	.loc	22 4336 0               @ ../../lib/vasnprintf.c:4336:0
 	ldr	r1, [r11, #-96]
@@ -13633,7 +14823,9 @@ vasnprintf:                             @ @vasnprintf
                                         @   in Loop: Header=BB70_290 Depth=2
 	ldr	r0, [r11, #-1088]
 	bl	malloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-1092]
 	b	.LBB70_505
 .LBB70_504:                             @ %if.else1338
@@ -13641,7 +14833,9 @@ vasnprintf:                             @ @vasnprintf
 	ldr	r0, [r11, #-92]
 	ldr	r1, [r11, #-1088]
 	bl	realloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-1092]
 .LBB70_505:                             @ %if.end1340
                                         @   in Loop: Header=BB70_290 Depth=2
@@ -13715,7 +14909,9 @@ vasnprintf:                             @ @vasnprintf
 	ldr	r0, [r11, #-100]
 	mov	r1, #1
 	bl	xsum
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [r11, #-96]
 	cmp	r0, r1
 	bls	.LBB70_542
@@ -13755,7 +14951,9 @@ vasnprintf:                             @ @vasnprintf
 	ldr	r0, [r11, #-100]
 	mov	r1, #1
 	bl	xsum
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [r11, #-96]
 	cmp	r0, r1
 	bls	.LBB70_527
@@ -13764,7 +14962,9 @@ vasnprintf:                             @ @vasnprintf
 	ldr	r0, [r11, #-100]
 	mov	r1, #1
 	bl	xsum
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-96]
 .LBB70_527:                             @ %if.end1389
 	ldr	r0, [r11, #-96]
@@ -13800,14 +15000,18 @@ vasnprintf:                             @ @vasnprintf
 .LBB70_534:                             @ %if.then1406
 	ldr	r0, [r11, #-1096]
 	bl	malloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-1100]
 	b	.LBB70_536
 .LBB70_535:                             @ %if.else1408
 	ldr	r0, [r11, #-92]
 	ldr	r1, [r11, #-1096]
 	bl	realloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-1100]
 .LBB70_536:                             @ %if.end1410
 	ldr	r0, [r11, #-1100]
@@ -13863,7 +15067,9 @@ vasnprintf:                             @ @vasnprintf
 	ldr	r1, [r11, #-100]
 	add	r1, r1, #1
 	bl	realloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-1104]
 	.loc	22 4652 0               @ ../../lib/vasnprintf.c:4652:0
 	cmp	r0, #0
@@ -13885,12 +15091,16 @@ vasnprintf:                             @ @vasnprintf
 	.loc	22 4657 0               @ ../../lib/vasnprintf.c:4657:0
 	ldr	r0, [r11, #-76]
 	bl	free
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB70_549:                             @ %if.end1444
 	.loc	22 4658 0               @ ../../lib/vasnprintf.c:4658:0
 	ldr	r0, [r11, #-52]
 	bl	free
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r0, [r11, #-60]
 	cmp	r0, #0
 	beq	.LBB70_551
@@ -13898,7 +15108,9 @@ vasnprintf:                             @ @vasnprintf
 .LBB70_550:                             @ %if.then1448
 	ldr	r0, [r11, #-60]
 	bl	free
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB70_551:                             @ %if.end1450
 	.loc	22 4659 0               @ ../../lib/vasnprintf.c:4659:0
 	ldr	r0, [r11, #-100]
@@ -13924,7 +15136,9 @@ vasnprintf:                             @ @vasnprintf
 	.loc	22 4669 0               @ ../../lib/vasnprintf.c:4669:0
 	ldr	r0, [r11, #-92]
 	bl	free
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB70_555:                             @ %if.end1457
 	.loc	22 4670 0               @ ../../lib/vasnprintf.c:4670:0
 	ldr	r0, [r11, #-76]
@@ -13935,12 +15149,16 @@ vasnprintf:                             @ @vasnprintf
 	.loc	22 4671 0               @ ../../lib/vasnprintf.c:4671:0
 	ldr	r0, [r11, #-76]
 	bl	free
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB70_557:                             @ %if.end1461
 	.loc	22 4672 0               @ ../../lib/vasnprintf.c:4672:0
 	ldr	r0, [r11, #-52]
 	bl	free
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r0, [r11, #-60]
 	cmp	r0, #0
 	beq	.LBB70_559
@@ -13948,11 +15166,15 @@ vasnprintf:                             @ @vasnprintf
 .LBB70_558:                             @ %if.then1465
 	ldr	r0, [r11, #-60]
 	bl	free
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB70_559:                             @ %if.end1467
 	.loc	22 4673 0               @ ../../lib/vasnprintf.c:4673:0
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	mov	r1, #75
 	str	r1, [r0]
 	mov	r0, #0
@@ -13975,7 +15197,9 @@ vasnprintf:                             @ @vasnprintf
 	.loc	22 4679 0               @ ../../lib/vasnprintf.c:4679:0
 	ldr	r0, [r11, #-92]
 	bl	free
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB70_563:                             @ %if.end1475
 	.loc	22 4680 0               @ ../../lib/vasnprintf.c:4680:0
 	ldr	r0, [r11, #-76]
@@ -13986,13 +15210,17 @@ vasnprintf:                             @ @vasnprintf
 	.loc	22 4681 0               @ ../../lib/vasnprintf.c:4681:0
 	ldr	r0, [r11, #-76]
 	bl	free
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB70_565:                             @ %if.end1479
 .LBB70_566:                             @ %out_of_memory_1
 	.loc	22 4683 0               @ ../../lib/vasnprintf.c:4683:0
 	ldr	r0, [r11, #-52]
 	bl	free
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r0, [r11, #-60]
 	cmp	r0, #0
 	beq	.LBB70_568
@@ -14000,11 +15228,15 @@ vasnprintf:                             @ @vasnprintf
 .LBB70_567:                             @ %if.then1483
 	ldr	r0, [r11, #-60]
 	bl	free
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB70_568:                             @ %if.end1485
 	.loc	22 4684 0               @ ../../lib/vasnprintf.c:4684:0
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	mov	r1, #12
 	str	r1, [r0]
 	mov	r0, #0
@@ -14014,10 +15246,19 @@ vasnprintf:                             @ @vasnprintf
 .LBB70_569:                             @ %return
 	.loc	22 4687 0               @ ../../lib/vasnprintf.c:4687:0
 	ldr	r0, [r11, #-24]
-	cficheckret	#39122
 	sub	sp, r11, #20
 	pop	{r4, r5, r6, r7, r8, r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp566:
 .Ltmp567:
 	.size	vasnprintf, .Ltmp567-vasnprintf
@@ -14027,6 +15268,9 @@ vasnprintf:                             @ @vasnprintf
 	.type	xsum4,%function
 xsum4:                                  @ @xsum4
 .Lfunc_begin71:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	23 78 0                 @ ../../lib/xsize.h:78:0
 @ BB#0:                                 @ %entry
 	.loc	23 77 0                 @ ../../lib/xsize.h:77:0
@@ -14037,7 +15281,6 @@ xsum4:                                  @ @xsum4
 	@DEBUG_VALUE: xsum4:size2 <- undef
 	@DEBUG_VALUE: xsum4:size3 <- undef
 	@DEBUG_VALUE: xsum4:size4 <- undef
-	cfiid	#40645
 	str	r0, [r11, #-4]
 	str	r1, [r11, #-8]
 	str	r2, [r11, #-12]
@@ -14052,13 +15295,19 @@ xsum4:                                  @ @xsum4
 	str	r3, [sp, #20]           @ 4-byte Spill
 	str	r2, [sp, #16]           @ 4-byte Spill
 	bl	xsum
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [r11, #-12]
 	bl	xsum
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [r11, #-16]
 	bl	xsum
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [sp, #20]           @ 4-byte Reload
 	ldr	r2, [sp, #16]           @ 4-byte Reload
 	ldr	r3, [sp, #24]           @ 4-byte Reload
@@ -14079,13 +15328,15 @@ xsum4:                                  @ @xsum4
 	.type	xsum,%function
 xsum:                                   @ @xsum
 .Lfunc_begin72:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	23 57 0                 @ ../../lib/xsize.h:57:0
 @ BB#0:                                 @ %entry
 	.loc	23 56 0                 @ ../../lib/xsize.h:56:0
 	sub	sp, sp, #24
 	@DEBUG_VALUE: xsum:size1 <- undef
 	@DEBUG_VALUE: xsum:size2 <- undef
-	cfiid	#40645
 	str	r0, [sp, #20]
 	str	r1, [sp, #16]
 	.loc	23 58 0 prologue_end    @ ../../lib/xsize.h:58:0
@@ -14108,9 +15359,18 @@ xsum:                                   @ @xsum
 	str	r0, [sp]                @ 4-byte Spill
 .LBB72_3:                               @ %cond.end
 	ldr	r0, [sp]                @ 4-byte Reload
-	cficheckret	#39122
 	add	sp, sp, #24
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp570:
 .Ltmp571:
 	.size	xsum, .Ltmp571-xsum
@@ -14120,6 +15380,9 @@ xsum:                                   @ @xsum
 	.type	is_infinitel,%function
 is_infinitel:                           @ @is_infinitel
 .Lfunc_begin73:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	22 244 0                @ ../../lib/vasnprintf.c:244:0
 @ BB#0:                                 @ %entry
 	.loc	22 243 0                @ ../../lib/vasnprintf.c:243:0
@@ -14127,15 +15390,16 @@ is_infinitel:                           @ @is_infinitel
 	mov	r11, sp
 	sub	sp, sp, #48
 	@DEBUG_VALUE: is_infinitel:x <- undef
-	cfiid	#40645
 	str	r1, [r11, #-4]
 	str	r0, [r11, #-8]
 	.loc	22 245 0 prologue_end   @ ../../lib/vasnprintf.c:245:0
 	str	r0, [r11, #-12]         @ 4-byte Spill
 	str	r1, [r11, #-16]         @ 4-byte Spill
 	bl	rpl_isnanl
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	mov	r1, #1
-	cfiid	#39122
 	ldr	r2, [r11, #-16]         @ 4-byte Reload
 	ldr	r3, [r11, #-12]         @ 4-byte Reload
 	cmp	r0, #0
@@ -14177,11 +15441,20 @@ is_infinitel:                           @ @is_infinitel
 .LBB73_4:                               @ %lor.end
 	ldr	r0, [sp, #20]           @ 4-byte Reload
 	.loc	22 246 0                @ ../../lib/vasnprintf.c:246:0
-	cficheckret	#39122
 	and	r0, r0, #1
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp572:
 .Ltmp573:
 	.size	is_infinitel, .Ltmp573-is_infinitel
@@ -14191,13 +15464,15 @@ is_infinitel:                           @ @is_infinitel
 	.type	xmax,%function
 xmax:                                   @ @xmax
 .Lfunc_begin74:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	23 88 0                 @ ../../lib/xsize.h:88:0
 @ BB#0:                                 @ %entry
 	.loc	23 87 0                 @ ../../lib/xsize.h:87:0
 	sub	sp, sp, #20
 	@DEBUG_VALUE: xmax:size1 <- undef
 	@DEBUG_VALUE: xmax:size2 <- undef
-	cfiid	#40645
 	str	r0, [sp, #16]
 	str	r1, [sp, #12]
 	.loc	23 91 0 prologue_end    @ ../../lib/xsize.h:91:0
@@ -14217,9 +15492,18 @@ xmax:                                   @ @xmax
 	str	r0, [sp]                @ 4-byte Spill
 .LBB74_3:                               @ %cond.end
 	ldr	r0, [sp]                @ 4-byte Reload
-	cficheckret	#39122
 	add	sp, sp, #20
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp574:
 .Ltmp575:
 	.size	xmax, .Ltmp575-xmax
@@ -14229,6 +15513,9 @@ xmax:                                   @ @xmax
 	.type	rpl_isnanl,%function
 rpl_isnanl:                             @ @rpl_isnanl
 .Lfunc_begin75:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	26 72 0                 @ ../../lib/isnan.c:72:0
 @ BB#0:                                 @ %entry
 	.loc	26 71 0                 @ ../../lib/isnan.c:71:0
@@ -14236,7 +15523,6 @@ rpl_isnanl:                             @ @rpl_isnanl
 	mov	r11, sp
 	sub	sp, sp, #40
 	@DEBUG_VALUE: rpl_isnanl:x <- undef
-	cfiid	#40645
 	str	r1, [r11, #-12]
 	str	r0, [r11, #-16]
 	.loc	26 129 0 prologue_end   @ ../../lib/isnan.c:129:0
@@ -14261,7 +15547,9 @@ rpl_isnanl:                             @ @rpl_isnanl
 	.loc	26 133 0                @ ../../lib/isnan.c:133:0
 	ldr	r1, .LCPI75_1
 	bl	memcmp
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	mov	r1, #0
 	cmp	r0, #0
 	str	r1, [sp, #4]            @ 4-byte Spill
@@ -14273,7 +15561,9 @@ rpl_isnanl:                             @ @rpl_isnanl
 	.loc	26 134 0                @ ../../lib/isnan.c:134:0
 	ldr	r1, .LCPI75_2
 	bl	memcmp
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	cmp	r0, #0
 	movne	r0, #1
 	str	r0, [sp, #4]            @ 4-byte Spill
@@ -14290,10 +15580,19 @@ rpl_isnanl:                             @ @rpl_isnanl
 .LBB75_5:                               @ %return
 	.loc	26 161 0                @ ../../lib/isnan.c:161:0
 	ldr	r0, [r11, #-4]
-	cficheckret	#39122
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp578:
 	.align	2
 @ BB#6:
@@ -14311,13 +15610,15 @@ rpl_isnanl:                             @ @rpl_isnanl
 	.type	printf_fetchargs,%function
 printf_fetchargs:                       @ @printf_fetchargs
 .Lfunc_begin76:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	27 37 0                 @ ../../lib/printf-args.c:37:0
 @ BB#0:                                 @ %entry
 	.loc	27 36 0                 @ ../../lib/printf-args.c:36:0
 	sub	sp, sp, #32
 	@DEBUG_VALUE: printf_fetchargs:args <- undef
 	@DEBUG_VALUE: printf_fetchargs:a <- undef
-	cfiid	#40645
 	strb	r0, [sp, #24]
 	lsr	r2, r0, #24
 	strb	r2, [sp, #27]
@@ -14696,9 +15997,18 @@ printf_fetchargs:                       @ @printf_fetchargs
 	str	r0, [sp, #28]
 .LBB76_34:                              @ %return
 	ldr	r0, [sp, #28]
-	cficheckret	#39122
 	add	sp, sp, #32
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp586:
 	.align	2
 @ BB#35:
@@ -14714,6 +16024,9 @@ printf_fetchargs:                       @ @printf_fetchargs
 	.type	printf_parse,%function
 printf_parse:                           @ @printf_parse
 .Lfunc_begin77:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	28 82 0                 @ ../../lib/printf-parse.c:82:0
 @ BB#0:                                 @ %entry
 	.loc	28 81 0                 @ ../../lib/printf-parse.c:81:0
@@ -14723,7 +16036,6 @@ printf_parse:                           @ @printf_parse
 	@DEBUG_VALUE: printf_parse:format <- undef
 	@DEBUG_VALUE: printf_parse:d <- undef
 	@DEBUG_VALUE: printf_parse:a <- undef
-	cfiid	#40645
 	str	r0, [r11, #-8]
 	str	r1, [r11, #-12]
 	str	r2, [r11, #-16]
@@ -14750,7 +16062,9 @@ printf_parse:                           @ @printf_parse
 	str	r2, [sp, #112]          @ 4-byte Spill
 	str	r1, [sp, #108]          @ 4-byte Spill
 	bl	malloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	ldr	r1, [r11, #-12]
 	str	r0, [r1, #4]
 	.loc	28 93 0                 @ ../../lib/printf-parse.c:93:0
@@ -14983,7 +16297,9 @@ printf_parse:                           @ @printf_parse
 	ldrb	r1, [r1]
 	sub	r1, r1, #48
 	bl	xsum105
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-60]
 @ BB#22:                                @ %for.inc45
                                         @   in Loop: Header=BB77_15 Depth=2
@@ -15342,7 +16658,9 @@ printf_parse:                           @ @printf_parse
 	ldrb	r1, [r1]
 	sub	r1, r1, #48
 	bl	xsum105
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-68]
 @ BB#69:                                @ %for.inc172
                                         @   in Loop: Header=BB77_62 Depth=2
@@ -15459,7 +16777,9 @@ printf_parse:                           @ @printf_parse
 	ldr	r0, [r11, #-72]
 	mov	r1, #1
 	bl	xsum105
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-32]
 .LBB77_86:                              @ %if.end215
                                         @   in Loop: Header=BB77_3 Depth=1
@@ -15499,14 +16819,18 @@ printf_parse:                           @ @printf_parse
 	ldr	r0, [r0, #4]
 	ldr	r1, [r11, #-76]
 	bl	realloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #60]           @ 4-byte Spill
 	b	.LBB77_94
 .LBB77_93:                              @ %cond.false231
                                         @   in Loop: Header=BB77_3 Depth=1
 	ldr	r0, [r11, #-76]
 	bl	malloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #60]           @ 4-byte Spill
 .LBB77_94:                              @ %cond.end233
                                         @   in Loop: Header=BB77_3 Depth=1
@@ -15836,7 +17160,9 @@ printf_parse:                           @ @printf_parse
 	ldrb	r1, [r1]
 	sub	r1, r1, #48
 	bl	xsum105
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-92]
 @ BB#139:                               @ %for.inc364
                                         @   in Loop: Header=BB77_132 Depth=2
@@ -15953,7 +17279,9 @@ printf_parse:                           @ @printf_parse
 	ldr	r0, [r11, #-96]
 	mov	r1, #1
 	bl	xsum105
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-32]
 .LBB77_156:                             @ %if.end410
                                         @   in Loop: Header=BB77_3 Depth=1
@@ -15993,14 +17321,18 @@ printf_parse:                           @ @printf_parse
 	ldr	r0, [r0, #4]
 	ldr	r1, [r11, #-100]
 	bl	realloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #32]           @ 4-byte Spill
 	b	.LBB77_164
 .LBB77_163:                             @ %cond.false427
                                         @   in Loop: Header=BB77_3 Depth=1
 	ldr	r0, [r11, #-100]
 	bl	malloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #32]           @ 4-byte Spill
 .LBB77_164:                             @ %cond.end429
                                         @   in Loop: Header=BB77_3 Depth=1
@@ -16830,7 +18162,9 @@ printf_parse:                           @ @printf_parse
 	ldr	r0, [r11, #-120]
 	mov	r1, #1
 	bl	xsum105
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [r11, #-32]
 .LBB77_288:                             @ %if.end678
                                         @   in Loop: Header=BB77_3 Depth=1
@@ -16870,14 +18204,18 @@ printf_parse:                           @ @printf_parse
 	ldr	r0, [r0, #4]
 	ldr	r1, [r11, #-124]
 	bl	realloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #8]            @ 4-byte Spill
 	b	.LBB77_296
 .LBB77_295:                             @ %cond.false695
                                         @   in Loop: Header=BB77_3 Depth=1
 	ldr	r0, [r11, #-124]
 	bl	malloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #8]            @ 4-byte Spill
 .LBB77_296:                             @ %cond.end697
                                         @   in Loop: Header=BB77_3 Depth=1
@@ -17031,7 +18369,9 @@ printf_parse:                           @ @printf_parse
 	ldr	r0, [r0, #4]
 	ldr	r1, [sp, #124]
 	bl	realloc
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	str	r0, [sp, #120]
 	.loc	28 585 0                @ ../../lib/printf-parse.c:585:0
 	cmp	r0, #0
@@ -17087,7 +18427,9 @@ printf_parse:                           @ @printf_parse
 	ldr	r0, [r11, #-16]
 	ldr	r0, [r0, #4]
 	bl	free
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB77_325:                             @ %if.end781
 	.loc	28 608 0                @ ../../lib/printf-parse.c:608:0
 	ldr	r0, [r11, #-12]
@@ -17100,11 +18442,15 @@ printf_parse:                           @ @printf_parse
 	ldr	r0, [r11, #-12]
 	ldr	r0, [r0, #4]
 	bl	free
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB77_327:                             @ %if.end786
 	.loc	28 610 0                @ ../../lib/printf-parse.c:610:0
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	mov	r1, #22
 	str	r1, [r0]
 	mvn	r0, #0
@@ -17123,7 +18469,9 @@ printf_parse:                           @ @printf_parse
 	ldr	r0, [r11, #-16]
 	ldr	r0, [r0, #4]
 	bl	free
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB77_330:                             @ %if.end792
 	.loc	28 616 0                @ ../../lib/printf-parse.c:616:0
 	ldr	r0, [r11, #-12]
@@ -17136,12 +18484,16 @@ printf_parse:                           @ @printf_parse
 	ldr	r0, [r11, #-12]
 	ldr	r0, [r0, #4]
 	bl	free
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 .LBB77_332:                             @ %if.end797
 .LBB77_333:                             @ %out_of_memory_1
 	.loc	28 619 0                @ ../../lib/printf-parse.c:619:0
 	bl	__errno_location
-	cfiid	#39122
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #39122
+	@ [ ====== CFI ID end ====== ]
 	mov	r1, #12
 	str	r1, [r0]
 	mvn	r0, #0
@@ -17149,10 +18501,19 @@ printf_parse:                           @ @printf_parse
 	str	r0, [r11, #-4]
 .LBB77_334:                             @ %return
 	ldr	r0, [r11, #-4]
-	cficheckret	#39122
 	mov	sp, r11
 	pop	{r11, lr}
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp676:
 .Ltmp677:
 	.size	printf_parse, .Ltmp677-printf_parse
@@ -17162,13 +18523,15 @@ printf_parse:                           @ @printf_parse
 	.type	xsum105,%function
 xsum105:                                @ @xsum105
 .Lfunc_begin78:
+	@ [ ====== CFI ID begin ====== ]
+	mov r12, #40645
+	@ [ ====== CFI ID end ====== ]
 	.loc	23 57 0                 @ ../../lib/xsize.h:57:0
 @ BB#0:                                 @ %entry
 	.loc	23 56 0                 @ ../../lib/xsize.h:56:0
 	sub	sp, sp, #24
 	@DEBUG_VALUE: xsum:size1 <- undef
 	@DEBUG_VALUE: xsum:size2 <- undef
-	cfiid	#40645
 	str	r0, [sp, #20]
 	str	r1, [sp, #16]
 	.loc	23 58 0 prologue_end    @ ../../lib/xsize.h:58:0
@@ -17191,9 +18554,18 @@ xsum105:                                @ @xsum105
 	str	r0, [sp]                @ 4-byte Spill
 .LBB78_3:                               @ %cond.end
 	ldr	r0, [sp]                @ 4-byte Reload
-	cficheckret	#39122
 	add	sp, sp, #24
+	@ [ ====== CFI checkret begin ====== ]
+	@ [ ====== mov pc lr ====== ]
+	push {r0}
+	ldr r0, [lr, #4] 	@ get destination ID
+	ldr r12, #39122 	@ ID first
+	cmp r0, r12
+	bne cfi_abort
+	pop {r0}
+	add lr, lr, #8
 	mov	pc, lr
+	@ [ ====== CFI check end ====== ]
 .Ltmp678:
 .Ltmp679:
 	.size	xsum105, .Ltmp679-xsum105
