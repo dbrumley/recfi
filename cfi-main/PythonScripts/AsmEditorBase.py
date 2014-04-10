@@ -47,7 +47,7 @@ class AsmEditorBase:
         label = split[0]
 
         #make sure label is a label and not a comment
-        if label.startswith("_") and ":" in label and "@" not in label:
+        if not label.startswith(".L") and not label.startswith("@") and ":" in label: 
             return True
         return False
 
