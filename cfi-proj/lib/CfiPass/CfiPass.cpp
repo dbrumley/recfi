@@ -24,9 +24,9 @@
 
 using namespace llvm;
 
-#define CFI_INSERT_INTRINSIC "llvm.arm.cfiid"
-#define CFI_CHECK_TAR_INTRINSIC "llvm.arm.cfichecktar"
-#define CFI_CHECK_RET_INTRINSIC "llvm.arm.cficheckret"
+#define CFI_INSERT_INTRINSIC "llvm.cfiid"
+#define CFI_CHECK_TAR_INTRINSIC "llvm.cfichecktar"
+#define CFI_CHECK_RET_INTRINSIC "llvm.cficheckret"
 #define CFI_ABORT "cfi_abort"
 
 #define MAX 0xFFFF
