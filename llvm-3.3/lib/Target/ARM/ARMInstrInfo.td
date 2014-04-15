@@ -5282,19 +5282,19 @@ def immMax : Operand<i32>, ImmLeaf<i32, [{
 }
 let isTerminator = 1 in
 def CFI_ID : AXI<(outs), (ins immMax:$id), MiscFrm, NoItinerary,
-              "cfiid\t$id", [(int_arm_cfiid immMax:$id)]>,
+              "cfiid\t$id", [(int_cfiid immMax:$id)]>,
            Requires<[IsARM]> {
   bits<32> id;
   let Inst = id;
 }
 def CFI_CHK_TAR : AXI<(outs), (ins immMax:$id), MiscFrm, NoItinerary,
-              "cfichecktar\t$id", [(int_arm_cfichecktar immMax:$id)]>,
+              "cfichecktar\t$id", [(int_cfichecktar immMax:$id)]>,
            Requires<[IsARM]> {
   bits<32> id;
   let Inst = id;
 }
 def CFI_CHK_RET : AXI<(outs), (ins immMax:$id), MiscFrm, NoItinerary,
-              "cficheckret\t$id", [(int_arm_cficheckret immMax:$id)]>,
+              "cficheckret\t$id", [(int_cficheckret immMax:$id)]>,
            Requires<[IsARM]> {
   bits<32> id;
   let Inst = id;

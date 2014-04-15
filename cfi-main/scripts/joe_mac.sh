@@ -5,7 +5,12 @@
 #clang -O1 -emit-llvm $1.c -c -o $1.bc
 
 echo "running $2 pass..."
-opt -debug-pass=Structure -load ../../build/projects/poolalloc/Release+Debug+Asserts/lib/LLVMDataStructure.dylib -load ../../cfi-proj/build/Release+Debug+Asserts/lib/LLVM$2.dylib -$2 -stats < $1.bc > $1_opt.bc
+opt -debug-pass=Structure \
+    -load ../../build/projects/poolalloc/Release+Debug+Asserts/lib/LLVMDataStructure.dylib \
+    -load ../../cfi-proj/build/Release+Debug+Asserts/lib/LLVM$2.dylib \
+    -$2 \
+    -stats \
+    < $1.bc > $1_opt.bc
 #opt -load ../build/Release+Debug+Asserts/lib/LLVM$2.dylib -$2 < $1.bc > $1_opt.bc
 
 echo "generating transformed llvm ir"
