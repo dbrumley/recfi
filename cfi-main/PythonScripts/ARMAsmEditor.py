@@ -10,26 +10,29 @@ class ARMAsmEditor(AsmEditorBase):
     pc_names = ['pc', 'r15']
     str_bases = ['str']
     branch_bases = ['b', 'bl', 'bx', 'blx']
-    cond_codes = ['eq', 'ne', 'cs', 'hs',\
-                'cc', 'lo', 'mi', 'pl',\
-                'vs', 'vc', 'hi', 'ls',\
-                'ge', 'lt', 'gt', 'le',\
-                'al', '']
-    gpr_names = ['r0', 'r1', 'r2', 'r3',\
-                    'r4', 'r5', 'r6', 'r7',\
-                    'r8', 'r9', 'r10', 'r11',\
-                    'r12', 'r13', 'r14', 'r15'\
-                    'sp', 'lr', 'pc']
+    cond_codes = ['eq', 'ne', 'cs', 'hs',
+                  'cc', 'lo', 'mi', 'pl',
+                  'vs', 'vc', 'hi', 'ls',
+                  'ge', 'lt', 'gt', 'le',
+                  'al', '']
+    gpr_names = ['r0', 'r1', 'r2', 'r3',
+                 'r4', 'r5', 'r6', 'r7',
+                 'r8', 'r9', 'r10', 'r11',
+                 'r12', 'r13', 'r14', 'r15'
+                 'sp', 'lr', 'pc']
 
     branch_codes = [a + b for a, b in itertools.product(branch_bases, cond_codes)]
     str_codes = [a + b for a, b in itertools.product(str_bases, cond_codes)] 
     transfers = set()
 
+
+
     def error(self, msg):
         print("\nARMAsmEditorError: " + msg)
 
+
+
     def is_transfer_instr(self, split):
-        
         if len(split) < 2:
             return False
         
@@ -49,8 +52,23 @@ class ARMAsmEditor(AsmEditorBase):
                     return True
         return False
 
-    def insert_check(self, line, split, asm_new, ids, check_tar):
 
+
+    def insert_ID_check(self, asm_new, id, r_temp, first_id):
+        if first_id:
+            asm_new.append("\tmovtne r12, " + id + "\t@ ID encoding, doesn't need to execute\n")
+            #asm_new.append("\tsub r12, pc, #12 \t@ get previous instr addr\n")
+            asm_new.append("\tldr r12, [pc, #-12] \t@ get ID encoding\n")
+            asm_new.append("\tcmp " + r_temp + ", r12\n")
+        else:
+            asm_new.append("\tmovtne r12, " + id + "\t@ extra ID\n")
+            #asm_new.append("\tsubne r12, pc, #12 \t@ get previous instr addr\n")
+            asm_new.append("\tldrne r12, [pc, #-12]\n")
+            asm_new.append("\tcmpne " + r_temp + ", r12\n")
+
+
+
+    def insert_check(self, line, split, asm_new, ids, check_tar):
         if len(ids) < 1:
             self.error('insert_check: ids is empty')
             return False
@@ -93,22 +111,19 @@ class ARMAsmEditor(AsmEditorBase):
                     #print '\tassume direct (no check needed):' + ' '.join(split)
                 return False
 
-
             if check_tar:
                 asm_new.append("\t@ [ ====== CFI checktar begin ====== ]\n")
             else:
                 asm_new.append("\t@ [ ====== CFI checkret begin ====== ]\n")
             asm_new.append("\t@ [ ====== " + ' '.join(split) + " ====== ]\n")
-            asm_new.append("\tpush {"+r_temp+"}\n")
-            asm_new.append("\tldr "+r_temp+", [" + r_src + ", #4] \t@ get destination ID\n")
-            asm_new.append("\tldr r12, " + ids.pop(0) + " \t@ ID first\n")
-            asm_new.append("\tcmp "+r_temp+", r12\n")
+            asm_new.append("\tpush {" + r_temp + "}\n")
+            asm_new.append("\tldr " + r_temp + ", [" + r_src + "] \t@ get destination ID\n")
+            self.insert_ID_check(asm_new, ids.pop(0), r_temp, True)
             for extra_id in ids:
-                asm_new.append("\tldrne r12, " + extra_id + " \t@ ID extra\n")
-                asm_new.append("\tcmpne "+r_temp+", r12\n")
+                self.insert_ID_check(asm_new, extra_id, r_temp, False)
             asm_new.append("\tbne cfi_abort\n")
-            asm_new.append("\tpop {"+r_temp+"}\n")
-            asm_new.append("\tadd " + r_src + ", " + r_src + ", #8\n")
+            asm_new.append("\tpop {" + r_temp + "}\n")
+            #asm_new.append("\tadd " + r_src + ", " + r_src + ", #8\n")
             if uses_pc and check_tar:
                 asm_new.append("\tmov lr, pc \t@ this is sorta sketch\n")
             asm_new.append(line)
@@ -141,20 +156,18 @@ class ARMAsmEditor(AsmEditorBase):
                         asm_new.append("\t@ [ ====== CFI checkret begin ====== ]\n")
                     asm_new.append("\t@ [ ====== " + ' '.join(split) + " ====== ]\n")
                     asm_new.append(new_load)
-                    asm_new.append("\tpush {r0}\n")
-                    asm_new.append("\tpush {r1}\n")
-                    asm_new.append("\tldr r0, " + ids.pop(0) + " \t@ ID first\n")
-                    asm_new.append("\tldr r1, [r12, #4] \t@ get destination ID\n")
-                    asm_new.append("\tcmp r0, r1\n")
+                    asm_new.append("\tpush {r0, r1}\n")
+                    asm_new.append("\tldr r0, [r12] \t@ get destination ID\n")
+                    asm_new.append("\tmov r1, r12 \t@ preserver destination addr\n")
+                    self.insert_ID_check(asm_new, ids.pop(0), "r0", True)
                     for extra_id in ids:
-                        asm_new.append("\tldrne r12, " + extra_id + " \t@ ID extra\n")
-                        asm_new.append("\tcmpne r0, r12\n")
+                        self.insert_ID_check(asm_new, extra_id, "r0", False)
                     asm_new.append("\tbne cfi_abort\n")
-                    asm_new.append("\tpop {r1}\n")
-                    asm_new.append("\tpop {r0}\n")
+                    asm_new.append("\tmov r12, r1\n \t@ restore destination addr\n")
+                    asm_new.append("\tpop {r0, r1}\n")
                     if check_tar:
                         asm_new.append("\tmov lr, pc \t@ this is sorta sketch\n")
-                    asm_new.append("\tmov pc, [r12, #8]\n")
+                    asm_new.append("\tmov pc, r12\n")
                     asm_new.append("\t@ [ ====== CFI check end ====== ]\n")
                     self.transfers.add(' '.join(split))
                     return True
@@ -162,17 +175,11 @@ class ARMAsmEditor(AsmEditorBase):
                     
 
     def insert_id(self, asm_new, id_str):
-        #default encoding is ".long <id>"
-        #if self.encode_type in ["", "long"]:
-        #    asm_new.append("\t@ [ ====== CFI ID end ====== ]\n")
-        #    asm_new.append("\t.word " + id_str + "\n")
-            #jump over id if run normally
-        #    asm_new.append("\tmov pc, pc\n")
-        #    asm_new.append("\t@ [ ====== CFI ID begin ====== ]\n")
+        #default encoding is "movtne <id>"
         if self.encode_type in ["", "mov"]:
             #TODO: make sure id is only 16 bits long
             asm_new.append("\t@ [ ====== CFI ID end ====== ]\n")
-            asm_new.append("\tmov r12, " + id_str + "\n")
+            asm_new.append("\tmovtne r12, " + id_str + "\n")
             asm_new.append("\t@ [ ====== CFI ID begin ====== ]\n")
         else:
             self.error("Not supporting encoding type of \"" +
@@ -197,6 +204,24 @@ class ARMAsmEditor(AsmEditorBase):
             add rx, rx, #8
             mov lr, pc (if check_tar && mov pc, rx)
             b rx || mov pc, rx
+        Alternate:
+            push r0
+            ldr r0, [rx]           @r0 should contain the encoding of the ID, ex. "movtne r12, #ID"
+            movtne r12, #ID
+            sub r12, pc, #12
+            ldr r12, [r12, #0]    @r12 should also contain "movt r12, #ID"
+            cmp r0, r12
+            ...
+            movtne r12, #ID2
+            subne r12, pc, #12
+            ldrne r12, [r12, #0]
+            cmpne r0, r12
+            ...
+            bne abort
+            pop {r0}
+            mov lr, pc             @if check_tar && mov pc, rx
+            b rx || mov pc, rx
+            
         
         Branch form:
             ldmfd sp!, [..., pc]
@@ -216,5 +241,24 @@ class ARMAsmEditor(AsmEditorBase):
             pop r1
             pop r0
             mov pc, [r12, #8]
+        Alternate:
+            ldmfd sp!, [..., r12]
+            push {r0, r1}
+            ldr r0, [r12]          @r0 should contain the encoding of the ID, ex. "movtne r12, #ID"
+            mov r1, r12            @preserve address
+            movtne r12, #ID    
+            sub r12, pc, #12    
+            ldr r12, [r12, #0]
+            cmp r0, r12
+            ...
+            movtne r12, #ID2
+            subne r12, pc, #12
+            ldrne r12, [r12, #0]
+            cmpne r0, r12
+            ...
+            bne abort
+            mov r12, r1
+            pop {r0, r1}
+            mov pc, r12
         
         '''''''''
