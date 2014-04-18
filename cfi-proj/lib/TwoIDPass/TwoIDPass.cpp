@@ -7,7 +7,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#define DEBUG_TYPE "TwoIDPass"
+#define DEBUG_TYPE "cfi-2id"
 
 #include "llvm/ADT/Statistic.h"
 #include "llvm/IR/IRBuilder.h"
@@ -412,4 +412,4 @@ namespace {
 }
 
 char TwoIDPass::ID = 0;
-static RegisterPass<TwoIDPass> X("TwoIDPass", "Two ID CFI Pass");
+static RegisterPass<TwoIDPass> X("cfi-2id", "CFI pass, two id");

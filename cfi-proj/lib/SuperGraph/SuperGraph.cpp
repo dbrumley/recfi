@@ -5,7 +5,7 @@
 //
 //===----------------------------------------------------------------------===//
 
-#define DEBUG_TYPE "SuperGraph"
+#define DEBUG_TYPE "cfi-multi"
 
 #include "llvm/ADT/Statistic.h"
 #include "llvm/IR/IRBuilder.h"
@@ -26,7 +26,16 @@ using namespace llvm;
 
 #define MAX 0xFFFF
 
-STATISTIC(MergeCounter, "Counts number of times destination sets are merged");
+STATISTIC(STAT_CALL, "direct calls" );
+STATISTIC(STAT_ITRANSFER, "indirect transfers (icall, ibr, ret)");
+STATISTIC(STAT_ICALL, "indirect calls" );
+STATISTIC(STAT_IBRANCH, "indirect branches");
+STATISTIC(STAT_RETURN, "returns");
+
+STATISTIC(STAT_ICALL_TAR, "valid indirect call/branch targets");
+STATISTIC(STAT_RET_TAR, "valid return targets");
+
+STATISTIC(STAT_MERGE, "Counts number of times destination sets are merged");
 
 namespace {
     /**
@@ -322,17 +331,6 @@ namespace {
                         //add call site to retMap
                         if (!F->isIntrinsic())
                             retMap[const_cast<Function *>(F)].insert(I);
-                        
-                        //Joe added this stuff
-                        /*
-                        if( F->getBasicBlockList().empty() )
-                            continue;
-                        BasicBlock *B = const_cast<BasicBlock *>
-                                (&F->back());
-                        Instruction *backInst = const_cast<Instruction*>
-                                (&B->back());
-                        errs() << "Back instr: " <<  *backInst << "\n";
-                        */
                     }
                 }
             }
@@ -393,7 +391,7 @@ namespace {
                                                        intersect.begin()));
                         if (intersect.size() > 0)
                         {
-                            MergeCounter++;
+                            STAT_MERGE++;
                             lset.insert(mset.begin(), mset.end());
                             break;
                         }
@@ -489,6 +487,7 @@ namespace {
 
                 builder.SetInsertPoint(BB->first->begin());
                 builder.CreateCall(cfiInsertID, ID);
+                STAT_ICALL_TAR++;
             }
             
             //insert IDs after call sites
@@ -506,6 +505,7 @@ namespace {
                 
                 builder.SetInsertPoint(II);
                 builder.CreateCall(cfiInsertID, ID);
+                STAT_RET_TAR++;
             }
         }
         
@@ -673,6 +673,13 @@ namespace {
             }
         }
 
+        /*
+         * Does additional computation on pass statistics
+         */
+        void calculateStatistics()
+        {
+        }
+
         /**
          * @brief find all indirect call and branch targets, then insert
          * IDs and checks at corresponding locations for a context sensitive
@@ -718,6 +725,8 @@ namespace {
             
             //create cfi_abort function:
             cfil.createAbort(M);
+
+            calculateStatistics();
             
             return false;
         }
@@ -725,4 +734,4 @@ namespace {
 }
 
 char SuperGraph::ID = 0;
-static RegisterPass<SuperGraph> X("SuperGraph", "SuperGraph Pass (with getAnalysisUsage implemented)");
+static RegisterPass<SuperGraph> X("cfi-multi", "CFI pass, multi-id with merging");

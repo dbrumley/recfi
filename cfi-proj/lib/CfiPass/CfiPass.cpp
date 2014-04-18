@@ -6,7 +6,7 @@
 // TODO: Insert Comments
 //===----------------------------------------------------------------------===//
 
-#define DEBUG_TYPE "CfiPass"
+#define DEBUG_TYPE "cfi-multi-wl"
 
 #include "llvm/ADT/Statistic.h"
 #include "llvm/IR/IRBuilder.h"
@@ -68,37 +68,6 @@ namespace {
         Module *mod;
         
         /**
-         * @brief Creates a function
-         *
-         * @return Function pointer to newly created function
-         *
-         * @arg module - current function
-         * @arg retType - return type of function
-         * @arg theArgTypes - types for function args
-         * @arg theArgNames - names for function args
-         * @arg functName - name of function
-         * @arg linkage - linkage type
-         * @arg declarationOnly - if the function is only a declaration
-         * @arg isVarArg - if function has variable number of arguments
-         */
-        Function *createFunction(llvm::Module &module,
-                                 llvm::Type *retType,
-                                 const ArgTypes &theArgTypes,
-                                 const ArgNames &theArgNames,
-                                 const std::string &functName,
-                                 llvm::GlobalValue::LinkageTypes linkage,
-                                 bool declarationOnly,
-                                 bool isVarArg) {
-            llvm::FunctionType *functType =
-                llvm::FunctionType::get(retType, theArgTypes, isVarArg);
-            llvm::Function *ret =
-                llvm::Function::Create(functType, linkage, functName, &module);
-            if (!ret || declarationOnly)
-                return(ret);
-            return NULL;
-        }
-        
-        /**
          * @brief creates a CFI intrinsic function
          *
          * @return Function pointer
@@ -123,28 +92,14 @@ namespace {
             argTypes.push_back(builder.getInt32Ty());
             
             //ex. call void @llvm.arm.cfiid(i32 dest_id)
-            Function *cfiFunc = createFunction(*mod,
-                                               retType,
-                                               argTypes,
-                                               argNames,
-                                               funcName,
-                                               llvm::Function::ExternalLinkage,
-                                               true,
-                                               false);
-            return cfiFunc;
+            llvm::FunctionType *functType = llvm::FunctionType::get(retType, argTypes, false);
+            return llvm::Function::Create(functType, llvm::Function::ExternalLinkage, funcName, mod);
         }
         
         /**
          * @brief create cfi_abort function:
-         *
          * void abort()
-         * {
-         *   while(1);
-         * }
-         *
-         * @return void
-         * 
-         * @arg M - module to create function in
+         * {while(1);}
          */
         void createAbort()
         {
@@ -164,7 +119,6 @@ namespace {
             builder.SetInsertPoint(loop);
             builder.CreateBr(loop);
         }
-        
         
     public:
         /**
@@ -259,15 +213,10 @@ namespace {
           AU.addRequired<CTF>();
         }
 
-        /**
-         * @brief Find all indirect branch targets and add them to instDestMap
-         *
-         * @return void
-         *
-         * @arg F - function to iterate over
-         */
-        void findIndBrTargets(Module& M, InstDestMap& instDestMap)
+        InstDestMap findIndBrTargets(Module& M)
         {
+            InstDestMap instDestMap;
+
             Module::iterator MB, ME;
             for (MB = M.begin(), ME = M.end(); MB != ME; MB++)
             {
@@ -298,6 +247,7 @@ namespace {
                 }
             }
 
+            return instDestMap;
         }
 
         /**
@@ -360,7 +310,7 @@ namespace {
                             instDestMap[I].insert(destInstr);
                         }
                         
-			//Find all returns
+			            //Find all returns in this function
                         Function::iterator BB, BE;
                         Function* ncF = const_cast<Function*>(F);
                         for (BB = ncF->begin(), BE = ncF->end(); BB != BE; BB++)
@@ -382,8 +332,10 @@ namespace {
             }
         }
 
-        void genUniqueTargetIDs(InstDestMap& tarmap, InstIDMap& idmap)
+        InstIDMap genUniqueTargetIDs(InstDestMap& tarmap)
         {
+            InstIDMap idmap;
+
             InstSet visitedSet;
             InstDestMap::iterator MB, ME;
             /* for each callsite */
@@ -407,16 +359,18 @@ namespace {
                 Instruction* K = *LB;
                 idmap[K] = ID;
             }
+            return idmap;
         }
 
         /**
          * @brief generates a map of constraint check sites and the ID to be 
          * checked against
          */
-        void generateCheckIDs(InstDestMap& tarmap,
-                              InstIDMap& idmap,
-                              InstIDSetMap& checkmap)
+        InstIDSetMap generateCheckIDs(InstDestMap& tarmap,
+                              InstIDMap& idmap)
+                              
         {
+            InstIDSetMap checkmap;
             InstDestMap::iterator MB, ME;
             for (MB = tarmap.begin(), ME = tarmap.end(); MB != ME; MB++)
             {
@@ -432,6 +386,7 @@ namespace {
                     checkmap[MB->first].insert(ID);
                 }
             }
+            return checkmap;
         }
 
         /**
@@ -447,20 +402,17 @@ namespace {
             
             srand(time(NULL));
 
-            // mapping ( TRANSFER => DESTINATION ) instructions
-            InstDestMap instDestMap;
-            findIndBrTargets(M, instDestMap);
+            // find all indirect transfer sites and their destinations
+            InstDestMap instDestMap = findIndBrTargets(M);
             findIndCallAndRetTargets(instDestMap);
             //print_dest_map(instDestMap);
             
-            // mapping destination ( INSTRUCTION => ID )
-            InstIDMap instrIDs;
-            genUniqueTargetIDs(instDestMap, instrIDs); 
+            // assign an ID to each destination
+            InstIDMap instrIDs = genUniqueTargetIDs(instDestMap); 
             //print_ID_maps(instrIDs);
 
-            // mapping transfer ( INSTRUCTION => ID_SET )
-            InstIDSetMap targetCheckIDs;
-            generateCheckIDs(instDestMap, instrIDs, targetCheckIDs);
+            // map each transfer site to a set of destination IDs
+            InstIDSetMap targetCheckIDs = generateCheckIDs(instDestMap, instrIDs);
             //print_ID_check_maps(targetCheckIDs);
 
             // insert IDs and checks into IR as instrinsics
@@ -546,4 +498,4 @@ namespace {
 }
 
 char CfiPass::ID = 0;
-static RegisterPass<CfiPass> X("CfiPass", "CfiPass Pass (with getAnalysisUsage implemented)");
+static RegisterPass<CfiPass> X("cfi-multi-wl", "CFI pass, multi-id with whitelisting)");
