@@ -13,7 +13,6 @@ opt -debug-pass=Structure \
 -$2 \
 -$3 \
 < $1.bc > $1_opt.bc
-
 #opt -load ../build/Release+Debug+Asserts/lib/LLVM$2.dylib -$2 < $1.bc > $1_opt.bc
 
 echo "generating transformed llvm ir"
