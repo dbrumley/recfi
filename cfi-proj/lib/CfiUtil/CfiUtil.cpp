@@ -8,7 +8,7 @@
 #include "llvm/IR/Value.h"
 #include "llvm/IR/Function.h"
 #include "llvm/IR/Module.h"
-#include "CFILowering.h"
+#include "cfi/CfiUtil.h"
 
 using namespace llvm;
 

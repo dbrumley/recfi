@@ -64,7 +64,6 @@ namespace cfi {
     struct CfiPass : public ModulePass {
         static char ID;
         CfiPass() : ModulePass(ID) {}
-
         cfi::CFILogger *cfiLogger;
 
 
@@ -138,32 +137,15 @@ namespace cfi {
                     {
                         const Function *F = *FB;
 
-                        if (F->isIntrinsic())
+                        if (F->isIntrinsic() || F->isDeclaration() )
                         {
-                            //errs() << "Skipping intrinsic: " << F->getName()  << "\n";
-                            continue;
-                        }
-                        if( F->getBasicBlockList().empty() )
-                        {
-                            //errs() << "Skipping declaration: " << F->getName()  << "\n";
+                            //errs() << "Skipping intrinsic || declaration: " << F->getName()  << "\n";
                             continue;
                         }
 
                         //add indirect call targets to indCallDestMap
                         if (!cs.getCalledFunction())
                         {
-                            //function that is declaration only
-                            if (F->isDeclaration())
-                            {
-                                errs() << "CFI Error: "
-                                    << "Indirect function "
-                                    << I->getParent()->getName() << " "
-                                    << "calls declaration only target "
-                                    << F->getName() << "; cannot insert ID "
-                                    << "before declaration only targets\n";
-                                continue;
-                            }
-
                             BasicBlock *destBlock = const_cast<BasicBlock *>
                                 (&F->getEntryBlock());
                             BasicBlock::iterator destBlockStart = destBlock->begin();
@@ -171,6 +153,8 @@ namespace cfi {
                             instDestMap[I].insert(destInstr);
                         }
 
+                        
+                    
                         //Find all returns in this function
                         Function::iterator BB, BE;
                         Function* ncF = const_cast<Function*>(F);
@@ -329,6 +313,11 @@ namespace cfi {
             return checkmap;
         }
 
+        void calculate_stats(Module &M, InstDestMap instDestMap, InstIDMap instrIDs, InstIDSetMap idsetMap)
+        {
+            errs() << "stats\n";
+        }
+
         /**
          * @brief find all indirect call and branch targets, then insert
          * IDs and checks at corresponding locations for a context sensitive
@@ -375,6 +364,8 @@ namespace cfi {
             cfi::CFILowering cfil = cfi::CFILowering(M);
             cfil.insertChecks(targetCheckIDs);
             cfil.insertIDs(instrIDs);
+
+            calculate_stats(M, instDestMap, instrIDs, targetCheckIDs);
 
             errs() << "/========================================================================/\n\n";
             return true;

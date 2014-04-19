@@ -15,10 +15,8 @@
 #include "llvm/Pass.h"
 #include "llvm/Support/raw_ostream.h"
 #include "llvm/Support/CommandLine.h"
-#include "dsa/CallTargets.h"
-#include "dsa/DSGraph.h"
-#include "dsa/DSCallGraph.h"
-#include "CFILowering.h"
+
+#include <set>
 
 #include <iostream>
 #include <fstream>
@@ -32,12 +30,6 @@ using namespace llvm;
 #define MAX 0xFFFF
 
 namespace cfi{
-
-	typedef dsa::CallTargetFinder<EQTDDataStructures> CTF;
-
-	//iterator types
-	typedef std::list<CallSite>::iterator CallSiteIterator;
-	typedef std::vector<const Function *>::iterator CallTargetIterator;
 
 	//set types
 	typedef std::set<Instruction *> InstSet;
