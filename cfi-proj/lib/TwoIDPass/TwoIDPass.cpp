@@ -28,6 +28,14 @@ using namespace llvm;
 
 #define MAX 0xFFFF
 
+STATISTIC(STAT_ITRANSFER, "indirect transfers (icall, ibr, ret)");
+STATISTIC(STAT_ICALL, "indirect calls" );
+STATISTIC(STAT_CALL, "direct calls" );
+STATISTIC(STAT_IBRANCH, "indirect branches");
+STATISTIC(STAT_RETURN, "returns");
+STATISTIC(STAT_ICALL_TAR, "valid indirect call/branch targets");
+STATISTIC(STAT_RET_TAR, "valid return targets");
+
 namespace {
     /**
      * @brief CFILowering class - handles creation of llvm intrinsic
@@ -266,6 +274,7 @@ namespace {
                     BasicBlock::iterator II = (*BB)->begin();
                     builder.SetInsertPoint(II);
                     builder.CreateCall(cfiInsertID, targetID);
+                    STAT_ICALL_TAR++;
                 }
             }
         }
@@ -301,19 +310,31 @@ namespace {
                         {
                             builder.SetInsertPoint(BB);
                             builder.CreateCall(cfiCheckTarget, targetID);
+                            //indirect transfer site
+                            STAT_ITRANSFER++;
+                            STAT_ICALL++;
+
                         }
                         
+                        //Insert IDs after non-intrinsic 
                         if (calledFunc != NULL && !calledFunc->isIntrinsic())
                         {
                             BB++;
                             builder.SetInsertPoint(BB);
                             builder.CreateCall(cfiInsertID, returnID);
+                            //direct callsite
+                            STAT_CALL++;
+                            STAT_RET_TAR++;
+
                         }
                     }
                     else if (dyn_cast<IndirectBrInst>(I))
                     {
                         builder.SetInsertPoint(BB);
                         builder.CreateCall(cfiCheckTarget, targetID);
+                        //indirect transfer site
+                        STAT_ITRANSFER++;
+                        STAT_IBRANCH++;
                     }
                     else if (dyn_cast<ReturnInst>(I))
                     {
@@ -321,6 +342,9 @@ namespace {
                         {
                             builder.SetInsertPoint(BB);
                             builder.CreateCall(cfiCheckReturn, returnID);
+                            //indirect transfer site
+                            STAT_ITRANSFER++;
+                            STAT_RETURN++;
                         }
                     }
                 }
