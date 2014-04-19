@@ -8,56 +8,11 @@
 #include "llvm/IR/Value.h"
 #include "llvm/IR/Function.h"
 #include "llvm/IR/Module.h"
-
-#define CFI_INSERT_INTRINSIC "llvm.arm.cfiid"
-#define CFI_CHECK_TAR_INTRINSIC "llvm.arm.cfichecktar"
-#define CFI_CHECK_RET_INTRINSIC "llvm.arm.cficheckret"
+#include "CFILowering.h"
 
 using namespace llvm;
 
 namespace cfi{
-    class CFILowering {
-        typedef std::vector<std::string> ArgNames;
-        typedef std::vector<llvm::Type*> ArgTypes;
-        typedef std::vector<llvm::Value*> ArgVals;
-        
-        //cfi intrinsic functions, all are of the form:
-        //@llvm.arm.cfiid(i32 dest_id)
-        Function *cfiInsertID;
-        Function *cfiCheckTarget;
-        Function *cfiCheckReturn;
-        
-        /**
-         * @brief Creates a function
-         *
-         * @return Function pointer to newly created function
-         *
-         * @arg module - current function
-         * @arg retType - return type of function
-         * @arg theArgTypes - types for function args
-         * @arg theArgNames - names for function args
-         * @arg functName - name of function
-         * @arg linkage - linkage type
-         * @arg declarationOnly - if the function is only a declaration
-         * @arg isVarArg - if function has variable number of arguments
-         */
-        Function *createFunction(llvm::Module &module,
-                                 llvm::Type *retType,
-                                 const ArgTypes &theArgTypes,
-                                 const ArgNames &theArgNames,
-                                 const std::string &functName,
-                                 llvm::GlobalValue::LinkageTypes linkage,
-                                 bool declarationOnly,
-                                 bool isVarArg) {
-            llvm::FunctionType *functType =
-            llvm::FunctionType::get(retType, theArgTypes, isVarArg);
-            llvm::Function *ret =
-            llvm::Function::Create(functType, linkage, functName, &module);
-            if (!ret || declarationOnly)
-                return(ret);
-            return NULL;
-        }
-        
         /**
          * @brief creates a CFI intrinsic function
          *
@@ -66,10 +21,10 @@ namespace cfi{
          * @arg funcName - name of llvm intrinsic function
          * @arg M - current module
          */
-        Function *createCfiFunc(std::string funcName, Module &M)
+        Function *CFILowering::createCfiFunc(std::string funcName)
         {
             //create the cfiid_intrinsic function
-            llvm::IRBuilder<> builder(M.getContext());
+            llvm::IRBuilder<> builder(mod->getContext());
             
             //function
             llvm::Type *retType = builder.getVoidTy();
@@ -83,39 +38,191 @@ namespace cfi{
             argTypes.push_back(builder.getInt32Ty());
             
             //ex. call void @llvm.arm.cfiid(i32 dest_id)
-            Function *cfiFunc = createFunction(M,
-                                               retType,
-                                               argTypes,
-                                               argNames,
-                                               funcName,
-                                               llvm::Function::ExternalLinkage,
-                                               true,
-                                               false);
-            return cfiFunc;
+            llvm::FunctionType *functType = llvm::FunctionType::get(retType, argTypes, false);
+            return llvm::Function::Create(functType, llvm::Function::ExternalLinkage, funcName, mod);
         }
         
-    public:
-        //initialize intrinsic functions
-        CFILowering(Module &M)
+        /**
+         * @brief create cfi_abort function:
+         * void abort()
+         * {while(1);}
+         */
+        void CFILowering::createAbort()
         {
-            cfiInsertID = createCfiFunc(CFI_INSERT_INTRINSIC, M);
-            cfiCheckTarget = createCfiFunc(CFI_CHECK_TAR_INTRINSIC, M);
-            cfiCheckReturn = createCfiFunc(CFI_CHECK_RET_INTRINSIC, M);
+            Constant *c = mod->getOrInsertFunction(CFI_ABORT,
+                                                Type::getVoidTy(mod->getContext()),
+                                                NULL);
+            Function *abort = dyn_cast<Function>(c);
+            abort->setCallingConv(CallingConv::C);
+            BasicBlock* entry = BasicBlock::Create(getGlobalContext(),
+                                                   "entry",
+                                                   abort);
+            BasicBlock* loop = BasicBlock::Create(getGlobalContext(),
+                                                  "loop",
+                                                  abort);
+            IRBuilder<> builder(entry);
+            builder.CreateBr(loop);
+            builder.SetInsertPoint(loop);
+            builder.CreateBr(loop);
         }
         
-        Function *getCfiInsertID()
+        /**
+         * @brief initializes CFILowering object by initializing cfi
+         * intrinsic functions
+         *
+         * @arg M - module
+         */
+        CFILowering::CFILowering(Module &M)
         {
-            return cfiInsertID;
+            mod = &M;
+            cfiInsertID = createCfiFunc(CFI_INSERT_INTRINSIC);
+            cfiCheckTarget = createCfiFunc(CFI_CHECK_TAR_INTRINSIC);
+            cfiCheckReturn = createCfiFunc(CFI_CHECK_RET_INTRINSIC);
+            createAbort();
         }
         
-        Function *getCfiCheckTarget()
+        
+        /**
+         * @brief Inserts IDs into their respective sites
+         */
+        void CFILowering::insertIDs(InstIDMap instrIDs)
         {
-            return cfiCheckTarget;
+            //insert IDs after call sites
+            InstIDMap::iterator IB, IE;
+            for (IB = instrIDs.begin(), IE = instrIDs.end();
+                 IB != IE; IB++)
+            {
+                llvm::IRBuilder<> builder(IB->first->getParent());
+                Value *ID = llvm::ConstantInt::get(builder.getInt32Ty(),
+                                                   IB->second);
+
+                //get next instruction
+                BasicBlock::iterator II(IB->first);
+                
+                if(dyn_cast<CallInst>(II))
+                    II++;
+                builder.SetInsertPoint(II);
+                builder.CreateCall(cfiInsertID, ID);
+            }
         }
         
-        Function *getCfiCheckReturn()
+        /**
+         * @brief Inserts checks into their respective sites
+         */
+        void CFILowering::insertChecks(InstIDSetMap targetCheckIDs)
         {
-            return cfiCheckReturn;
+            //insert ID checks before call sites
+            InstIDSetMap::iterator IB, IE;
+            for (IB = targetCheckIDs.begin(), IE = targetCheckIDs.end();
+                 IB != IE; IB++)
+            {
+                Instruction* callInst = IB->first;
+                std::set<int>::iterator setB, setE;
+                for(setB = IB->second.begin(), setE = IB->second.end();
+                        setB != setE; setB++)
+                {
+                    int intID = *setB;
+                    llvm::IRBuilder<> builder(callInst->getParent());
+                    Value *ID = llvm::ConstantInt::get(builder.getInt32Ty(),
+                            intID);
+
+                    BasicBlock::iterator II(callInst);
+
+                    //insert before current instruction
+                    builder.SetInsertPoint(II);
+                    if (dyn_cast<ReturnInst>(callInst))
+                    {
+                        builder.CreateCall(cfiCheckReturn, ID);
+                    }
+                    else
+                    {
+                        builder.CreateCall(cfiCheckTarget, ID);
+                    }
+                }
+            }
         }
-    };
+        
+        CFILogger::CFILogger(const char * filename)
+        {
+            outStream.open(filename);
+        }
+
+        void CFILogger::log(std::string logstr)
+        {
+            outStream << logstr << "\n";
+        }
+        
+        void CFILogger::endlog()
+        {
+            outStream.close();
+        }
+        /********** Debug Functions **********/
+	/*
+         * prints out the destination map
+         */
+        void print_dest_map(InstDestMap instDestMap)
+        {
+            errs() << "Indirect Destination Map:\n";
+            
+           InstDestMap::iterator DB, DE;
+            for (DB = instDestMap.begin(), DE = instDestMap.end(); DB != DE; DB++)
+            {
+                errs() << "\tInstruction: ";
+                DB->first->dump();
+
+                errs() << "\tTargets:\n";
+                InstSet::iterator SB, SE;
+                for (SB = DB->second.begin(), SE = DB->second.end();
+                     SB != SE; SB++)
+                {
+                    Instruction *B = *SB;
+                    errs() << "\t\t";
+                    B->dump();
+                }
+                errs() << "\n";
+            }
+        }
+
+        /*
+         * prints out the ID maps
+         */
+        void print_ID_maps(InstIDMap callSiteIDs)
+        {
+            
+            errs() << "\nTarget ID Map:\n";
+           // int count = 0;
+            
+            InstIDMap::iterator IB, IE;
+            for (IB = callSiteIDs.begin(), IE = callSiteIDs.end();
+                 IB != IE; IB++)
+            {
+                errs() << "\tTarget Instr: ";
+                IB->first->dump();
+                errs() << "\t\tID = " << IB->second << "\n";
+            }
+        }
+
+        /*
+         * prints out the ID check maps
+         */
+        void print_ID_check_maps(InstIDSetMap targetCheckIDs)
+        {
+            errs() << "\nTarget ID Check Map:\n";
+
+            InstIDSetMap::iterator IB, IE;
+            for (IB = targetCheckIDs.begin(), IE = targetCheckIDs.end();
+                 IB != IE; IB++)
+            {
+                errs() << "\tTransfer Instr: ";
+                IB->first->dump();
+                std::set<int>::iterator setB, setE;
+                for(setB = IB->second.begin(), setE = IB->second.end();
+                        setB != setE; setB++)
+                {
+                    int intID = *setB;
+                    errs() << "\t\tTarget ID = " << intID << "\n";
+                }
+            }
+        }
+
 }

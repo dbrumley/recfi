@@ -1,4 +1,4 @@
-##===- lib/Transforms/Hello/Makefile -----------------------*- Makefile -*-===##
+##===- lib/CfiPass/Makefile -----------------------*- Makefile -*-===##
 #
 #                     The LLVM Compiler Infrastructure
 #
@@ -9,14 +9,16 @@
 
 LEVEL = ../../
 
-LIBRARYNAME = LLVMCfiPass
+LIBRARYNAME = LLVMcfi
 LOADABLE_MODULE = 1
 USEDLIBS =
 
-LLVMSRC = /Users/jabat/Documents/workspace/CMU/boeing/boeing-cfi/llvm-3.3
-#LLVMSRC = /Users/oulinyao/Desktop/MSISTM/CFI/project/boeing-cfi/llvm-3.3
+#LLVMSRC = /Users/jabat/Documents/workspace/CMU/boeing/boeing-cfi/llvm-3.3
+LLVMSRC = /home/lynn/boeing-cfi/llvm-3.3
 POOLALLOC_SRCDIR := $(LLVMSRC)/projects/poolalloc
 SC_FLAGS = -I$(POOLALLOC_SRCDIR)/include  
+
+LDFLAGS = /home/lynn/boeing-cfi/cfi-proj/build/$(BuildMode)/lib/libCFIUtil.a
 
 CFLAGS   += $(SC_FLAGS)
 CPPFLAGS += $(SC_FLAGS)
