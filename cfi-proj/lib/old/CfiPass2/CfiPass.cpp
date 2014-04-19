@@ -27,35 +27,6 @@ using namespace llvm;
 
 namespace cfi {
 
-    /*
-     * Levels of CFI precision
-     */
-    enum CfiLevel{
-        TwoId,          /* Abadi's basic "Two-ID CFI" */
-        MultiMerge,    /* Abadi's main "Multi-ID CFI" */
-        MultiList      /* Multi-ID with a white list for solving destination equivalence */
-    };
-
-    /*
-     * Command-line flag for the level of CFI precision
-     */
-    cl::opt<CfiLevel> PrecisionLevel(cl::Required, cl::desc("Choose level of CFI precision:"),
-            cl::values(
-                clEnumValN(TwoId, "two", "Abadi's basic two-id CFI"),
-                clEnumValN(MultiMerge, "merge", "Abadi's traditional multi-id CFI, with merged destination sets"),
-                clEnumValN(MultiList, "list", "Abadi's multi-id CFI, without destination set merging (whitelisting)"),
-                clEnumValEnd));
-
-    /*
-     * Command-line flag for printing precision statistics
-     */
-    cl::opt<bool> PrintPrecStats("s", cl::desc("Print precision statistics"));
-
-    /*
-     * Command-line flag for printing debug
-     */
-    cl::opt<bool> Debug("d", cl::desc("Useful for debugging"));
-
 
     /**
      * @brief CfiPass - module pass on the llvm IR that inserts cfi

@@ -1,4 +1,5 @@
 #include "llvm/IR/Module.h"
+#include "cfi/CfiUtil.h"
 #ifndef ICFIPASS
 #define ICFIPASS
 /*
@@ -14,7 +15,7 @@ namespace cfi {
         public: 
             ICfiPass() {};
             ~ICfiPass() {};
-            virtual void findAllTargets(){};
+            virtual void findAllTargets(CTF &ctf){};
             virtual void generateDestIDs() {};
             virtual void generateCheckIDs() {};
             virtual void lowerChecksAndIDs() {};

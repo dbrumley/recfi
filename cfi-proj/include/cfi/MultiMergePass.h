@@ -1,19 +1,15 @@
-#include "ICfiPass.h"
+#include "MultiPass.h"
 
 
 using namespace llvm;
 
 namespace cfi {
 
-class MultiMergePass : public ICfiPass
+class MultiMergePass : public MultiPass 
 {
     public: 
-        MultiMergePass(Module &M, bool debug);
-        ~MultiMergePass();
-        void findAllTargets();
+        MultiMergePass(Module &M, bool debug_flag);
         void generateDestIDs();
-        void generateCheckIDs();
-        void lowerChecksAndIDs();
         std::string getStats();
 };
 }

@@ -16,23 +16,32 @@
 #include "llvm/Support/raw_ostream.h"
 #include "llvm/Support/CommandLine.h"
 
-#include <set>
+#include "dsa/DSGraph.h"
+#include "dsa/CallTargets.h"
+#include "dsa/DSCallGraph.h"
 
+#include <set>
 #include <iostream>
 #include <fstream>
 using namespace llvm;
 
-#define CFI_INSERT_INTRINSIC "llvm.cfiid"
-#define CFI_CHECK_TAR_INTRINSIC "llvm.cfichecktar"
-#define CFI_CHECK_RET_INTRINSIC "llvm.cficheckret"
-#define CFI_ABORT "cfi_abort"
-
-#define MAX 0xFFFF
-
 namespace cfi{
+
+    #define CFI_INSERT_INTRINSIC "llvm.cfiid"
+    #define CFI_CHECK_TAR_INTRINSIC "llvm.cfichecktar"
+    #define CFI_CHECK_RET_INTRINSIC "llvm.cficheckret"
+    #define CFI_ABORT "cfi_abort"
+    #define MAX 0xFFFF
+
+	typedef dsa::CallTargetFinder<EQTDDataStructures> CTF;
+
+	//iterator types
+	typedef std::list<CallSite>::iterator CallSiteIterator;
+	typedef std::vector<const Function *>::iterator CallTargetIterator;
 
 	//set types
 	typedef std::set<Instruction *> InstSet;
+    typedef std::set<BasicBlock *> BBSet;
 
 	//helper map types
 	typedef std::map<Instruction *, InstSet> InstDestMap;
@@ -45,6 +54,16 @@ namespace cfi{
 	typedef std::vector<std::string> ArgNames;
 	typedef std::vector<llvm::Type*> ArgTypes;
 	typedef std::vector<llvm::Value*> ArgVals;
+
+
+    /*
+     * Levels of CFI precision
+     */
+    enum CfiLevel{
+        TwoID,          /* Abadi's basic "Two-ID CFI" */
+        MultiMerge,    /* Abadi's main "Multi-ID CFI" */
+        MultiList      /* Multi-ID with a white list for solving destination equivalence */
+    };
 
     void print_dest_map(InstDestMap instDestMap);
     void print_ID_maps(InstIDMap callSiteIDs);

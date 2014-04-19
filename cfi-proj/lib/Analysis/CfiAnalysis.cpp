@@ -20,18 +20,10 @@
 #include "cfi/MultiListPass.h"
 
 using namespace llvm;
+using namespace cfi;
 
 namespace {
-
-    /*
-     * Levels of CFI precision
-     */
-    enum CfiLevel{
-        TwoID,          /* Abadi's basic "Two-ID CFI" */
-        MultiMerge,    /* Abadi's main "Multi-ID CFI" */
-        MultiList      /* Multi-ID with a white list for solving destination equivalence */
-    };
-
+    
     /*
      * Command-line flag for the level of CFI precision
      */
@@ -51,13 +43,6 @@ namespace {
      * Command-line flag for printing debug
      */
     cl::opt<bool> Debug("d", cl::desc("Useful for debugging"));
-
-	typedef dsa::CallTargetFinder<EQTDDataStructures> CTF;
-
-	//iterator types
-	typedef std::list<CallSite>::iterator CallSiteIterator;
-	typedef std::vector<const Function *>::iterator CallTargetIterator;
-
 
     /**
      * @brief CfiPass - module pass on the llvm IR that inserts cfi
@@ -92,21 +77,25 @@ namespace {
 
             assert(PrecisionLevel == TwoID || PrecisionLevel == MultiMerge || PrecisionLevel == MultiList);
 
-            cfi::ICfiPass *pass;
+            ICfiPass *pass;
+            CTF *ctf;
             switch(PrecisionLevel)
             {
                 case TwoID:
-                    pass = new cfi::TwoIDPass(M, Debug);
+                    ctf = NULL;
+                    pass = new TwoIDPass(M, Debug);
                     break;
                 case MultiMerge:
-                    pass = new cfi::MultiMergePass(M, Debug);
+                    ctf = &getAnalysis<CTF>();
+                    pass = new MultiMergePass(M, Debug);
                     break;
                 case MultiList:
-                    pass = new cfi::MultiListPass(M, Debug);
+                    ctf = &getAnalysis<CTF>();
+                    pass = new MultiListPass(M, Debug);
                     break;
             }
             
-            pass->findAllTargets();
+            pass->findAllTargets(*ctf);
             pass->generateDestIDs();
             pass->generateCheckIDs();
             pass->lowerChecksAndIDs();
