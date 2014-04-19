@@ -8,6 +8,6 @@ LEVEL=..
 #
 # List all of the subdirectories that we will compile.
 #
-DIRS=CfiAnalysis CfiUtil CfiPasses
+DIRS=Analysis Util Passes
 
 include $(LEVEL)/Makefile.common
