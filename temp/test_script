@@ -1,0 +1,46 @@
+#!/usr/bin/env python
+
+import os
+import sys
+import subprocess
+import fileinput
+
+def usage():
+    use = "\n\tUsage: opt_script <dir> <pass>\n\
+\tdir - directory containing llvm bitcode files to harden\n\
+\tpass - name of llvm pass to run without extension\n"
+    print(use)
+
+def main():
+    if len(sys.argv) < 3:
+        usage()
+        sys.exit(1)
+
+    dir = sys.argv[1]
+    opt_pass = sys.argv[2]
+
+    os.chdir(dir)
+    bcfiles = []
+    for file in os.listdir("./"):
+        if file.endswith(".bc") and "_opt" not in file:
+            #skip files that aren't assembling due to unknown issues
+            bcfiles.append(os.path.abspath(file))
+
+    dsa_lib = "/home/lynn/boeing-cfi/build/projects/poolalloc/Release+Debug+Asserts/lib/LLVMDataStructure.so"
+    path_to_pass = "/home/lynn/boeing-cfi/cfi-proj/build/Release+Debug+Asserts/lib/LLVM" + opt_pass + ".so"
+    pyscript = "/home/lynn/boeing-cfi/cfi-main/PythonScripts/AsmEditor.py"
+    arm_as = "/usr/arm-linux-gnueabi/bin/as"
+
+    for file in bcfiles:
+        print("running pass on " + file)
+        
+        #generate assembly and replace llvm intrinsic with 
+        #actual asm instructions
+        asm_file = file.replace(".bc", ".s")
+        binary = file.replace(".bc", "")        
+
+        subprocess.check_call(["llc", "-O0", "-march", "arm", file, "-o", asm_file])
+        subprocess.check_call([arm_as, asm_file, "-o", binary])
+
+if __name__ == "__main__":
+    main()
