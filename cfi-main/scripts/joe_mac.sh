@@ -1,8 +1,8 @@
 #echo "generating llvm IR..."
-#clang -O1 -emit-llvm $1.c -S -o $1.ll
+clang -O1 -emit-llvm $1.c -S -o $1.ll
 
 #echo "generating llvm bitcode..."
-#clang -O1 -emit-llvm $1.c -c -o $1.bc
+clang -O1 -emit-llvm $1.c -c -o $1.bc
 
 echo "running $2 pass..."
 opt -debug-pass=Structure \

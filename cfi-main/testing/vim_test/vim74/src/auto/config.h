@@ -121,8 +121,8 @@
 #define HAVE_SVR4_PTYS 1
 
 /* Define to range of pty names to try */
-#define PTYRANGE0 "pqrstuvw"
-#define PTYRANGE1 "0123456789abcdef"
+/* #undef PTYRANGE0 */
+/* #undef PTYRANGE1 */
 
 /* Define mode for pty */
 /* #undef PTYMODE */
@@ -149,7 +149,7 @@
 /* #undef TGETSTR_CHAR_P */
 
 /* Define if tgetent() returns zero for an error */
-/* #undef TGETENT_ZERO_ERR */
+#define TGETENT_ZERO_ERR 0
 
 /* Define if the getcwd() function should not be used.  */
 /* #undef BAD_GETCWD */
@@ -189,8 +189,8 @@
 #define HAVE_SIGACTION 1
 #define HAVE_SIGALTSTACK 1
 #define HAVE_SIGSET 1
-#define HAVE_SIGSETJMP 1
-/* #undef HAVE_SIGSTACK */
+/* #undef HAVE_SIGSETJMP */
+#define HAVE_SIGSTACK 1
 #define HAVE_SIGVEC 1
 #define HAVE_STRCASECMP 1
 #define HAVE_STRERROR 1
@@ -201,10 +201,10 @@
 #define HAVE_STRPBRK 1
 #define HAVE_STRTOL 1
 #define HAVE_ST_BLKSIZE 1
-/* #undef HAVE_SYSCONF */
-#define HAVE_SYSCTL 1
-/* #undef HAVE_SYSINFO */
-/* #undef HAVE_SYSINFO_MEM_UNIT */
+#define HAVE_SYSCONF 1
+/* #undef HAVE_SYSCTL */
+#define HAVE_SYSINFO 1
+#define HAVE_SYSINFO_MEM_UNIT 1
 #define HAVE_TGETENT 1
 #define HAVE_TOWLOWER 1
 #define HAVE_TOWUPPER 1
@@ -229,9 +229,9 @@
 #define HAVE_ICONV_H 1
 #define HAVE_INTTYPES_H 1
 #define HAVE_LANGINFO_H 1
-#define HAVE_LIBC_H 1
+/* #undef HAVE_LIBC_H */
 #define HAVE_LIBGEN_H 1
-/* #undef HAVE_LIBINTL_H */
+#define HAVE_LIBINTL_H 1
 #define HAVE_LOCALE_H 1
 #define HAVE_MATH_H 1
 /* #undef HAVE_NDIR_H */
@@ -242,9 +242,9 @@
 #define HAVE_SGTTY_H 1
 #define HAVE_STDINT_H 1
 #define HAVE_STRINGS_H 1
-/* #undef HAVE_STROPTS_H */
+#define HAVE_STROPTS_H 1
 /* #undef HAVE_SYS_ACCESS_H */
-#define HAVE_SYS_ACL_H 1
+/* #undef HAVE_SYS_ACL_H */
 /* #undef HAVE_SYS_DIR_H */
 #define HAVE_SYS_IOCTL_H 1
 /* #undef HAVE_SYS_NDIR_H */
@@ -253,17 +253,17 @@
 /* #undef HAVE_SYS_PTEM_H */
 #define HAVE_SYS_RESOURCE_H 1
 #define HAVE_SYS_SELECT_H 1
-/* #undef HAVE_SYS_STATFS_H */
+#define HAVE_SYS_STATFS_H 1
 /* #undef HAVE_SYS_STREAM_H */
 #define HAVE_SYS_SYSCTL_H 1
-/* #undef HAVE_SYS_SYSINFO_H */
+#define HAVE_SYS_SYSINFO_H 1
 /* #undef HAVE_SYS_SYSTEMINFO_H */
 #define HAVE_SYS_TIME_H 1
 #define HAVE_SYS_TYPES_H 1
 #define HAVE_SYS_UTSNAME_H 1
 #define HAVE_TERMCAP_H 1
 #define HAVE_TERMIOS_H 1
-/* #undef HAVE_TERMIO_H */
+#define HAVE_TERMIO_H 1
 #define HAVE_WCHAR_H 1
 #define HAVE_WCTYPE_H 1
 #define HAVE_UNISTD_H 1
@@ -301,7 +301,7 @@
 #define HAVE_STRING_H 1
 
 /* Define if strings.h cannot be included when strings.h already is */
-#define NO_STRINGS_WITH_STRING_H 1
+/* #undef NO_STRINGS_WITH_STRING_H */
 
 /* Define if you want tiny features. */
 /* #undef FEAT_TINY */
@@ -364,7 +364,7 @@
 /* #undef FEAT_SNIFF */
 
 /* Define if you want to add support for ACL */
-#define HAVE_POSIX_ACL 1
+/* #undef HAVE_POSIX_ACL */
 /* #undef HAVE_SOLARIS_ZFS_ACL */
 /* #undef HAVE_SOLARIS_ACL */
 /* #undef HAVE_AIX_ACL */

@@ -1,6 +1,6 @@
 /*
-* osdef.h is automagically created from osdef?.h.in by osdef.sh -- DO NOT EDIT
-*/
+ * osdef.h is automagically created from osdef?.h.in by osdef.sh -- DO NOT EDIT
+ */
 /* autoconf cannot fiddle out declarations. Use our homebrewn tools. (jw) */
 /*
  * Declarations that may cause conflicts belong here so that osdef.sh
@@ -73,10 +73,12 @@ extern int	poll __ARGS((struct pollfd *, long, int));
 
 
 #ifdef HAVE_SIGSET
+extern RETSIGTYPE (*sigset __ARGS((int, RETSIGTYPE (*func) SIGPROTOARG))) __ARGS(SIGPROTOARG);
 #endif
 
 #if defined(HAVE_SETJMP_H)
 # ifdef HAVE_SIGSETJMP
+extern int	sigsetjmp __ARGS((sigjmp_buf, int));
 # else
 # endif
 #endif
