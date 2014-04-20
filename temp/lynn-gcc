@@ -16,22 +16,26 @@ def main():
     if "-Werror" in str:
 	sys.argv.remove("-Werror")
 	
-    if not isLink():
-        os.execvp("clang", ["clang", "-emit-llvm",
-            "-target", "armv6a-linux-gnueabihf",
-            "-mcpu=cortex-a9", "-mfloat-abi=hard", 
+    #if not isLink():
+    os.execvp("clang", ["clang", "-emit-llvm", "-static",
+#            "-target", "arm-none-eabi",
+        "-usr-gold-plugin", "-Wl,-plugin-opt=also-emit-llvm",
+        "-target", "armv7a-linux-gnueabi",
+        ] + sys.argv[1:])
+#            "-mcpu=cortex-a9", "-mfloat-abi=hard", 
             #"-ccc-gcc-name", "arm-linux-gnueabihf-gcc", 
             #"-I/usr/arm-linux-gnueabihf/include/",
             #"-I/usr/include/x86_64-linux-gnu/",
-            "-Wno-unknown-warning-option"
-            ] + sys.argv[1:])
+            #"-Wno-unknown-warning-option"
+#        ] + sys.argv[1:])
 
-    else:
-	os.execvp("clang", ["clang", "-use-gold-plugin", "-v",
-	    "-Wl,-plugin-opt=also-emit-llvm",
-            "-target", "armv6a-linux-gnueabihf",
-            "-mcpu=cortex-a9", "-mfloat-abi=hard"
-            ] + sys.argv[1:])
+#    else:
+#	os.execvp("clang", ["clang", "-use-gold-plugin", "-static", 
+#	    "-Wl,-plugin-opt=also-emit-llvm",
+#            "-target", "arm-none-eabi",
+#            "-target", "armv7a-linux-gnueabi",
+#            "-mcpu=cortex-a9", "-mfloat-abi=hard"
+#            ] + sys.argv[1:])
    
     return 1
 

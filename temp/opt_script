@@ -3,6 +3,7 @@
 import os
 import sys
 import subprocess
+import fileinput
 
 def usage():
     use = "\n\tUsage: opt_script <dir> <pass>\n\
@@ -21,27 +22,49 @@ def main():
     os.chdir(dir)
     bcfiles = []
     for file in os.listdir("./"):
-        if file.endswith(".bc"):
-            bcfiles.append(os.path.abspath(file))
+        if file.endswith(".bc") and "_opt" not in file:
+            #skip files that aren't assembling due to unknown issues
+            if "ptx" not in file and "sha1sum" not in file:
+                bcfiles.append(os.path.abspath(file))
 
     dsa_lib = "/home/lynn/boeing-cfi/build/projects/poolalloc/Release+Debug+Asserts/lib/LLVMDataStructure.so"
-    path_to_pass = "/home/lynn/boeing-cfi/llvm-cfi/build/Release+Debug+Asserts/lib/LLVM" + opt_pass + ".so"
-    path_to_pyscript = "/home/lynn/boeing-cfi/llvm-cfi/lib/PythonScripts/AsmPython.py"
+    path_to_pass = "/home/lynn/boeing-cfi/cfi-proj/build/Release+Debug+Asserts/lib/LLVM" + opt_pass + ".so"
+    pyscript = "/home/lynn/boeing-cfi/cfi-main/PythonScripts/AsmEditor.py"
 
     for file in bcfiles:
         print("running pass on " + file)
+        disass = file.replace(".bc", ".ll")
+        opt_file = file.replace(".bc", "_opt.bc")
+        
+        #disassemble .bc file, then change triple 
+        #from arm to x86_64, then reassemble the file
+        subprocess.check_call(["llvm-dis", file])
+        for line in fileinput.input(disass, inplace=True):
+            if "target triple" in line:
+                line = "target triple = \"x86_64--linux-gnueabi\"\n"
+                sys.stdout.write(line) 
+            else:
+                sys.stdout.write(line)
+        fileinput.close()
+        subprocess.check_call(["llvm-as", disass, "-o", file])
+
         #run opt pass on .bc files
         subprocess.check_call(["opt", "-load", dsa_lib, 
             "-load", path_to_pass,
             "-" + opt_pass, 
-            file, "-o", file])
-        subprocess.check_call(["llvm-dis", file])
+            file, "-o", opt_file])
+        subprocess.check_call(["llvm-dis", opt_file]) 
 
         #generate assembly and replace llvm intrinsic with 
         #actual asm instructions
         asm_file = file.replace(".bc", ".s")
-        subprocess.check_call(["llc", "-O3", "-march", "arm", file, "-o", asm_file])
-        #subprocess.check_call(["python", path_to_pyscript, "-o", asm_file, asm_file])
+        asm_fixed = asm_file.replace(".s", "_fixed.s")
+        binary = file.replace(".bc", "")        
+
+        subprocess.check_call(["llc", "-O0", "-mtriple", "armv7a-linux-gnueabi", opt_file, "-o", asm_file])
+        subprocess.check_call(["python", pyscript, "-f", asm_file, "-o", asm_fixed])
+        subprocess.check_call(["arm-linux-gnueabi-gcc", "-static", asm_fixed, "-o", binary])
+        subprocess.check_call(["chmod", "+x", binary])
 
 if __name__ == "__main__":
     main()
