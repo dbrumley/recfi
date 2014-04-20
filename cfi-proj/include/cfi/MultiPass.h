@@ -21,7 +21,7 @@ class MultiPass : public ICfiPass
     public: 
         MultiPass(Module &M, bool debug_flag);
         ~MultiPass();
-        void findAllTargets(CTF &ctf);
+        void findAllTargets(Module &M, CTF &ctf);
         virtual void generateDestIDs() {}
         void generateCheckIDs();
         void lowerChecksAndIDs();

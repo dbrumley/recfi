@@ -9,6 +9,7 @@ opt -debug-pass=Structure \
 -stats \
 -load ../../build/projects/poolalloc/Release+Debug+Asserts/lib/LLVMDataStructure.so \
 -load ../../cfi-proj/build/Release+Debug+Asserts/lib/CfiPasses.so \
+-load ../../cfi-proj/build/Release+Debug+Asserts/lib/CfiUtil.so \
 -load ../../cfi-proj/build/Release+Debug+Asserts/lib/LLVM$2.so \
 -$2 \
 -$3 \

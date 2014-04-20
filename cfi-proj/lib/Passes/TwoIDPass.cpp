@@ -17,46 +17,56 @@ namespace cfi {
     /*
      * Populate jmpSites, jmpTars, retSites, retTars
      */
-    void TwoIDPass::findAllTargets(CTF &ctf)
+    void TwoIDPass::findAllTargets( Module &M, CTF &ctf)
     {
-        /* ignore ctf */ 
+        errs() << "TwoIDPass::findAllTargets\n";
         Module::iterator MB, ME;
-        for (MB = mod->begin(), ME = mod->end(); MB != ME; MB++)
+        for (MB = M.begin(), ME = M.end(); MB != ME; MB++)
         {
-            Function &F = *MB;
+            Function *F = &*MB;
+            //errs().write_escaped(F->getName()) << '\n';
+            //for all basic blocks in function
             Function::iterator FB, FE;
-            for (FB = F.begin(), FE = F.end(); FB != FE; FB++)
+            for (FB = F->begin(), FE = F->end(); FB != FE; FB++)
             {
+                errs() << "\t\tBB: \n";
                 BasicBlock::iterator BB, BE;
                 for(BB = FB->begin(), BE = FB->end(); BB != BE; BB++)
                 {
+                    errs() << "word";
                     Instruction *I = &*BB;
+                    errs() << "\t\t\tInstr:" << *I << "\n";
 
                     //FOUND: CALLSITE
                     if (CallInst* callInst = dyn_cast<CallInst>(I))
                     {
+                        errs() << "\t\t\t[Callsite]\n";
                         Function *calledFunc = callInst->getCalledFunction();
                         //FOUND: ICALL
                         if (calledFunc == NULL)
                         {
+                            errs() << "\t\t\t[ICall]\n";
                             jmpSites.insert(I);
                         }
                         //FOUND: RETURN SITE
                         if (!calledFunc->isIntrinsic())
                         {
-                            Instruction *II = I+1;
-                                retTars.insert(II);
+                            errs() << "\t\t\t[AsRetSite]\n";
+                            retTars.insert(++I);
+                            I--;
                         }
                     }
                     //FOUND: IBR SITE
                     else if (dyn_cast<IndirectBrInst>(I))
                     {
+                        errs() << "\t\t\t[IBRSite]\n";
                         jmpSites.insert(I);
                     }
                     //FOUND: RET SITE
                     else if (dyn_cast<ReturnInst>(I))
                     {
-                        if (F.getName() != "main")
+                        errs() << "\t\t\t[RetSite]\n";
+                        if (F->getName() != "main")
                         {
                             retSites.insert(I);
                         }
@@ -64,11 +74,12 @@ namespace cfi {
                 }
             }
 
-            if (F.isDeclaration())
+            errs() << "\t\t\t[Finding target blocks]\n";
+            if (F->isDeclaration())
                 continue;
 
             //find all indirect target blocks, including entry block
-            BBSet indTargets = findIndTargets(F);
+            BBSet indTargets = findIndTargets(*F);
 
             //for all targets in indTargets, insert targetID at beginning
             //of block

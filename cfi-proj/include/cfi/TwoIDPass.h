@@ -28,7 +28,7 @@ namespace cfi {
         public: 
             TwoIDPass(Module &M, bool debug);
             ~TwoIDPass();
-            void findAllTargets(CTF &ctf);
+            void findAllTargets(Module &M, CTF &ctf);
             void generateDestIDs();
             void generateCheckIDs();
             void lowerChecksAndIDs();
