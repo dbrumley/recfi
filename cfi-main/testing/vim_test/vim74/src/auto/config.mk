@@ -19,20 +19,20 @@ VIEWNAME	= view
 
 CC		= gcc
 DEFS		= -DHAVE_CONFIG_H
-CFLAGS		= -O2 -fno-strength-reduce -Wall -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1
-CPPFLAGS	=  -DMACOS_X_UNIX -no-cpp-precomp
+CFLAGS		= -g -O2 -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1
+CPPFLAGS	=  -I/usr/local/include
 srcdir		= .
 
-LDFLAGS		=  -L/usr/local/lib
-LIBS		= -lm -lncurses  -liconv -framework Cocoa
-TAGPRG		= ctags -t
+LDFLAGS		=  -L/usr/local/lib -Wl,--as-needed
+LIBS		= -lm -ltinfo -lnsl  -ldl
+TAGPRG		= ctags
 
 CPP		= gcc -E
 CPP_MM		= M
 DEPEND_CFLAGS_FILTER = | sed 's+-I */+-isystem /+g'
-LINK_AS_NEEDED	= 
-X_CFLAGS	= 
-X_LIBS_DIR	= 
+LINK_AS_NEEDED	= yes
+X_CFLAGS	=  
+X_LIBS_DIR	=  
 X_PRE_LIBS	= 
 X_EXTRA_LIBS	= 
 X_LIBS		= 
@@ -99,7 +99,7 @@ RUBY_LIBS	=
 SNIFF_SRC	= 
 SNIFF_OBJ	= 
 
-AWK		= awk
+AWK		= mawk
 
 STRIP		= strip
 
@@ -158,8 +158,8 @@ MOTIF_LIBNAME	=
 GTK_LIBNAME	= 
 
 ### Any OS dependent extra source and object file
-OS_EXTRA_SRC	= os_macosx.m os_mac_conv.c
-OS_EXTRA_OBJ	= objects/os_macosx.o objects/os_mac_conv.o
+OS_EXTRA_SRC	= 
+OS_EXTRA_OBJ	= 
 
 ### If the *.po files are to be translated to *.mo files.
 MAKEMO		= 
