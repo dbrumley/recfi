@@ -16,7 +16,8 @@ def main():
     for file in os.listdir("./"):
         if file.endswith(".bc") and "_opt" not in file:
             #skip files that aren't assembling due to unknown issues
-            bcfiles.append(os.path.abspath(file))
+            if "su.bc" not in file:
+                bcfiles.append(os.path.abspath(file))
 
     for file in bcfiles:
         print("running pass on " + file)
@@ -30,7 +31,7 @@ def main():
         subprocess.check_call(["arm-linux-gnueabi-gcc", "-static",   
             #"-I/usr/lib/gcc/arm-linux-gnueabi/4.6/include", "-I/usr/lib/gcc/arm-linux-gnueabi/4.6/include-fixed", 
             #"-I/usr/arm-linux-gnueabi/include", "-I/usr/include",
-            "-L/usr/arm-linux-gnueabi/lib", "-L/usr/lib/gcc/arm-linux-gnueabi",
+            #"-L/usr/arm-linux-gnueabi/lib", "-L/usr/lib/gcc/arm-linux-gnueabi",
             asm_file, "-lrt", "-o", binary])
         subprocess.check_call(["chmod", "+x", binary])
 

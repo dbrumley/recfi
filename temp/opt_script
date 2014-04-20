@@ -63,7 +63,7 @@ def main():
 
         subprocess.check_call(["llc", "-O0", "-mtriple", "armv7a-linux-gnueabi", opt_file, "-o", asm_file])
         subprocess.check_call(["python", pyscript, "-f", asm_file, "-o", asm_fixed])
-        subprocess.check_call(["arm-linux-gnueabi-gcc", "-static", asm_fixed, "-o", binary])
+        subprocess.check_call(["arm-linux-gnueabi-gcc", "-static", asm_fixed, "-lrt", "-o", binary])
         subprocess.check_call(["chmod", "+x", binary])
 
 if __name__ == "__main__":

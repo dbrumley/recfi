@@ -18,7 +18,6 @@ def main():
 	
     #if not isLink():
     os.execvp("clang", ["clang", "-emit-llvm", "-static",
-#            "-target", "arm-none-eabi",
         "-usr-gold-plugin", "-Wl,-plugin-opt=also-emit-llvm",
         "-target", "armv7a-linux-gnueabi",
         ] + sys.argv[1:])
