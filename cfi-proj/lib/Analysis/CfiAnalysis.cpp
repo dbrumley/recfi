@@ -65,12 +65,13 @@ namespace {
          */
         virtual bool runOnModule(Module &M) 
         {  
+            /*
             errs() << "/========================================================================/\n\n";
             errs() << "Running CFI Pass: \
                 Precision=" << PrecisionLevel << ", \
                 Stats=" << PrintPrecStats << ", \
                 Debug=" << Debug << "\n";
-
+*/
             srand(time(NULL));
 
             //cfi::ICfiPass *pass;
@@ -79,7 +80,7 @@ namespace {
 
             ICfiPass *pass;
             CTF *ctf;
-            errs() << "Creating pass.\n";
+            //errs() << "Creating pass.\n";
             switch(PrecisionLevel)
             {
                 case TwoID:
@@ -95,20 +96,22 @@ namespace {
                     pass = new MultiListPass(M, Debug);
                     break;
             }
-            errs() << "Creating pass....Done\n";
+            //errs() << "Creating pass....Done\n";
             
-            errs() << "Finding targets..\n";
+            //errs() << "Finding targets..\n";
             pass->findAllTargets(*ctf);
-            errs() << "generating IDs..\n";
+            //errs() << "generating IDs..\n";
             pass->generateDestIDs();
-            errs() << "generating Check IDs..\n";
+            //errs() << "generating Check IDs..\n";
             pass->generateCheckIDs();
-            errs() << "Lowering...\n";
+            //errs() << "Lowering...\n";
             pass->lowerChecksAndIDs();
 
             if( PrintPrecStats ) 
                 errs() << pass->getStats() << "\n";
+            /*
             errs() << "/========================================================================/\n\n";
+            */
             return true;
         }
     };

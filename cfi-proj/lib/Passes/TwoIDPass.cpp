@@ -122,21 +122,17 @@ namespace cfi {
         InstSet::iterator IB, IE;
         
         jmpID = rand() % MAX;
-        errs() << "Jmp ID: \n";
         for (IB = jmpTars.begin(), IE = jmpTars.end(); IB != IE; IB++)
         {
             Instruction* K = *IB;
             idMap[K] = jmpID;
-            errs() << "\t" << *K << "\n";
         }
 
         do{retID = rand() % MAX;} while (retID == jmpID); //ensure the two IDs are unique
-        errs() << "Ret ID: \n";
         for (IB = retTars.begin(), IE = retTars.end(); IB != IE; IB++)
         {
             Instruction* K = *IB;
             idMap[K] = retID;
-            errs() << "\t" << *K << "\n";
         }
     }
 
@@ -171,7 +167,6 @@ namespace cfi {
     {
         CFILowering cfil = CFILowering(*mod);
         cfil.insertChecks(checkMap); //checkamp 
-        print_ID_maps(idMap);
         cfil.insertIDs(idMap);
     }
     std::string TwoIDPass::getStats() {return "stats: two-id";}

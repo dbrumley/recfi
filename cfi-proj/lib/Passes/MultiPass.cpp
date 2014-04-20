@@ -137,7 +137,6 @@ namespace cfi {
         }
     void MultiPass::lowerChecksAndIDs()
     {
-        print_ID_maps(idMap);
         CFILowering cfil = CFILowering(*mod);
         cfil.insertChecks(checkMap);
         cfil.insertIDs(idMap);
