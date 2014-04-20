@@ -21,7 +21,7 @@ namespace cfi {
         return;
     }
 
-    void MultiPass::findAllTargets(Module &M, CTF &ctf)
+    void MultiPass::findAllTargets(CTF &ctf)
     {
         /*
          * First: find indirect branch targets 
@@ -137,6 +137,7 @@ namespace cfi {
         }
     void MultiPass::lowerChecksAndIDs()
     {
+        print_ID_maps(idMap);
         CFILowering cfil = CFILowering(*mod);
         cfil.insertChecks(checkMap);
         cfil.insertIDs(idMap);

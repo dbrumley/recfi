@@ -12,7 +12,6 @@ namespace cfi {
     }
     void MultiMergePass::generateDestIDs()
     {
-        InstIDMap idMap;
         std::list<InstSet> setList;
 
         //merge target destination sets

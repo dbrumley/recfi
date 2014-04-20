@@ -15,7 +15,7 @@ namespace cfi {
         public: 
             ICfiPass() {};
             ~ICfiPass() {};
-            virtual void findAllTargets(Module &M, CTF &ctf);
+            virtual void findAllTargets(CTF &ctf);
             virtual void generateDestIDs() {};
             virtual void generateCheckIDs() {};
             virtual void lowerChecksAndIDs() {};

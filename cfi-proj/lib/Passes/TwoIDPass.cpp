@@ -11,17 +11,20 @@
 using namespace llvm;
 
 namespace cfi {
-    TwoIDPass::TwoIDPass(Module &M, bool debug) {return;}
-
+    TwoIDPass::TwoIDPass(Module &M, bool debug_flag) 
+    {
+        mod = &M;
+        debug = debug_flag;
+        return;
+    }
 
     /*
      * Populate jmpSites, jmpTars, retSites, retTars
      */
-    void TwoIDPass::findAllTargets( Module &M, CTF &ctf)
+    void TwoIDPass::findAllTargets(CTF &ctf)
     {
-        errs() << "TwoIDPass::findAllTargets\n";
         Module::iterator MB, ME;
-        for (MB = M.begin(), ME = M.end(); MB != ME; MB++)
+        for (MB = mod->begin(), ME = mod->end(); MB != ME; MB++)
         {
             Function *F = &*MB;
             //errs().write_escaped(F->getName()) << '\n';
@@ -29,43 +32,35 @@ namespace cfi {
             Function::iterator FB, FE;
             for (FB = F->begin(), FE = F->end(); FB != FE; FB++)
             {
-                errs() << "\t\tBB: \n";
                 BasicBlock::iterator BB, BE;
                 for(BB = FB->begin(), BE = FB->end(); BB != BE; BB++)
                 {
-                    errs() << "word";
                     Instruction *I = &*BB;
-                    errs() << "\t\t\tInstr:" << *I << "\n";
 
                     //FOUND: CALLSITE
                     if (CallInst* callInst = dyn_cast<CallInst>(I))
                     {
-                        errs() << "\t\t\t[Callsite]\n";
                         Function *calledFunc = callInst->getCalledFunction();
                         //FOUND: ICALL
                         if (calledFunc == NULL)
                         {
-                            errs() << "\t\t\t[ICall]\n";
                             jmpSites.insert(I);
                         }
-                        //FOUND: RETURN SITE
-                        if (!calledFunc->isIntrinsic())
+                        else if (calledFunc->isIntrinsic())
                         {
-                            errs() << "\t\t\t[AsRetSite]\n";
-                            retTars.insert(++I);
-                            I--;
+                            continue;
                         }
+                        //FOUND: RETURN SITE (call or icall)
+                        retTars.insert(I);
                     }
                     //FOUND: IBR SITE
                     else if (dyn_cast<IndirectBrInst>(I))
                     {
-                        errs() << "\t\t\t[IBRSite]\n";
                         jmpSites.insert(I);
                     }
                     //FOUND: RET SITE
                     else if (dyn_cast<ReturnInst>(I))
                     {
-                        errs() << "\t\t\t[RetSite]\n";
                         if (F->getName() != "main")
                         {
                             retSites.insert(I);
@@ -74,7 +69,6 @@ namespace cfi {
                 }
             }
 
-            errs() << "\t\t\t[Finding target blocks]\n";
             if (F->isDeclaration())
                 continue;
 
@@ -128,17 +122,21 @@ namespace cfi {
         InstSet::iterator IB, IE;
         
         jmpID = rand() % MAX;
+        errs() << "Jmp ID: \n";
         for (IB = jmpTars.begin(), IE = jmpTars.end(); IB != IE; IB++)
         {
             Instruction* K = *IB;
             idMap[K] = jmpID;
+            errs() << "\t" << *K << "\n";
         }
 
         do{retID = rand() % MAX;} while (retID == jmpID); //ensure the two IDs are unique
+        errs() << "Ret ID: \n";
         for (IB = retTars.begin(), IE = retTars.end(); IB != IE; IB++)
         {
             Instruction* K = *IB;
             idMap[K] = retID;
+            errs() << "\t" << *K << "\n";
         }
     }
 
@@ -172,9 +170,9 @@ namespace cfi {
     void TwoIDPass::lowerChecksAndIDs() 
     {
         CFILowering cfil = CFILowering(*mod);
-        cfil.insertIDs(idMap);
         cfil.insertChecks(checkMap); //checkamp 
-        return;
+        print_ID_maps(idMap);
+        cfil.insertIDs(idMap);
     }
     std::string TwoIDPass::getStats() {return "stats: two-id";}
 }

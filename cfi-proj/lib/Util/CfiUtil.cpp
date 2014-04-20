@@ -23,6 +23,7 @@ namespace cfi{
          */
         Function *CFILowering::createCfiFunc(std::string funcName)
         {
+
             //create the cfiid_intrinsic function
             llvm::IRBuilder<> builder(mod->getContext());
             

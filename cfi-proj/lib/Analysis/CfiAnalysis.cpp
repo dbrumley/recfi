@@ -98,8 +98,7 @@ namespace {
             errs() << "Creating pass....Done\n";
             
             errs() << "Finding targets..\n";
-            pass->findAllTargets(M, *ctf);
-            /*
+            pass->findAllTargets(*ctf);
             errs() << "generating IDs..\n";
             pass->generateDestIDs();
             errs() << "generating Check IDs..\n";
@@ -109,7 +108,6 @@ namespace {
 
             if( PrintPrecStats ) 
                 errs() << pass->getStats() << "\n";
-*/
             errs() << "/========================================================================/\n\n";
             return true;
         }

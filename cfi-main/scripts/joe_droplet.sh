@@ -16,11 +16,11 @@ opt -debug-pass=Structure \
 < $1.bc > $1_opt.bc
 #opt -load ../build/Release+Debug+Asserts/lib/LLVM$2.dylib -$2 < $1.bc > $1_opt.bc
 
-echo "generating transformed llvm ir"
-llvm-dis $1_opt.bc
+#echo "generating transformed llvm ir"
+#llvm-dis $1_opt.bc
 
-echo "generating target specific assembly..."
-llc -O1 -march arm $1_opt.bc
+#echo "generating target specific assembly..."
+#llc -O1 -march arm $1_opt.bc
 
-echo "generating target specific object..."
-llc -O1 -march arm -filetype obj $1_opt.bc
+#echo "generating target specific object..."
+#llc -O1 -march arm -filetype obj $1_opt.bc

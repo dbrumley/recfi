@@ -17,8 +17,6 @@ namespace cfi {
     }
     void MultiListPass::generateDestIDs()
     {
-        InstIDMap idMap;
-
         InstSet visitedSet;
         InstDestMap::iterator MB, ME;
         /* create a set of target instructions */
