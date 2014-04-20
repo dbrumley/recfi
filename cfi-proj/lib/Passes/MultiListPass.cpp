@@ -14,9 +14,6 @@ namespace cfi {
 
     MultiListPass::MultiListPass(Module &M, bool debug_flag) : MultiPass(M, debug_flag)
     {
-        mod = &M;
-        debug = debug_flag;
-        return;
     }
     void MultiListPass::generateDestIDs()
     {

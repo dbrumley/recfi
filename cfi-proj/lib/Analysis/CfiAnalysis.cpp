@@ -79,6 +79,7 @@ namespace {
 
             ICfiPass *pass;
             CTF *ctf;
+            errs() << "Creating pass.\n";
             switch(PrecisionLevel)
             {
                 case TwoID:
@@ -94,10 +95,15 @@ namespace {
                     pass = new MultiListPass(M, Debug);
                     break;
             }
+            errs() << "Creating pass....Done\n";
             
+            errs() << "Finding targets..\n";
             pass->findAllTargets(*ctf);
+            errs() << "generating IDs..\n";
             pass->generateDestIDs();
+            errs() << "generating Check IDs..\n";
             pass->generateCheckIDs();
+            errs() << "Lowering...\n";
             pass->lowerChecksAndIDs();
 
             if( PrintPrecStats ) 

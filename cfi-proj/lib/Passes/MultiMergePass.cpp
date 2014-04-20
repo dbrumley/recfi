@@ -7,7 +7,9 @@ using namespace llvm;
 
 namespace cfi {
 
-    MultiMergePass::MultiMergePass(Module &M, bool debug_flag) : MultiPass(M, debug_flag) {return;}
+    MultiMergePass::MultiMergePass(Module &M, bool debug_flag) : MultiPass(M, debug_flag)
+    {
+    }
     void MultiMergePass::generateDestIDs()
     {
         InstIDMap idMap;

@@ -22,10 +22,10 @@ class MultiPass : public ICfiPass
         MultiPass(Module &M, bool debug_flag);
         ~MultiPass();
         void findAllTargets(CTF &ctf);
-        virtual void generateDestIDs();
+        virtual void generateDestIDs() {}
         void generateCheckIDs();
         void lowerChecksAndIDs();
-        virtual std::string getStats();
+        virtual std::string getStats(){return "stats: MultiPass";}
 };
 }
 #endif

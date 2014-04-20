@@ -154,7 +154,7 @@ namespace cfi {
             if( idset->find(retID) != idset->end() ) // idset.contains(ID)
                 continue;
             else
-                idset->insert(jmpID);
+                idset->insert(retID);
         }
     }
 
