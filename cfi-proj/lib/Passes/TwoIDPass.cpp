@@ -140,7 +140,6 @@ namespace cfi {
     {
         InstSet::iterator IB, IE;
         
-        jmpID = rand() % MAX;
         for (IB = jmpSites.begin(), IE = jmpSites.end(); IB != IE; IB++)
         {
             Instruction* K = *IB;
@@ -151,7 +150,6 @@ namespace cfi {
                 idset->insert(jmpID);
         }
 
-        do{retID = rand() % MAX;} while (retID == jmpID); //ensure the two IDs are unique
         for (IB = retSites.begin(), IE = retSites.end(); IB != IE; IB++)
         {
             Instruction* K = *IB;

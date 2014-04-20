@@ -43,7 +43,7 @@ class ARMAsmEditor(AsmEditorBase):
             return True
         elif operand in self.pc_names:
             return True
-        elif "ldm" in operand:
+        elif "ldm" in opcode or "pop" in opcode:
             #iterate through elements in line,
             #ex. ["ldmfd", "sp,", "r0-r5,", "r12-r15"]
             #TODO: better parsing of load (using semantics)
@@ -57,12 +57,10 @@ class ARMAsmEditor(AsmEditorBase):
     def insert_ID_check(self, asm_new, id, r_temp, first_id):
         if first_id:
             asm_new.append("\tmovtne r12, " + id + "\t@ ID encoding, doesn't need to execute\n")
-            #asm_new.append("\tsub r12, pc, #12 \t@ get previous instr addr\n")
             asm_new.append("\tldr r12, [pc, #-12] \t@ get ID encoding\n")
             asm_new.append("\tcmp " + r_temp + ", r12\n")
         else:
             asm_new.append("\tmovtne r12, " + id + "\t@ extra ID\n")
-            #asm_new.append("\tsubne r12, pc, #12 \t@ get previous instr addr\n")
             asm_new.append("\tldrne r12, [pc, #-12]\n")
             asm_new.append("\tcmpne " + r_temp + ", r12\n")
 
@@ -88,8 +86,44 @@ class ARMAsmEditor(AsmEditorBase):
         elif operand in self.pc_names:
             uses_pc = True
 
-        if is_br or uses_pc:
-            
+        if "ldm" in opcode or "pop" in opcode:
+            reserved_flag = False
+            for r_dest in split[2:]:
+                if any(reserved in r_dest for reserved in ['r12']):
+                    reserved_flag = True 
+
+            for r_dest in split[2:]:
+                if any(pc_name in r_dest for pc_name in self.pc_names):
+                    if reserved_flag:
+                        raise Exception('indirect branch ldm/pop also loading to r12... \
+                                we need to insert a special case in check lowering')
+                    '''
+                    TODO: make sure r12-r14 are not being loaded to
+                    '''
+                    new_load = re.sub('|'.join(self.pc_names), "r12", line)
+
+                    if check_tar:
+                        asm_new.append("\t@ [ ====== CFI checktar begin ====== ]\n")
+                    else:
+                        asm_new.append("\t@ [ ====== CFI checkret begin ====== ]\n")
+                    asm_new.append("\t@ [ ====== " + ' '.join(split) + " ====== ]\n")
+                    asm_new.append(new_load)
+                    asm_new.append("\tpush {r0, r1}\n")
+                    asm_new.append("\tldr r0, [r12] \t@ get destination ID\n")
+                    asm_new.append("\tmov r1, r12 \t@ preserver destination addr\n")
+                    self.insert_ID_check(asm_new, ids.pop(0), "r0", True)
+                    for extra_id in ids:
+                        self.insert_ID_check(asm_new, extra_id, "r0", False)
+                    asm_new.append("\tbne cfi_abort\n")
+                    asm_new.append("\tmov r12, r1 \t@ restore destination addr\n")
+                    asm_new.append("\tpop {r0, r1}\n")
+                    if check_tar:
+                        asm_new.append("\tmov lr, pc \t@ this is sorta sketch\n")
+                    asm_new.append("\tmov pc, r12\n")
+                    asm_new.append("\t@ [ ====== CFI check end ====== ]\n")
+                    self.transfers.add(' '.join(split))
+                    return True
+        elif is_br or uses_pc:
             r_temp = 'r0'
 
             #get source register
@@ -132,45 +166,7 @@ class ARMAsmEditor(AsmEditorBase):
             self.transfers.add(' '.join(split))
             return True
 
-        #TODO: pop instructions also
-        elif "ldm" in operand:
-            reserved_flag = False
-            for r_dest in split[2:]:
-                if any(reserved in r_dest for reserved in ['r0', 'r12']):
-                    reserved_flag = True 
 
-            for r_dest in split[2:]:
-                if any(pc_name in r_dest for pc_name in self.pc_names):
-
-                    if reserved_flag:
-                        raise Exception('indirect branch to r0 or r12... \
-                                we need to insert a special case in check lowering')
-                    '''
-                    TODO: make sure r12-r14 are not being loaded to
-                    '''
-                    new_load = re.sub('|'.join(self.pc_names), "r12", line)
-
-                    if check_tar:
-                        asm_new.append("\t@ [ ====== CFI checktar begin ====== ]\n")
-                    else:
-                        asm_new.append("\t@ [ ====== CFI checkret begin ====== ]\n")
-                    asm_new.append("\t@ [ ====== " + ' '.join(split) + " ====== ]\n")
-                    asm_new.append(new_load)
-                    asm_new.append("\tpush {r0, r1}\n")
-                    asm_new.append("\tldr r0, [r12] \t@ get destination ID\n")
-                    asm_new.append("\tmov r1, r12 \t@ preserver destination addr\n")
-                    self.insert_ID_check(asm_new, ids.pop(0), "r0", True)
-                    for extra_id in ids:
-                        self.insert_ID_check(asm_new, extra_id, "r0", False)
-                    asm_new.append("\tbne cfi_abort\n")
-                    asm_new.append("\tmov r12, r1\n \t@ restore destination addr\n")
-                    asm_new.append("\tpop {r0, r1}\n")
-                    if check_tar:
-                        asm_new.append("\tmov lr, pc \t@ this is sorta sketch\n")
-                    asm_new.append("\tmov pc, r12\n")
-                    asm_new.append("\t@ [ ====== CFI check end ====== ]\n")
-                    self.transfers.add(' '.join(split))
-                    return True
         return False
                     
 

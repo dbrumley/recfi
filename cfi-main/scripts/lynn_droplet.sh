@@ -4,7 +4,6 @@ clang -target armv7a-linux-gnueabi -use-gold-plugin -emit-llvm -Wl,-plugin-opt=a
 -static -S -o $1.ll $1.c
 
 echo "generating llvm bitcode..."
-#clang -O1 -emit-llvm $1.c -c -o $1.bc
 clang -target armv7a-linux-gnueabi -use-gold-plugin -emit-llvm -Wl,-plugin-opt=also-emit-llvm \
 -I/usr/lib/gcc/arm-linux-gnueabi/4.6/include -I/usr/lib/gcc/arm-linux-gnueabi/4.6/include-fixed -I/usr/arm-linux-gnueabi/include -I/usr/include \
 -static -o $1 $1.c
