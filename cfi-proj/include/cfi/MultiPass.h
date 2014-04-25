@@ -14,10 +14,19 @@ class MultiPass : public ICfiPass
         Module* mod;
         bool debug;
 
-        InstDestMap destMap;
-        InstIDMap idMap;
-        InstIDSetMap checkMap;
-        std::map<int,int> idCounts;
+        InstDestMap jmpDestMap;
+        InstDestMap retDestMap;
+
+        InstIDMap jmpIdMap;
+        InstIDMap retIdMap;
+        
+        InstIDSetMap jmpCheckMap;
+        InstIDSetMap retCheckMap;
+        
+        std::map<int,int> retIdCounts;
+        std::map<int,int> jmpIdCounts;
+
+        void genCheckIds(InstDestMap &destMap, InstIDMap &idMap, InstIDSetMap &checkMap );
 
     public: 
         MultiPass(Module &M, bool debug_flag);

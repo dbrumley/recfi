@@ -21,6 +21,13 @@ namespace cfi {
      */
     void MultiListPass::generateDestIDs()
     {
+        genIDs(jmpDestMap, jmpIdMap, jmpIdCounts);
+        genIDs(retDestMap, retIdMap, retIdCounts);
+    }
+
+
+    void MultiListPass::genIDs(InstDestMap &destMap, InstIDMap &idMap, std::map<int,int> &idCounts)
+    { 
         InstSet targetSet;
         InstDestMap::iterator MB, ME;
         /* create a set of target instructions */

@@ -12,6 +12,13 @@ namespace cfi {
     }
     void MultiMergePass::generateDestIDs()
     {
+        errs() << "multimerge gendestids\n";
+        genIDs(jmpDestMap, jmpIdMap, jmpIdCounts);
+        genIDs(retDestMap, retIdMap, retIdCounts);
+    }
+
+    void MultiMergePass::genIDs(InstDestMap& destMap, InstIDMap& idMap, std::map<int,int> &idCounts)
+    {
         std::list<InstSet> setList;
 
         //merge target destination sets

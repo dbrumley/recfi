@@ -15,12 +15,14 @@ namespace cfi {
 
             InstSet jmpSites; //all places that need a jmpID check
             InstSet jmpTars; //all places that need a jmpID inserted
+
             InstSet retSites; // "" retID check
             InstSet retTars; // retID inserted
 
-            InstDestMap destMap;
-            InstIDMap idMap;
-            InstIDSetMap checkMap;
+            InstIDMap jmpMap;
+            InstIDMap retMap;
+            InstIDSetMap retCheckMap;
+            InstIDSetMap jmpCheckMap;
 
         
             BBSet findIndTargets(Function &F);

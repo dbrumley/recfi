@@ -131,19 +131,18 @@ namespace cfi {
     void TwoIDPass::generateDestIDs() 
     {
         InstSet::iterator IB, IE;
-        
         jmpID = rand() % MAX;
         for (IB = jmpTars.begin(), IE = jmpTars.end(); IB != IE; IB++)
         {
             Instruction* K = *IB;
-            idMap[K] = jmpID;
+            jmpMap[K] = jmpID;
         }
 
         do{retID = rand() % MAX;} while (retID == jmpID); //ensure the two IDs are unique
         for (IB = retTars.begin(), IE = retTars.end(); IB != IE; IB++)
         {
             Instruction* K = *IB;
-            idMap[K] = retID;
+            retMap[K] = retID;
         }
     }
 
@@ -154,7 +153,7 @@ namespace cfi {
         for (IB = jmpSites.begin(), IE = jmpSites.end(); IB != IE; IB++)
         {
             Instruction* K = *IB;
-            std::set<int> *idset = &checkMap[K];
+            std::set<int> *idset = &jmpCheckMap[K];
             if( idset->find(jmpID) != idset->end() ) // idset.contains(ID)
                 continue;
             else
@@ -164,7 +163,7 @@ namespace cfi {
         for (IB = retSites.begin(), IE = retSites.end(); IB != IE; IB++)
         {
             Instruction* K = *IB;
-            std::set<int> *idset = &checkMap[K];
+            std::set<int> *idset = &retCheckMap[K];
             if( idset->find(retID) != idset->end() ) // idset.contains(ID)
                 continue;
             else
@@ -175,8 +174,10 @@ namespace cfi {
     void TwoIDPass::lowerChecksAndIDs() 
     {
         CFILowering cfil = CFILowering(*mod);
-        cfil.insertChecks(checkMap); //checkamp 
-        cfil.insertIDs(idMap);
+        cfil.insertIDs(jmpMap, /* isRetTarget= */ false);
+        cfil.insertIDs(retMap, /* isRetTarget= */ true);
+        cfil.insertChecks(jmpCheckMap); //checkamp 
+        cfil.insertChecks(retCheckMap); //checkamp 
     }
     std::string TwoIDPass::getStats() 
     {
@@ -192,13 +193,11 @@ namespace cfi {
         std::ostringstream resultStream;
 
         resultStream << "Two ID Stats:\n";
-        /*
         resultStream << "\tNum Classes = " << num_classes << "\n";
         resultStream << "\tjmpSites = " << jmpSites.size() << "\n";
         resultStream << "\tjmpTars = " << jmpTars.size() << "\n";
         resultStream << "\tretSites = " << retSites.size() << "\n";
         resultStream << "\tretTars = " << retTars.size() << "\n";
-        */
         resultStream << "\tnum_sites = " << num_sites << "\n";
         resultStream << "\tcumulative_targets = " << cumulative_targets << "\n";
         resultStream << "\tTargets Per Callsite:\n"; 
@@ -210,8 +209,9 @@ namespace cfi {
     }
     void TwoIDPass::print()
     {
-        print_dest_map(destMap);
-        print_ID_maps(idMap);
-        print_ID_check_maps(checkMap);
+        print_ID_maps(jmpMap, "jmpMap");
+        print_ID_maps(retMap, "retMap");
+        print_ID_check_maps(jmpCheckMap, "jmpCheckMap");
+        print_ID_check_maps(retCheckMap, "retCheckMap");
     }
 }

@@ -86,7 +86,7 @@ namespace cfi{
         /**
          * @brief Inserts IDs into their respective sites
          */
-        void CFILowering::insertIDs(InstIDMap instrIDs)
+        void CFILowering::insertIDs(InstIDMap instrIDs, bool isRetTarget)
         {
             //insert IDs at beginning of basic blocks 
             InstIDMap::iterator IB, IE;
@@ -98,32 +98,13 @@ namespace cfi{
                                                    IB->second);
 
                 BasicBlock::iterator II(IB->first);
+                if(isRetTarget)
+                    II++;
                 builder.SetInsertPoint(II);
                 builder.CreateCall(cfiInsertID, ID);
             }
         }
 
-        void CFILowering::insertCheckIDs(InstIDMap instrIDs)
-	{
-	    //insert IDs after callsites
-            InstIDMap::iterator IB, IE;
-            for (IB = instrIDs.begin(), IE = instrIDs.end();
-                 IB != IE; IB++)
-            {
-                llvm::IRBuilder<> builder(IB->first->getParent());
-                Value *ID = llvm::ConstantInt::get(builder.getInt32Ty(),
-                                                   IB->second);
-
-                //get next instruction
-                BasicBlock::iterator II(IB->first);
-               
-	        //increment to after callsites 
-                II++;
-                builder.SetInsertPoint(II);
-                builder.CreateCall(cfiInsertID, ID);
-            }
-	}
-        
         /**
          * @brief Inserts checks into their respective sites
          */
@@ -178,9 +159,9 @@ namespace cfi{
 	/*
          * prints out the destination map
          */
-        void print_dest_map(InstDestMap instDestMap)
+        void print_dest_map(InstDestMap instDestMap, std::string tag)
         {
-            errs() << "Indirect Destination Map:\n";
+            errs() << tag << "\n";
             
            InstDestMap::iterator DB, DE;
             for (DB = instDestMap.begin(), DE = instDestMap.end(); DB != DE; DB++)
@@ -204,10 +185,10 @@ namespace cfi{
         /*
          * prints out the ID maps
          */
-        void print_ID_maps(InstIDMap callSiteIDs)
+        void print_ID_maps(InstIDMap callSiteIDs, std::string tag)
         {
             
-            errs() << "\nTarget ID Map:\n";
+            errs() << "\n" << tag << "\n";
            // int count = 0;
             
             InstIDMap::iterator IB, IE;
@@ -223,9 +204,9 @@ namespace cfi{
         /*
          * prints out the ID check maps
          */
-        void print_ID_check_maps(InstIDSetMap targetCheckIDs)
+        void print_ID_check_maps(InstIDSetMap targetCheckIDs, std::string tag)
         {
-            errs() << "\nTarget ID Check Map:\n";
+            errs() << "\n" << tag << "\n";
 
             InstIDSetMap::iterator IB, IE;
             for (IB = targetCheckIDs.begin(), IE = targetCheckIDs.end();

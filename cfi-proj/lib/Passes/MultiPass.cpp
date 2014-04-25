@@ -50,7 +50,7 @@ namespace cfi {
                             BasicBlock *destBlock = IBI->getSuccessor(j);
                             BasicBlock::iterator destBlockStart = destBlock->begin();
                             Instruction *destInstr = &*destBlockStart;
-                            destMap[IBI].insert(destInstr);
+                            jmpDestMap[IBI].insert(destInstr);
                             STAT_SITE_IBRANCH++;
                             STAT_SITE_ITRANSFER++;
                             STAT_TAR_ICALL++;
@@ -93,7 +93,7 @@ namespace cfi {
                         (&F->getEntryBlock());
                     BasicBlock::iterator destBlockStart = destBlock->begin();
                     Instruction *destInstr = &*destBlockStart;
-                    destMap[I].insert(destInstr);
+                    jmpDestMap[I].insert(destInstr);
                     STAT_SITE_ICALL++;
                     STAT_TAR_ICALL++;
                     STAT_SITE_ITRANSFER++;
@@ -114,7 +114,7 @@ namespace cfi {
                     {
                         if (ReturnInst *RI = dyn_cast<ReturnInst>(TI))
                         {
-                            destMap[RI].insert(I);
+                            retDestMap[RI].insert(I);
                             STAT_SITE_RETURN++;
                             STAT_TAR_RETURN++;
                             STAT_SITE_ITRANSFER++;
@@ -131,6 +131,12 @@ namespace cfi {
      * Now, give each callsite a set of destination IDs
      */
     void MultiPass::generateCheckIDs()
+    {
+        errs() << "multipass gen check IDs\n";
+        genCheckIds(jmpDestMap, jmpIdMap, jmpCheckMap);
+        genCheckIds(retDestMap, retIdMap, retCheckMap);
+    }
+    void MultiPass::genCheckIds(InstDestMap &destMap, InstIDMap &idMap, InstIDSetMap &checkMap )
     {
         InstDestMap::iterator MB, ME;
         /* for each callsite */
@@ -158,8 +164,10 @@ namespace cfi {
     void MultiPass::lowerChecksAndIDs()
     {
         CFILowering cfil = CFILowering(*mod);
-        cfil.insertChecks(checkMap);
-        cfil.insertIDs(idMap);
+        cfil.insertIDs(jmpIdMap, /*isRetTarget=*/false);
+        cfil.insertIDs(retIdMap, /*isRetTarget=*/true);
+        cfil.insertChecks(jmpCheckMap); //checkamp 
+        cfil.insertChecks(retCheckMap); //checkamp 
     }
     
     std::string MultiPass::getStats()
@@ -179,7 +187,7 @@ namespace cfi {
 
         //iterate over monitor code sites
         InstIDSetMap::iterator IB, IE;
-        for (IB = checkMap.begin(), IE = checkMap.end();
+        for (IB = jmpCheckMap.begin(), IE = jmpCheckMap.end();
                 IB != IE; IB++)
         {
             num_sites++;
@@ -190,7 +198,25 @@ namespace cfi {
                     ib != ie; ib++)
             {
                 int id = *ib;
-                num_tars += idCounts[id];
+                num_tars += jmpIdCounts[id];
+            }
+            
+            min_tars = min_tars == 0 ? num_tars : fmin(min_tars, num_tars);
+            max_tars = fmax(max_tars, num_tars);
+            cumulative_targets += num_tars;
+        }
+        for (IB = retCheckMap.begin(), IE = retCheckMap.end();
+                IB != IE; IB++)
+        {
+            num_sites++;
+            int num_tars = 0;
+            std::set<int> id_set  = IB->second;
+            std::set<int>::iterator ib, ie;
+            for (ib = id_set.begin(), ie = id_set.end();
+                    ib != ie; ib++)
+            {
+                int id = *ib;
+                num_tars += retIdCounts[id];
             }
             
             min_tars = min_tars == 0 ? num_tars : fmin(min_tars, num_tars);
@@ -210,11 +236,14 @@ namespace cfi {
         resultStream << "\t\tmax = " << max_tars << "\n";
         return resultStream.str();
     }
-
     void MultiPass::print()
     {
-        print_dest_map(destMap);
-        print_ID_maps(idMap);
-        print_ID_check_maps(checkMap);
+        print_dest_map(jmpDestMap, "jmpDestMap");
+        print_dest_map(retDestMap, "retDestMap");
+        print_ID_check_maps(jmpCheckMap, "jmpCheckMap");
+        print_ID_check_maps(retCheckMap, "retCheckMap");
+        print_ID_maps(jmpIdMap, "jmpIdMap");
+        print_ID_maps(retIdMap, "retIdMap");
+
     }
 }

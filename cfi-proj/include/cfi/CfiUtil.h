@@ -28,8 +28,6 @@ using namespace llvm;
 
 namespace cfi{
 
-
-    #define DEBUG_TYPE "cfi"
     #define CFI_INSERT_INTRINSIC "llvm.cfiid"
     #define CFI_CHECK_TAR_INTRINSIC "llvm.cfichecktar"
     #define CFI_CHECK_RET_INTRINSIC "llvm.cficheckret"
@@ -68,9 +66,9 @@ namespace cfi{
         MultiList      /* Multi-ID with a white list for solving destination equivalence */
     };
 
-    void print_dest_map(InstDestMap instDestMap);
-    void print_ID_maps(InstIDMap callSiteIDs);
-    void print_ID_check_maps(InstIDSetMap targetCheckIDs);
+    void print_dest_map(InstDestMap instDestMap, std::string tag);
+    void print_ID_maps(InstIDMap callSiteIDs, std::string tag);
+    void print_ID_check_maps(InstIDSetMap targetCheckIDs, std::string tag);
 
     STATISTIC(STAT_SITE_ITRANSFER, "site: (icall, ibr, ret)");
     STATISTIC(STAT_SITE_CALL, "site: direct calls" );
@@ -99,8 +97,7 @@ namespace cfi{
 		public:
 			CFILowering(Module &M);
 
-			void insertIDs(InstIDMap instrIDs);
-			void insertCheckIDs(InstIDMap instrIDs);
+			void insertIDs(InstIDMap instrIDs, bool isRetTarget);
 			void insertChecks(InstIDSetMap targetCheckIDs);
 	};
 
