@@ -20,6 +20,7 @@ namespace cfi {
             virtual void generateCheckIDs() {};
             virtual void lowerChecksAndIDs() {};
             virtual std::string getStats() {return "stats: ICfiPass";};
+            virtual void print(){};
     };
 }
 #endif

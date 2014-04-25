@@ -33,5 +33,6 @@ namespace cfi {
             void generateCheckIDs();
             void lowerChecksAndIDs();
             std::string getStats();
+            void print();
     };
 }

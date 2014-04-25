@@ -1,6 +1,7 @@
 
 #include "cfi/ICfiPass.h"
 #include "cfi/TwoIDPass.h"
+#include <sstream>
 /*
  * TODO: Comments
  *  This pass is intended to to instrument code with checks such that: 
@@ -45,18 +46,25 @@ namespace cfi {
                         if (calledFunc == NULL)
                         {
                             jmpSites.insert(I);
+                            STAT_SITE_ITRANSFER++;
+                            STAT_SITE_ICALL++;
                         }
-                        else if (calledFunc->isIntrinsic())
+                        else 
                         {
-                            continue;
+                            if (calledFunc->isIntrinsic() || calledFunc->isDeclaration())
+                                continue;
+                            STAT_SITE_CALL++;
                         }
                         //FOUND: RETURN SITE (call or icall)
                         retTars.insert(I);
+                        STAT_TAR_RETURN++;
                     }
                     //FOUND: IBR SITE
                     else if (dyn_cast<IndirectBrInst>(I))
                     {
                         jmpSites.insert(I);
+                        STAT_SITE_ITRANSFER++;
+                        STAT_SITE_IBRANCH++;
                     }
                     //FOUND: RET SITE
                     else if (dyn_cast<ReturnInst>(I))
@@ -64,6 +72,8 @@ namespace cfi {
                         if (F->getName() != "main")
                         {
                             retSites.insert(I);
+                            STAT_SITE_ITRANSFER++;
+                            STAT_SITE_RETURN++;
                         }
                     }
                 }
@@ -83,6 +93,7 @@ namespace cfi {
             {
                 BasicBlock::iterator II = (*BB)->begin();
                 jmpTars.insert(II);
+                STAT_TAR_ICALL++;
             }
         }
     }
@@ -167,5 +178,40 @@ namespace cfi {
         cfil.insertChecks(checkMap); //checkamp 
         cfil.insertIDs(idMap);
     }
-    std::string TwoIDPass::getStats() {return "stats: two-id";}
+    std::string TwoIDPass::getStats() 
+    {
+
+        int num_classes = 2;
+
+        int num_sites = jmpSites.size() + retSites.size();
+        int cumulative_targets = (jmpSites.size() * jmpTars.size()) + (retSites.size() * retTars.size());
+        float avg_targets_per_site = float(cumulative_targets)/float(num_sites);
+        int min_targets_per_site = fmin(jmpTars.size(), retTars.size());
+        int max_targets_per_site = fmax(jmpTars.size(), retTars.size());
+        
+        std::ostringstream resultStream;
+
+        resultStream << "Two ID Stats:\n";
+        /*
+        resultStream << "\tNum Classes = " << num_classes << "\n";
+        resultStream << "\tjmpSites = " << jmpSites.size() << "\n";
+        resultStream << "\tjmpTars = " << jmpTars.size() << "\n";
+        resultStream << "\tretSites = " << retSites.size() << "\n";
+        resultStream << "\tretTars = " << retTars.size() << "\n";
+        */
+        resultStream << "\tnum_sites = " << num_sites << "\n";
+        resultStream << "\tcumulative_targets = " << cumulative_targets << "\n";
+        resultStream << "\tTargets Per Callsite:\n"; 
+        resultStream << "\t\tavg = " << avg_targets_per_site << "\n";
+        resultStream << "\t\tmin = " << min_targets_per_site << "\n";
+        resultStream << "\t\tmax = " << max_targets_per_site << "\n";
+
+        return resultStream.str();
+    }
+    void TwoIDPass::print()
+    {
+        print_dest_map(destMap);
+        print_ID_maps(idMap);
+        print_ID_check_maps(checkMap);
+    }
 }

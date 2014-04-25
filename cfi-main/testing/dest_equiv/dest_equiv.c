@@ -26,7 +26,6 @@ void function_B(int b)
         func_ptr = function_Y;
     func_ptr(b);
 }
-
 void function_C(int c)
 {
     void (*func_ptr)();
@@ -39,8 +38,8 @@ void function_C(int c)
 int main()
 {
     int x = 0;
-    //function_B(x);
-    //function_C(x);
-    //function_Z();
+    function_B(x);
+    function_C(x);
+    function_Z();
     return 0;
 }

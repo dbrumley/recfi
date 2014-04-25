@@ -17,6 +17,7 @@ class MultiPass : public ICfiPass
         InstDestMap destMap;
         InstIDMap idMap;
         InstIDSetMap checkMap;
+        std::map<int,int> idCounts;
 
     public: 
         MultiPass(Module &M, bool debug_flag);
@@ -25,7 +26,8 @@ class MultiPass : public ICfiPass
         virtual void generateDestIDs() {}
         void generateCheckIDs();
         void lowerChecksAndIDs();
-        virtual std::string getStats(){return "stats: MultiPass";}
+        std::string getStats();
+        void print();
 };
 }
 #endif

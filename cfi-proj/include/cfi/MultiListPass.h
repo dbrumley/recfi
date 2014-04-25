@@ -9,6 +9,5 @@ class MultiListPass : public MultiPass
     public: 
         MultiListPass(Module &M, bool debug_flag);
         void generateDestIDs();
-        std::string getStats();
 };
 }

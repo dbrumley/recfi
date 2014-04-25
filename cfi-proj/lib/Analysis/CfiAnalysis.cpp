@@ -27,7 +27,7 @@ namespace {
     /*
      * Command-line flag for the level of CFI precision
      */
-    cl::opt<CfiLevel> PrecisionLevel(cl::Required, cl::desc("Choose level of CFI precision:"),
+    cl::opt<CfiLevel> PrecisionLevel(cl::Required, cl::desc("CFI precision level"),
             cl::values(
                 clEnumValN(TwoID, "two", "Abadi's basic two-id CFI"),
                 clEnumValN(MultiMerge, "merge", "Abadi's traditional multi-id CFI, with merged destination sets"),
@@ -37,12 +37,12 @@ namespace {
     /*
      * Command-line flag for printing precision statistics
      */
-    cl::opt<bool> PrintPrecStats("s", cl::desc("Print precision statistics"));
+    cl::opt<bool> PrintPrecStats("cfi-stats", cl::desc("Print precision statistics"));
 
     /*
      * Command-line flag for printing debug
      */
-    cl::opt<bool> Debug("d", cl::desc("Useful for debugging"));
+    cl::opt<bool> Debug("cfi-debug", cl::desc("Useful for debugging"));
 
     /**
      * @brief CfiPass - module pass on the llvm IR that inserts cfi
@@ -53,7 +53,16 @@ namespace {
         CfiInstrumentation() : ModulePass(ID) {}
 
         virtual void getAnalysisUsage(AnalysisUsage &AU) const {
-            AU.addRequired<CTF>();
+            assert(PrecisionLevel == TwoID || PrecisionLevel == MultiMerge || PrecisionLevel == MultiList);
+            switch(PrecisionLevel)
+            {
+                case TwoID:
+                    break;
+                case MultiMerge:
+                case MultiList:
+                    AU.addRequired<CTF>();
+                    break;
+            }
         }
 
         /**
@@ -65,22 +74,22 @@ namespace {
          */
         virtual bool runOnModule(Module &M) 
         {  
-            /*
-            errs() << "/========================================================================/\n\n";
-            errs() << "Running CFI Pass: \
-                Precision=" << PrecisionLevel << ", \
-                Stats=" << PrintPrecStats << ", \
-                Debug=" << Debug << "\n";
-*/
+            if( Debug)
+                errs() << "\n/========================================================================/\n";
+            if( Debug)
+                errs() << "Running CFI Pass: " <<
+                    "Precision=" << PrecisionLevel << ", " <<
+                    "Stats=" << PrintPrecStats << ", " <<
+                    "Debug=" << Debug << "\n\n";
             srand(time(NULL));
-
-            //cfi::ICfiPass *pass;
 
             assert(PrecisionLevel == TwoID || PrecisionLevel == MultiMerge || PrecisionLevel == MultiList);
 
             ICfiPass *pass;
             CTF *ctf;
-            //errs() << "Creating pass.\n";
+            if( Debug)
+                errs() << "Creating pass.\n";
+
             switch(PrecisionLevel)
             {
                 case TwoID:
@@ -96,22 +105,26 @@ namespace {
                     pass = new MultiListPass(M, Debug);
                     break;
             }
-            //errs() << "Creating pass....Done\n";
-            
-            //errs() << "Finding targets..\n";
+            if( Debug)
+                errs() << "Creating pass....Done\n";
+            if( Debug)
+                errs() << "Finding targets..\n";
             pass->findAllTargets(*ctf);
-            //errs() << "generating IDs..\n";
+            if( Debug)
+                errs() << "generating IDs..\n";
             pass->generateDestIDs();
-            //errs() << "generating Check IDs..\n";
+            if( Debug)
+                errs() << "generating Check IDs..\n";
             pass->generateCheckIDs();
-            //errs() << "Lowering...\n";
+            if( Debug)
+                errs() << "Lowering...\n";
             pass->lowerChecksAndIDs();
-
+            if(Debug)
+                pass->print();
             if( PrintPrecStats ) 
-                errs() << pass->getStats() << "\n";
-            /*
-            errs() << "/========================================================================/\n\n";
-            */
+                errs() << "\n" << pass->getStats() << "\n";
+            if( Debug)
+                errs() << "/========================================================================/\n\n";
             return true;
         }
     };

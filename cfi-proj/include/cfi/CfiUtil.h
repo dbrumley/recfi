@@ -23,10 +23,13 @@
 #include <set>
 #include <iostream>
 #include <fstream>
+
 using namespace llvm;
 
 namespace cfi{
 
+
+    #define DEBUG_TYPE "cfi"
     #define CFI_INSERT_INTRINSIC "llvm.cfiid"
     #define CFI_CHECK_TAR_INTRINSIC "llvm.cfichecktar"
     #define CFI_CHECK_RET_INTRINSIC "llvm.cficheckret"
@@ -68,6 +71,16 @@ namespace cfi{
     void print_dest_map(InstDestMap instDestMap);
     void print_ID_maps(InstIDMap callSiteIDs);
     void print_ID_check_maps(InstIDSetMap targetCheckIDs);
+
+    STATISTIC(STAT_SITE_ITRANSFER, "site: (icall, ibr, ret)");
+    STATISTIC(STAT_SITE_CALL, "site: direct calls" );
+    STATISTIC(STAT_SITE_ICALL, "site: icall" );
+    STATISTIC(STAT_SITE_IBRANCH, "site: ibr");
+    STATISTIC(STAT_SITE_RETURN, "site: ret");
+    STATISTIC(STAT_TAR_ICALL, "target: (icall, ibr)");
+    STATISTIC(STAT_TAR_RETURN, "target: ret");
+    STATISTIC(STAT_MERGE, "merged target sets");
+    STATISTIC(STAT_CLASSES, "classes");
 
 	class CFILowering {
 

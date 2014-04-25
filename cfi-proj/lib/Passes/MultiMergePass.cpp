@@ -47,7 +47,7 @@ namespace cfi {
                 if (intersect.size() > 0)
                 {
                     /* merge the two sets */
-                    //STAT_MERGE++;
+                    STAT_MERGE++;
                     lset.insert(mset.begin(), mset.end());
                     break;
                 }
@@ -69,13 +69,16 @@ namespace cfi {
             InstSet lset = *LB;
             int ID = rand() % MAX;
 
+            idCounts[ID] = 0;
+
             InstSet::iterator SB, SE;
             for (SB = lset.begin(), SE = lset.end(); SB != SE; SB++)
             {
                 Instruction* K = *SB;
                 idMap[K] = ID;
+                idCounts[ID]++;
             }
         }
+        
     }
-    std::string MultiMergePass::getStats() {return "stats: merge";}
 }
