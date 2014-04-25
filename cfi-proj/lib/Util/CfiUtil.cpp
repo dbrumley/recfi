@@ -88,7 +88,24 @@ namespace cfi{
          */
         void CFILowering::insertIDs(InstIDMap instrIDs)
         {
-            //insert IDs after call sites
+            //insert IDs at beginning of basic blocks 
+            InstIDMap::iterator IB, IE;
+            for (IB = instrIDs.begin(), IE = instrIDs.end();
+                 IB != IE; IB++)
+            {
+                llvm::IRBuilder<> builder(IB->first->getParent());
+                Value *ID = llvm::ConstantInt::get(builder.getInt32Ty(),
+                                                   IB->second);
+
+                BasicBlock::iterator II(IB->first);
+                builder.SetInsertPoint(II);
+                builder.CreateCall(cfiInsertID, ID);
+            }
+        }
+
+        void CFILowering::insertCheckIDs(InstIDMap instrIDs)
+	{
+	    //insert IDs after callsites
             InstIDMap::iterator IB, IE;
             for (IB = instrIDs.begin(), IE = instrIDs.end();
                  IB != IE; IB++)
@@ -99,13 +116,13 @@ namespace cfi{
 
                 //get next instruction
                 BasicBlock::iterator II(IB->first);
-                
-                if(dyn_cast<CallInst>(II))
-                    II++;
+               
+	        //increment to after callsites 
+                II++;
                 builder.SetInsertPoint(II);
                 builder.CreateCall(cfiInsertID, ID);
             }
-        }
+	}
         
         /**
          * @brief Inserts checks into their respective sites

@@ -100,6 +100,7 @@ namespace cfi{
 			CFILowering(Module &M);
 
 			void insertIDs(InstIDMap instrIDs);
+			void insertCheckIDs(InstIDMap instrIDs);
 			void insertChecks(InstIDSetMap targetCheckIDs);
 	};
 
