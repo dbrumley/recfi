@@ -40,6 +40,6 @@ int main()
     int x = 0;
     function_B(x);
     function_C(x);
-    function_Z();
+    //function_Z();
     return 0;
 }

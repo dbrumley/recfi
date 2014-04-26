@@ -234,6 +234,7 @@ namespace cfi {
         resultStream << "\t\tavg = " << avg_tars << "\n";
         resultStream << "\t\tmin = " << min_tars << "\n";
         resultStream << "\t\tmax = " << max_tars << "\n";
+
         return resultStream.str();
     }
     void MultiPass::print()

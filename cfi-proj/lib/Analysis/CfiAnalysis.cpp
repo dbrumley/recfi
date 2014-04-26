@@ -35,6 +35,11 @@ namespace {
                 clEnumValEnd));
 
     /*
+     *
+     */
+    cl::opt<std::string> OutputFilename("cso", cl::desc("Specify output filename"), cl::value_desc("filename"), cl::init("cfistats.txt"));
+
+    /*
      * Command-line flag for printing precision statistics
      */
     cl::opt<bool> PrintPrecStats("cfi-stats", cl::desc("Print precision statistics"));
@@ -122,7 +127,12 @@ namespace {
             if(Debug)
                 pass->print();
             if( PrintPrecStats ) 
-                errs() << "\n" << pass->getStats() << "\n";
+            {
+                std::ofstream myfile;
+                myfile.open (OutputFilename.c_str(), std::ios::app);
+                myfile << pass->getStats();
+                myfile.close();
+            }
             if( Debug)
                 errs() << "/========================================================================/\n\n";
             return true;
