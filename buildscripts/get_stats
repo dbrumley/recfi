@@ -1,0 +1,46 @@
+#!/usr/bin/env python
+
+import os
+import sys
+import subprocess
+import fileinput
+
+def usage():
+    use = "\n\tUsage: get_stats <dir> <outfile>\n\
+\tdir - directory containing llvm bitcode files to harden\n"
+    print(use)
+
+def main():
+    if len(sys.argv) < 3:
+        usage()
+        sys.exit(1)
+
+    dir = sys.argv[1]
+    outfile = sys.argv[2]
+
+    os.chdir(dir)
+    logfiles = []
+    for file in os.listdir("./"):
+        if file.endswith(".log"):
+            logfiles.append(os.path.abspath(file))
+
+    keywords = ["avg", "min", "max"]
+    outfile = open(outfile, "w")
+
+    for file in logfiles:
+        print("reading log from " + file)
+
+	outfile.write(os.path.basename(file).replace(".log", "") + ",")
+	infile = open(file, "r")
+	for line in infile:
+	    if any(word in line for word in keywords):
+	        split = line.split("=")
+		split = map(lambda x : x.strip(), split) 
+		outfile.write(split[0] + "," + split[1] + ",")
+	infile.close()
+	outfile.write("\n")
+
+    outfile.close()
+
+if __name__ == "__main__":
+    main()

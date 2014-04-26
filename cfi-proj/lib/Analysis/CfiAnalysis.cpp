@@ -129,7 +129,7 @@ namespace {
             if( PrintPrecStats ) 
             {
                 std::ofstream myfile;
-                myfile.open (OutputFilename.c_str(), std::ios::app);
+                myfile.open (OutputFilename.c_str(), std::ios::out);
                 myfile << pass->getStats();
                 myfile.close();
             }
