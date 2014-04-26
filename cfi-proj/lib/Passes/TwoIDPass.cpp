@@ -182,6 +182,7 @@ namespace cfi {
     std::string TwoIDPass::getStats() 
     {
 
+        /*
         int num_classes = 2;
 
         int num_sites = jmpSites.size() + retSites.size();
@@ -189,21 +190,49 @@ namespace cfi {
         float avg_targets_per_site = float(cumulative_targets)/float(num_sites);
         int min_targets_per_site = fmin(jmpTars.size(), retTars.size());
         int max_targets_per_site = fmax(jmpTars.size(), retTars.size());
+        */
+        int num_sites = 0;
+        int cumulative_targets = 0;
         
+        float avg_tars  = 0.0;
+        int min_tars = 0;
+        int max_tars  = 0;
+
+        //iterate over monitor code sites
+        InstIDSetMap::iterator IB, IE;
+        for (IB = jmpCheckMap.begin(), IE = jmpCheckMap.end();
+                IB != IE; IB++)
+        {
+            num_sites++;
+            int num_tars = jmpTars.size();
+            
+            min_tars = min_tars == 0 ? num_tars : fmin(min_tars, num_tars);
+            max_tars = fmax(max_tars, num_tars);
+            cumulative_targets += num_tars;
+        }
+
+        for (IB = retCheckMap.begin(), IE = retCheckMap.end();
+                IB != IE; IB++)
+        {
+            num_sites++;
+            int num_tars = retTars.size();
+            
+            min_tars = min_tars == 0 ? num_tars : fmin(min_tars, num_tars);
+            max_tars = fmax(max_tars, num_tars);
+            cumulative_targets += num_tars;
+        }
+        
+        avg_tars = float(cumulative_targets)/float(num_sites);
+
         std::ostringstream resultStream;
 
         resultStream << "Two ID Stats:\n";
-        resultStream << "\tNum Classes = " << num_classes << "\n";
-        resultStream << "\tjmpSites = " << jmpSites.size() << "\n";
-        resultStream << "\tjmpTars = " << jmpTars.size() << "\n";
-        resultStream << "\tretSites = " << retSites.size() << "\n";
-        resultStream << "\tretTars = " << retTars.size() << "\n";
         resultStream << "\tnum_sites = " << num_sites << "\n";
         resultStream << "\tcumulative_targets = " << cumulative_targets << "\n";
         resultStream << "\tTargets Per Callsite:\n"; 
-        resultStream << "\t\tavg = " << avg_targets_per_site << "\n";
-        resultStream << "\t\tmin = " << min_targets_per_site << "\n";
-        resultStream << "\t\tmax = " << max_targets_per_site << "\n";
+        resultStream << "\t\tavg = " << avg_tars << "\n";
+        resultStream << "\t\tmin = " << min_tars << "\n";
+        resultStream << "\t\tmax = " << max_tars << "\n";
 
         return resultStream.str();
     }
