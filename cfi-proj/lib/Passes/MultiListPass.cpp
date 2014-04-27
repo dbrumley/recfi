@@ -21,19 +21,22 @@ namespace cfi {
      */
     void MultiListPass::generateDestIDs()
     {
-        genIDs(jmpDestMap, jmpIdMap, jmpIdCounts);
-        genIDs(retDestMap, retIdMap, retIdCounts);
+        genIDs(jmpDestMap, jmpIdMap, jmpIdCounts, jmpMergedMap);
+        genIDs(retDestMap, retIdMap, retIdCounts, retMergedMap);
     }
 
 
-    void MultiListPass::genIDs(InstDestMap &destMap, InstIDMap &idMap, std::map<int,int> &idCounts)
+    void MultiListPass::genIDs(InstDestMap &destMap, InstIDMap &idMap, std::map<int,int> &idCounts, InstDestMap &mergedMap)
     { 
         InstSet targetSet;
+
         InstDestMap::iterator MB, ME;
         /* create a set of target instructions */
         for (MB = destMap.begin(), ME = destMap.end(); MB != ME; MB++)
         {
+            Instruction* I = MB->first;
             InstSet mset = MB->second;
+            mergedMap[I] = mset;
             InstSet::iterator LB, LE;
             /* for each target of this callsite, add to set */
             for (LB = mset.begin(), LE = mset.end(); LB != LE; LB++)

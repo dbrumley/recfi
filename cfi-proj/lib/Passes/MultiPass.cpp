@@ -186,38 +186,23 @@ namespace cfi {
 
 
         //iterate over monitor code sites
-        InstIDSetMap::iterator IB, IE;
-        for (IB = jmpCheckMap.begin(), IE = jmpCheckMap.end();
+        InstDestMap::iterator IB, IE;
+        for (IB = jmpMergedMap.begin(), IE = jmpMergedMap.end();
                 IB != IE; IB++)
         {
             num_sites++;
-            int num_tars = 0;
-            std::set<int> id_set  = IB->second;
-            std::set<int>::iterator ib, ie;
-            for (ib = id_set.begin(), ie = id_set.end();
-                    ib != ie; ib++)
-            {
-                int id = *ib;
-                num_tars += jmpIdCounts[id];
-            }
+            int num_tars = IB->second.size();
             
             min_tars = min_tars == 0 ? num_tars : fmin(min_tars, num_tars);
             max_tars = fmax(max_tars, num_tars);
             cumulative_targets += num_tars;
         }
-        for (IB = retCheckMap.begin(), IE = retCheckMap.end();
+
+        for (IB = retMergedMap.begin(), IE = retMergedMap.end();
                 IB != IE; IB++)
         {
             num_sites++;
-            int num_tars = 0;
-            std::set<int> id_set  = IB->second;
-            std::set<int>::iterator ib, ie;
-            for (ib = id_set.begin(), ie = id_set.end();
-                    ib != ie; ib++)
-            {
-                int id = *ib;
-                num_tars += retIdCounts[id];
-            }
+            int num_tars = IB->second.size();
             
             min_tars = min_tars == 0 ? num_tars : fmin(min_tars, num_tars);
             max_tars = fmax(max_tars, num_tars);
@@ -239,12 +224,16 @@ namespace cfi {
     }
     void MultiPass::print()
     {
+        print_dest_map(jmpMergedMap, "jmpMergedMap");
+        print_dest_map(retMergedMap, "retMergedMap");
+        /*
         print_dest_map(jmpDestMap, "jmpDestMap");
         print_dest_map(retDestMap, "retDestMap");
         print_ID_check_maps(jmpCheckMap, "jmpCheckMap");
         print_ID_check_maps(retCheckMap, "retCheckMap");
         print_ID_maps(jmpIdMap, "jmpIdMap");
         print_ID_maps(retIdMap, "retIdMap");
+        */
 
     }
 }

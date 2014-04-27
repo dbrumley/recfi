@@ -1,8 +1,8 @@
-echo "generating llvm IR..."
-clang -O0 -emit-llvm $1.c -S -o $1.ll
+#echo "generating llvm IR..."
+#clang -O0 -emit-llvm $1.c -S -o $1.ll
 
-echo "generating llvm bitcode..."
-clang -O0 -emit-llvm $1.c -c -o $1.bc
+#echo "generating llvm bitcode..."
+#clang -O0 -emit-llvm $1.c -c -o $1.bc
 
 echo "running $2 pass..."
 opt \
@@ -13,6 +13,8 @@ opt \
 -cfi \
 -$2 \
 -cfi-stats \
+-stats \
+-cfi-debug \
 < $1.bc > $1_opt.bc
 
 #opt -load ../build/Release+Debug+Asserts/lib/LLVM$2.dylib -$2 < $1.bc > $1_opt.bc

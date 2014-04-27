@@ -16,6 +16,9 @@ class MultiPass : public ICfiPass
 
         InstDestMap jmpDestMap;
         InstDestMap retDestMap;
+        
+        InstDestMap jmpMergedMap;
+        InstDestMap retMergedMap;
 
         InstIDMap jmpIdMap;
         InstIDMap retIdMap;
@@ -23,8 +26,8 @@ class MultiPass : public ICfiPass
         InstIDSetMap jmpCheckMap;
         InstIDSetMap retCheckMap;
         
-        std::map<int,int> retIdCounts;
-        std::map<int,int> jmpIdCounts;
+        std::map<int, int> retIdCounts;
+        std::map<int, int> jmpIdCounts;
 
         void genCheckIds(InstDestMap &destMap, InstIDMap &idMap, InstIDSetMap &checkMap );
 

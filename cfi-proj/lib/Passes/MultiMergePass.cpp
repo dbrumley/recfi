@@ -13,11 +13,11 @@ namespace cfi {
     void MultiMergePass::generateDestIDs()
     {
         errs() << "multimerge gendestids\n";
-        genIDs(jmpDestMap, jmpIdMap, jmpIdCounts);
-        genIDs(retDestMap, retIdMap, retIdCounts);
+        genIDs(jmpDestMap, jmpIdMap, jmpIdCounts, jmpMergedMap);
+        genIDs(retDestMap, retIdMap, retIdCounts, retMergedMap);
     }
 
-    void MultiMergePass::genIDs(InstDestMap& destMap, InstIDMap& idMap, std::map<int,int> &idCounts)
+    void MultiMergePass::genIDs(InstDestMap& destMap, InstIDMap& idMap, std::map<int,int> &idCounts, InstDestMap& mergedMap)
     {
         std::list<InstSet> setList;
 
@@ -27,12 +27,14 @@ namespace cfi {
         for (MB = destMap.begin(), ME = destMap.end(); MB != ME; MB++)
         {
             /* get the destination set */
+            Instruction* I = MB->first;
             InstSet mset = MB->second;
 
             //add first set to setList
             if (setList.size() == 0)
             {
                 setList.push_back(mset);
+                mergedMap[I] = mset;
                 continue;
             }
 
@@ -56,6 +58,7 @@ namespace cfi {
                     /* merge the two sets */
                     STAT_MERGE++;
                     lset.insert(mset.begin(), mset.end());
+                    mergedMap[I] = lset;
                     break;
                 }
             }
@@ -64,6 +67,7 @@ namespace cfi {
             if (intersect.size() == 0)
             {
                 setList.push_back(mset);
+                mergedMap[I] = mset;
             }
         }
 
