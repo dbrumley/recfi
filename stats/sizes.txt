@@ -1,0 +1,857 @@
+   text	   data	    bss	    dec	    hex	filename
+ 413508	   3232	   6157	 422897	  673f1	/home/lynn/coreutils-6.11/obj-llvm/src/dd
+   text	   data	    bss	    dec	    hex	filename
+ 398516	   3232	   5589	 407337	  63729	/home/lynn/coreutils-6.11/obj-llvm/src/shuf
+   text	   data	    bss	    dec	    hex	filename
+ 391084	   3232	   5589	 399905	  61a21	/home/lynn/coreutils-6.11/obj-llvm/src/mknod
+   text	   data	    bss	    dec	    hex	filename
+ 388860	   3232	   5597	 397689	  61179	/home/lynn/coreutils-6.11/obj-llvm/src/rmdir
+   text	   data	    bss	    dec	    hex	filename
+ 390500	   3232	   5597	 399329	  617e1	/home/lynn/coreutils-6.11/obj-llvm/src/pwd
+   text	   data	    bss	    dec	    hex	filename
+ 390932	   3232	   5869	 400033	  61aa1	/home/lynn/coreutils-6.11/obj-llvm/src/tsort
+   text	   data	    bss	    dec	    hex	filename
+ 388876	   3224	   5597	 397697	  61181	/home/lynn/coreutils-6.11/obj-llvm/src/chroot
+   text	   data	    bss	    dec	    hex	filename
+ 460044	   3208	   5349	 468601	  72679	/home/lynn/coreutils-6.11/obj-llvm/src/expr
+   text	   data	    bss	    dec	    hex	filename
+ 383676	   3208	   5333	 392217	  5fc19	/home/lynn/coreutils-6.11/obj-llvm/src/yes
+   text	   data	    bss	    dec	    hex	filename
+ 397940	   3240	   5613	 406793	  63509	/home/lynn/coreutils-6.11/obj-llvm/src/split
+   text	   data	    bss	    dec	    hex	filename
+ 430608	   3240	   5669	 439517	  6b4dd	/home/lynn/coreutils-6.11/obj-llvm/src/cp
+   text	   data	    bss	    dec	    hex	filename
+ 389660	   3224	   5605	 398489	  61499	/home/lynn/coreutils-6.11/obj-llvm/src/fold
+   text	   data	    bss	    dec	    hex	filename
+ 479300	   3436	   6909	 489645	  778ad	/home/lynn/coreutils-6.11/obj-llvm/src/vdir
+   text	   data	    bss	    dec	    hex	filename
+ 427996	   3208	   5333	 436537	  6a939	/home/lynn/coreutils-6.11/obj-llvm/src/sha384sum
+   text	   data	    bss	    dec	    hex	filename
+ 388084	   3208	   5341	 396633	  60d59	/home/lynn/coreutils-6.11/obj-llvm/src/cksum
+   text	   data	    bss	    dec	    hex	filename
+ 389388	   3232	   5589	 398209	  61381	/home/lynn/coreutils-6.11/obj-llvm/src/mkfifo
+   text	   data	    bss	    dec	    hex	filename
+ 404052	   3232	   5605	 412889	  64cd9	/home/lynn/coreutils-6.11/obj-llvm/src/chmod
+   text	   data	    bss	    dec	    hex	filename
+ 479300	   3436	   6909	 489645	  778ad	/home/lynn/coreutils-6.11/obj-llvm/src/dir
+   text	   data	    bss	    dec	    hex	filename
+ 389772	   3224	   5629	 398625	  61521	/home/lynn/coreutils-6.11/obj-llvm/src/paste
+   text	   data	    bss	    dec	    hex	filename
+ 398732	   3232	   5613	 407577	  63819	/home/lynn/coreutils-6.11/obj-llvm/src/uniq
+   text	   data	    bss	    dec	    hex	filename
+ 437884	   3248	   6157	 447289	  6d339	/home/lynn/coreutils-6.11/obj-llvm/src/mv
+   text	   data	    bss	    dec	    hex	filename
+ 389548	   3208	   5389	 398145	  61341	/home/lynn/coreutils-6.11/obj-llvm/src/sum
+   text	   data	    bss	    dec	    hex	filename
+ 479308	   3436	   6909	 489653	  778b5	/home/lynn/coreutils-6.11/obj-llvm/src/ls
+   text	   data	    bss	    dec	    hex	filename
+ 393628	   3232	   5597	 402457	  62419	/home/lynn/coreutils-6.11/obj-llvm/src/mkdir
+   text	   data	    bss	    dec	    hex	filename
+ 415548	   3244	   6353	 425145	  67cb9	/home/lynn/coreutils-6.11/obj-llvm/src/setuidgid
+   text	   data	    bss	    dec	    hex	filename
+ 387996	   3224	   5597	 396817	  60e11	/home/lynn/coreutils-6.11/obj-llvm/src/basename
+   text	   data	    bss	    dec	    hex	filename
+ 454564	   3260	   6481	 464305	  715b1	/home/lynn/coreutils-6.11/obj-llvm/src/ginstall
+   text	   data	    bss	    dec	    hex	filename
+ 390612	   3224	   5597	 399433	  61849	/home/lynn/coreutils-6.11/obj-llvm/src/nice
+   text	   data	    bss	    dec	    hex	filename
+ 395340	   3224	   5697	 404261	  62b25	/home/lynn/coreutils-6.11/obj-llvm/src/whoami
+   text	   data	    bss	    dec	    hex	filename
+ 385452	   3208	   5333	 393993	  60309	/home/lynn/coreutils-6.11/obj-llvm/src/echo
+   text	   data	    bss	    dec	    hex	filename
+ 393284	   3208	   5333	 401825	  621a1	/home/lynn/coreutils-6.11/obj-llvm/src/md5sum
+   text	   data	    bss	    dec	    hex	filename
+ 387430	   3224	   5597	 396251	  60bdb	/home/lynn/coreutils-6.11/obj-llvm/src/dirname
+   text	   data	    bss	    dec	    hex	filename
+ 395624	   3232	   5589	 404445	  62bdd	/home/lynn/coreutils-6.11/obj-llvm/src/pathchk
+   text	   data	    bss	    dec	    hex	filename
+ 392068	   3232	   5621	 400921	  61e19	/home/lynn/coreutils-6.11/obj-llvm/src/seq
+   text	   data	    bss	    dec	    hex	filename
+ 409364	   3236	   6253	 418853	  66425	/home/lynn/coreutils-6.11/obj-llvm/src/hostid
+   text	   data	    bss	    dec	    hex	filename
+ 389680	   3224	   5597	 398501	  614a5	/home/lynn/coreutils-6.11/obj-llvm/src/sleep
+   text	   data	    bss	    dec	    hex	filename
+ 390420	   3240	   5613	 399273	  617a9	/home/lynn/coreutils-6.11/obj-llvm/src/expand
+   text	   data	    bss	    dec	    hex	filename
+ 391708	   3240	   5621	 400569	  61cb9	/home/lynn/coreutils-6.11/obj-llvm/src/unexpand
+   text	   data	    bss	    dec	    hex	filename
+ 452804	   3280	   6533	 462617	  70f19	/home/lynn/coreutils-6.11/obj-llvm/src/nl
+   text	   data	    bss	    dec	    hex	filename
+ 453884	   3232	  14117	 471233	  730c1	/home/lynn/coreutils-6.11/obj-llvm/src/tac
+   text	   data	    bss	    dec	    hex	filename
+ 409252	   3232	   5733	 418217	  661a9	/home/lynn/coreutils-6.11/obj-llvm/src/od
+   text	   data	    bss	    dec	    hex	filename
+ 388268	   3224	   5605	 397097	  60f29	/home/lynn/coreutils-6.11/obj-llvm/src/tty
+   text	   data	    bss	    dec	    hex	filename
+ 398540	   3232	   5589	 407361	  63741	/home/lynn/coreutils-6.11/obj-llvm/src/mktemp
+   text	   data	    bss	    dec	    hex	filename
+ 392388	   3248	   5589	 401225	  61f49	/home/lynn/coreutils-6.11/obj-llvm/src/cat
+   text	   data	    bss	    dec	    hex	filename
+ 443268	   3244	   5717	 452229	  6e685	/home/lynn/coreutils-6.11/obj-llvm/src/du
+   text	   data	    bss	    dec	    hex	filename
+ 395420	   3232	   5637	 404289	  62b41	/home/lynn/coreutils-6.11/obj-llvm/src/cut
+   text	   data	    bss	    dec	    hex	filename
+ 391012	   3232	   5725	 399969	  61a61	/home/lynn/coreutils-6.11/obj-llvm/src/nohup
+   text	   data	    bss	    dec	    hex	filename
+ 462580	   3232	   5941	 471753	  732c9	/home/lynn/coreutils-6.11/obj-llvm/src/csplit
+   text	   data	    bss	    dec	    hex	filename
+ 427996	   3208	   5333	 436537	  6a939	/home/lynn/coreutils-6.11/obj-llvm/src/sha512sum
+   text	   data	    bss	    dec	    hex	filename
+ 396882	   3240	   5637	 405759	  630ff	/home/lynn/coreutils-6.11/obj-llvm/src/dircolors
+   text	   data	    bss	    dec	    hex	filename
+ 386104	   3208	   5325	 394637	  6058d	/home/lynn/coreutils-6.11/obj-llvm/src/env
+   text	   data	    bss	    dec	    hex	filename
+ 400340	   3232	   5605	 409177	  63e59	/home/lynn/coreutils-6.11/obj-llvm/src/[
+   text	   data	    bss	    dec	    hex	filename
+ 393486	   3232	  38669	 435387	  6a4bb	/home/lynn/coreutils-6.11/obj-llvm/src/fmt
+   text	   data	    bss	    dec	    hex	filename
+ 385708	   3208	   5461	 394377	  60489	/home/lynn/coreutils-6.11/obj-llvm/src/tee
+   text	   data	    bss	    dec	    hex	filename
+ 400476	   3232	  14549	 418257	  661d1	/home/lynn/coreutils-6.11/obj-llvm/src/tr
+   text	   data	    bss	    dec	    hex	filename
+ 392748	   3224	   5589	 401561	  62099	/home/lynn/coreutils-6.11/obj-llvm/src/readlink
+   text	   data	    bss	    dec	    hex	filename
+ 417694	   3232	   5589	 426515	  68213	/home/lynn/coreutils-6.11/obj-llvm/src/date
+   text	   data	    bss	    dec	    hex	filename
+ 429676	   3244	   6393	 439313	  6b411	/home/lynn/coreutils-6.11/obj-llvm/src/stat
+   text	   data	    bss	    dec	    hex	filename
+ 439624	   3252	   6693	 449569	  6dc21	/home/lynn/coreutils-6.11/obj-llvm/src/pinky
+   text	   data	    bss	    dec	    hex	filename
+ 416740	   3280	   5765	 425785	  67f39	/home/lynn/coreutils-6.11/obj-llvm/src/pr
+   text	   data	    bss	    dec	    hex	filename
+ 390876	   3232	   5629	 399737	  61979	/home/lynn/coreutils-6.11/obj-llvm/src/base64
+   text	   data	    bss	    dec	    hex	filename
+ 395916	   3208	   5333	 404457	  62be9	/home/lynn/coreutils-6.11/obj-llvm/src/sha1sum
+   text	   data	    bss	    dec	    hex	filename
+ 407984	   3240	   6133	 417357	  65e4d	/home/lynn/coreutils-6.11/obj-llvm/src/rm
+   text	   data	    bss	    dec	    hex	filename
+ 379772	   3196	   5289	 388257	  5eca1	/home/lynn/coreutils-6.11/obj-llvm/src/true
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/dd
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/shuf
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/mknod
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/rmdir
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/pwd
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/tsort
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/chroot
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/expr
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/yes
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/split
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/cp
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/fold
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/vdir
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sha384sum
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/cksum
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/mkfifo
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/chmod
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/dir
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/paste
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/uniq
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/mv
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sum
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/ls
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/mkdir
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/setuidgid
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/basename
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/su
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/ginstall
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/nice
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/whoami
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/echo
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/md5sum
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/dirname
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/pathchk
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/seq
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/hostid
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sleep
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/expand
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/unexpand
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/nl
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/tac
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/od
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/tty
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/mktemp
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/cat
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/du
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/cut
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/nohup
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/csplit
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sha512sum
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/dircolors
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/env
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/[
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/fmt
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/tee
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/tr
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/readlink
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/date
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/stat
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/pinky
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/pr
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/base64
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sha1sum
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/rm
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/true
+getting size from /home/lynn/   text	   data	    bss	    dec	    hex	filename
+ 387428	   3232	   5597	 396257	  60be1	/home/lynn/coreutils-6.11/obj-llvm/src/link
+   text	   data	    bss	    dec	    hex	filename
+ 438620	   3248	   7013	 448881	  6d971	/home/lynn/coreutils-6.11/obj-llvm/src/sort
+   text	   data	    bss	    dec	    hex	filename
+ 382716	   3180	   5561	 391457	  5f921	/home/lynn/coreutils-6.11/obj-llvm/src/test
+   text	   data	    bss	    dec	    hex	filename
+ 402260	   3248	   5653	 411161	  64619	/home/lynn/coreutils-6.11/obj-llvm/src/join
+   text	   data	    bss	    dec	    hex	filename
+ 383564	   3208	   5333	 392105	  5fba9	/home/lynn/coreutils-6.11/obj-llvm/src/sync
+   text	   data	    bss	    dec	    hex	filename
+ 400260	   3232	   5589	 409081	  63df9	/home/lynn/coreutils-6.11/obj-llvm/src/head
+   text	   data	    bss	    dec	    hex	filename
+ 408156	   3232	   5653	 417041	  65d11	/home/lynn/coreutils-6.11/obj-llvm/src/shred
+   text	   data	    bss	    dec	    hex	filename
+ 399782	   3208	   5333	 408323	  63b03	/home/lynn/coreutils-6.11/obj-llvm/src/sha224sum
+   text	   data	    bss	    dec	    hex	filename
+ 396604	   3224	   5613	 405441	  62fc1	/home/lynn/coreutils-6.11/obj-llvm/src/printf
+   text	   data	    bss	    dec	    hex	filename
+ 390572	   3360	   5589	 399521	  618a1	/home/lynn/coreutils-6.11/obj-llvm/src/runcon
+   text	   data	    bss	    dec	    hex	filename
+ 392924	   3232	   5853	 402009	  62259	/home/lynn/coreutils-6.11/obj-llvm/src/factor
+   text	   data	    bss	    dec	    hex	filename
+ 379772	   3196	   5289	 388257	  5eca1	/home/lynn/coreutils-6.11/obj-llvm/src/false
+   text	   data	    bss	    dec	    hex	filename
+ 443596	   3276	   6921	 453793	  6eca1	/home/lynn/coreutils-6.11/obj-llvm/src/who
+   text	   data	    bss	    dec	    hex	filename
+ 388404	   3224	   5589	 397217	  60fa1	/home/lynn/coreutils-6.11/obj-llvm/src/uname
+   text	   data	    bss	    dec	    hex	filename
+ 384332	   3208	   5333	 392873	  5fea9	/home/lynn/coreutils-6.11/obj-llvm/src/printenv
+   text	   data	    bss	    dec	    hex	filename
+ 398168	   3240	   5653	 407061	  63615	/home/lynn/coreutils-6.11/obj-llvm/src/wc
+   text	   data	    bss	    dec	    hex	filename
+ 389376	   3640	   5445	 398461	  6147d	/home/lynn/coreutils-6.11/obj-llvm/src/kill
+   text	   data	    bss	    dec	    hex	filename
+ 427236	   3244	   6357	 436837	  6aa65	/home/lynn/coreutils-6.11/obj-llvm/src/chgrp
+   text	   data	    bss	    dec	    hex	filename
+ 393100	   3232	   5589	 401921	  62201	/home/lynn/coreutils-6.11/obj-llvm/src/comm
+   text	   data	    bss	    dec	    hex	filename
+ 394056	   3236	   6005	 403297	  62761	/home/lynn/coreutils-6.11/obj-llvm/src/users
+   text	   data	    bss	    dec	    hex	filename
+ 396228	   3236	   6005	 405469	  62fdd	/home/lynn/coreutils-6.11/obj-llvm/src/uptime
+   text	   data	    bss	    dec	    hex	filename
+ 387228	   3232	   5597	 396057	  60b19	/home/lynn/coreutils-6.11/obj-llvm/src/unlink
+   text	   data	    bss	    dec	    hex	filename
+ 410526	   3240	   5597	 419363	  66623	/home/lynn/coreutils-6.11/obj-llvm/src/tail
+   text	   data	    bss	    dec	    hex	filename
+ 420416	   3256	   6825	 430497	  691a1	/home/lynn/coreutils-6.11/obj-llvm/src/groups
+   text	   data	    bss	    dec	    hex	filename
+ 406020	   5288	   5613	 416921	  65c99	/home/lynn/coreutils-6.11/obj-llvm/src/stty
+coreutils-6.11/obj-llvm/src/link
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sort
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/test
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/join
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sync
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/head
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/shred
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sha224sum
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/printf
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/runcon
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/factor
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/false
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/who
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/uname
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/printenv
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/wc
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/kill
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/chgrp
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/comm
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/users
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/uptime
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/unlink
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/tail
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/groups
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/stty
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/Makefile
+   text	   data	    bss	    dec	    hex	filename
+ 413508	   3232	   6157	 422897	  673f1	/home/lynn/coreutils-6.11/obj-llvm/src/dd
+   text	   data	    bss	    dec	    hex	filename
+ 398516	   3232	   5589	 407337	  63729	/home/lynn/coreutils-6.11/obj-llvm/src/shuf
+   text	   data	    bss	    dec	    hex	filename
+ 391084	   3232	   5589	 399905	  61a21	/home/lynn/coreutils-6.11/obj-llvm/src/mknod
+   text	   data	    bss	    dec	    hex	filename
+ 388860	   3232	   5597	 397689	  61179	/home/lynn/coreutils-6.11/obj-llvm/src/rmdir
+   text	   data	    bss	    dec	    hex	filename
+ 390500	   3232	   5597	 399329	  617e1	/home/lynn/coreutils-6.11/obj-llvm/src/pwd
+   text	   data	    bss	    dec	    hex	filename
+ 390932	   3232	   5869	 400033	  61aa1	/home/lynn/coreutils-6.11/obj-llvm/src/tsort
+   text	   data	    bss	    dec	    hex	filename
+ 388876	   3224	   5597	 397697	  61181	/home/lynn/coreutils-6.11/obj-llvm/src/chroot
+   text	   data	    bss	    dec	    hex	filename
+ 460044	   3208	   5349	 468601	  72679	/home/lynn/coreutils-6.11/obj-llvm/src/expr
+   text	   data	    bss	    dec	    hex	filename
+ 383676	   3208	   5333	 392217	  5fc19	/home/lynn/coreutils-6.11/obj-llvm/src/yes
+   text	   data	    bss	    dec	    hex	filename
+ 397940	   3240	   5613	 406793	  63509	/home/lynn/coreutils-6.11/obj-llvm/src/split
+   text	   data	    bss	    dec	    hex	filename
+ 430608	   3240	   5669	 439517	  6b4dd	/home/lynn/coreutils-6.11/obj-llvm/src/cp
+   text	   data	    bss	    dec	    hex	filename
+ 389660	   3224	   5605	 398489	  61499	/home/lynn/coreutils-6.11/obj-llvm/src/fold
+   text	   data	    bss	    dec	    hex	filename
+ 479300	   3436	   6909	 489645	  778ad	/home/lynn/coreutils-6.11/obj-llvm/src/vdir
+   text	   data	    bss	    dec	    hex	filename
+ 427996	   3208	   5333	 436537	  6a939	/home/lynn/coreutils-6.11/obj-llvm/src/sha384sum
+   text	   data	    bss	    dec	    hex	filename
+ 388084	   3208	   5341	 396633	  60d59	/home/lynn/coreutils-6.11/obj-llvm/src/cksum
+   text	   data	    bss	    dec	    hex	filename
+ 389388	   3232	   5589	 398209	  61381	/home/lynn/coreutils-6.11/obj-llvm/src/mkfifo
+   text	   data	    bss	    dec	    hex	filename
+ 404052	   3232	   5605	 412889	  64cd9	/home/lynn/coreutils-6.11/obj-llvm/src/chmod
+   text	   data	    bss	    dec	    hex	filename
+ 479300	   3436	   6909	 489645	  778ad	/home/lynn/coreutils-6.11/obj-llvm/src/dir
+   text	   data	    bss	    dec	    hex	filename
+ 389772	   3224	   5629	 398625	  61521	/home/lynn/coreutils-6.11/obj-llvm/src/paste
+   text	   data	    bss	    dec	    hex	filename
+ 398732	   3232	   5613	 407577	  63819	/home/lynn/coreutils-6.11/obj-llvm/src/uniq
+   text	   data	    bss	    dec	    hex	filename
+ 437884	   3248	   6157	 447289	  6d339	/home/lynn/coreutils-6.11/obj-llvm/src/mv
+   text	   data	    bss	    dec	    hex	filename
+ 389548	   3208	   5389	 398145	  61341	/home/lynn/coreutils-6.11/obj-llvm/src/sum
+   text	   data	    bss	    dec	    hex	filename
+ 479308	   3436	   6909	 489653	  778b5	/home/lynn/coreutils-6.11/obj-llvm/src/ls
+   text	   data	    bss	    dec	    hex	filename
+ 393628	   3232	   5597	 402457	  62419	/home/lynn/coreutils-6.11/obj-llvm/src/mkdir
+   text	   data	    bss	    dec	    hex	filename
+ 415548	   3244	   6353	 425145	  67cb9	/home/lynn/coreutils-6.11/obj-llvm/src/setuidgid
+   text	   data	    bss	    dec	    hex	filename
+ 387996	   3224	   5597	 396817	  60e11	/home/lynn/coreutils-6.11/obj-llvm/src/basename
+   text	   data	    bss	    dec	    hex	filename
+ 435872	   3220	 166093	 605185	  93c01	/home/lynn/coreutils-6.11/obj-llvm/src/su
+   text	   data	    bss	    dec	    hex	filename
+ 454564	   3260	   6481	 464305	  715b1	/home/lynn/coreutils-6.11/obj-llvm/src/ginstall
+   text	   data	    bss	    dec	    hex	filename
+ 390612	   3224	   5597	 399433	  61849	/home/lynn/coreutils-6.11/obj-llvm/src/nice
+   text	   data	    bss	    dec	    hex	filename
+ 395340	   3224	   5697	 404261	  62b25	/home/lynn/coreutils-6.11/obj-llvm/src/whoami
+   text	   data	    bss	    dec	    hex	filename
+ 385452	   3208	   5333	 393993	  60309	/home/lynn/coreutils-6.11/obj-llvm/src/echo
+   text	   data	    bss	    dec	    hex	filename
+ 393284	   3208	   5333	 401825	  621a1	/home/lynn/coreutils-6.11/obj-llvm/src/md5sum
+   text	   data	    bss	    dec	    hex	filename
+ 387430	   3224	   5597	 396251	  60bdb	/home/lynn/coreutils-6.11/obj-llvm/src/dirname
+   text	   data	    bss	    dec	    hex	filename
+ 395624	   3232	   5589	 404445	  62bdd	/home/lynn/coreutils-6.11/obj-llvm/src/pathchk
+   text	   data	    bss	    dec	    hex	filename
+ 392068	   3232	   5621	 400921	  61e19	/home/lynn/coreutils-6.11/obj-llvm/src/seq
+   text	   data	    bss	    dec	    hex	filename
+ 409364	   3236	   6253	 418853	  66425	/home/lynn/coreutils-6.11/obj-llvm/src/hostid
+   text	   data	    bss	    dec	    hex	filename
+ 389680	   3224	   5597	 398501	  614a5	/home/lynn/coreutils-6.11/obj-llvm/src/sleep
+   text	   data	    bss	    dec	    hex	filename
+ 390420	   3240	   5613	 399273	  617a9	/home/lynn/coreutils-6.11/obj-llvm/src/expand
+   text	   data	    bss	    dec	    hex	filename
+ 391708	   3240	   5621	 400569	  61cb9	/home/lynn/coreutils-6.11/obj-llvm/src/unexpand
+   text	   data	    bss	    dec	    hex	filename
+ 452804	   3280	   6533	 462617	  70f19	/home/lynn/coreutils-6.11/obj-llvm/src/nl
+   text	   data	    bss	    dec	    hex	filename
+ 453884	   3232	  14117	 471233	  730c1	/home/lynn/coreutils-6.11/obj-llvm/src/tac
+   text	   data	    bss	    dec	    hex	filename
+ 409252	   3232	   5733	 418217	  661a9	/home/lynn/coreutils-6.11/obj-llvm/src/od
+   text	   data	    bss	    dec	    hex	filename
+ 388268	   3224	   5605	 397097	  60f29	/home/lynn/coreutils-6.11/obj-llvm/src/tty
+   text	   data	    bss	    dec	    hex	filename
+ 398540	   3232	   5589	 407361	  63741	/home/lynn/coreutils-6.11/obj-llvm/src/mktemp
+   text	   data	    bss	    dec	    hex	filename
+ 392388	   3248	   5589	 401225	  61f49	/home/lynn/coreutils-6.11/obj-llvm/src/cat
+   text	   data	    bss	    dec	    hex	filename
+ 443268	   3244	   5717	 452229	  6e685	/home/lynn/coreutils-6.11/obj-llvm/src/du
+   text	   data	    bss	    dec	    hex	filename
+ 395420	   3232	   5637	 404289	  62b41	/home/lynn/coreutils-6.11/obj-llvm/src/cut
+   text	   data	    bss	    dec	    hex	filename
+ 391012	   3232	   5725	 399969	  61a61	/home/lynn/coreutils-6.11/obj-llvm/src/nohup
+   text	   data	    bss	    dec	    hex	filename
+ 462580	   3232	   5941	 471753	  732c9	/home/lynn/coreutils-6.11/obj-llvm/src/csplit
+   text	   data	    bss	    dec	    hex	filename
+ 427996	   3208	   5333	 436537	  6a939	/home/lynn/coreutils-6.11/obj-llvm/src/sha512sum
+   text	   data	    bss	    dec	    hex	filename
+ 396882	   3240	   5637	 405759	  630ff	/home/lynn/coreutils-6.11/obj-llvm/src/dircolors
+   text	   data	    bss	    dec	    hex	filename
+ 386104	   3208	   5325	 394637	  6058d	/home/lynn/coreutils-6.11/obj-llvm/src/env
+   text	   data	    bss	    dec	    hex	filename
+ 400340	   3232	   5605	 409177	  63e59	/home/lynn/coreutils-6.11/obj-llvm/src/[
+   text	   data	    bss	    dec	    hex	filename
+ 393486	   3232	  38669	 435387	  6a4bb	/home/lynn/coreutils-6.11/obj-llvm/src/fmt
+   text	   data	    bss	    dec	    hex	filename
+ 385708	   3208	   5461	 394377	  60489	/home/lynn/coreutils-6.11/obj-llvm/src/tee
+   text	   data	    bss	    dec	    hex	filename
+ 400476	   3232	  14549	 418257	  661d1	/home/lynn/coreutils-6.11/obj-llvm/src/tr
+   text	   data	    bss	    dec	    hex	filename
+ 392748	   3224	   5589	 401561	  62099	/home/lynn/coreutils-6.11/obj-llvm/src/readlink
+   text	   data	    bss	    dec	    hex	filename
+ 417694	   3232	   5589	 426515	  68213	/home/lynn/coreutils-6.11/obj-llvm/src/date
+   text	   data	    bss	    dec	    hex	filename
+ 429676	   3244	   6393	 439313	  6b411	/home/lynn/coreutils-6.11/obj-llvm/src/stat
+   text	   data	    bss	    dec	    hex	filename
+ 439624	   3252	   6693	 449569	  6dc21	/home/lynn/coreutils-6.11/obj-llvm/src/pinky
+   text	   data	    bss	    dec	    hex	filename
+ 416740	   3280	   5765	 425785	  67f39	/home/lynn/coreutils-6.11/obj-llvm/src/pr
+   text	   data	    bss	    dec	    hex	filename
+ 390876	   3232	   5629	 399737	  61979	/home/lynn/coreutils-6.11/obj-llvm/src/base64
+   text	   data	    bss	    dec	    hex	filename
+ 395916	   3208	   5333	 404457	  62be9	/home/lynn/coreutils-6.11/obj-llvm/src/sha1sum
+   text	   data	    bss	    dec	    hex	filename
+ 407984	   3240	   6133	 417357	  65e4d	/home/lynn/coreutils-6.11/obj-llvm/src/rm
+   text	   data	    bss	    dec	    hex	filename
+ 379772	   3196	   5289	 388257	  5eca1	/home/lynn/coreutils-6.11/obj-llvm/src/true
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/dd
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/shuf
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/mknod
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/rmdir
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/pwd
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/tsort
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/chroot
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/expr
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/yes
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/split
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/cp
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/fold
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/vdir
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sha384sum
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/cksum
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/mkfifo
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/chmod
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/dir
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/paste
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/uniq
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/mv
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sum
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/ls
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/mkdir
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/setuidgid
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/basename
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/su
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/ginstall
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/nice
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/whoami
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/echo
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/md5sum
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/dirname
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/pathchk
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/seq
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/hostid
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sleep
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/expand
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/unexpand
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/nl
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/tac
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/od
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/tty
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/mktemp
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/cat
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/du
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/cut
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/nohup
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/csplit
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sha512sum
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/dircolors
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/env
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/[
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/fmt
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/tee
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/tr
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/readlink
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/date
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/stat
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/pinky
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/pr
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/base64
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sha1sum
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/rm
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/true
+getting size from /home/lynn/   text	   data	    bss	    dec	    hex	filename
+ 387428	   3232	   5597	 396257	  60be1	/home/lynn/coreutils-6.11/obj-llvm/src/link
+   text	   data	    bss	    dec	    hex	filename
+ 438620	   3248	   7013	 448881	  6d971	/home/lynn/coreutils-6.11/obj-llvm/src/sort
+   text	   data	    bss	    dec	    hex	filename
+ 382716	   3180	   5561	 391457	  5f921	/home/lynn/coreutils-6.11/obj-llvm/src/test
+   text	   data	    bss	    dec	    hex	filename
+ 402260	   3248	   5653	 411161	  64619	/home/lynn/coreutils-6.11/obj-llvm/src/join
+   text	   data	    bss	    dec	    hex	filename
+ 383564	   3208	   5333	 392105	  5fba9	/home/lynn/coreutils-6.11/obj-llvm/src/sync
+   text	   data	    bss	    dec	    hex	filename
+ 400260	   3232	   5589	 409081	  63df9	/home/lynn/coreutils-6.11/obj-llvm/src/head
+   text	   data	    bss	    dec	    hex	filename
+ 408156	   3232	   5653	 417041	  65d11	/home/lynn/coreutils-6.11/obj-llvm/src/shred
+   text	   data	    bss	    dec	    hex	filename
+ 399782	   3208	   5333	 408323	  63b03	/home/lynn/coreutils-6.11/obj-llvm/src/sha224sum
+   text	   data	    bss	    dec	    hex	filename
+ 396604	   3224	   5613	 405441	  62fc1	/home/lynn/coreutils-6.11/obj-llvm/src/printf
+   text	   data	    bss	    dec	    hex	filename
+ 390572	   3360	   5589	 399521	  618a1	/home/lynn/coreutils-6.11/obj-llvm/src/runcon
+   text	   data	    bss	    dec	    hex	filename
+ 392924	   3232	   5853	 402009	  62259	/home/lynn/coreutils-6.11/obj-llvm/src/factor
+   text	   data	    bss	    dec	    hex	filename
+ 379772	   3196	   5289	 388257	  5eca1	/home/lynn/coreutils-6.11/obj-llvm/src/false
+   text	   data	    bss	    dec	    hex	filename
+ 443596	   3276	   6921	 453793	  6eca1	/home/lynn/coreutils-6.11/obj-llvm/src/who
+   text	   data	    bss	    dec	    hex	filename
+ 388404	   3224	   5589	 397217	  60fa1	/home/lynn/coreutils-6.11/obj-llvm/src/uname
+   text	   data	    bss	    dec	    hex	filename
+ 384332	   3208	   5333	 392873	  5fea9	/home/lynn/coreutils-6.11/obj-llvm/src/printenv
+   text	   data	    bss	    dec	    hex	filename
+ 398168	   3240	   5653	 407061	  63615	/home/lynn/coreutils-6.11/obj-llvm/src/wc
+   text	   data	    bss	    dec	    hex	filename
+ 389376	   3640	   5445	 398461	  6147d	/home/lynn/coreutils-6.11/obj-llvm/src/kill
+   text	   data	    bss	    dec	    hex	filename
+ 427236	   3244	   6357	 436837	  6aa65	/home/lynn/coreutils-6.11/obj-llvm/src/chgrp
+   text	   data	    bss	    dec	    hex	filename
+ 393100	   3232	   5589	 401921	  62201	/home/lynn/coreutils-6.11/obj-llvm/src/comm
+   text	   data	    bss	    dec	    hex	filename
+ 394056	   3236	   6005	 403297	  62761	/home/lynn/coreutils-6.11/obj-llvm/src/users
+   text	   data	    bss	    dec	    hex	filename
+ 396228	   3236	   6005	 405469	  62fdd	/home/lynn/coreutils-6.11/obj-llvm/src/uptime
+   text	   data	    bss	    dec	    hex	filename
+ 387228	   3232	   5597	 396057	  60b19	/home/lynn/coreutils-6.11/obj-llvm/src/unlink
+   text	   data	    bss	    dec	    hex	filename
+ 410526	   3240	   5597	 419363	  66623	/home/lynn/coreutils-6.11/obj-llvm/src/tail
+   text	   data	    bss	    dec	    hex	filename
+ 420416	   3256	   6825	 430497	  691a1	/home/lynn/coreutils-6.11/obj-llvm/src/groups
+   text	   data	    bss	    dec	    hex	filename
+ 406020	   5288	   5613	 416921	  65c99	/home/lynn/coreutils-6.11/obj-llvm/src/stty
+   text	   data	    bss	    dec	    hex	filename
+ 431924	   3244	   6425	 441593	  6bcf9	/home/lynn/coreutils-6.11/obj-llvm/src/chown
+   text	   data	    bss	    dec	    hex	filename
+ 399782	   3208	   5333	 408323	  63b03	/home/lynn/coreutils-6.11/obj-llvm/src/sha256sum
+   text	   data	    bss	    dec	    hex	filename
+ 405716	   3232	   5605	 414553	  65359	/home/lynn/coreutils-6.11/obj-llvm/src/touch
+   text	   data	    bss	    dec	    hex	filename
+ 414364	   3244	   6389	 423997	  6783d	/home/lynn/coreutils-6.11/obj-llvm/src/id
+   text	   data	    bss	    dec	    hex	filename
+ 405148	   3232	   5613	 413993	  65129	/home/lynn/coreutils-6.11/obj-llvm/src/chcon
+   text	   data	    bss	    dec	    hex	filename
+ 403164	   3236	   6089	 412489	  64b49	/home/lynn/coreutils-6.11/obj-llvm/src/logname
+   text	   data	    bss	    dec	    hex	filename
+ 406752	   3232	   5613	 415597	  6576d	/home/lynn/coreutils-6.11/obj-llvm/src/ln
+   text	   data	    bss	    dec	    hex	filename
+ 461804	   3232	   7093	 472129	  73441	/home/lynn/coreutils-6.11/obj-llvm/src/ptx
+coreutils-6.11/obj-llvm/src/link
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sort
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/test
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/join
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sync
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/head
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/shred
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sha224sum
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/printf
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/runcon
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/factor
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/false
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/who
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/uname
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/printenv
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/wc
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/kill
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/chgrp
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/comm
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/users
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/uptime
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/unlink
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/tail
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/groups
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/stty
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/chown
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sha256sum
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/touch
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/id
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/chcon
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/logname
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/ln
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/ptx
+   text	   data	    bss	    dec	    hex	filename
+ 413508	   3232	   6157	 422897	  673f1	/home/lynn/coreutils-6.11/obj-llvm/src/dd
+   text	   data	    bss	    dec	    hex	filename
+ 398516	   3232	   5589	 407337	  63729	/home/lynn/coreutils-6.11/obj-llvm/src/shuf
+   text	   data	    bss	    dec	    hex	filename
+ 391084	   3232	   5589	 399905	  61a21	/home/lynn/coreutils-6.11/obj-llvm/src/mknod
+   text	   data	    bss	    dec	    hex	filename
+ 388860	   3232	   5597	 397689	  61179	/home/lynn/coreutils-6.11/obj-llvm/src/rmdir
+   text	   data	    bss	    dec	    hex	filename
+ 390500	   3232	   5597	 399329	  617e1	/home/lynn/coreutils-6.11/obj-llvm/src/pwd
+   text	   data	    bss	    dec	    hex	filename
+ 390932	   3232	   5869	 400033	  61aa1	/home/lynn/coreutils-6.11/obj-llvm/src/tsort
+   text	   data	    bss	    dec	    hex	filename
+ 388876	   3224	   5597	 397697	  61181	/home/lynn/coreutils-6.11/obj-llvm/src/chroot
+   text	   data	    bss	    dec	    hex	filename
+ 460044	   3208	   5349	 468601	  72679	/home/lynn/coreutils-6.11/obj-llvm/src/expr
+   text	   data	    bss	    dec	    hex	filename
+ 383676	   3208	   5333	 392217	  5fc19	/home/lynn/coreutils-6.11/obj-llvm/src/yes
+   text	   data	    bss	    dec	    hex	filename
+ 397940	   3240	   5613	 406793	  63509	/home/lynn/coreutils-6.11/obj-llvm/src/split
+   text	   data	    bss	    dec	    hex	filename
+ 430608	   3240	   5669	 439517	  6b4dd	/home/lynn/coreutils-6.11/obj-llvm/src/cp
+   text	   data	    bss	    dec	    hex	filename
+ 389660	   3224	   5605	 398489	  61499	/home/lynn/coreutils-6.11/obj-llvm/src/fold
+   text	   data	    bss	    dec	    hex	filename
+ 479300	   3436	   6909	 489645	  778ad	/home/lynn/coreutils-6.11/obj-llvm/src/vdir
+   text	   data	    bss	    dec	    hex	filename
+ 427996	   3208	   5333	 436537	  6a939	/home/lynn/coreutils-6.11/obj-llvm/src/sha384sum
+   text	   data	    bss	    dec	    hex	filename
+ 388084	   3208	   5341	 396633	  60d59	/home/lynn/coreutils-6.11/obj-llvm/src/cksum
+   text	   data	    bss	    dec	    hex	filename
+ 389388	   3232	   5589	 398209	  61381	/home/lynn/coreutils-6.11/obj-llvm/src/mkfifo
+   text	   data	    bss	    dec	    hex	filename
+ 404052	   3232	   5605	 412889	  64cd9	/home/lynn/coreutils-6.11/obj-llvm/src/chmod
+   text	   data	    bss	    dec	    hex	filename
+ 479300	   3436	   6909	 489645	  778ad	/home/lynn/coreutils-6.11/obj-llvm/src/dir
+   text	   data	    bss	    dec	    hex	filename
+ 389772	   3224	   5629	 398625	  61521	/home/lynn/coreutils-6.11/obj-llvm/src/paste
+   text	   data	    bss	    dec	    hex	filename
+ 398732	   3232	   5613	 407577	  63819	/home/lynn/coreutils-6.11/obj-llvm/src/uniq
+   text	   data	    bss	    dec	    hex	filename
+ 437884	   3248	   6157	 447289	  6d339	/home/lynn/coreutils-6.11/obj-llvm/src/mv
+   text	   data	    bss	    dec	    hex	filename
+ 389548	   3208	   5389	 398145	  61341	/home/lynn/coreutils-6.11/obj-llvm/src/sum
+   text	   data	    bss	    dec	    hex	filename
+ 479308	   3436	   6909	 489653	  778b5	/home/lynn/coreutils-6.11/obj-llvm/src/ls
+   text	   data	    bss	    dec	    hex	filename
+ 393628	   3232	   5597	 402457	  62419	/home/lynn/coreutils-6.11/obj-llvm/src/mkdir
+   text	   data	    bss	    dec	    hex	filename
+ 415548	   3244	   6353	 425145	  67cb9	/home/lynn/coreutils-6.11/obj-llvm/src/setuidgid
+   text	   data	    bss	    dec	    hex	filename
+ 387996	   3224	   5597	 396817	  60e11	/home/lynn/coreutils-6.11/obj-llvm/src/basename
+   text	   data	    bss	    dec	    hex	filename
+ 435872	   3220	 166093	 605185	  93c01	/home/lynn/coreutils-6.11/obj-llvm/src/su
+   text	   data	    bss	    dec	    hex	filename
+ 454564	   3260	   6481	 464305	  715b1	/home/lynn/coreutils-6.11/obj-llvm/src/ginstall
+   text	   data	    bss	    dec	    hex	filename
+ 390612	   3224	   5597	 399433	  61849	/home/lynn/coreutils-6.11/obj-llvm/src/nice
+   text	   data	    bss	    dec	    hex	filename
+ 395340	   3224	   5697	 404261	  62b25	/home/lynn/coreutils-6.11/obj-llvm/src/whoami
+   text	   data	    bss	    dec	    hex	filename
+ 385452	   3208	   5333	 393993	  60309	/home/lynn/coreutils-6.11/obj-llvm/src/echo
+   text	   data	    bss	    dec	    hex	filename
+ 393284	   3208	   5333	 401825	  621a1	/home/lynn/coreutils-6.11/obj-llvm/src/md5sum
+   text	   data	    bss	    dec	    hex	filename
+ 387430	   3224	   5597	 396251	  60bdb	/home/lynn/coreutils-6.11/obj-llvm/src/dirname
+   text	   data	    bss	    dec	    hex	filename
+ 395624	   3232	   5589	 404445	  62bdd	/home/lynn/coreutils-6.11/obj-llvm/src/pathchk
+   text	   data	    bss	    dec	    hex	filename
+ 392068	   3232	   5621	 400921	  61e19	/home/lynn/coreutils-6.11/obj-llvm/src/seq
+   text	   data	    bss	    dec	    hex	filename
+ 409364	   3236	   6253	 418853	  66425	/home/lynn/coreutils-6.11/obj-llvm/src/hostid
+   text	   data	    bss	    dec	    hex	filename
+ 389680	   3224	   5597	 398501	  614a5	/home/lynn/coreutils-6.11/obj-llvm/src/sleep
+   text	   data	    bss	    dec	    hex	filename
+ 390420	   3240	   5613	 399273	  617a9	/home/lynn/coreutils-6.11/obj-llvm/src/expand
+   text	   data	    bss	    dec	    hex	filename
+ 391708	   3240	   5621	 400569	  61cb9	/home/lynn/coreutils-6.11/obj-llvm/src/unexpand
+   text	   data	    bss	    dec	    hex	filename
+ 452804	   3280	   6533	 462617	  70f19	/home/lynn/coreutils-6.11/obj-llvm/src/nl
+   text	   data	    bss	    dec	    hex	filename
+ 453884	   3232	  14117	 471233	  730c1	/home/lynn/coreutils-6.11/obj-llvm/src/tac
+   text	   data	    bss	    dec	    hex	filename
+ 409252	   3232	   5733	 418217	  661a9	/home/lynn/coreutils-6.11/obj-llvm/src/od
+   text	   data	    bss	    dec	    hex	filename
+ 388268	   3224	   5605	 397097	  60f29	/home/lynn/coreutils-6.11/obj-llvm/src/tty
+   text	   data	    bss	    dec	    hex	filename
+ 398540	   3232	   5589	 407361	  63741	/home/lynn/coreutils-6.11/obj-llvm/src/mktemp
+   text	   data	    bss	    dec	    hex	filename
+ 392388	   3248	   5589	 401225	  61f49	/home/lynn/coreutils-6.11/obj-llvm/src/cat
+   text	   data	    bss	    dec	    hex	filename
+ 443268	   3244	   5717	 452229	  6e685	/home/lynn/coreutils-6.11/obj-llvm/src/du
+   text	   data	    bss	    dec	    hex	filename
+ 395420	   3232	   5637	 404289	  62b41	/home/lynn/coreutils-6.11/obj-llvm/src/cut
+   text	   data	    bss	    dec	    hex	filename
+ 391012	   3232	   5725	 399969	  61a61	/home/lynn/coreutils-6.11/obj-llvm/src/nohup
+   text	   data	    bss	    dec	    hex	filename
+ 462580	   3232	   5941	 471753	  732c9	/home/lynn/coreutils-6.11/obj-llvm/src/csplit
+   text	   data	    bss	    dec	    hex	filename
+ 427996	   3208	   5333	 436537	  6a939	/home/lynn/coreutils-6.11/obj-llvm/src/sha512sum
+   text	   data	    bss	    dec	    hex	filename
+ 396882	   3240	   5637	 405759	  630ff	/home/lynn/coreutils-6.11/obj-llvm/src/dircolors
+   text	   data	    bss	    dec	    hex	filename
+ 386104	   3208	   5325	 394637	  6058d	/home/lynn/coreutils-6.11/obj-llvm/src/env
+   text	   data	    bss	    dec	    hex	filename
+ 400340	   3232	   5605	 409177	  63e59	/home/lynn/coreutils-6.11/obj-llvm/src/[
+   text	   data	    bss	    dec	    hex	filename
+ 393486	   3232	  38669	 435387	  6a4bb	/home/lynn/coreutils-6.11/obj-llvm/src/fmt
+   text	   data	    bss	    dec	    hex	filename
+ 385708	   3208	   5461	 394377	  60489	/home/lynn/coreutils-6.11/obj-llvm/src/tee
+   text	   data	    bss	    dec	    hex	filename
+ 400476	   3232	  14549	 418257	  661d1	/home/lynn/coreutils-6.11/obj-llvm/src/tr
+   text	   data	    bss	    dec	    hex	filename
+ 392748	   3224	   5589	 401561	  62099	/home/lynn/coreutils-6.11/obj-llvm/src/readlink
+   text	   data	    bss	    dec	    hex	filename
+ 417694	   3232	   5589	 426515	  68213	/home/lynn/coreutils-6.11/obj-llvm/src/date
+   text	   data	    bss	    dec	    hex	filename
+ 429676	   3244	   6393	 439313	  6b411	/home/lynn/coreutils-6.11/obj-llvm/src/stat
+   text	   data	    bss	    dec	    hex	filename
+ 439624	   3252	   6693	 449569	  6dc21	/home/lynn/coreutils-6.11/obj-llvm/src/pinky
+   text	   data	    bss	    dec	    hex	filename
+ 416740	   3280	   5765	 425785	  67f39	/home/lynn/coreutils-6.11/obj-llvm/src/pr
+   text	   data	    bss	    dec	    hex	filename
+ 390876	   3232	   5629	 399737	  61979	/home/lynn/coreutils-6.11/obj-llvm/src/base64
+   text	   data	    bss	    dec	    hex	filename
+ 395916	   3208	   5333	 404457	  62be9	/home/lynn/coreutils-6.11/obj-llvm/src/sha1sum
+   text	   data	    bss	    dec	    hex	filename
+ 407984	   3240	   6133	 417357	  65e4d	/home/lynn/coreutils-6.11/obj-llvm/src/rm
+   text	   data	    bss	    dec	    hex	filename
+ 379772	   3196	   5289	 388257	  5eca1	/home/lynn/coreutils-6.11/obj-llvm/src/true
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/dd
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/shuf
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/mknod
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/rmdir
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/pwd
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/tsort
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/chroot
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/expr
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/yes
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/split
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/cp
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/fold
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/vdir
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sha384sum
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/cksum
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/mkfifo
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/chmod
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/dir
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/paste
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/uniq
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/mv
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sum
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/ls
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/mkdir
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/setuidgid
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/basename
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/su
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/ginstall
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/nice
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/whoami
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/echo
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/md5sum
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/dirname
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/pathchk
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/seq
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/hostid
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sleep
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/expand
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/unexpand
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/nl
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/tac
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/od
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/tty
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/mktemp
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/cat
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/du
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/cut
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/nohup
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/csplit
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sha512sum
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/dircolors
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/env
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/[
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/fmt
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/tee
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/tr
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/readlink
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/date
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/stat
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/pinky
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/pr
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/base64
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sha1sum
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/rm
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/true
+getting size from /home/lynn/   text	   data	    bss	    dec	    hex	filename
+ 387428	   3232	   5597	 396257	  60be1	/home/lynn/coreutils-6.11/obj-llvm/src/link
+   text	   data	    bss	    dec	    hex	filename
+ 438620	   3248	   7013	 448881	  6d971	/home/lynn/coreutils-6.11/obj-llvm/src/sort
+   text	   data	    bss	    dec	    hex	filename
+ 382716	   3180	   5561	 391457	  5f921	/home/lynn/coreutils-6.11/obj-llvm/src/test
+   text	   data	    bss	    dec	    hex	filename
+ 402260	   3248	   5653	 411161	  64619	/home/lynn/coreutils-6.11/obj-llvm/src/join
+   text	   data	    bss	    dec	    hex	filename
+ 383564	   3208	   5333	 392105	  5fba9	/home/lynn/coreutils-6.11/obj-llvm/src/sync
+   text	   data	    bss	    dec	    hex	filename
+ 400260	   3232	   5589	 409081	  63df9	/home/lynn/coreutils-6.11/obj-llvm/src/head
+   text	   data	    bss	    dec	    hex	filename
+ 408156	   3232	   5653	 417041	  65d11	/home/lynn/coreutils-6.11/obj-llvm/src/shred
+   text	   data	    bss	    dec	    hex	filename
+ 399782	   3208	   5333	 408323	  63b03	/home/lynn/coreutils-6.11/obj-llvm/src/sha224sum
+   text	   data	    bss	    dec	    hex	filename
+ 396604	   3224	   5613	 405441	  62fc1	/home/lynn/coreutils-6.11/obj-llvm/src/printf
+   text	   data	    bss	    dec	    hex	filename
+ 390572	   3360	   5589	 399521	  618a1	/home/lynn/coreutils-6.11/obj-llvm/src/runcon
+   text	   data	    bss	    dec	    hex	filename
+ 392924	   3232	   5853	 402009	  62259	/home/lynn/coreutils-6.11/obj-llvm/src/factor
+   text	   data	    bss	    dec	    hex	filename
+ 379772	   3196	   5289	 388257	  5eca1	/home/lynn/coreutils-6.11/obj-llvm/src/false
+   text	   data	    bss	    dec	    hex	filename
+ 443596	   3276	   6921	 453793	  6eca1	/home/lynn/coreutils-6.11/obj-llvm/src/who
+   text	   data	    bss	    dec	    hex	filename
+ 388404	   3224	   5589	 397217	  60fa1	/home/lynn/coreutils-6.11/obj-llvm/src/uname
+   text	   data	    bss	    dec	    hex	filename
+ 384332	   3208	   5333	 392873	  5fea9	/home/lynn/coreutils-6.11/obj-llvm/src/printenv
+   text	   data	    bss	    dec	    hex	filename
+ 398168	   3240	   5653	 407061	  63615	/home/lynn/coreutils-6.11/obj-llvm/src/wc
+   text	   data	    bss	    dec	    hex	filename
+ 389376	   3640	   5445	 398461	  6147d	/home/lynn/coreutils-6.11/obj-llvm/src/kill
+   text	   data	    bss	    dec	    hex	filename
+ 427236	   3244	   6357	 436837	  6aa65	/home/lynn/coreutils-6.11/obj-llvm/src/chgrp
+   text	   data	    bss	    dec	    hex	filename
+ 393100	   3232	   5589	 401921	  62201	/home/lynn/coreutils-6.11/obj-llvm/src/comm
+   text	   data	    bss	    dec	    hex	filename
+ 394056	   3236	   6005	 403297	  62761	/home/lynn/coreutils-6.11/obj-llvm/src/users
+   text	   data	    bss	    dec	    hex	filename
+ 396228	   3236	   6005	 405469	  62fdd	/home/lynn/coreutils-6.11/obj-llvm/src/uptime
+   text	   data	    bss	    dec	    hex	filename
+ 387228	   3232	   5597	 396057	  60b19	/home/lynn/coreutils-6.11/obj-llvm/src/unlink
+   text	   data	    bss	    dec	    hex	filename
+ 410526	   3240	   5597	 419363	  66623	/home/lynn/coreutils-6.11/obj-llvm/src/tail
+   text	   data	    bss	    dec	    hex	filename
+ 420416	   3256	   6825	 430497	  691a1	/home/lynn/coreutils-6.11/obj-llvm/src/groups
+   text	   data	    bss	    dec	    hex	filename
+ 406020	   5288	   5613	 416921	  65c99	/home/lynn/coreutils-6.11/obj-llvm/src/stty
+   text	   data	    bss	    dec	    hex	filename
+ 431924	   3244	   6425	 441593	  6bcf9	/home/lynn/coreutils-6.11/obj-llvm/src/chown
+   text	   data	    bss	    dec	    hex	filename
+ 399782	   3208	   5333	 408323	  63b03	/home/lynn/coreutils-6.11/obj-llvm/src/sha256sum
+   text	   data	    bss	    dec	    hex	filename
+ 405716	   3232	   5605	 414553	  65359	/home/lynn/coreutils-6.11/obj-llvm/src/touch
+   text	   data	    bss	    dec	    hex	filename
+ 414364	   3244	   6389	 423997	  6783d	/home/lynn/coreutils-6.11/obj-llvm/src/id
+   text	   data	    bss	    dec	    hex	filename
+ 405148	   3232	   5613	 413993	  65129	/home/lynn/coreutils-6.11/obj-llvm/src/chcon
+   text	   data	    bss	    dec	    hex	filename
+ 403164	   3236	   6089	 412489	  64b49	/home/lynn/coreutils-6.11/obj-llvm/src/logname
+   text	   data	    bss	    dec	    hex	filename
+ 406752	   3232	   5613	 415597	  6576d	/home/lynn/coreutils-6.11/obj-llvm/src/ln
+   text	   data	    bss	    dec	    hex	filename
+ 461804	   3232	   7093	 472129	  73441	/home/lynn/coreutils-6.11/obj-llvm/src/ptx
+coreutils-6.11/obj-llvm/src/link
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sort
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/test
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/join
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sync
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/head
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/shred
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sha224sum
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/printf
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/runcon
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/factor
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/false
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/who
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/uname
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/printenv
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/wc
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/kill
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/chgrp
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/comm
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/users
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/uptime
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/unlink
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/tail
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/groups
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/stty
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/chown
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/sha256sum
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/touch
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/id
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/chcon
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/logname
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/ln
+getting size from /home/lynn/coreutils-6.11/obj-llvm/src/ptx
