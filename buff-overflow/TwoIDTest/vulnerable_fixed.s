@@ -35,7 +35,7 @@
 malicious:                              @ @malicious
 .Lfunc_begin0:
 	@ [ ====== CFI ID begin ====== ]
-	movtne r12, #32243
+	movtne r12, #10934
 	@ [ ====== CFI ID end ====== ]
 	.loc	1 6 0                   @ vulnerable.c:6:0
 @ BB#0:                                 @ %entry
@@ -51,7 +51,7 @@ malicious:                              @ @malicious
 	push {r0, r1}
 	ldr r0, [r12] 	@ get destination ID
 	mov r1, r12 	@ preserver destination addr
-	movtne r12, #9228	@ ID encoding, doesn't need to execute
+	movtne r12, #23631	@ ID encoding, doesn't need to execute
 	ldr r12, [pc, #-12] 	@ get ID encoding
 	cmp r0, r12
 	bne cfi_abort
@@ -73,7 +73,7 @@ malicious:                              @ @malicious
 foobar:                                 @ @foobar
 .Lfunc_begin1:
 	@ [ ====== CFI ID begin ====== ]
-	movtne r12, #32243
+	movtne r12, #10934
 	@ [ ====== CFI ID end ====== ]
 	.loc	1 11 0                  @ vulnerable.c:11:0
 @ BB#0:                                 @ %entry
@@ -99,7 +99,7 @@ foobar:                                 @ @foobar
 	push {r0, r1}
 	ldr r0, [r12] 	@ get destination ID
 	mov r1, r12 	@ preserver destination addr
-	movtne r12, #9228	@ ID encoding, doesn't need to execute
+	movtne r12, #23631	@ ID encoding, doesn't need to execute
 	ldr r12, [pc, #-12] 	@ get ID encoding
 	cmp r0, r12
 	bne cfi_abort
@@ -150,7 +150,7 @@ main:                                   @ @main
 	ldr	r0, [r0, #4]
 	bl	foobar
 	@ [ ====== CFI ID begin ====== ]
-	movtne r12, #9228
+	movtne r12, #23631
 	@ [ ====== CFI ID end ====== ]
 	.loc	1 26 0                  @ vulnerable.c:26:0
 	str	r4, [sp, #8]
@@ -172,9 +172,14 @@ main:                                   @ @main
 	.type	cfi_abort,%function
 cfi_abort:                              @ @cfi_abort
 @ BB#0:                                 @ %entry
-.LBB3_1:                                @ %loop
-                                        @ =>This Inner Loop Header: Depth=1
-	b	.LBB3_1
+	push	{r11, lr}
+	ldr	r0, .LCPI3_0
+	mov	r11, sp
+	bl	exit
+	.align	2
+@ BB#1:
+.LCPI3_0:
+	.long	4294966596              @ 0xfffffd44
 .Ltmp10:
 	.size	cfi_abort, .Ltmp10-cfi_abort
 
@@ -469,7 +474,7 @@ cfi_abort:                              @ @cfi_abort
 .Linfo_string1:
 	.asciz	 "vulnerable.c"
 .Linfo_string2:
-	.asciz	 "/home/lynn/buff-overflow/TwoIDTest"
+	.asciz	 "/home/lynn/Documents/boeing-cfi/buff-overflow/TwoIDTest"
 .Linfo_string3:
 	.asciz	 "malicious"
 .Linfo_string4:

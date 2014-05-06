@@ -11,7 +11,7 @@ LEVEL = ../../
 
 LIBRARYNAME=CfiPasses
 
-LLVMSRC = /home/jabat/Documents/boeing-cfi/llvm-3.3
+LLVMSRC = /home/lynn/Documents/boeing-cfi/llvm-3.3
 POOLALLOC_SRCDIR := $(LLVMSRC)/projects/poolalloc
 SC_FLAGS = -I$(POOLALLOC_SRCDIR)/include -I$(PROJ_SRC_ROOT)/include
 

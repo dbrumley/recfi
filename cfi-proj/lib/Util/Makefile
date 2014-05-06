@@ -11,7 +11,7 @@ LEVEL = ../../
 
 LIBRARYNAME=CfiUtil
 
-LLVMSRC = /home/jabat/Documents/boeing-cfi/llvm-3.3
+LLVMSRC = /home/lynn/Documents/boeing-cfi/llvm-3.3
 POOLALLOC_SRCDIR := $(LLVMSRC)/projects/poolalloc
 SC_FLAGS = -I$(POOLALLOC_SRCDIR)/include  
 

@@ -9,9 +9,9 @@ target triple = "arm--linux-gnueabi"
 ; Function Attrs: nounwind
 define internal void @malicious() #0 {
 entry:
-  call void @llvm.cfiid(i32 32243), !dbg !18
+  call void @llvm.cfiid(i32 10934), !dbg !18
   %call = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([26 x i8]* @.str, i32 0, i32 0)), !dbg !18
-  call void @llvm.cficheckret(i32 9228), !dbg !19
+  call void @llvm.cficheckret(i32 23631), !dbg !19
   ret void, !dbg !19
 }
 
@@ -20,7 +20,7 @@ declare i32 @printf(i8*, ...) #1
 ; Function Attrs: nounwind
 define internal void @foobar(i8* %str) #0 {
 entry:
-  call void @llvm.cfiid(i32 32243)
+  call void @llvm.cfiid(i32 10934)
   %str.addr = alloca i8*, align 4
   %buf = alloca [10 x i8], align 1
   store i8* %str, i8** %str.addr, align 4
@@ -31,7 +31,7 @@ entry:
   %call = call i8* @strcpy(i8* %arraydecay, i8* %0) #4, !dbg !27
   %arraydecay1 = getelementptr inbounds [10 x i8]* %buf, i32 0, i32 0, !dbg !28
   %call2 = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([4 x i8]* @.str1, i32 0, i32 0), i8* %arraydecay1), !dbg !28
-  call void @llvm.cficheckret(i32 9228), !dbg !29
+  call void @llvm.cficheckret(i32 23631), !dbg !29
   ret void, !dbg !29
 }
 
@@ -66,7 +66,7 @@ if.end:                                           ; preds = %entry
   %arrayidx = getelementptr inbounds i8** %1, i32 1, !dbg !37
   %2 = load i8** %arrayidx, align 4, !dbg !37
   call void @foobar(i8* %2), !dbg !37
-  call void @llvm.cfiid(i32 9228), !dbg !38
+  call void @llvm.cfiid(i32 23631), !dbg !38
   store i32 0, i32* %retval, !dbg !38
   br label %return, !dbg !38
 
@@ -86,11 +86,11 @@ declare void @llvm.cficheckret(i32) #3
 
 define void @cfi_abort() {
 entry:
-  br label %loop
-
-loop:                                             ; preds = %loop, %entry
-  br label %loop
+  call void @exit(i32 -700)
+  unreachable
 }
+
+declare void @exit(i32)
 
 attributes #0 = { nounwind "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf"="true" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "unsafe-fp-math"="false" "use-soft-float"="false" }
 attributes #1 = { "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf"="true" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "unsafe-fp-math"="false" "use-soft-float"="false" }
@@ -100,12 +100,12 @@ attributes #4 = { nounwind }
 
 !llvm.dbg.cu = !{!0}
 
-!0 = metadata !{i32 786449, metadata !1, i32 12, metadata !"clang version 3.3.1 (tags/RELEASE_33/final)", i1 false, metadata !"", i32 0, metadata !2, metadata !2, metadata !3, metadata !2, metadata !2, metadata !""} ; [ DW_TAG_compile_unit ] [/home/lynn/buff-overflow/TwoIDTest/vulnerable.c] [DW_LANG_C99]
-!1 = metadata !{metadata !"vulnerable.c", metadata !"/home/lynn/buff-overflow/TwoIDTest"}
+!0 = metadata !{i32 786449, metadata !1, i32 12, metadata !"clang version 3.3.1 (tags/RELEASE_33/final)", i1 false, metadata !"", i32 0, metadata !2, metadata !2, metadata !3, metadata !2, metadata !2, metadata !""} ; [ DW_TAG_compile_unit ] [/home/lynn/Documents/boeing-cfi/buff-overflow/TwoIDTest/vulnerable.c] [DW_LANG_C99]
+!1 = metadata !{metadata !"vulnerable.c", metadata !"/home/lynn/Documents/boeing-cfi/buff-overflow/TwoIDTest"}
 !2 = metadata !{i32 0}
 !3 = metadata !{metadata !4, metadata !8, metadata !13}
 !4 = metadata !{i32 786478, metadata !1, metadata !5, metadata !"malicious", metadata !"malicious", metadata !"", i32 5, metadata !6, i1 false, i1 true, i32 0, i32 0, null, i32 0, i1 false, void ()* @malicious, null, null, metadata !2, i32 6} ; [ DW_TAG_subprogram ] [line 5] [def] [scope 6] [malicious]
-!5 = metadata !{i32 786473, metadata !1}          ; [ DW_TAG_file_type ] [/home/lynn/buff-overflow/TwoIDTest/vulnerable.c]
+!5 = metadata !{i32 786473, metadata !1}          ; [ DW_TAG_file_type ] [/home/lynn/Documents/boeing-cfi/buff-overflow/TwoIDTest/vulnerable.c]
 !6 = metadata !{i32 786453, i32 0, i32 0, metadata !"", i32 0, i64 0, i64 0, i64 0, i32 0, null, metadata !7, i32 0, i32 0} ; [ DW_TAG_subroutine_type ] [line 0, size 0, align 0, offset 0] [from ]
 !7 = metadata !{null}
 !8 = metadata !{i32 786478, metadata !1, metadata !5, metadata !"foobar", metadata !"foobar", metadata !"", i32 10, metadata !9, i1 false, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (i8*)* @foobar, null, null, metadata !2, i32 11} ; [ DW_TAG_subprogram ] [line 10] [def] [scope 11] [foobar]
@@ -135,7 +135,7 @@ attributes #4 = { nounwind }
 !32 = metadata !{i32 786689, metadata !13, metadata !"argv", metadata !5, i32 33554450, metadata !17, i32 0, i32 0} ; [ DW_TAG_arg_variable ] [argv] [line 18]
 !33 = metadata !{i32 20, i32 0, metadata !13, null}
 !34 = metadata !{i32 22, i32 0, metadata !35, null}
-!35 = metadata !{i32 786443, metadata !1, metadata !13, i32 21, i32 0, i32 0} ; [ DW_TAG_lexical_block ] [/home/lynn/buff-overflow/TwoIDTest/vulnerable.c]
+!35 = metadata !{i32 786443, metadata !1, metadata !13, i32 21, i32 0, i32 0} ; [ DW_TAG_lexical_block ] [/home/lynn/Documents/boeing-cfi/buff-overflow/TwoIDTest/vulnerable.c]
 !36 = metadata !{i32 23, i32 0, metadata !35, null}
 !37 = metadata !{i32 25, i32 0, metadata !13, null}
 !38 = metadata !{i32 26, i32 0, metadata !13, null}

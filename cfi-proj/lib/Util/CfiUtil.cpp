@@ -23,7 +23,6 @@ namespace cfi{
          */
         Function *CFILowering::createCfiFunc(std::string funcName)
         {
-
             //create the cfiid_intrinsic function
             llvm::IRBuilder<> builder(mod->getContext());
             
@@ -46,25 +45,31 @@ namespace cfi{
         /**
          * @brief create cfi_abort function:
          * void abort()
-         * {while(1);}
+         * {exit(-700);}
          */
         void CFILowering::createAbort()
         {
-            Constant *c = mod->getOrInsertFunction(CFI_ABORT,
+            //get cfi_abort function if exists, else create new func
+            Constant *c_abort = mod->getOrInsertFunction(CFI_ABORT,
                                                 Type::getVoidTy(mod->getContext()),
                                                 NULL);
-            Function *abort = dyn_cast<Function>(c);
+            Function *abort = dyn_cast<Function>(c_abort);
             abort->setCallingConv(CallingConv::C);
             BasicBlock* entry = BasicBlock::Create(getGlobalContext(),
                                                    "entry",
                                                    abort);
-            BasicBlock* loop = BasicBlock::Create(getGlobalContext(),
-                                                  "loop",
-                                                  abort);
-            IRBuilder<> builder(entry);
-            builder.CreateBr(loop);
-            builder.SetInsertPoint(loop);
-            builder.CreateBr(loop);
+
+            //get exit function if exists, else create new func
+            Constant *c_exit = mod->getOrInsertFunction("exit",
+                                                Type::getVoidTy(mod->getContext()),
+                                                Type::getInt32Ty(mod->getContext()),
+                                                NULL);
+            Function *exit = dyn_cast<Function>(c_exit);
+
+            llvm::IRBuilder<> builder(entry);
+            Value *code = llvm::ConstantInt::get(builder.getInt32Ty(), -700);
+            builder.CreateCall(exit, code);
+            builder.CreateUnreachable();
         }
         
         /**
@@ -81,7 +86,6 @@ namespace cfi{
             cfiCheckReturn = createCfiFunc(CFI_CHECK_RET_INTRINSIC);
             createAbort();
         }
-        
         
         /**
          * @brief Inserts IDs into their respective sites

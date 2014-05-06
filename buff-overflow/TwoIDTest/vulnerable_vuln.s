@@ -137,9 +137,14 @@ main:                                   @ @main
 	.type	cfi_abort,%function
 cfi_abort:                              @ @cfi_abort
 @ BB#0:                                 @ %entry
-.LBB3_1:                                @ %loop
-                                        @ =>This Inner Loop Header: Depth=1
-	b	.LBB3_1
+	push	{r11, lr}
+	ldr	r0, .LCPI3_0
+	mov	r11, sp
+	bl	exit
+	.align	2
+@ BB#1:
+.LCPI3_0:
+	.long	4294966596              @ 0xfffffd44
 .Ltmp10:
 	.size	cfi_abort, .Ltmp10-cfi_abort
 
@@ -434,7 +439,7 @@ cfi_abort:                              @ @cfi_abort
 .Linfo_string1:
 	.asciz	 "vulnerable.c"
 .Linfo_string2:
-	.asciz	 "/home/lynn/buff-overflow/TwoIDTest"
+	.asciz	 "/home/lynn/Documents/boeing-cfi/buff-overflow/TwoIDTest"
 .Linfo_string3:
 	.asciz	 "malicious"
 .Linfo_string4:
