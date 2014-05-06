@@ -24,17 +24,20 @@ def main():
     for file in os.listdir("./"):
         if file.endswith(".bc") and "_opt" not in file:
             #skip files that aren't assembling due to unknown issues
-            if "ptx" not in file and "sha1sum" not in file:
+	    if not ("su.bc" in file):
                 bcfiles.append(os.path.abspath(file))
 
-    dsa_lib = "/home/lynn/boeing-cfi/build/projects/poolalloc/Release+Debug+Asserts/lib/LLVMDataStructure.so"
-    path_to_pass = "/home/lynn/boeing-cfi/cfi-proj/build/Release+Debug+Asserts/lib/LLVM" + opt_pass + ".so"
+    dsalib = "/home/lynn/boeing-cfi/build/projects/poolalloc/Release+Debug+Asserts/lib/LLVMDataStructure.so"
+    cfipasslib = "/home/lynn/boeing-cfi/cfi-proj/build/Release+Debug+Asserts/lib/CfiPasses.so"
+    cfiutillib = "/home/lynn/boeing-cfi/cfi-proj/build/Release+Debug+Asserts/lib/CfiUtil.so"
+    cfilib = "/home/lynn/boeing-cfi/cfi-proj/build/Release+Debug+Asserts/lib/LLVMcfi.so"
     pyscript = "/home/lynn/boeing-cfi/cfi-main/PythonScripts/AsmEditor.py"
 
     for file in bcfiles:
         print("running pass on " + file)
         disass = file.replace(".bc", ".ll")
         opt_file = file.replace(".bc", "_opt.bc")
+	log_file = file.replace(".bc", ".log")
         
         #disassemble .bc file, then change triple 
         #from arm to x86_64, then reassemble the file
@@ -49,9 +52,15 @@ def main():
         subprocess.check_call(["llvm-as", disass, "-o", file])
 
         #run opt pass on .bc files
-        subprocess.check_call(["opt", "-load", dsa_lib, 
-            "-load", path_to_pass,
+        subprocess.check_call(["opt", 
+	    "-load", dsalib, 
+            "-load", cfipasslib,
+	    "-load", cfiutillib,
+	    "-load", cfilib,
+	    "-cfi",
             "-" + opt_pass, 
+	    "-cfi-stats",
+	    "-cso", log_file,
             file, "-o", opt_file])
         subprocess.check_call(["llvm-dis", opt_file]) 
 
