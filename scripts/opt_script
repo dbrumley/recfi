@@ -5,6 +5,7 @@ import sys
 import subprocess
 import fileinput
 
+
 def usage():
     use = "\n\tUsage: opt_script <dir> <pass>\n\
 \tdir - directory containing llvm bitcode files to harden\n\
@@ -22,16 +23,17 @@ def main():
     os.chdir(dir)
     bcfiles = []
     for file in os.listdir("./"):
-        if file.endswith(".bc") and "_opt" not in file:
+        if file.endswith(".bc") and "_opt" not in file and ".so" not in file:
             #skip files that aren't assembling due to unknown issues
-	    if not ("su.bc" in file):
-                bcfiles.append(os.path.abspath(file))
+	    #if not ("timeout.bc" in file or "sort.bc" in file):
+            bcfiles.append(os.path.abspath(file))
 
-    dsalib = "/home/lynn/boeing-cfi/build/projects/poolalloc/Release+Debug+Asserts/lib/LLVMDataStructure.so"
-    cfipasslib = "/home/lynn/boeing-cfi/cfi-proj/build/Release+Debug+Asserts/lib/CfiPasses.so"
-    cfiutillib = "/home/lynn/boeing-cfi/cfi-proj/build/Release+Debug+Asserts/lib/CfiUtil.so"
-    cfilib = "/home/lynn/boeing-cfi/cfi-proj/build/Release+Debug+Asserts/lib/LLVMcfi.so"
-    pyscript = "/home/lynn/boeing-cfi/cfi-main/PythonScripts/AsmEditor.py"
+    root_dir = "/home/lynn/Documents/boeing-cfi"
+    dsalib = root_dir + "/build/projects/poolalloc/Release+Debug+Asserts/lib/LLVMDataStructure.so"
+    cfipasslib = root_dir + "/cfi-proj/build/Release+Debug+Asserts/lib/CfiPasses.so"
+    cfiutillib = root_dir + "/cfi-proj/build/Release+Debug+Asserts/lib/CfiUtil.so"
+    cfilib = root_dir + "/cfi-proj/build/Release+Debug+Asserts/lib/LLVMcfi.so"
+    pyscript = root_dir + "/cfi-main/PythonScripts/AsmEditor.py"
 
     for file in bcfiles:
         print("running pass on " + file)
@@ -72,7 +74,7 @@ def main():
 
         subprocess.check_call(["llc", "-O0", "-mtriple", "armv7a-linux-gnueabi", opt_file, "-o", asm_file])
         subprocess.check_call(["python", pyscript, "-f", asm_file, "-o", asm_fixed])
-        subprocess.check_call(["arm-linux-gnueabi-gcc", "-static", asm_fixed, "-lrt", "-o", binary])
+        subprocess.check_call(["arm-linux-gnueabi-gcc", "-static", asm_fixed, "-lrt", "-lpthread", "-o", binary])
         subprocess.check_call(["chmod", "+x", binary])
 
 if __name__ == "__main__":

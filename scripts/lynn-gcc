@@ -2,39 +2,17 @@
 
 import os, sys
 
-def isLink():
-    for arg in sys.argv:
-	if arg.startswith('-Wl,'):
-	    return True
-
 def main():
-    #remove -Wint-to-pointer-cast and -Werror for chroot, for some reason
+    #remove -Wint-to-pointer-cast and -Werror for chroot
     #clang will error out when gcc doesn't
-
-    #chroot, df, ls, factor
     str = ' '.join(sys.argv)
     if "-Werror" in str:
 	sys.argv.remove("-Werror")
 	
-    #if not isLink():
     os.execvp("clang", ["clang", "-emit-llvm", "-static",
         "-usr-gold-plugin", "-Wl,-plugin-opt=also-emit-llvm",
         "-target", "armv7a-linux-gnueabi",
         ] + sys.argv[1:])
-#            "-mcpu=cortex-a9", "-mfloat-abi=hard", 
-            #"-ccc-gcc-name", "arm-linux-gnueabihf-gcc", 
-            #"-I/usr/arm-linux-gnueabihf/include/",
-            #"-I/usr/include/x86_64-linux-gnu/",
-            #"-Wno-unknown-warning-option"
-#        ] + sys.argv[1:])
-
-#    else:
-#	os.execvp("clang", ["clang", "-use-gold-plugin", "-static", 
-#	    "-Wl,-plugin-opt=also-emit-llvm",
-#            "-target", "arm-none-eabi",
-#            "-target", "armv7a-linux-gnueabi",
-#            "-mcpu=cortex-a9", "-mfloat-abi=hard"
-#            ] + sys.argv[1:])
    
     return 1
 
