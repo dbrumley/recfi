@@ -50,26 +50,21 @@ namespace cfi{
         void CFILowering::createAbort()
         {
             //get cfi_abort function if exists, else create new func
-            Constant *c_abort = mod->getOrInsertFunction(CFI_ABORT,
+            Constant *c = mod->getOrInsertFunction(CFI_ABORT,
                                                 Type::getVoidTy(mod->getContext()),
                                                 NULL);
-            Function *abort = dyn_cast<Function>(c_abort);
+            Function *abort = dyn_cast<Function>(c);
             abort->setCallingConv(CallingConv::C);
             BasicBlock* entry = BasicBlock::Create(getGlobalContext(),
                                                    "entry",
                                                    abort);
-
-            //get exit function if exists, else create new func
-            Constant *c_exit = mod->getOrInsertFunction("exit",
-                                                Type::getVoidTy(mod->getContext()),
-                                                Type::getInt32Ty(mod->getContext()),
-                                                NULL);
-            Function *exit = dyn_cast<Function>(c_exit);
-
-            llvm::IRBuilder<> builder(entry);
-            Value *code = llvm::ConstantInt::get(builder.getInt32Ty(), -700);
-            builder.CreateCall(exit, code);
-            builder.CreateUnreachable();
+            BasicBlock* loop = BasicBlock::Create(getGlobalContext(),
+                                                  "loop",
+                                                  abort);
+            IRBuilder<> builder(entry);
+            builder.CreateBr(loop);
+            builder.SetInsertPoint(loop);
+            builder.CreateBr(loop);
         }
         
         /**
