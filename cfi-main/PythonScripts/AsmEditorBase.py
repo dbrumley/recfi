@@ -89,9 +89,9 @@ class AsmEditorBase:
             return False
 
         label = instr_split[0]
-        if not label.startswith(".L") \
+        if not label.startswith(".l") \
         and not label.startswith("@") \
-        and ":" in label: 
+        and ":" in label:
             return True
         return False
 
