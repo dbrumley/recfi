@@ -12,10 +12,7 @@ using namespace llvm;
 
 namespace cfi {
 
-    MultiListPass::MultiListPass(Module &M, bool debug_flag) : MultiPass(M, debug_flag)
-    {
-    }
-
+    MultiListPass::MultiListPass(Module &M) : MultiPass(M){}
     /*
      * Generate a unique ID for each target
      */

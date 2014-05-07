@@ -15,11 +15,9 @@ using namespace llvm;
 
 namespace cfi {
 
-    MultiPass::MultiPass(Module &M, bool debug_flag) 
+    MultiPass::MultiPass(Module &M) 
     {
         mod = &M;
-        debug = debug_flag;
-        return;
     }
 
     void MultiPass::findAllTargets(CTF &ctf)

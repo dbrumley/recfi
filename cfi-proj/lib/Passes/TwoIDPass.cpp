@@ -12,11 +12,9 @@
 using namespace llvm;
 
 namespace cfi {
-    TwoIDPass::TwoIDPass(Module &M, bool debug_flag) 
+    TwoIDPass::TwoIDPass(Module &M) 
     {
         mod = &M;
-        debug = debug_flag;
-        return;
     }
 
     /*

@@ -1,10 +1,8 @@
+#ifndef CFI_MULTIPASS
+#define CFI_MULTIPASS
 #include "ICfiPass.h"
 #include "CfiUtil.h"
-#ifndef MULTIPASS
-#define MULTIPASS
 
-
-using namespace llvm;
 
 namespace cfi {
 
@@ -12,7 +10,6 @@ class MultiPass : public ICfiPass
 {
     protected:
         Module* mod;
-        bool debug;
 
         InstDestMap jmpDestMap;
         InstDestMap retDestMap;
@@ -30,9 +27,11 @@ class MultiPass : public ICfiPass
         std::map<int, int> jmpIdCounts;
 
         void genCheckIds(InstDestMap &destMap, InstIDMap &idMap, InstIDSetMap &checkMap );
+        
+        virtual void genIDs(InstDestMap &destMap, InstIDMap &idMap, std::map<int,int> &idCounts, InstDestMap &mergedMap){} 
 
     public: 
-        MultiPass(Module &M, bool debug_flag);
+        MultiPass(Module &M);
         ~MultiPass();
         void findAllTargets(CTF &ctf);
         virtual void generateDestIDs() {}

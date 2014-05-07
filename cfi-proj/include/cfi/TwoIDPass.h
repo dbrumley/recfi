@@ -1,14 +1,15 @@
+#ifndef CFI_TWOIDPASS
+#define CFI_TWOIDPASS
+
 #include "llvm/IR/Module.h"
 #include "cfi/ICfiPass.h"
 
-using namespace llvm;
 
 namespace cfi {
 
     class TwoIDPass : public ICfiPass
     {
             Module* mod;
-            bool debug;
 
             int jmpID;
             int retID;
@@ -23,12 +24,11 @@ namespace cfi {
             InstIDMap retMap;
             InstIDSetMap retCheckMap;
             InstIDSetMap jmpCheckMap;
-
         
             BBSet findIndTargets(Function &F);
 
         public: 
-            TwoIDPass(Module &M, bool debug);
+            TwoIDPass(Module &M);
             ~TwoIDPass();
             void findAllTargets(CTF &ctf);
             void generateDestIDs();
@@ -38,3 +38,4 @@ namespace cfi {
             void print();
     };
 }
+#endif

@@ -1,11 +1,9 @@
-#include "llvm/IR/Module.h"
+#ifndef CFI_ICFIPASS
+#define CFI_ICFIPASS
 #include "cfi/CfiUtil.h"
-#ifndef ICFIPASS
-#define ICFIPASS
 /*
  * TODO: Comments
  */
-using namespace llvm;
 
 namespace cfi {
 
