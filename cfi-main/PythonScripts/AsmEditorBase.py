@@ -1,6 +1,12 @@
 '''
 #------------------------------ AsmEditorBase.py ------------------------------#
 #                                                                              #
+#   This is the abstract base class for a ReCFI Asm Editor object. The         #
+#   point of this class is to take in annotated asm and operate on it.         #
+#   Two main operates are exposed: id lowering, and check lowering.            #
+#   Before lowering each annotation to valid asm, it needs to be shifted       #
+#   back into place, because during llvm code generation it might have         #
+#   moved.                                                                     #
 #                                                                              #
 #------------------------------------------------------------------------------#
 '''

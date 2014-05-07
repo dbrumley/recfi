@@ -1,8 +1,16 @@
 '''
 #------------------------------ AsmEditor.py ----------------------------------#
 #                                                                              #
-# Slides cfi IDs and Checks up or down to their correct locations in assembly, #
-# and converts IDs and Checks to their correct assembly representations        #
+#   This script takes in an ARM asm file that has CFI annotations and outputs  #
+#   a CFI hardened asm file. The annotations are custom asm instructions       #
+#   that are lowered from LLVM IR intrinsic calls. This script is the final    #
+#   componenet to the ReCFI instrumentation process, and the output asm        #
+#   should be compilable into a runnable binary.                               #
+#                                                                              #
+#   Annotations are in the form:                                               #
+#       cfiid #12345                                                           #
+#       cfichecktar #12345                                                     #
+#       cficheckret #12345                                                     #
 #                                                                              #
 #------------------------------------------------------------------------------#
 '''

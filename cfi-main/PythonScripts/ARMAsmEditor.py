@@ -1,6 +1,9 @@
 '''
 #------------------------------ ARMAsmEditor.py -------------------------------#
 #                                                                              #
+#    This is an ARM-specific subclass for transforming annotated ARM asm.      #
+#    Much of the implementation is ARM-specific, but this class can be used    #
+#    as a model for lowering other architectures.                              #
 #                                                                              #
 #------------------------------------------------------------------------------#
 '''
