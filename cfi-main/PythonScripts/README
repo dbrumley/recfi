@@ -1,1 +1,79 @@
 Python Usage
+        '''''''''
+        Checking code to insert
+
+        Branch form: 
+            [b rx] or [mov pc, rx]
+
+        Branch with check:
+            push r0
+            ldr r0, [rx, #4]
+            ldr r12, #ID
+            cmp r0, r12
+            ...
+            ldrne r12, #ID2
+            cmpne r0, r12
+            ...
+            bne abort
+            pop r0
+            add rx, rx, #8
+            mov lr, pc (if check_tar && mov pc, rx)
+            b rx || mov pc, rx
+        Alternate:
+            push r0
+            ldr r0, [rx]           @r0 should contain the encoding of the ID, ex. "movtne r12, #ID"
+            movtne r12, #ID
+            sub r12, pc, #12
+            ldr r12, [r12, #0]    @r12 should also contain "movt r12, #ID"
+            cmp r0, r12
+            ...
+            movtne r12, #ID2
+            subne r12, pc, #12
+            ldrne r12, [r12, #0]
+            cmpne r0, r12
+            ...
+            bne abort
+            pop {r0}
+            mov lr, pc             @if check_tar && mov pc, rx
+            b rx || mov pc, rx
+            
+        
+        Branch form:
+            ldmfd sp!, [..., pc]
+
+        Branch with check:
+            ldmfd sp!, [..., r12]
+            push r0
+            push r1
+            ldr r0, #ID
+            ldr r1, [r12, #4]
+            cmp r0, r1
+            ...
+            ldrne r0, #ID2
+            cmpne r0, r1
+            ...
+            bne abort
+            pop r1
+            pop r0
+            mov pc, [r12, #8]
+        Alternate:
+            ldmfd sp!, [..., r12]
+            push {r0, r1}
+            ldr r0, [r12]          @r0 should contain the encoding of the ID, ex. "movtne r12, #ID"
+            mov r1, r12            @preserve address
+            movtne r12, #ID    
+            sub r12, pc, #12    
+            ldr r12, [r12, #0]
+            cmp r0, r12
+            ...
+            movtne r12, #ID2
+            subne r12, pc, #12
+            ldrne r12, [r12, #0]
+            cmpne r0, r12
+            ...
+            bne abort
+            mov r12, r1
+            pop {r0, r1}
+            mov pc, r12
+        
+        '''''''''

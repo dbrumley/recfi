@@ -39,7 +39,7 @@ class AsmEditorBase:
         asm_new:        assembly instructions to insert ID into
         id_str:         id to insert, in format "#12345"
         
-        No return
+        No return value
         ''' 
         raise NotImplementedError()
     
