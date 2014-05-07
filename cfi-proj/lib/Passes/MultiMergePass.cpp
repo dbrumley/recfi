@@ -56,7 +56,6 @@ namespace cfi {
                 if (intersect.size() > 0)
                 {
                     /* merge the two sets */
-                    STAT_MERGE++;
                     lset.insert(mset.begin(), mset.end());
                     mergedMap[I] = lset;
                     break;
