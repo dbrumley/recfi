@@ -11,14 +11,24 @@ from AsmEditorBase import AsmEditorBase
 class ARMAsmEditor(AsmEditorBase):
 
     ''' ARM Opcode specifics '''
+
+    # program counter aliases
     pc_names = ['pc', 'r15']
+
+    # store instruction aliases
     str_bases = ['str']
+
+    # branch instructions
     branch_bases = ['b', 'bl', 'bx', 'blx']
+
+    # ARM condition codes
     cond_codes = ['eq', 'ne', 'cs', 'hs',
                   'cc', 'lo', 'mi', 'pl',
                   'vs', 'vc', 'hi', 'ls',
                   'ge', 'lt', 'gt', 'le',
                   'al', '']
+
+    # general purpose registers
     gpr_names = ['r0', 'r1', 'r2', 'r3',
                  'r4', 'r5', 'r6', 'r7',
                  'r8', 'r9', 'r10', 'r11',
