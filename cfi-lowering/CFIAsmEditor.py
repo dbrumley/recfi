@@ -1,5 +1,5 @@
 '''
-#------------------------------ AsmEditor.py ----------------------------------#
+#------------------------------ CFIAsmEditor.py -------------------------------#
 #                                                                              #
 #   This script takes in an ARM asm file that has CFI annotations and outputs  #
 #   a CFI hardened asm file. The annotations are custom asm instructions       #
@@ -55,11 +55,9 @@ if __name__ == "__main__":
             help="The path of the asm file to transform")
     parser.add_option("-i", "--id_encoding", type="string", dest="id_encoding", 
             help="ID encoding type, default mov\n\
-                    Supported encodings:\n\
-                    \"mov\" - mov r12, <ID>\n")
+                    Supported encodings: \n\"mov\" - mov r12, <ID>\n")
     parser.add_option("-a", "--arch", type="string", dest="arch", 
-            help="Target architecture\
-                    \n***currently only supporting arm***\n")
+            help="Target architecture\n***currently only supporting arm***\n")
     parser.add_option("-o", "--outfile", type="string", dest="outfile", 
             help="The path of the asm file to generate")
     parser.set_defaults(id_encoding="mov", arch="arm")
