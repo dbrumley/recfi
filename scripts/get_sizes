@@ -1,22 +1,23 @@
 #!/usr/bin/env python
 
+#prints sizes of all binary files in a folder
+
 import os
 import sys
 import subprocess
 import fileinput
 
 def usage():
-    use = "\n\tUsage: get_stats <dir> <outfile>\n\
-\tdir - directory containing llvm bitcode files to harden\n"
+    use = "\n\tUsage: get_sizes <dir>\n\
+\tdir - directory containing binary files\n"
     print(use)
 
 def main():
-    if len(sys.argv) < 3:
+    if len(sys.argv) < 2:
         usage()
         sys.exit(1)
 
     dir = sys.argv[1]
-    outfile = sys.argv[2]
 
     os.chdir(dir)
     binfiles = []

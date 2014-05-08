@@ -1,4 +1,9 @@
-
+#Used by build.sh to remove annotations in target
+#assembly to produce un-hardened assembly. This is
+#useful for debugging and comparison purposes because
+#directly generated un-hardened assembly may be
+#slightly different from hardened assembly with
+#annotations removed
 
 import sys
 

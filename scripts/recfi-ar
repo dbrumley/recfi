@@ -15,7 +15,7 @@ def main():
 
     os.execvp("ar", ["ar", action,
 	"--plugin", 
-	"/home/lynn/boeing-cfi/build/Release+Debug+Asserts/lib/LLVMgold.so"
+	"/home/lynn/Documents/boeing-cfi/build/Release+Debug+Asserts/lib/LLVMgold.so"
 	] + args)
    
     return 1

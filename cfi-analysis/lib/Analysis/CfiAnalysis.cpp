@@ -98,10 +98,6 @@ namespace {
 
             switch(PrecisionLevel)
             {
-                default:
-                case TwoID:
-                    pass = new TwoIDPass(M);
-                    break;
                 case MultiMerge:
                     ctf = &getAnalysis<CTF>();
                     pass = new MultiMergePass(M);
@@ -109,6 +105,10 @@ namespace {
                 case MultiList:
                     ctf = &getAnalysis<CTF>();
                     pass = new MultiListPass(M);
+                    break;
+		//default case: TwoID
+                default:
+                    pass = new TwoIDPass(M);
                     break;
             }
             if( Debug)

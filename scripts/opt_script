@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+#used for instrumenting coreutils with recfi policies
+
 import os
 import sys
 import subprocess
@@ -7,18 +9,20 @@ import fileinput
 
 
 def usage():
-    use = "\n\tUsage: opt_script <dir> <pass>\n\
+    use = "\n\tUsage: opt_script <dir> <cfi policy> <recfi root dir>\n\
 \tdir - directory containing llvm bitcode files to harden\n\
-\tpass - name of llvm pass to run without extension\n"
+\tcfi policy - name of cfi policy to run: two, merge, list\n\
+\trecfi root dir - root directory for recfi\n"
     print(use)
 
 def main():
-    if len(sys.argv) < 3:
+    if len(sys.argv) < 4:
         usage()
         sys.exit(1)
 
     dir = sys.argv[1]
     opt_pass = sys.argv[2]
+    root_dir = sys.argv[3]
 
     os.chdir(dir)
     bcfiles = []
@@ -28,12 +32,11 @@ def main():
 	    #if not ("timeout.bc" in file or "sort.bc" in file):
             bcfiles.append(os.path.abspath(file))
 
-    root_dir = "/home/lynn/Documents/boeing-cfi"
     dsalib = root_dir + "/build/projects/poolalloc/Release+Debug+Asserts/lib/LLVMDataStructure.so"
-    cfipasslib = root_dir + "/cfi-proj/build/Release+Debug+Asserts/lib/CfiPasses.so"
-    cfiutillib = root_dir + "/cfi-proj/build/Release+Debug+Asserts/lib/CfiUtil.so"
-    cfilib = root_dir + "/cfi-proj/build/Release+Debug+Asserts/lib/LLVMcfi.so"
-    pyscript = root_dir + "/cfi-main/PythonScripts/AsmEditor.py"
+    cfipasslib = root_dir + "/cfi-analysis/build/Release+Debug+Asserts/lib/CfiPasses.so"
+    cfiutillib = root_dir + "/cfi-analysis/build/Release+Debug+Asserts/lib/CfiUtil.so"
+    cfilib = root_dir + "/cfi-analysis/build/Release+Debug+Asserts/lib/LLVMcfi.so"
+    pyscript = root_dir + "/cfi-lowering/AsmEditor.py"
 
     for file in bcfiles:
         print("running pass on " + file)
