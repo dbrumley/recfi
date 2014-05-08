@@ -24,8 +24,6 @@
 #include <iostream>
 #include <fstream>
 
-using namespace llvm;
-
 namespace cfi{
 
     #define CFI_INSERT_INTRINSIC "llvm.cfiid"
@@ -61,24 +59,14 @@ namespace cfi{
      * Levels of CFI precision
      */
     enum CfiLevel{
-        TwoID,          /* Abadi's basic "Two-ID CFI" */
-        MultiMerge,    /* Abadi's main "Multi-ID CFI" */
-        MultiList      /* Multi-ID with a white list for solving destination equivalence */
+        TwoID,          /* "Two-Class CFI" */
+        MultiMerge,    /* "Multi-Class CFI" */
+        MultiList      /* ID with a white list for solving destination equivalence */
     };
 
     void print_dest_map(InstDestMap instDestMap, std::string tag);
     void print_ID_maps(InstIDMap callSiteIDs, std::string tag);
     void print_ID_check_maps(InstIDSetMap targetCheckIDs, std::string tag);
-
-    STATISTIC(STAT_SITE_ITRANSFER, "site: (icall, ibr, ret)");
-    STATISTIC(STAT_SITE_CALL, "site: direct calls" );
-    STATISTIC(STAT_SITE_ICALL, "site: icall" );
-    STATISTIC(STAT_SITE_IBRANCH, "site: ibr");
-    STATISTIC(STAT_SITE_RETURN, "site: ret");
-    STATISTIC(STAT_TAR_ICALL, "target: (icall, ibr)");
-    STATISTIC(STAT_TAR_RETURN, "target: ret");
-    STATISTIC(STAT_MERGE, "merged target sets");
-    STATISTIC(STAT_CLASSES, "classes");
 
 	class CFILowering {
 
@@ -100,16 +88,6 @@ namespace cfi{
 			void insertIDs(InstIDMap instrIDs, bool isRetTarget);
 			void insertChecks(InstIDSetMap targetCheckIDs);
 	};
-
-    class CFILogger {
-
-        std::ofstream outStream;
-
-        public:
-            CFILogger(const char* logfile);
-            void log(std::string logstr);
-            void endlog();
-    };
 }
 
 #endif

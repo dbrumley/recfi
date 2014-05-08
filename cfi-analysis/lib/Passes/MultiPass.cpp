@@ -15,11 +15,9 @@ using namespace llvm;
 
 namespace cfi {
 
-    MultiPass::MultiPass(Module &M, bool debug_flag) 
+    MultiPass::MultiPass(Module &M) 
     {
         mod = &M;
-        debug = debug_flag;
-        return;
     }
 
     void MultiPass::findAllTargets(CTF &ctf)
@@ -51,9 +49,6 @@ namespace cfi {
                             BasicBlock::iterator destBlockStart = destBlock->begin();
                             Instruction *destInstr = &*destBlockStart;
                             jmpDestMap[IBI].insert(destInstr);
-                            STAT_SITE_IBRANCH++;
-                            STAT_SITE_ITRANSFER++;
-                            STAT_TAR_ICALL++;
                         }
                     }
                 }
@@ -94,13 +89,6 @@ namespace cfi {
                     BasicBlock::iterator destBlockStart = destBlock->begin();
                     Instruction *destInstr = &*destBlockStart;
                     jmpDestMap[I].insert(destInstr);
-                    STAT_SITE_ICALL++;
-                    STAT_TAR_ICALL++;
-                    STAT_SITE_ITRANSFER++;
-                }
-                else
-                {
-                    STAT_SITE_CALL++;
                 }
 
                 //Find all returns in this function
@@ -115,9 +103,6 @@ namespace cfi {
                         if (ReturnInst *RI = dyn_cast<ReturnInst>(TI))
                         {
                             retDestMap[RI].insert(I);
-                            STAT_SITE_RETURN++;
-                            STAT_TAR_RETURN++;
-                            STAT_SITE_ITRANSFER++;
                         }
                     }
                 }

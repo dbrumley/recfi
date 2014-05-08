@@ -7,9 +7,8 @@ using namespace llvm;
 
 namespace cfi {
 
-    MultiMergePass::MultiMergePass(Module &M, bool debug_flag) : MultiPass(M, debug_flag)
-    {
-    }
+    MultiMergePass::MultiMergePass(Module &M) : MultiPass(M){}
+
     void MultiMergePass::generateDestIDs()
     {
         errs() << "multimerge gendestids\n";
@@ -56,7 +55,6 @@ namespace cfi {
                 if (intersect.size() > 0)
                 {
                     /* merge the two sets */
-                    STAT_MERGE++;
                     lset.insert(mset.begin(), mset.end());
                     mergedMap[I] = lset;
                     break;

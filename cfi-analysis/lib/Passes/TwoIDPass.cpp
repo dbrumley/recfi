@@ -12,11 +12,9 @@
 using namespace llvm;
 
 namespace cfi {
-    TwoIDPass::TwoIDPass(Module &M, bool debug_flag) 
+    TwoIDPass::TwoIDPass(Module &M) 
     {
         mod = &M;
-        debug = debug_flag;
-        return;
     }
 
     /*
@@ -46,25 +44,19 @@ namespace cfi {
                         if (calledFunc == NULL)
                         {
                             jmpSites.insert(I);
-                            STAT_SITE_ITRANSFER++;
-                            STAT_SITE_ICALL++;
                         }
                         else 
                         {
                             if (calledFunc->isIntrinsic() || calledFunc->isDeclaration())
                                 continue;
-                            STAT_SITE_CALL++;
                         }
                         //FOUND: RETURN SITE (call or icall)
                         retTars.insert(I);
-                        STAT_TAR_RETURN++;
                     }
                     //FOUND: IBR SITE
                     else if (dyn_cast<IndirectBrInst>(I))
                     {
                         jmpSites.insert(I);
-                        STAT_SITE_ITRANSFER++;
-                        STAT_SITE_IBRANCH++;
                     }
                     //FOUND: RET SITE
                     else if (dyn_cast<ReturnInst>(I))
@@ -72,8 +64,6 @@ namespace cfi {
                         if (F->getName() != "main")
                         {
                             retSites.insert(I);
-                            STAT_SITE_ITRANSFER++;
-                            STAT_SITE_RETURN++;
                         }
                     }
                 }
@@ -93,7 +83,6 @@ namespace cfi {
             {
                 BasicBlock::iterator II = (*BB)->begin();
                 jmpTars.insert(II);
-                STAT_TAR_ICALL++;
             }
         }
     }

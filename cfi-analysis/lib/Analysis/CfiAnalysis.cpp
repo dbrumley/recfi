@@ -91,23 +91,24 @@ namespace {
             assert(PrecisionLevel == TwoID || PrecisionLevel == MultiMerge || PrecisionLevel == MultiList);
 
             ICfiPass *pass;
-            CTF *ctf;
+            CTF *ctf = NULL;
+
             if( Debug)
                 errs() << "Creating pass.\n";
 
             switch(PrecisionLevel)
             {
+                default:
                 case TwoID:
-                    ctf = NULL;
-                    pass = new TwoIDPass(M, Debug);
+                    pass = new TwoIDPass(M);
                     break;
                 case MultiMerge:
                     ctf = &getAnalysis<CTF>();
-                    pass = new MultiMergePass(M, Debug);
+                    pass = new MultiMergePass(M);
                     break;
                 case MultiList:
                     ctf = &getAnalysis<CTF>();
-                    pass = new MultiListPass(M, Debug);
+                    pass = new MultiListPass(M);
                     break;
             }
             if( Debug)

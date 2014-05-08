@@ -1,15 +1,15 @@
-#echo "generating llvm IR..."
-#clang -O0 -emit-llvm $1.c -S -o $1.ll
+echo "generating llvm IR..."
+clang -O0 -emit-llvm $1.c -S -o $1.ll
 
-#echo "generating llvm bitcode..."
-#clang -O0 -emit-llvm $1.c -c -o $1.bc
+echo "generating llvm bitcode..."
+clang -O0 -emit-llvm $1.c -c -o $1.bc
 
 echo "running $2 pass..."
 opt \
--load ../../build/projects/poolalloc/Release+Debug+Asserts/lib/LLVMDataStructure.so \
--load ../../cfi-proj/build/Release+Debug+Asserts/lib/CfiPasses.so \
--load ../../cfi-proj/build/Release+Debug+Asserts/lib/CfiUtil.so \
--load ../../cfi-proj/build/Release+Debug+Asserts/lib/LLVMcfi.so \
+-load ../../build/projects/poolalloc/Release+Asserts/lib/LLVMDataStructure.so \
+-load ../../cfi-proj/build/Release+Asserts/lib/CfiPasses.so \
+-load ../../cfi-proj/build/Release+Asserts/lib/CfiUtil.so \
+-load ../../cfi-proj/build/Release+Asserts/lib/LLVMcfi.so \
 -cfi \
 -$2 \
 -cfi-stats \

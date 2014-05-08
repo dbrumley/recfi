@@ -140,22 +140,8 @@ namespace cfi{
             }
         }
         
-        CFILogger::CFILogger(const char * filename)
-        {
-            outStream.open(filename);
-        }
-
-        void CFILogger::log(std::string logstr)
-        {
-            outStream << logstr << "\n";
-        }
-        
-        void CFILogger::endlog()
-        {
-            outStream.close();
-        }
         /********** Debug Functions **********/
-	/*
+	    /*
          * prints out the destination map
          */
         void print_dest_map(InstDestMap instDestMap, std::string tag)

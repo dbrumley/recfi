@@ -1,15 +1,17 @@
+#ifndef CFI_MULTIMERGEPASS
+#define CFI_MULTIMERGEPASS
 #include "MultiPass.h"
 
-
-using namespace llvm;
 
 namespace cfi {
 
 class MultiMergePass : public MultiPass 
 {
-    void genIDs(InstDestMap &destMap, InstIDMap &idMap, std::map<int,int> &idCounts, InstDestMap &mergedMap);
+    private:
+        void genIDs(InstDestMap &destMap, InstIDMap &idMap, std::map<int,int> &idCounts, InstDestMap &mergedMap);
     public: 
-        MultiMergePass(Module &M, bool debug_flag);
+        MultiMergePass(Module &M);
         void generateDestIDs();
 };
 }
+#endif
