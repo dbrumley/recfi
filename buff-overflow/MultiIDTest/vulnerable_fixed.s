@@ -33,16 +33,32 @@
 	.align	2
 	.type	malicious,%function
 malicious:                              @ @malicious
+	@ [ ====== CFI ID begin ====== ]
+	movtne r12, #35212
+	@ [ ====== CFI ID end ====== ]
 .Lfunc_begin0:
 	.loc	1 6 0                   @ vulnerable.c:6:0
 @ BB#0:                                 @ %entry
 	.loc	1 7 0 prologue_end      @ vulnerable.c:7:0
 	push	{r11, lr}
-	ldr	r0, .LCPI0_0
 	mov	r11, sp
+	ldr	r0, .LCPI0_0
 	bl	printf
 	.loc	1 8 0                   @ vulnerable.c:8:0
-	pop	{r11, pc}
+	@ [ === CFI checkret begin === ]
+	@ [ === pop r11 pc === ]
+	pop	{r11, r12}
+	push {r0, r1}
+	ldr r0, [r12] 	@ get destination ID
+	mov r1, r12 	@ preserve dest addr
+	movtne r12, #6998	@ ID encoding, nop
+	ldr r12, [pc, #-12] 	@ get ID encoding
+	cmp r0, r12
+	bne cfi_abort
+	mov r12, r1 	@ restore dest addr
+	pop {r0, r1}
+	mov pc, r12
+	@ [ === CFI check end === ]
 .Ltmp0:
 	.align	2
 @ BB#1:
@@ -55,10 +71,10 @@ malicious:                              @ @malicious
 	.align	2
 	.type	format_age,%function
 format_age:                             @ @format_age
-.Lfunc_begin1:
 	@ [ ====== CFI ID begin ====== ]
-	movtne r12, #45138
+	movtne r12, #35212
 	@ [ ====== CFI ID end ====== ]
+.Lfunc_begin1:
 	.loc	1 11 0                  @ vulnerable.c:11:0
 @ BB#0:                                 @ %entry
 	push	{r11, lr}
@@ -72,20 +88,20 @@ format_age:                             @ @format_age
 	bl	printf
 	.loc	1 13 0                  @ vulnerable.c:13:0
 	mov	sp, r11
-	@ [ ====== CFI checkret begin ====== ]
-	@ [ ====== pop r11 pc ====== ]
+	@ [ === CFI checkret begin === ]
+	@ [ === pop r11 pc === ]
 	pop	{r11, r12}
 	push {r0, r1}
 	ldr r0, [r12] 	@ get destination ID
-	mov r1, r12 	@ preserver destination addr
-	movtne r12, #670	@ ID encoding, doesn't need to execute
+	mov r1, r12 	@ preserve dest addr
+	movtne r12, #6998	@ ID encoding, nop
 	ldr r12, [pc, #-12] 	@ get ID encoding
 	cmp r0, r12
 	bne cfi_abort
-	mov r12, r1 	@ restore destination addr
+	mov r12, r1 	@ restore dest addr
 	pop {r0, r1}
 	mov pc, r12
-	@ [ ====== CFI check end ====== ]
+	@ [ === CFI check end === ]
 .Ltmp3:
 	.align	2
 @ BB#1:
@@ -98,10 +114,10 @@ format_age:                             @ @format_age
 	.align	2
 	.type	format_name,%function
 format_name:                            @ @format_name
-.Lfunc_begin2:
 	@ [ ====== CFI ID begin ====== ]
-	movtne r12, #45138
+	movtne r12, #35212
 	@ [ ====== CFI ID end ====== ]
+.Lfunc_begin2:
 	.loc	1 16 0                  @ vulnerable.c:16:0
 @ BB#0:                                 @ %entry
 	push	{r11, lr}
@@ -115,20 +131,20 @@ format_name:                            @ @format_name
 	bl	printf
 	.loc	1 18 0                  @ vulnerable.c:18:0
 	mov	sp, r11
-	@ [ ====== CFI checkret begin ====== ]
-	@ [ ====== pop r11 pc ====== ]
+	@ [ === CFI checkret begin === ]
+	@ [ === pop r11 pc === ]
 	pop	{r11, r12}
 	push {r0, r1}
 	ldr r0, [r12] 	@ get destination ID
-	mov r1, r12 	@ preserver destination addr
-	movtne r12, #670	@ ID encoding, doesn't need to execute
+	mov r1, r12 	@ preserve dest addr
+	movtne r12, #6998	@ ID encoding, nop
 	ldr r12, [pc, #-12] 	@ get ID encoding
 	cmp r0, r12
 	bne cfi_abort
-	mov r12, r1 	@ restore destination addr
+	mov r12, r1 	@ restore dest addr
 	pop {r0, r1}
 	mov pc, r12
-	@ [ ====== CFI check end ====== ]
+	@ [ === CFI check end === ]
 .Ltmp6:
 	.align	2
 @ BB#1:
@@ -141,6 +157,9 @@ format_name:                            @ @format_name
 	.align	2
 	.type	call_format,%function
 call_format:                            @ @call_format
+	@ [ ====== CFI ID begin ====== ]
+	movtne r12, #35212
+	@ [ ====== CFI ID end ====== ]
 .Lfunc_begin3:
 	.loc	1 21 0                  @ vulnerable.c:21:0
 @ BB#0:                                 @ %entry
@@ -161,7 +180,7 @@ call_format:                            @ @call_format
 	@ [ ====== blx r1 ====== ]
 	push {r0}
 	ldr r0, [r1] 	@ get destination ID
-	movtne r12, #45138	@ ID encoding, doesn't need to execute
+	movtne r12, #35212	@ ID encoding, nop
 	ldr r12, [pc, #-12] 	@ get ID encoding
 	cmp r0, r12
 	bne cfi_abort
@@ -169,24 +188,24 @@ call_format:                            @ @call_format
 	blx	r1
 	@ [ ====== CFI check end ====== ]
 	@ [ ====== CFI ID begin ====== ]
-	movtne r12, #670
+	movtne r12, #6998
 	@ [ ====== CFI ID end ====== ]
 	.loc	1 27 0                  @ vulnerable.c:27:0
 	sub	sp, r11, #4
-	@ [ ====== CFI checkret begin ====== ]
-	@ [ ====== pop r4 r11 pc ====== ]
+	@ [ === CFI checkret begin === ]
+	@ [ === pop r4 r11 pc === ]
 	pop	{r4, r11, r12}
 	push {r0, r1}
 	ldr r0, [r12] 	@ get destination ID
-	mov r1, r12 	@ preserver destination addr
-	movtne r12, #50096	@ ID encoding, doesn't need to execute
+	mov r1, r12 	@ preserve dest addr
+	movtne r12, #6998	@ ID encoding, nop
 	ldr r12, [pc, #-12] 	@ get ID encoding
 	cmp r0, r12
 	bne cfi_abort
-	mov r12, r1 	@ restore destination addr
+	mov r12, r1 	@ restore dest addr
 	pop {r0, r1}
 	mov pc, r12
-	@ [ ====== CFI check end ====== ]
+	@ [ === CFI check end === ]
 .Ltmp9:
 .Ltmp10:
 	.size	call_format, .Ltmp10-call_format
@@ -255,7 +274,7 @@ main:                                   @ @main
 	ldr	r0, [sp]
 	bl	call_format
 	@ [ ====== CFI ID begin ====== ]
-	movtne r12, #50096
+	movtne r12, #6998
 	@ [ ====== CFI ID end ====== ]
 	.loc	1 44 0                  @ vulnerable.c:44:0
 	mov	r0, #0
@@ -667,7 +686,7 @@ cfi_abort:                              @ @cfi_abort
 .Linfo_string1:
 	.asciz	 "vulnerable.c"
 .Linfo_string2:
-	.asciz	 "/home/lynn/buff-overflow/MultiIDTest"
+	.asciz	 "/home/lynn/Documents/boeing-cfi/buff-overflow/MultiIDTest"
 .Linfo_string3:
 	.asciz	 "malicious"
 .Linfo_string4:

@@ -33,10 +33,10 @@
 	.align	2
 	.type	malicious,%function
 malicious:                              @ @malicious
-.Lfunc_begin0:
 	@ [ ====== CFI ID begin ====== ]
-	movtne r12, #10934
+	movtne r12, #8869
 	@ [ ====== CFI ID end ====== ]
+.Lfunc_begin0:
 	.loc	1 6 0                   @ vulnerable.c:6:0
 @ BB#0:                                 @ %entry
 	.loc	1 7 0 prologue_end      @ vulnerable.c:7:0
@@ -45,20 +45,20 @@ malicious:                              @ @malicious
 	ldr	r0, .LCPI0_0
 	bl	printf
 	.loc	1 8 0                   @ vulnerable.c:8:0
-	@ [ ====== CFI checkret begin ====== ]
-	@ [ ====== pop r11 pc ====== ]
+	@ [ === CFI checkret begin === ]
+	@ [ === pop r11 pc === ]
 	pop	{r11, r12}
 	push {r0, r1}
 	ldr r0, [r12] 	@ get destination ID
-	mov r1, r12 	@ preserver destination addr
-	movtne r12, #23631	@ ID encoding, doesn't need to execute
+	mov r1, r12 	@ preserve dest addr
+	movtne r12, #39368	@ ID encoding, nop
 	ldr r12, [pc, #-12] 	@ get ID encoding
 	cmp r0, r12
 	bne cfi_abort
-	mov r12, r1 	@ restore destination addr
+	mov r12, r1 	@ restore dest addr
 	pop {r0, r1}
 	mov pc, r12
-	@ [ ====== CFI check end ====== ]
+	@ [ === CFI check end === ]
 .Ltmp0:
 	.align	2
 @ BB#1:
@@ -71,10 +71,10 @@ malicious:                              @ @malicious
 	.align	2
 	.type	foobar,%function
 foobar:                                 @ @foobar
-.Lfunc_begin1:
 	@ [ ====== CFI ID begin ====== ]
-	movtne r12, #10934
+	movtne r12, #8869
 	@ [ ====== CFI ID end ====== ]
+.Lfunc_begin1:
 	.loc	1 11 0                  @ vulnerable.c:11:0
 @ BB#0:                                 @ %entry
 	push	{r4, r11, lr}
@@ -93,20 +93,20 @@ foobar:                                 @ @foobar
 	bl	printf
 	.loc	1 16 0                  @ vulnerable.c:16:0
 	sub	sp, r11, #4
-	@ [ ====== CFI checkret begin ====== ]
-	@ [ ====== pop r4 r11 pc ====== ]
+	@ [ === CFI checkret begin === ]
+	@ [ === pop r4 r11 pc === ]
 	pop	{r4, r11, r12}
 	push {r0, r1}
 	ldr r0, [r12] 	@ get destination ID
-	mov r1, r12 	@ preserver destination addr
-	movtne r12, #23631	@ ID encoding, doesn't need to execute
+	mov r1, r12 	@ preserve dest addr
+	movtne r12, #39368	@ ID encoding, nop
 	ldr r12, [pc, #-12] 	@ get ID encoding
 	cmp r0, r12
 	bne cfi_abort
-	mov r12, r1 	@ restore destination addr
+	mov r12, r1 	@ restore dest addr
 	pop {r0, r1}
 	mov pc, r12
-	@ [ ====== CFI check end ====== ]
+	@ [ === CFI check end === ]
 .Ltmp3:
 	.align	2
 @ BB#1:
@@ -150,7 +150,7 @@ main:                                   @ @main
 	ldr	r0, [r0, #4]
 	bl	foobar
 	@ [ ====== CFI ID begin ====== ]
-	movtne r12, #23631
+	movtne r12, #39368
 	@ [ ====== CFI ID end ====== ]
 	.loc	1 26 0                  @ vulnerable.c:26:0
 	str	r4, [sp, #8]
@@ -172,14 +172,9 @@ main:                                   @ @main
 	.type	cfi_abort,%function
 cfi_abort:                              @ @cfi_abort
 @ BB#0:                                 @ %entry
-	push	{r11, lr}
-	ldr	r0, .LCPI3_0
-	mov	r11, sp
-	bl	exit
-	.align	2
-@ BB#1:
-.LCPI3_0:
-	.long	4294966596              @ 0xfffffd44
+.LBB3_1:                                @ %loop
+                                        @ =>This Inner Loop Header: Depth=1
+	b	.LBB3_1
 .Ltmp10:
 	.size	cfi_abort, .Ltmp10-cfi_abort
 

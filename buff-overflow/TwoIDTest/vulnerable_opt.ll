@@ -9,9 +9,9 @@ target triple = "arm--linux-gnueabi"
 ; Function Attrs: nounwind
 define internal void @malicious() #0 {
 entry:
-  call void @llvm.cfiid(i32 10934), !dbg !18
+  call void @llvm.cfiid(i32 8869), !dbg !18
   %call = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([26 x i8]* @.str, i32 0, i32 0)), !dbg !18
-  call void @llvm.cficheckret(i32 23631), !dbg !19
+  call void @llvm.cficheckret(i32 39368), !dbg !19
   ret void, !dbg !19
 }
 
@@ -20,7 +20,7 @@ declare i32 @printf(i8*, ...) #1
 ; Function Attrs: nounwind
 define internal void @foobar(i8* %str) #0 {
 entry:
-  call void @llvm.cfiid(i32 10934)
+  call void @llvm.cfiid(i32 8869)
   %str.addr = alloca i8*, align 4
   %buf = alloca [10 x i8], align 1
   store i8* %str, i8** %str.addr, align 4
@@ -31,7 +31,7 @@ entry:
   %call = call i8* @strcpy(i8* %arraydecay, i8* %0) #4, !dbg !27
   %arraydecay1 = getelementptr inbounds [10 x i8]* %buf, i32 0, i32 0, !dbg !28
   %call2 = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([4 x i8]* @.str1, i32 0, i32 0), i8* %arraydecay1), !dbg !28
-  call void @llvm.cficheckret(i32 23631), !dbg !29
+  call void @llvm.cficheckret(i32 39368), !dbg !29
   ret void, !dbg !29
 }
 
@@ -66,7 +66,7 @@ if.end:                                           ; preds = %entry
   %arrayidx = getelementptr inbounds i8** %1, i32 1, !dbg !37
   %2 = load i8** %arrayidx, align 4, !dbg !37
   call void @foobar(i8* %2), !dbg !37
-  call void @llvm.cfiid(i32 23631), !dbg !38
+  call void @llvm.cfiid(i32 39368), !dbg !38
   store i32 0, i32* %retval, !dbg !38
   br label %return, !dbg !38
 
@@ -86,11 +86,11 @@ declare void @llvm.cficheckret(i32) #3
 
 define void @cfi_abort() {
 entry:
-  call void @exit(i32 -700)
-  unreachable
-}
+  br label %loop
 
-declare void @exit(i32)
+loop:                                             ; preds = %loop, %entry
+  br label %loop
+}
 
 attributes #0 = { nounwind "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf"="true" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "unsafe-fp-math"="false" "use-soft-float"="false" }
 attributes #1 = { "less-precise-fpmad"="false" "no-frame-pointer-elim"="true" "no-frame-pointer-elim-non-leaf"="true" "no-infs-fp-math"="false" "no-nans-fp-math"="false" "unsafe-fp-math"="false" "use-soft-float"="false" }

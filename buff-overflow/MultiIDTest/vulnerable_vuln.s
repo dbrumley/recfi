@@ -38,8 +38,8 @@ malicious:                              @ @malicious
 @ BB#0:                                 @ %entry
 	.loc	1 7 0 prologue_end      @ vulnerable.c:7:0
 	push	{r11, lr}
-	ldr	r0, .LCPI0_0
 	mov	r11, sp
+	ldr	r0, .LCPI0_0
 	bl	printf
 	.loc	1 8 0                   @ vulnerable.c:8:0
 	pop	{r11, pc}
@@ -606,7 +606,7 @@ cfi_abort:                              @ @cfi_abort
 .Linfo_string1:
 	.asciz	 "vulnerable.c"
 .Linfo_string2:
-	.asciz	 "/home/lynn/buff-overflow/MultiIDTest"
+	.asciz	 "/home/lynn/Documents/boeing-cfi/buff-overflow/MultiIDTest"
 .Linfo_string3:
 	.asciz	 "malicious"
 .Linfo_string4:

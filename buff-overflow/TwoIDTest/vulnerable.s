@@ -39,11 +39,11 @@ malicious:                              @ @malicious
 	.loc	1 7 0 prologue_end      @ vulnerable.c:7:0
 	push	{r11, lr}
 	mov	r11, sp
-	cfiid	#10934
+	cfiid	#8869
 	ldr	r0, .LCPI0_0
 	bl	printf
 	.loc	1 8 0                   @ vulnerable.c:8:0
-	cficheckret	#23631
+	cficheckret	#39368
 	pop	{r11, pc}
 .Ltmp0:
 	.align	2
@@ -64,7 +64,7 @@ foobar:                                 @ @foobar
 	add	r11, sp, #4
 	sub	sp, sp, #20
 	mov	r1, r0
-	cfiid	#10934
+	cfiid	#8869
 	add	r4, sp, #6
 	str	r1, [r11, #-8]
 	.loc	1 13 0 prologue_end     @ vulnerable.c:13:0
@@ -76,7 +76,7 @@ foobar:                                 @ @foobar
 	mov	r1, r4
 	bl	printf
 	.loc	1 16 0                  @ vulnerable.c:16:0
-	cficheckret	#23631
+	cficheckret	#39368
 	sub	sp, r11, #4
 	pop	{r4, r11, pc}
 .Ltmp3:
@@ -122,7 +122,7 @@ main:                                   @ @main
 	ldr	r0, [r0, #4]
 	bl	foobar
 	.loc	1 26 0                  @ vulnerable.c:26:0
-	cfiid	#23631
+	cfiid	#39368
 	str	r4, [sp, #8]
 .LBB2_3:                                @ %return
 	ldr	r0, [sp, #8]
@@ -142,14 +142,9 @@ main:                                   @ @main
 	.type	cfi_abort,%function
 cfi_abort:                              @ @cfi_abort
 @ BB#0:                                 @ %entry
-	push	{r11, lr}
-	ldr	r0, .LCPI3_0
-	mov	r11, sp
-	bl	exit
-	.align	2
-@ BB#1:
-.LCPI3_0:
-	.long	4294966596              @ 0xfffffd44
+.LBB3_1:                                @ %loop
+                                        @ =>This Inner Loop Header: Depth=1
+	b	.LBB3_1
 .Ltmp10:
 	.size	cfi_abort, .Ltmp10-cfi_abort
 

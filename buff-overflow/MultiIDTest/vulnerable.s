@@ -38,10 +38,12 @@ malicious:                              @ @malicious
 @ BB#0:                                 @ %entry
 	.loc	1 7 0 prologue_end      @ vulnerable.c:7:0
 	push	{r11, lr}
-	ldr	r0, .LCPI0_0
 	mov	r11, sp
+	cfiid	#35212
+	ldr	r0, .LCPI0_0
 	bl	printf
 	.loc	1 8 0                   @ vulnerable.c:8:0
+	cficheckret	#6998
 	pop	{r11, pc}
 .Ltmp0:
 	.align	2
@@ -62,14 +64,14 @@ format_age:                             @ @format_age
 	mov	r11, sp
 	sub	sp, sp, #8
 	mov	r1, r0
-	cfiid	#45138
+	cfiid	#35212
 	.loc	1 12 0 prologue_end     @ vulnerable.c:12:0
 .Ltmp2:
 	ldr	r0, .LCPI1_0
 	str	r1, [sp, #4]
 	bl	printf
 	.loc	1 13 0                  @ vulnerable.c:13:0
-	cficheckret	#670
+	cficheckret	#6998
 	mov	sp, r11
 	pop	{r11, pc}
 .Ltmp3:
@@ -91,14 +93,14 @@ format_name:                            @ @format_name
 	mov	r11, sp
 	sub	sp, sp, #8
 	mov	r1, r0
-	cfiid	#45138
+	cfiid	#35212
 	.loc	1 17 0 prologue_end     @ vulnerable.c:17:0
 .Ltmp5:
 	ldr	r0, .LCPI2_0
 	str	r1, [sp, #4]
 	bl	printf
 	.loc	1 18 0                  @ vulnerable.c:18:0
-	cficheckret	#670
+	cficheckret	#6998
 	mov	sp, r11
 	pop	{r11, pc}
 .Ltmp6:
@@ -119,6 +121,7 @@ call_format:                            @ @call_format
 	push	{r4, r11, lr}
 	add	r11, sp, #4
 	sub	sp, sp, #20
+	cfiid	#35212
 	add	r4, sp, #2
 	str	r0, [r11, #-8]
 	str	r1, [sp, #12]
@@ -128,12 +131,12 @@ call_format:                            @ @call_format
 	bl	strcpy
 	.loc	1 26 0                  @ vulnerable.c:26:0
 	ldr	r1, [r11, #-8]
-	cfichecktar	#45138
+	cfichecktar	#35212
 	mov	r0, r4
 	blx	r1
 	.loc	1 27 0                  @ vulnerable.c:27:0
-	cfiid	#670
-	cficheckret	#50096
+	cfiid	#6998
+	cficheckret	#6998
 	sub	sp, r11, #4
 	pop	{r4, r11, pc}
 .Ltmp9:
@@ -204,7 +207,7 @@ main:                                   @ @main
 	ldr	r0, [sp]
 	bl	call_format
 	.loc	1 44 0                  @ vulnerable.c:44:0
-	cfiid	#50096
+	cfiid	#6998
 	mov	r0, #0
 .LBB4_8:                                @ %if.end8
 	str	r0, [r11, #-4]
@@ -614,7 +617,7 @@ cfi_abort:                              @ @cfi_abort
 .Linfo_string1:
 	.asciz	 "vulnerable.c"
 .Linfo_string2:
-	.asciz	 "/home/lynn/buff-overflow/MultiIDTest"
+	.asciz	 "/home/lynn/Documents/boeing-cfi/buff-overflow/MultiIDTest"
 .Linfo_string3:
 	.asciz	 "malicious"
 .Linfo_string4:

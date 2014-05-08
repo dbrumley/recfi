@@ -12,7 +12,9 @@ target triple = "arm--linux-gnueabi"
 ; Function Attrs: nounwind
 define internal void @malicious() #0 {
 entry:
+  call void @llvm.cfiid(i32 35212), !dbg !26
   %call = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([26 x i8]* @.str, i32 0, i32 0)), !dbg !26
+  call void @llvm.cficheckret(i32 6998), !dbg !27
   ret void, !dbg !27
 }
 
@@ -21,13 +23,13 @@ declare i32 @printf(i8*, ...) #1
 ; Function Attrs: nounwind
 define internal void @format_age(i8* %age) #0 {
 entry:
-  call void @llvm.cfiid(i32 45138)
+  call void @llvm.cfiid(i32 35212)
   %age.addr = alloca i8*, align 4
   store i8* %age, i8** %age.addr, align 4
   call void @llvm.dbg.declare(metadata !{i8** %age.addr}, metadata !28), !dbg !29
   %0 = load i8** %age.addr, align 4, !dbg !30
   %call = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([26 x i8]* @.str1, i32 0, i32 0), i8* %0), !dbg !30
-  call void @llvm.cficheckret(i32 670), !dbg !31
+  call void @llvm.cficheckret(i32 6998), !dbg !31
   ret void, !dbg !31
 }
 
@@ -37,19 +39,20 @@ declare void @llvm.dbg.declare(metadata, metadata) #2
 ; Function Attrs: nounwind
 define internal void @format_name(i8* %name) #0 {
 entry:
-  call void @llvm.cfiid(i32 45138)
+  call void @llvm.cfiid(i32 35212)
   %name.addr = alloca i8*, align 4
   store i8* %name, i8** %name.addr, align 4
   call void @llvm.dbg.declare(metadata !{i8** %name.addr}, metadata !32), !dbg !33
   %0 = load i8** %name.addr, align 4, !dbg !34
   %call = call i32 (i8*, ...)* @printf(i8* getelementptr inbounds ([21 x i8]* @.str2, i32 0, i32 0), i8* %0), !dbg !34
-  call void @llvm.cficheckret(i32 670), !dbg !35
+  call void @llvm.cficheckret(i32 6998), !dbg !35
   ret void, !dbg !35
 }
 
 ; Function Attrs: nounwind
 define internal void @call_format(void (...)* %format_func, i8* %str) #0 {
 entry:
+  call void @llvm.cfiid(i32 35212)
   %format_func.addr = alloca void (...)*, align 4
   %str.addr = alloca i8*, align 4
   %buf = alloca [10 x i8], align 1
@@ -64,10 +67,10 @@ entry:
   %1 = load void (...)** %format_func.addr, align 4, !dbg !45
   %arraydecay1 = getelementptr inbounds [10 x i8]* %buf, i32 0, i32 0, !dbg !45
   %callee.knr.cast = bitcast void (...)* %1 to void (i8*)*, !dbg !45
-  call void @llvm.cfichecktar(i32 45138), !dbg !45
+  call void @llvm.cfichecktar(i32 35212), !dbg !45
   call void %callee.knr.cast(i8* %arraydecay1), !dbg !45
-  call void @llvm.cfiid(i32 670), !dbg !46
-  call void @llvm.cficheckret(i32 50096), !dbg !46
+  call void @llvm.cfiid(i32 6998), !dbg !46
+  call void @llvm.cficheckret(i32 6998), !dbg !46
   ret void, !dbg !46
 }
 
@@ -129,7 +132,7 @@ if.end8:                                          ; preds = %if.end7, %if.then2
   %arrayidx9 = getelementptr inbounds i8** %6, i32 1, !dbg !60
   %7 = load i8** %arrayidx9, align 4, !dbg !60
   call void @call_format(void (...)* %5, i8* %7), !dbg !60
-  call void @llvm.cfiid(i32 50096), !dbg !61
+  call void @llvm.cfiid(i32 6998), !dbg !61
   store i32 0, i32* %retval, !dbg !61
   br label %return, !dbg !61
 
@@ -168,12 +171,12 @@ attributes #6 = { nounwind readonly }
 
 !llvm.dbg.cu = !{!0}
 
-!0 = metadata !{i32 786449, metadata !1, i32 12, metadata !"clang version 3.3.1 (tags/RELEASE_33/final)", i1 false, metadata !"", i32 0, metadata !2, metadata !2, metadata !3, metadata !2, metadata !2, metadata !""} ; [ DW_TAG_compile_unit ] [/home/lynn/buff-overflow/MultiIDTest/vulnerable.c] [DW_LANG_C99]
-!1 = metadata !{metadata !"vulnerable.c", metadata !"/home/lynn/buff-overflow/MultiIDTest"}
+!0 = metadata !{i32 786449, metadata !1, i32 12, metadata !"clang version 3.3.1 (tags/RELEASE_33/final)", i1 false, metadata !"", i32 0, metadata !2, metadata !2, metadata !3, metadata !2, metadata !2, metadata !""} ; [ DW_TAG_compile_unit ] [/home/lynn/Documents/boeing-cfi/buff-overflow/MultiIDTest/vulnerable.c] [DW_LANG_C99]
+!1 = metadata !{metadata !"vulnerable.c", metadata !"/home/lynn/Documents/boeing-cfi/buff-overflow/MultiIDTest"}
 !2 = metadata !{i32 0}
 !3 = metadata !{metadata !4, metadata !8, metadata !13, metadata !14, metadata !21}
 !4 = metadata !{i32 786478, metadata !1, metadata !5, metadata !"malicious", metadata !"malicious", metadata !"", i32 5, metadata !6, i1 false, i1 true, i32 0, i32 0, null, i32 0, i1 false, void ()* @malicious, null, null, metadata !2, i32 6} ; [ DW_TAG_subprogram ] [line 5] [def] [scope 6] [malicious]
-!5 = metadata !{i32 786473, metadata !1}          ; [ DW_TAG_file_type ] [/home/lynn/buff-overflow/MultiIDTest/vulnerable.c]
+!5 = metadata !{i32 786473, metadata !1}          ; [ DW_TAG_file_type ] [/home/lynn/Documents/boeing-cfi/buff-overflow/MultiIDTest/vulnerable.c]
 !6 = metadata !{i32 786453, i32 0, i32 0, metadata !"", i32 0, i64 0, i64 0, i64 0, i32 0, null, metadata !7, i32 0, i32 0} ; [ DW_TAG_subroutine_type ] [line 0, size 0, align 0, offset 0] [from ]
 !7 = metadata !{null}
 !8 = metadata !{i32 786478, metadata !1, metadata !5, metadata !"format_age", metadata !"format_age", metadata !"", i32 10, metadata !9, i1 false, i1 true, i32 0, i32 0, null, i32 256, i1 false, void (i8*)* @format_age, null, null, metadata !2, i32 11} ; [ DW_TAG_subprogram ] [line 10] [def] [scope 11] [format_age]
@@ -220,7 +223,7 @@ attributes #6 = { nounwind readonly }
 !49 = metadata !{i32 786689, metadata !21, metadata !"argv", metadata !5, i32 33554461, metadata !25, i32 0, i32 0} ; [ DW_TAG_arg_variable ] [argv] [line 29]
 !50 = metadata !{i32 31, i32 0, metadata !21, null}
 !51 = metadata !{i32 33, i32 0, metadata !52, null}
-!52 = metadata !{i32 786443, metadata !1, metadata !21, i32 32, i32 0, i32 0} ; [ DW_TAG_lexical_block ] [/home/lynn/buff-overflow/MultiIDTest/vulnerable.c]
+!52 = metadata !{i32 786443, metadata !1, metadata !21, i32 32, i32 0, i32 0} ; [ DW_TAG_lexical_block ] [/home/lynn/Documents/boeing-cfi/buff-overflow/MultiIDTest/vulnerable.c]
 !53 = metadata !{i32 34, i32 0, metadata !52, null}
 !54 = metadata !{i32 786688, metadata !21, metadata !"format_func", metadata !5, i32 37, metadata !17, i32 0, i32 0} ; [ DW_TAG_auto_variable ] [format_func] [line 37]
 !55 = metadata !{i32 37, i32 0, metadata !21, null}

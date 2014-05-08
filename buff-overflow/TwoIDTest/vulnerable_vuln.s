@@ -137,14 +137,9 @@ main:                                   @ @main
 	.type	cfi_abort,%function
 cfi_abort:                              @ @cfi_abort
 @ BB#0:                                 @ %entry
-	push	{r11, lr}
-	ldr	r0, .LCPI3_0
-	mov	r11, sp
-	bl	exit
-	.align	2
-@ BB#1:
-.LCPI3_0:
-	.long	4294966596              @ 0xfffffd44
+.LBB3_1:                                @ %loop
+                                        @ =>This Inner Loop Header: Depth=1
+	b	.LBB3_1
 .Ltmp10:
 	.size	cfi_abort, .Ltmp10-cfi_abort
 
