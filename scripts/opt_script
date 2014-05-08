@@ -36,7 +36,7 @@ def main():
     cfipasslib = root_dir + "/cfi-analysis/build/Release+Debug+Asserts/lib/CfiPasses.so"
     cfiutillib = root_dir + "/cfi-analysis/build/Release+Debug+Asserts/lib/CfiUtil.so"
     cfilib = root_dir + "/cfi-analysis/build/Release+Debug+Asserts/lib/LLVMcfi.so"
-    pyscript = root_dir + "/cfi-lowering/AsmEditor.py"
+    pyscript = root_dir + "/cfi-lowering/CFIAsmEditor.py"
 
     for file in bcfiles:
         print("running pass on " + file)

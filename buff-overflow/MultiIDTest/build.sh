@@ -38,7 +38,7 @@ arm-linux-gnueabi-gcc -static -g $1_vuln.s -lrt -o $1_vuln
 chmod +x $1_vuln
 
 echo "running python script..."
-python $3/cfi-lowering/AsmEditor.py -f $1.s -o $1_fixed.s
+python $3/cfi-lowering/CFIAsmEditor.py -f $1.s -o $1_fixed.s
 
 echo "assembling fixed assembly..."
 arm-linux-gnueabi-gcc -static -g $1_fixed.s -lrt -o $1_fixed
