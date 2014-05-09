@@ -1,6 +1,15 @@
-/*
- * TODO: Comments
- */
+//=== MultiPass.cpp - contains functions used by both Multi-Class policies ===//
+//
+// This file implements ICfiPass and contains functions used by both
+// Multi-Class CFI policies, such as generating check IDs for transfer
+// sites. IDs for transfer targets will be generated differently for
+// each Multi-Class policy. 
+//
+// Both multi-class policies should follow this rule:
+//
+// Allowed transfer targets are edges within the program's CFG
+//
+//===----------------------------------------------------------------------===//
 
 #include "cfi/ICfiPass.h"
 #include "cfi/MultiListPass.h"
@@ -15,33 +24,44 @@ using namespace llvm;
 
 namespace cfi {
 
+    /**
+     * @brief initializes the Multi-Class CFI pass
+     * 
+     * @arg M - current module
+     */
     MultiPass::MultiPass(Module &M) 
     {
         mod = &M;
     }
 
+    /**
+     * @brief finds all transfer sites and targets and populates 
+     * jmpDestMap, retDestMap
+     *
+     * @arg ctf - call target finder, provided by DSA
+     *
+     * @return void
+     */
     void MultiPass::findAllTargets(CTF &ctf)
     {
-        /*
-         * First: find indirect branch targets 
-         */
+        //First: find indirect branch targets 
         Module::iterator MB, ME;
+        //iterate over all functions
         for (MB = mod->begin(), ME = mod->end(); MB != ME; MB++)
         {
             Function *F = &*MB;
-            //for all basic blocks in function
             Function::iterator FB, FE;
+            //iterate over basic blocsk in function
             for (FB = F->begin(), FE = F->end(); FB != FE; FB++)
             {
                 BasicBlock *B = &*FB;
 
                 //check if basic block ends with indirect branch 
-                //(TODO add other checks: exceptions, longjumps, trampolines?)
+                //Future: add other checks: exceptions, longjumps, trampolines?
                 if (TerminatorInst *TI = B->getTerminator())
                 {
                     if (IndirectBrInst *IBI = dyn_cast<IndirectBrInst>(TI))
                     {
-                        //add all possible successors to indBrDestMap
                         int n = IBI->getNumSuccessors();
                         for (int j = 0; j < n; j++)
                         {
@@ -54,12 +74,10 @@ namespace cfi {
                 }
             }
         }
-
-        /*
-         * Second: find call and ret targets 
-         */
-        //for all call sites
+        
+        //Second: find call and ret targets 
         CallSiteIterator CB, CE;
+        //iterate over all call sites
         for (CB = ctf.cs_begin(), CE = ctf.cs_end(); CB != CE; CB++)
         {
             CallSite cs = *CB;
@@ -69,19 +87,19 @@ namespace cfi {
             if (ctf.begin(cs) == ctf.end(cs))
                 continue;
 
-            //for all call site targets
             CallTargetIterator FB, FE;
+            //iterate over call site targets
             for (FB = ctf.begin(cs), FE = ctf.end(cs); FB != FE; FB++)
             {
                 const Function *F = *FB;
 
+                //skip intrinsic or declaration only functions
                 if (F->isIntrinsic() || F->isDeclaration() )
                 {
-                    //errs() << "Skipping intrinsic || declaration: " << F->getName()  << "\n";
                     continue;
                 }
 
-                //add indirect call targets to indCallDestMap
+                //add indirect call targets to jmpDestMap
                 if (!cs.getCalledFunction())
                 {
                     BasicBlock *destBlock = const_cast<BasicBlock *>
@@ -91,7 +109,7 @@ namespace cfi {
                     jmpDestMap[I].insert(destInstr);
                 }
 
-                //Find all returns in this function
+                //Third: find all returns in this function
                 Function::iterator BB, BE;
                 Function* ncF = const_cast<Function*>(F);
                 for (BB = ncF->begin(), BE = ncF->end(); BB != BE; BB++)
@@ -106,14 +124,15 @@ namespace cfi {
                         }
                     }
                 }
-
             }
         }
     }
 
-    /*
-     * Each destination has been assigned an ID.
-     * Now, give each callsite a set of destination IDs
+    /**
+     * @brief generate transfer site check IDs, populates jmpCheckMap
+     * and retCheckMap
+     *
+     * @return void
      */
     void MultiPass::generateCheckIDs()
     {
@@ -121,7 +140,21 @@ namespace cfi {
         genCheckIds(jmpDestMap, jmpIdMap, jmpCheckMap);
         genCheckIds(retDestMap, retIdMap, retCheckMap);
     }
-    void MultiPass::genCheckIds(InstDestMap &destMap, InstIDMap &idMap, InstIDSetMap &checkMap )
+
+    /**
+     * @brief generates transfer site check IDs given a
+     * map of transfer sites to transfer targets and a
+     * map of transfer targets and IDs
+     *
+     * @arg destMap - mapping of transfer sites to targets
+     * @arg idMap - mapping of transfer targets to IDs
+     * @arg checkMap - mapping of transfer sites to IDs, to be populated
+     *
+     * @return void
+     */ 
+    void MultiPass::genCheckIds(InstDestMap &destMap, 
+                                InstIDMap &idMap, 
+                                InstIDSetMap &checkMap)
     {
         InstDestMap::iterator MB, ME;
         /* for each callsite */
@@ -146,22 +179,27 @@ namespace cfi {
         }
     }
 
+    /**
+     * @brief insert IDs and checks into IR
+     *
+     * @return void
+     */
     void MultiPass::lowerChecksAndIDs()
     {
         CFILowering cfil = CFILowering(*mod);
-        cfil.insertIDs(jmpIdMap, /*isRetTarget=*/false);
-        cfil.insertIDs(retIdMap, /*isRetTarget=*/true);
-        cfil.insertChecks(jmpCheckMap); //checkamp 
-        cfil.insertChecks(retCheckMap); //checkamp 
+        cfil.insertIDs(jmpIdMap, false);
+        cfil.insertIDs(retIdMap, true);
+        cfil.insertChecks(jmpCheckMap);  
+        cfil.insertChecks(retCheckMap);  
     }
     
+    /**
+     * @brief get statistics for this pass
+     *
+     * @return string representation of stats
+     */
     std::string MultiPass::getStats()
     {
-        //destinations per callsite
-        //
-        //get number of classes
-        ///*
-        
         int num_sites = 0;
         int cumulative_targets = 0;
         
@@ -169,11 +207,10 @@ namespace cfi {
         int min_tars = 0;
         int max_tars  = 0;
 
-
         //iterate over monitor code sites
         InstDestMap::iterator IB, IE;
         for (IB = jmpMergedMap.begin(), IE = jmpMergedMap.end();
-                IB != IE; IB++)
+             IB != IE; IB++)
         {
             num_sites++;
             int num_tars = IB->second.size();
@@ -184,7 +221,7 @@ namespace cfi {
         }
 
         for (IB = retMergedMap.begin(), IE = retMergedMap.end();
-                IB != IE; IB++)
+             IB != IE; IB++)
         {
             num_sites++;
             int num_tars = IB->second.size();
@@ -207,18 +244,15 @@ namespace cfi {
 
         return resultStream.str();
     }
+
+    /**
+     * @brief prints debug info for this pass
+     *
+     * @return void
+     */
     void MultiPass::print()
     {
         print_dest_map(jmpMergedMap, "jmpMergedMap");
         print_dest_map(retMergedMap, "retMergedMap");
-        /*
-        print_dest_map(jmpDestMap, "jmpDestMap");
-        print_dest_map(retDestMap, "retDestMap");
-        print_ID_check_maps(jmpCheckMap, "jmpCheckMap");
-        print_ID_check_maps(retCheckMap, "retCheckMap");
-        print_ID_maps(jmpIdMap, "jmpIdMap");
-        print_ID_maps(retIdMap, "retIdMap");
-        */
-
     }
 }

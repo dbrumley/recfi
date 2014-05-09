@@ -1,6 +1,7 @@
-//===- CFILowering.cpp - Functions for lowering id and check inserting ----===//
+//===- CFIUtil.cpp - Functions for inserting id and check inserting -------===//
 //
-// Contains function declarations for inserting IDs and checks into llvm IR
+// Contains functions for inserting IDs and checks into llvm IR as
+// LLVM intrinsic functions
 //
 //===----------------------------------------------------------------------===//
 
@@ -13,6 +14,7 @@
 using namespace llvm;
 
 namespace cfi{
+
         /**
          * @brief creates a CFI intrinsic function
          *
@@ -43,24 +45,37 @@ namespace cfi{
         }
         
         /**
-         * @brief create cfi_abort function:
+         * @brief create cfi_abort function as a while loop:
+         *
          * void abort()
-         * {exit(-700);}
+         * {while(1);}
+         *
+         * We do not call any other functions in abort, such as print,
+         * because we do not want to introduce additional control flow
+         * values that may be corrupted by the attacker.
+         *
+         * @return void
          */
         void CFILowering::createAbort()
         {
             //get cfi_abort function if exists, else create new func
             Constant *c = mod->getOrInsertFunction(CFI_ABORT,
-                                                Type::getVoidTy(mod->getContext()),
-                                                NULL);
+                                                   Type::getVoidTy(mod->getContext()),
+                                                   NULL);
             Function *abort = dyn_cast<Function>(c);
             abort->setCallingConv(CallingConv::C);
+
+            //create entry block
             BasicBlock* entry = BasicBlock::Create(getGlobalContext(),
                                                    "entry",
                                                    abort);
+            //create loop block
             BasicBlock* loop = BasicBlock::Create(getGlobalContext(),
                                                   "loop",
                                                   abort);
+            //entry block will branch to loop block,
+            //which will continue to branch to
+            //loop block
             IRBuilder<> builder(entry);
             builder.CreateBr(loop);
             builder.SetInsertPoint(loop);
@@ -69,7 +84,7 @@ namespace cfi{
         
         /**
          * @brief initializes CFILowering object by initializing cfi
-         * intrinsic functions
+         * intrinsic functions and creating the abort function
          *
          * @arg M - module
          */
@@ -84,10 +99,16 @@ namespace cfi{
         
         /**
          * @brief Inserts IDs into their respective sites
+         *
+         * @arg instrIDs - map of transfer targets to their IDs
+         * @arg isRetTarget - flag to indicate if map is of ret targets
+         * to IDs or jump targets to IDs
+         *
+         * @return void
          */
         void CFILowering::insertIDs(InstIDMap instrIDs, bool isRetTarget)
         {
-            //insert IDs at beginning of basic blocks 
+            //iterate through target ID map 
             InstIDMap::iterator IB, IE;
             for (IB = instrIDs.begin(), IE = instrIDs.end();
                  IB != IE; IB++)
@@ -97,8 +118,12 @@ namespace cfi{
                                                    IB->second);
 
                 BasicBlock::iterator II(IB->first);
+                
+                //ret targets are call sites, so insert ID after target
+                //jump targets are basic block beginnings, so insert ID before
                 if(isRetTarget)
                     II++;
+
                 builder.SetInsertPoint(II);
                 builder.CreateCall(cfiInsertID, ID);
             }
@@ -106,50 +131,58 @@ namespace cfi{
 
         /**
          * @brief Inserts checks into their respective sites
+         *
+         * @arg targetCheckIDs - map of transfer sites to their target
+         * ID (or IDs for whitelisting policy)
+         *
+         * @return void
          */
         void CFILowering::insertChecks(InstIDSetMap targetCheckIDs)
         {
-            //insert ID checks before call sites
+            //iterate through transfer site ID map
             InstIDSetMap::iterator IB, IE;
             for (IB = targetCheckIDs.begin(), IE = targetCheckIDs.end();
                  IB != IE; IB++)
             {
-                Instruction* callInst = IB->first;
+                Instruction* transferInst = IB->first;
                 std::set<int>::iterator setB, setE;
                 for(setB = IB->second.begin(), setE = IB->second.end();
-                        setB != setE; setB++)
+                    setB != setE; setB++)
                 {
                     int intID = *setB;
-                    llvm::IRBuilder<> builder(callInst->getParent());
-                    Value *ID = llvm::ConstantInt::get(builder.getInt32Ty(),
-                            intID);
+                    llvm::IRBuilder<> builder(transferInst->getParent());
+                    Value *ID = llvm::ConstantInt::get(builder.getInt32Ty(), 
+                                                       intID);
 
-                    BasicBlock::iterator II(callInst);
+                    BasicBlock::iterator II(transferInst);
 
                     //insert before current instruction
                     builder.SetInsertPoint(II);
-                    if (dyn_cast<ReturnInst>(callInst))
-                    {
+                    if (dyn_cast<ReturnInst>(transferInst))
                         builder.CreateCall(cfiCheckReturn, ID);
-                    }
                     else
-                    {
                         builder.CreateCall(cfiCheckTarget, ID);
-                    }
                 }
             }
         }
         
         /********** Debug Functions **********/
-	    /*
-         * prints out the destination map
+
+	/**
+         * @brief prints out the destination map
+         * 
+         * @arg instDestMap - map of transfer sites to their targets
+         * @arg tag - name of the map to print
+         *
+         * @return void
          */
         void print_dest_map(InstDestMap instDestMap, std::string tag)
         {
             errs() << tag << "\n";
             
-           InstDestMap::iterator DB, DE;
-            for (DB = instDestMap.begin(), DE = instDestMap.end(); DB != DE; DB++)
+            InstDestMap::iterator DB, DE;
+            for (DB = instDestMap.begin(), DE = instDestMap.end(); 
+                 DB != DE; DB++)
             {
                 errs() << "\tInstruction: ";
                 DB->first->dump();
@@ -167,17 +200,20 @@ namespace cfi{
             }
         }
 
-        /*
-         * prints out the ID maps
+        /**
+         * @brief prints out the target ID map
+         * 
+         * @arg transferIDs - map of transfer targets to their IDs
+         * @arg tag - name of the map to print
+         *
+         * @return void
          */
-        void print_ID_maps(InstIDMap callSiteIDs, std::string tag)
+        void print_ID_maps(InstIDMap targetIDs, std::string tag)
         {
-            
             errs() << "\n" << tag << "\n";
-           // int count = 0;
             
             InstIDMap::iterator IB, IE;
-            for (IB = callSiteIDs.begin(), IE = callSiteIDs.end();
+            for (IB = targetIDs.begin(), IE = targetIDs.end();
                  IB != IE; IB++)
             {
                 errs() << "\tTarget Instr: ";
@@ -186,8 +222,13 @@ namespace cfi{
             }
         }
 
-        /*
-         * prints out the ID check maps
+        /**
+         * @brief prints out the trasnfer site ID map
+         * 
+         * @arg targetCheckIDs - map of transfer sites to their IDs
+         * @arg tag - name of the map to print
+         *
+         * @return void
          */
         void print_ID_check_maps(InstIDSetMap targetCheckIDs, std::string tag)
         {
@@ -201,12 +242,11 @@ namespace cfi{
                 IB->first->dump();
                 std::set<int>::iterator setB, setE;
                 for(setB = IB->second.begin(), setE = IB->second.end();
-                        setB != setE; setB++)
+                    setB != setE; setB++)
                 {
                     int intID = *setB;
                     errs() << "\t\tTarget ID = " << intID << "\n";
                 }
             }
         }
-
 }

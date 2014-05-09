@@ -1,33 +1,51 @@
+//===- TwoIDPass.cpp - Implementation of Two-Class CFI policy -------------===//
+//
+// This pass instruments LLVM IR with the Two-Class CFI Policy. It 
+// inherits from ICfiPass.
+//
+// The instrumented code should follow these rules:
+// 1. every indirect call or branch can target every function or
+//    indirectly targetable basic block
+// 2. every return can target every call site
+//
+//===----------------------------------------------------------------------===//
 
 #include "cfi/ICfiPass.h"
 #include "cfi/TwoIDPass.h"
 #include <sstream>
-/*
- * TODO: Comments
- *  This pass is intended to to instrument code with checks such that: 
- *  1. every icall/ibr site can target every potential icall/ibr dest
- *  2. every ret site can target every potential ret dest
- */
 
 using namespace llvm;
 
 namespace cfi {
+
+    /**
+     * @brief initializes the Two-Class CFI pass
+     * 
+     * @arg M - current module
+     */
     TwoIDPass::TwoIDPass(Module &M) 
     {
         mod = &M;
     }
 
-    /*
-     * Populate jmpSites, jmpTars, retSites, retTars
+    /**
+     * @brief finds all transfer sites and targets and populates 
+     * jmpSites, jmpTars, retSites, retTars
+     *
+     * @arg ctf - call target finder, provided by DSA,
+     * should be null for this pass
+     *
+     * @return void
      */
     void TwoIDPass::findAllTargets(CTF &ctf)
     {
         Module::iterator MB, ME;
+        //iterate through functions in module
         for (MB = mod->begin(), ME = mod->end(); MB != ME; MB++)
         {
             Function *F = &*MB;
-            //errs().write_escaped(F->getName()) << '\n';
-            //for all basic blocks in function
+
+            //iterate through basic blocks in function
             Function::iterator FB, FE;
             for (FB = F->begin(), FE = F->end(); FB != FE; FB++)
             {
@@ -36,29 +54,30 @@ namespace cfi {
                 {
                     Instruction *I = &*BB;
 
-                    //FOUND: CALLSITE
+                    //found: call site
                     if (CallInst* callInst = dyn_cast<CallInst>(I))
                     {
                         Function *calledFunc = callInst->getCalledFunction();
-                        //FOUND: ICALL
+                        //found: indirect call site
                         if (calledFunc == NULL)
                         {
                             jmpSites.insert(I);
                         }
                         else 
                         {
-                            if (calledFunc->isIntrinsic() || calledFunc->isDeclaration())
+                            if (calledFunc->isIntrinsic() || 
+                                calledFunc->isDeclaration())
                                 continue;
                         }
-                        //FOUND: RETURN SITE (call or icall)
+                        //call sites are return targets (call or indirect call)
                         retTars.insert(I);
                     }
-                    //FOUND: IBR SITE
+                    //found: indirect branch site
                     else if (dyn_cast<IndirectBrInst>(I))
                     {
                         jmpSites.insert(I);
                     }
-                    //FOUND: RET SITE
+                    //found: return site
                     else if (dyn_cast<ReturnInst>(I))
                     {
                         if (F->getName() != "main")
@@ -72,11 +91,11 @@ namespace cfi {
             if (F->isDeclaration())
                 continue;
 
-            //find all indirect target blocks, including entry block
+            //find all indirect call and branch targets (basic blocks)
             BBSet indTargets = findIndTargets(*F);
 
-            //for all targets in indTargets, insert targetID at beginning
-            //of block
+            //for all targets in indTargets, add first instruction of
+            //basic block to jmpTars
             BBSet::iterator BB, BE;
             for (BB = indTargets.begin(), BE = indTargets.end();
                     BB != BE; BB++)
@@ -87,20 +106,28 @@ namespace cfi {
         }
     }
 
+    /**
+     * @brief finds all indirect targets in given function
+     *
+     * @arg F - function
+     *
+     * @return set of indirectly targetable basic blocks,
+     * including entry block, of given function
+     */
     BBSet TwoIDPass::findIndTargets(Function &F)
     {
         BBSet indTargets;
         if (F.getName() != "main")
             indTargets.insert(&F.getEntryBlock());
 
-        //for all basic blocks in function
+        //iterate over basic blocks in function
         Function::iterator FB, FE;
         for (FB = F.begin(), FE = F.end(); FB != FE; FB++)
         {
             BasicBlock *B = &*FB;
 
             //check if basic block ends with indirect branch
-            //(TODO add other checks: exceptions, longjumps, trampolines?)
+            //Future: add other checks: exceptions, longjumps, trampolines?
             if (TerminatorInst *TI = B->getTerminator())
             {
                 if (IndirectBrInst *IBI = dyn_cast<IndirectBrInst>(TI))
@@ -117,9 +144,16 @@ namespace cfi {
         return indTargets;
     }
 
+    /**
+     * @brief generate target IDs, populates jmpMap and retMap
+     *
+     * @return void
+     */ 
     void TwoIDPass::generateDestIDs() 
     {
         InstSet::iterator IB, IE;
+     
+        //make sure ID is smaller than MAX
         jmpID = rand() % MAX;
         for (IB = jmpTars.begin(), IE = jmpTars.end(); IB != IE; IB++)
         {
@@ -127,7 +161,11 @@ namespace cfi {
             jmpMap[K] = jmpID;
         }
 
-        do{retID = rand() % MAX;} while (retID == jmpID); //ensure the two IDs are unique
+        //ensure two IDs are unique
+        do {
+            retID = rand() % MAX;
+        } while (retID == jmpID); 
+
         for (IB = retTars.begin(), IE = retTars.end(); IB != IE; IB++)
         {
             Instruction* K = *IB;
@@ -135,6 +173,12 @@ namespace cfi {
         }
     }
 
+    /**
+     * @brief generate transfer site check IDs, populates jmpCheckMap
+     * and retCheckMap
+     *
+     * @return void
+     */ 
     void TwoIDPass::generateCheckIDs() 
     {
         InstSet::iterator IB, IE;
@@ -143,7 +187,7 @@ namespace cfi {
         {
             Instruction* K = *IB;
             std::set<int> *idset = &jmpCheckMap[K];
-            if( idset->find(jmpID) != idset->end() ) // idset.contains(ID)
+            if (idset->find(jmpID) != idset->end()) // idset.contains(ID)
                 continue;
             else
                 idset->insert(jmpID);
@@ -153,33 +197,34 @@ namespace cfi {
         {
             Instruction* K = *IB;
             std::set<int> *idset = &retCheckMap[K];
-            if( idset->find(retID) != idset->end() ) // idset.contains(ID)
+            if (idset->find(retID) != idset->end()) // idset.contains(ID)
                 continue;
             else
                 idset->insert(retID);
         }
     }
 
+    /**
+     * @brief insert IDs and checks into IR
+     *
+     * @return void
+     */
     void TwoIDPass::lowerChecksAndIDs() 
     {
         CFILowering cfil = CFILowering(*mod);
-        cfil.insertIDs(jmpMap, /* isRetTarget= */ false);
-        cfil.insertIDs(retMap, /* isRetTarget= */ true);
-        cfil.insertChecks(jmpCheckMap); //checkamp 
-        cfil.insertChecks(retCheckMap); //checkamp 
+        cfil.insertIDs(jmpMap, false);
+        cfil.insertIDs(retMap, true);
+        cfil.insertChecks(jmpCheckMap);  
+        cfil.insertChecks(retCheckMap); 
     }
+
+    /**
+     * @brief get statistics for this pass
+     *
+     * @return string representation of stats
+     */
     std::string TwoIDPass::getStats() 
     {
-
-        /*
-        int num_classes = 2;
-
-        int num_sites = jmpSites.size() + retSites.size();
-        int cumulative_targets = (jmpSites.size() * jmpTars.size()) + (retSites.size() * retTars.size());
-        float avg_targets_per_site = float(cumulative_targets)/float(num_sites);
-        int min_targets_per_site = fmin(jmpTars.size(), retTars.size());
-        int max_targets_per_site = fmax(jmpTars.size(), retTars.size());
-        */
         int num_sites = 0;
         int cumulative_targets = 0;
         
@@ -190,7 +235,7 @@ namespace cfi {
         //iterate over monitor code sites
         InstIDSetMap::iterator IB, IE;
         for (IB = jmpCheckMap.begin(), IE = jmpCheckMap.end();
-                IB != IE; IB++)
+             IB != IE; IB++)
         {
             num_sites++;
             int num_tars = jmpTars.size();
@@ -201,7 +246,7 @@ namespace cfi {
         }
 
         for (IB = retCheckMap.begin(), IE = retCheckMap.end();
-                IB != IE; IB++)
+             IB != IE; IB++)
         {
             num_sites++;
             int num_tars = retTars.size();
@@ -225,6 +270,12 @@ namespace cfi {
 
         return resultStream.str();
     }
+
+    /**
+     * @brief prints debug info for this pass
+     *
+     * @return void
+     */
     void TwoIDPass::print()
     {
         print_ID_maps(jmpMap, "jmpMap");
