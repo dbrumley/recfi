@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 #Used as a replacement of opt_script to generate
-#arm binaries for coreutil tools without recfi
+#arm binaries for Coreutil tools without recfi
 #instrumentation
 
 import os

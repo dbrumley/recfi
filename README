@@ -1,4 +1,163 @@
-boeing-cfi
-==========
+ReCFI Installation Guide
+================================
 
-Boeing CFI Project using LLVM
+ReCFI is a re-targetable, tunable CFI framework implemented 
+using the LLVM compiler toolchain. This project was created 
+at CMU and funded by Boeing, with Professor David Brumly as
+advisor. This prototype was built and tested on Ubuntu 
+12.04, using LLVM 3.3. This prototype targets ARM.
+
+All bash commands below begin with ">" and should be typed
+as a single line.
+
+
+1. Install Dependencies
+================================
+
+    Install ARM related dependencies:
+
+        >apt-get install gcc-arm-linux-gnueabi
+        >apt-get install qemu qemu-user
+
+    You can also install qemu-system if you want to do 
+    system-emulation. Because we will be linking LLVM bitcode 
+    files, we need to change the default ARM linker to one 
+    that accepts plugins. Save a copy of the default linker 
+    and switch to ld.gold.
+
+        >cd /usr/arm-linux-gnueabi/bin
+        >mov ld ld.old
+        >mov ld.gold ld
+
+    For debugging purposes:
+
+        >apt-get install gdb-multiarch
+
+2. Build LLVM-3.3
+=================================
+
+    Download and build LLVM gold plugin by following the
+    directions under the "How To Build It" section at this
+    link:
+
+    http://llvm.org/releases/3.3/docs/GoldPlugin.html
+
+    Get LLVM-3.3 and ReCFI source:
+        
+        >git clone http://URL (TODO after move)
+
+    Create build directory for LLVM-3.3 to keep source clean,
+    then configure the build directory.
+
+        >cd /path/to/recfi
+        >mkdir build
+        >cd build
+        >../llvm-3.3/configure --enable-debug-symbols --enable-runtime-symbols --with-llvmsrc=/path/to/recfi/llvm-3.3 --with-llvmobj=/path/to/recfi/build --with-binutils-include=/path/to/binutils/src/include
+
+    Configure poolalloc (contains DSA libraries):
+
+        >cd /path/to/recfi/build/project/poolalloc
+        >../../../llvm-3.3/project/poolalloc/configure --enable-debug-symbols --enable-runtime-symbols --with-llvmsrc=/path/to/recfi/llvm-3.3 --with-llvmobj=/path/to/recfi/build
+
+    Build LLVM-3.3. LLVM can be built concurrently using the
+    -j <n> option with make, e.g. "make -j 4". 
+
+        >cd /path/to/recfi/build
+        >make -j 4
+        >export PATH=$PATH:/path/to/recfi/build/Release+Debug+Asserts/bin
+
+3. Build ReCFI
+=================================
+
+    Generate configuration file (may be asked to provide 
+    paths to llvm-3.3 source and build directories).
+
+        >cd /path/to/recfi/cfi-analysis
+        >cd autoconf
+        >./AutoRegen.sh
+
+    Create a build directory in cfi-analysis and configure.
+
+        >cd ..
+        >mkdir build
+        >cd build
+        >../configure --enable-debug-symbols --enable-runtime-symbols --with-llvmsrc=/path/to/recfi/llvm-3.3 --with-llvmobj=/path/to/recfi/build
+
+    Change absolute paths in Makefiles in the lib directory.
+    Unfortunately, using relative paths in these Makefiles
+    failed to compile.
+
+        >cd /path/to/recfi/cfi-analysis/lib
+        
+    For every sub-directory in lib, modify the Makefile in 
+    the sub-directory such that LLVMSRC has the correct
+    path. Now you can build cfi-analysis.
+
+        >cd /path/to/recfi/cfi-analysis/build
+        >make
+
+4. Running ReCFI on Coreutils
+=================================
+
+    Download coreutils 8.22 (can use wget):
+
+    http://ftp.gnu.org/gnu/coreutils/
+
+    Create and configure build directory:
+
+        >cd /path/to/coreutils
+        >mkdir build
+        >cd build
+        >../configure --disable-nls CFLAGS="-g -static -I /usr/arm-linux-gnueabi/include/ -Wno-unknown-warning-option" LDFLAGS="-L /usr/arm-linux-gnueabi/lib -L /usr/lib/gcc/arm-linux-gnueabi" CC=clang
+
+    Make sure that recfi-ar has the correct absolute path
+    to LLVMgold.so, which should be here:
+
+    /path/to/recfi/build/Release+Debug+Asserts/lib/LLVMgold.so
+
+        >cd /path/to/recfi/scripts
+        >vim recfi-ar
+
+    Build Coreutils. Note that Coreutils versions that 
+    generate man-pages (including 8.22) will fail towards 
+    the end of the build, but the binaries should still be 
+    correct. Binaries will be in coreutils/build/src, and 
+    there should be a LLVM bit-code file (.bc) generated 
+    for each binary.
+
+        >make CC=/path/to/recfi/scripts/recfi-gcc AR=/path/to/recfi/scripts/recfi-ar RANLIB=/bin/true
+
+    Instrument Coreutils with ReCFI, where <cfi policy>
+    is "two", "merge", or "list"
+
+        >cd /path/to/coreutils/build/
+        >/path/to/recfi/scripts/opt-script src <cfi policy>
+
+    Run Coreutils tools:
+  
+        >cd /path/to/coreutils/build/src
+        >qemu-arm ./<tool> [options]
+
+    There is a known issue with running Coreutils tools
+    hardened using ReCFI. Because we did not recompile system 
+    libraries when hardening coreutils, they remain unhardened 
+    and are linked during assembling. This will cause a 
+    problem if an unhardened library function calls a hardened 
+    Coreutil function, since the hardened function will check 
+    for a return target ID, which will not exist in the 
+    unhardened library function. This causes the checking code 
+    to abort. Specifically, this happens when the exit function 
+    is invoked, which will call __run_exit_handlers, which will 
+    then call a hardened coreutil function via function pointer. 
+    This problem will be mitigated if system libraries are 
+    compiled to LLVM IR and linked at IR stage rather than 
+    assembly stage.
+
+
+
+
+
+
+
+
+

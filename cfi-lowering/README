@@ -26,6 +26,7 @@ Files:
 
 README - this file
 CFIAsmEditor.py - main script
-AsmEditorBase.py - abstract class target asm editors must inherit from
+AsmEditorBase.py - abstract class which target asm editors 
+    must inherit from
 ARMAsmEditor.py - asm editor for ARM assembly
 

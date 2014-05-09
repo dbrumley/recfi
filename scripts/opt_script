@@ -1,6 +1,11 @@
 #!/usr/bin/env python
 
-#used for instrumenting coreutils with recfi policies
+#Used for instrumenting coreutils with recfi policies:
+#"two", "merge", or "list".
+#
+#Looks for .bc files in a given directory and instruments
+#each with the given ReCFI policy. Generates a log file
+#with useful statistics for each .bc file.
 
 import os
 import sys

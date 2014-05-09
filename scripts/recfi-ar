@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+#used for compiling Coreutils
+
 import os, sys
 
 def main():
