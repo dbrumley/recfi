@@ -2,13 +2,12 @@ build
 
 llvm-3.3/test
 
-llvm-cfi/autoconf/autom4te.cache
-llvm-cfi/autoconf/aclocal.m4
-llvm-cfi/Makefile.common
-llvm-cfi/configure
-llvm-cfi/configure.out
-llvm-cfi/config.log
-llvm-cfi/lib/PythonScripts/.idea
+cfi-analysis/autoconf/autom4te.cache
+cfi-analysis/autoconf/aclocal.m4
+cfi-analysis/Makefile.common
+cfi-analysis/configure
+cfi-analysis/configure.out
+cfi-analysis/config.log
 
 # Compiled source #
 ###################
