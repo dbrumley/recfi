@@ -8,10 +8,6 @@
 
 #include "cfi/MultiListPass.h"
 
-//#include "dsa/CallTargets.h"
-//#include "dsa/DSGraph.h"
-//#include "dsa/DSCallGraph.h"
-
 using namespace llvm;
 
 namespace cfi {
