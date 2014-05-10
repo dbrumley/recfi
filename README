@@ -2,10 +2,11 @@ ReCFI Installation Guide
 ================================
 
 ReCFI is a re-targetable, tunable CFI framework implemented 
-using the LLVM compiler toolchain. This project was created 
-at CMU and funded by Boeing, with Professor David Brumly as
-advisor. This prototype was built and tested on Ubuntu 
-12.04, using LLVM 3.3. This prototype targets ARM.
+using the LLVM compiler toolchain. This project was funded by
+Boeing and was created at CMU by Joseph Battaglia and Oulin 
+Yao with the advise of Professor David Brumley. The ReCFI 
+prototype was built and tested on Ubuntu 12.04, using 
+LLVM 3.3. This prototype targets ARM.
 
 All bash commands below begin with ">" and should be typed
 as a single line.
