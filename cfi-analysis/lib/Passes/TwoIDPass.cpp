@@ -26,6 +26,31 @@ namespace cfi {
     TwoIDPass::TwoIDPass(Module &M) 
     {
         mod = &M;
+        this->numFunPointers = 0;
+    }
+    
+    void TwoIDPass::findFunctionPointerArgs(CallInst* CI)
+    {
+       if (CI == NULL)
+          return;
+
+       unsigned num_args = CI->getNumArgOperands();
+       unsigned i;
+        
+       for (i = 0; i < num_args; i++)
+       {
+          Type* arg_type = CI->getArgOperand(i)->getType();
+          
+          if (PointerType * PT = dyn_cast<PointerType>(arg_type)) 
+          {
+             Type* elem_type = PT->getElementType();
+             if (FunctionType * FT = dyn_cast<FunctionType>(elem_type)) 
+             {
+                numFunPointers++;
+             }
+
+          }
+       }
     }
 
     /**
@@ -57,6 +82,10 @@ namespace cfi {
                     //found: call site
                     if (CallInst* callInst = dyn_cast<CallInst>(I))
                     {
+                        //TODO: move this once design finalized.
+                        
+                        findFunctionPointerArgs(callInst);
+
                         Function *calledFunc = callInst->getCalledFunction();
                         //found: indirect call site
                         if (calledFunc == NULL)
@@ -267,6 +296,8 @@ namespace cfi {
         resultStream << "\t\tavg = " << avg_tars << "\n";
         resultStream << "\t\tmin = " << min_tars << "\n";
         resultStream << "\t\tmax = " << max_tars << "\n";
+        
+        resultStream << "\t\tnumber of function pointer args: " << numFunPointers << "\n"; 
 
         return resultStream.str();
     }
