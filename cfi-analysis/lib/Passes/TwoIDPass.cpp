@@ -46,9 +46,13 @@ namespace cfi {
              Type* elem_type = PT->getElementType();
              if (FunctionType * FT = dyn_cast<FunctionType>(elem_type)) 
              {
-                numFunPointers++;
+                Function *calledFunc = CI->getCalledFunction();
+                if (calledFunc != NULL && calledFunc->isDeclaration())
+                {
+                   errs() << calledFunc->getName() << "\n";
+                   numFunPointers++;
+                }
              }
-
           }
        }
     }
