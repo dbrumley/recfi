@@ -29,6 +29,13 @@ namespace cfi {
         this->numFunPointers = 0;
     }
     
+    void TwoIDPass::createNewCallInst(CallInst* CI, PointerType* t, int index)
+    {
+       //replace with null pointer
+       ConstantPointerNull* nll = ConstantPointerNull::get(t);
+       CI->setArgOperand(index, nll);
+    }
+
     void TwoIDPass::findFunctionPointerArgs(CallInst* CI)
     {
        if (CI == NULL)
@@ -51,6 +58,7 @@ namespace cfi {
                 {
                    errs() << calledFunc->getName() << "\n";
                    numFunPointers++;
+                   createNewCallInst(CI, PT, i);
                 }
              }
           }

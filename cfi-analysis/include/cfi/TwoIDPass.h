@@ -44,12 +44,14 @@ namespace cfi {
       void generateDestIDs();
       void generateCheckIDs();
       void lowerChecksAndIDs();
+
       std::string getStats();
       void print();
       
       //TODO:will be moved to its own pass once the design is finalized
       //(rohanseh)
       void findFunctionPointerArgs(CallInst* CI);
+      void createNewCallInst(CallInst* CI, PointerType* t,int index);
    };
 }
 
