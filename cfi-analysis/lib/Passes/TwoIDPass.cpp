@@ -31,9 +31,19 @@ namespace cfi {
     
     void TwoIDPass::createNewCallInst(CallInst* CI, PointerType* t, int index)
     {
+       //create global var
+       GlobalVariable* gvar = new llvm::GlobalVariable(*mod,
+                         t,
+                         false,
+                         llvm::GlobalValue::ExternalLinkage,
+                         0,
+                         "rr");
        //replace with null pointer
        ConstantPointerNull* nll = ConstantPointerNull::get(t);
-       CI->setArgOperand(index, nll);
+       gvar->setInitializer(nll);
+       StoreInst* store = new StoreInst(CI->getArgOperand(index), gvar, CI);
+       LoadInst* ptr_gvar = new LoadInst(gvar, "", false, CI);
+       CI->setArgOperand(index, ptr_gvar);
     }
 
     void TwoIDPass::findFunctionPointerArgs(CallInst* CI)
