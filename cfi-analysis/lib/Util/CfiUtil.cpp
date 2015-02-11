@@ -81,6 +81,49 @@ namespace cfi{
             builder.SetInsertPoint(loop);
             builder.CreateBr(loop);
         }
+
+        /**
+         * @brief create a wrapper function for a user-created function to be passed
+         * as a function pointer to an external library.
+         *
+         * This wrapper will have no ID on entry in order to allow it to be called by
+         * an external library function. It will call funcName without ID checks and
+         * will have an ID that will allow funcName to return to this wrapper. It will
+         * perform no return ID checks when returning back to the external library 
+         * function since that function will not have an ID.
+         *
+         * @arg funcName Name of function to create wrapper for
+         * @return void
+         */
+        void CFILowering::createExternalLibWrapper(std::string funcName)
+        {
+            GlobalValue *F = getNamedValue(funcName);
+            assert(F != NULL);
+            // TODO: funcName takes arguments 
+
+            std::string wrapperName = funcName + "_libwrapper";
+
+            Constant *c = mod->getOrInsertFunction(wrapperName,
+                                                   F->getReturnType(),
+                                                   NULL);
+            Function *wrapper = dyn_cast<Function>(c);
+            BasicBlock* wrapperEntry = BasicBlock::Create(getGlobalContext(),
+                                                          "wrapperEntry",
+                                                          wrapper);
+            BasicBlock* wrapperExit = BasicBlock::Create(getGlobalContext(),
+                                                         "wrapperExit",
+                                                         wrapper);
+
+            // Entry block sets up call frame and arguments, then calls funcName
+            // Exit block has a valid ID and returns what funcName returned
+            IRBuilder<> builder(wrapperEntry);
+            Value* ret = builder.CreateCall(funcName);
+
+            builder.SetInsertPoint(wrapperExit);
+            //TODO: insert ID here
+            builder.CreateRet(ret);
+
+        }
         
         /**
          * @brief initializes CFILowering object by initializing cfi
