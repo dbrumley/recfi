@@ -29,7 +29,20 @@ namespace cfi {
         this->numFunPointers = 0;
     }
     
-    void TwoIDPass::createNewCallInst(CallInst* CI, PointerType* t, int index)
+    Function* TwoIDPass::createWrapperFunction(FunctionType* ft, GlobalVariable* gvar)
+    {
+       Function* fn_wrap = Function::Create(ft, GlobalValue::ExternalLinkage, "wrap", mod);
+       BasicBlock* label_entry = BasicBlock::Create(mod->getContext(), "entry",fn_wrap,0);
+       LoadInst* ptr_gvar = new LoadInst(gvar, "", false, label_entry);
+       CallInst* inner_call = CallInst::Create(ptr_gvar, "", label_entry);
+       inner_call->setTailCall(false);
+       inner_call->setIsNoInline();
+       ReturnInst* r = ReturnInst::Create(mod->getContext(),  label_entry);
+       retTars.insert(inner_call);
+       return fn_wrap;
+    }
+
+    void TwoIDPass::createNewCallInst(CallInst* CI, PointerType* t, FunctionType* ft, int index)
     {
        //create global var
        GlobalVariable* gvar = new llvm::GlobalVariable(*mod,
@@ -38,12 +51,13 @@ namespace cfi {
                          llvm::GlobalValue::ExternalLinkage,
                          0,
                          "rr");
-       //replace with null pointer
        ConstantPointerNull* nll = ConstantPointerNull::get(t);
        gvar->setInitializer(nll);
+       Function* fn_wrap = createWrapperFunction(ft, gvar);
        StoreInst* store = new StoreInst(CI->getArgOperand(index), gvar, CI);
-       LoadInst* ptr_gvar = new LoadInst(gvar, "", false, CI);
-       CI->setArgOperand(index, ptr_gvar);
+       Constant* ptr_wrap = ConstantExpr::getCast(Instruction::BitCast, fn_wrap, t);
+       //LoadInst* ptr_wrap = new LoadInst(fn_wrap, "", false, CI);
+       CI->setArgOperand(index, ptr_wrap);
     }
 
     void TwoIDPass::findFunctionPointerArgs(CallInst* CI)
@@ -68,7 +82,7 @@ namespace cfi {
                 {
                    errs() << calledFunc->getName() << "\n";
                    numFunPointers++;
-                   createNewCallInst(CI, PT, i);
+                   createNewCallInst(CI, PT, FT, i);
                 }
              }
           }
@@ -131,7 +145,7 @@ namespace cfi {
                     //found: return site
                     else if (dyn_cast<ReturnInst>(I))
                     {
-                        if (F->getName() != "main")
+                        if (F->getName() != "main" && F->getName() != "wrap")
                         {
                             retSites.insert(I);
                         }

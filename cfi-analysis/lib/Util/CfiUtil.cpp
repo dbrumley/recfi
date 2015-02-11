@@ -125,6 +125,7 @@ namespace cfi{
                     II++;
 
                 builder.SetInsertPoint(II);
+                assert (ID != NULL);
                 builder.CreateCall(cfiInsertID, ID);
             }
         }

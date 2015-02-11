@@ -51,7 +51,8 @@ namespace cfi {
       //TODO:will be moved to its own pass once the design is finalized
       //(rohanseh)
       void findFunctionPointerArgs(CallInst* CI);
-      void createNewCallInst(CallInst* CI, PointerType* t,int index);
+      void createNewCallInst(CallInst* CI, PointerType* t, FunctionType* ft, int index);
+      Function* createWrapperFunction(FunctionType* ft, GlobalVariable* gvar);
    };
 }
 
