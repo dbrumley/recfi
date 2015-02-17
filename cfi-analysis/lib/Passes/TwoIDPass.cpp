@@ -69,8 +69,10 @@ namespace cfi {
           return;
 
        unsigned num_args = CI->getNumArgOperands();
-       unsigned i;
-        
+       unsigned i, j;
+       unsigned num_params;
+       
+
        for (i = 0; i < num_args; i++)
        {
           Type* arg_type = CI->getArgOperand(i)->getType();
@@ -83,9 +85,38 @@ namespace cfi {
                 Function *calledFunc = CI->getCalledFunction();
                 if (calledFunc != NULL && calledFunc->isDeclaration())
                 {
-                   errs() << calledFunc->getName() << "\n";
+                   
+                   errs() << "Function name: " << calledFunc->getName() << "\n";
+                   if (FT->isVarArg()) {
+                       errs() << "Error: Function is variadic, cannot create wrapper\n";
+                       continue;
+                   }
+                   num_params = FT->getNumParams();
+                   
+                   errs() << num_params << " parameters\n";
+                   errs() << "Arg types: ";
+                   for (j = 0; j < num_params; j++) {
+                       // We must redeclare the string and ostream upon each loop iteration to guarantee
+                       // it flushes properly
+                       std::string type_str;
+                       llvm::raw_string_ostream rso(type_str);
+                       FT->getParamType(j)->print(rso);
+                       errs() << rso.str() << ", ";
+                   }
+                   errs() << "\n";
+                   std::string type_str;
+                   llvm::raw_string_ostream rso(type_str);
+                   FT->getReturnType()->print(rso);
+                   errs() << "Return type: " << rso.str() << "\n";
                    numFunPointers++;
-                   createNewCallInst(CI, PT, FT, i);
+
+                   // TODO: functions with arguments -- skip now to avoid error on compilation
+                   if (num_params == 0) {
+                       createNewCallInst(CI, PT, FT, i);
+                   }
+                   else {
+                       errs() << "Error: Function contains multiple args, wrapper not created\n";
+                   }
                 }
              }
           }
