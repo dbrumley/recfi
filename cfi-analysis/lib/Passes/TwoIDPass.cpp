@@ -33,12 +33,15 @@ namespace cfi {
     {
        Function* fn_wrap = Function::Create(ft, GlobalValue::ExternalLinkage, "wrap", mod);
        BasicBlock* label_entry = BasicBlock::Create(mod->getContext(), "entry",fn_wrap,0);
+       BasicBlock* label_exit = BasicBlock::Create(mod->getContext(), "exit",fn_wrap,0);
+
        LoadInst* ptr_gvar = new LoadInst(gvar, "", false, label_entry);
        CallInst* inner_call = CallInst::Create(ptr_gvar, "", label_entry);
        inner_call->setTailCall(false);
        inner_call->setIsNoInline();
-       ReturnInst* r = ReturnInst::Create(mod->getContext(),  label_entry);
-       retTars.insert(inner_call);
+       BranchInst::Create(label_exit, label_entry);
+       ReturnInst* r = ReturnInst::Create(mod->getContext(),  label_exit);
+       
        return fn_wrap;
     }
 
