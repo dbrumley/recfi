@@ -29,108 +29,6 @@ namespace cfi {
         this->numFunPointers = 0;
     }
     
-    Function* TwoIDPass::createWrapperFunction(FunctionType* ft, GlobalVariable* gvar)
-    {
-       Function* fn_wrap = Function::Create(ft, GlobalValue::ExternalLinkage, "wrap", mod);
-       BasicBlock* label_entry = BasicBlock::Create(mod->getContext(), "entry",fn_wrap,0);
-       BasicBlock* label_exit = BasicBlock::Create(mod->getContext(), "exit",fn_wrap,0);
-
-       Function::arg_iterator FB, FE;
-       std::vector<Value *> args;
-       for (FB = fn_wrap->arg_begin(), FE = fn_wrap->arg_end(); FB!= FE; FB++)
-       {
-          Value* v = &*FB;
-          args.push_back(v);
-       }
-
-       LoadInst* ptr_gvar = new LoadInst(gvar, "", false, label_entry);
-       CallInst* inner_call = CallInst::Create(ptr_gvar, args, "", label_entry);
-       
-       inner_call->setTailCall(false);
-       inner_call->setIsNoInline();
-       BranchInst::Create(label_exit, label_entry);
-
-       if (ft->getReturnType()->isVoidTy())
-          ReturnInst* r = ReturnInst::Create(mod->getContext(), label_exit);
-       else
-          ReturnInst* r = ReturnInst::Create(mod->getContext(), inner_call,  label_exit);
-
-       return fn_wrap;
-    }
-
-    void TwoIDPass::createNewCallInst(CallInst* CI, PointerType* t, FunctionType* ft, int index)
-    {
-       //create global var
-       GlobalVariable* gvar = new llvm::GlobalVariable(*mod,
-                         t,
-                         false,
-                         llvm::GlobalValue::ExternalLinkage,
-                         0,
-                         "rr");
-       ConstantPointerNull* nll = ConstantPointerNull::get(t);
-       gvar->setInitializer(nll);
-       Function* fn_wrap = createWrapperFunction(ft, gvar);
-       StoreInst* store = new StoreInst(CI->getArgOperand(index), gvar, CI);
-       Constant* ptr_wrap = ConstantExpr::getCast(Instruction::BitCast, fn_wrap, t);
-       //LoadInst* ptr_wrap = new LoadInst(fn_wrap, "", false, CI);
-       CI->setArgOperand(index, ptr_wrap);
-    }
-
-    void TwoIDPass::findFunctionPointerArgs(CallInst* CI)
-    {
-       if (CI == NULL)
-          return;
-
-       unsigned num_args = CI->getNumArgOperands();
-       unsigned i, j;
-       unsigned num_params;
-       
-
-       for (i = 0; i < num_args; i++)
-       {
-          Type* arg_type = CI->getArgOperand(i)->getType();
-          
-          if (PointerType * PT = dyn_cast<PointerType>(arg_type)) 
-          {
-             Type* elem_type = PT->getElementType();
-             if (FunctionType * FT = dyn_cast<FunctionType>(elem_type)) 
-             {
-                Function *calledFunc = CI->getCalledFunction();
-                if (calledFunc != NULL && calledFunc->isDeclaration())
-                {
-                   
-                   errs() << "Function name: " << calledFunc->getName() << "\n";
-                   if (FT->isVarArg()) {
-                       errs() << "Error: Function is variadic, cannot create wrapper\n";
-                       continue;
-                   }
-                   num_params = FT->getNumParams();
-                   
-                   errs() << num_params << " parameters\n";
-                   errs() << "Arg types: ";
-                   for (j = 0; j < num_params; j++) {
-                       // We must redeclare the string and ostream upon each loop iteration to guarantee
-                       // it flushes properly
-                       std::string type_str;
-                       llvm::raw_string_ostream rso(type_str);
-                       FT->getParamType(j)->print(rso);
-                       errs() << rso.str() << ", ";
-                   }
-                   errs() << "\n";
-                   std::string type_str;
-                   llvm::raw_string_ostream rso(type_str);
-                   FT->getReturnType()->print(rso);
-                   errs() << "Return type: " << rso.str() << "\n";
-                   numFunPointers++;
-
-                   // TODO: functions with arguments -- skip now to avoid error on compilation
-                   createNewCallInst(CI, PT, FT, i);
-                }
-             }
-          }
-       }
-    }
-
     /**
      * @brief finds all transfer sites and targets and populates 
      * jmpSites, jmpTars, retSites, retTars
@@ -160,9 +58,6 @@ namespace cfi {
                     //found: call site
                     if (CallInst* callInst = dyn_cast<CallInst>(I))
                     {
-                        //TODO: move this once design finalized.
-                        
-                        findFunctionPointerArgs(callInst);
 
                         Function *calledFunc = callInst->getCalledFunction();
                         //found: indirect call site
@@ -187,7 +82,8 @@ namespace cfi {
                     //found: return site
                     else if (dyn_cast<ReturnInst>(I))
                     {
-                        if (F->getName() != "main" && F->getName() != "wrap")
+                        //TODO: make the name generic
+                        if (F->getName() != "main" && F->getName().find("__recfi_wrap") == std::string::npos)
                         {
                             retSites.insert(I);
                         }

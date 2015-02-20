@@ -112,6 +112,11 @@ namespace {
             CTF *ctf = NULL;
 
             if (Debug)
+                errs() << "Adding function pointer wrappers.\n";
+
+            addFunctionPointerWrappers(&M);
+
+            if (Debug)
                 errs() << "Creating pass.\n";
 
             //select CFI pass to use based on user input
