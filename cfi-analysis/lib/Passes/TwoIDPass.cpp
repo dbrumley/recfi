@@ -35,13 +35,26 @@ namespace cfi {
        BasicBlock* label_entry = BasicBlock::Create(mod->getContext(), "entry",fn_wrap,0);
        BasicBlock* label_exit = BasicBlock::Create(mod->getContext(), "exit",fn_wrap,0);
 
+       Function::arg_iterator FB, FE;
+       std::vector<Value *> args;
+       for (FB = fn_wrap->arg_begin(), FE = fn_wrap->arg_end(); FB!= FE; FB++)
+       {
+          Value* v = &*FB;
+          args.push_back(v);
+       }
+
        LoadInst* ptr_gvar = new LoadInst(gvar, "", false, label_entry);
-       CallInst* inner_call = CallInst::Create(ptr_gvar, "", label_entry);
+       CallInst* inner_call = CallInst::Create(ptr_gvar, args, "", label_entry);
+       
        inner_call->setTailCall(false);
        inner_call->setIsNoInline();
        BranchInst::Create(label_exit, label_entry);
-       ReturnInst* r = ReturnInst::Create(mod->getContext(),  label_exit);
-       
+
+       if (ft->getReturnType()->isVoidTy())
+          ReturnInst* r = ReturnInst::Create(mod->getContext(), label_exit);
+       else
+          ReturnInst* r = ReturnInst::Create(mod->getContext(), inner_call,  label_exit);
+
        return fn_wrap;
     }
 
@@ -111,12 +124,7 @@ namespace cfi {
                    numFunPointers++;
 
                    // TODO: functions with arguments -- skip now to avoid error on compilation
-                   if (num_params == 0) {
-                       createNewCallInst(CI, PT, FT, i);
-                   }
-                   else {
-                       errs() << "Error: Function contains multiple args, wrapper not created\n";
-                   }
+                   createNewCallInst(CI, PT, FT, i);
                 }
              }
           }
