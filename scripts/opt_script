@@ -40,6 +40,7 @@ def main():
     dsalib = root_dir + "/build/projects/poolalloc/Release+Debug+Asserts/lib/LLVMDataStructure.so"
     cfipasslib = root_dir + "/cfi-analysis/build/Release+Debug+Asserts/lib/CfiPasses.so"
     cfiutillib = root_dir + "/cfi-analysis/build/Release+Debug+Asserts/lib/CfiUtil.so"
+    cfiwrapperlib = root_dir + "/cfi-analysis/build/Release+Debug+Asserts/lib/LLVMWrapper.so"
     cfilib = root_dir + "/cfi-analysis/build/Release+Debug+Asserts/lib/LLVMcfi.so"
     pyscript = root_dir + "/cfi-lowering/CFIAsmEditor.py"
 
@@ -67,6 +68,8 @@ def main():
             "-load", cfipasslib,
 	    "-load", cfiutillib,
 	    "-load", cfilib,
+      "-load", cfiwrapperlib,
+      "-cfi-wrapper",
 	    "-cfi",
             "-" + opt_pass, 
 	    "-cfi-stats",
