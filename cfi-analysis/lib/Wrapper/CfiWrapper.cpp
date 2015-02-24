@@ -29,30 +29,22 @@ namespace {
                         cl::desc("Useful for debugging"));
 
     /**
-     * @brief CfiInstrumentation - module pass on the llvm IR that
-     * inserts cfi related information as llvm intrinsic functions
+     * @brief CfiWrapper - module pass on the llvm IR that
+     * adds wrappers around all function pointer arguments (functions
+     * that escape to the unhardened universe)
      */
     struct CfiWrapper : public ModulePass 
     {
         static char ID;
         CfiWrapper() : ModulePass(ID) {}
 
-        /**
-         * @brief adds DSA pass if using Multi-Class CFI policies
-         *
-         * @arg AU - used by LLVM
-         * 
-         * @return void
-         */
         virtual void getAnalysisUsage(AnalysisUsage &AU) const 
         {
 
         }
 
         /**
-         * @brief instruments the IR code based on the selected CFI
-         * policy. Prints debug information and generates statistic
-         * information if corresponding flags are set.
+         * @brief detects fn arg calls and adds wrappers.
          *
          * @arg M - module reference
          * 
