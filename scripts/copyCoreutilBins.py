@@ -23,9 +23,10 @@ else:
    binPath = opts.binpath
 
 for name in os.listdir(binPath):
-   filePath = os.path.join(binpath, name)
+   filePath = os.path.join(binPath, name)
    if os.path.isfile(filePath):
-      if is_binary(filePath):
+      if is_binary(filePath) and os.path.splitext(filePath)[1] != '.o' and \
+                  os.path.splitext(filePath) != '.bc':
          print filePath
 
 print is_binary('/bin/ls')
