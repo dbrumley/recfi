@@ -40,6 +40,7 @@ def main():
     dsalib = root_dir + "/build/projects/poolalloc/Release+Debug+Asserts/lib/LLVMDataStructure.so"
     cfipasslib = root_dir + "/cfi-analysis/build/Release+Debug+Asserts/lib/CfiPasses.so"
     cfiutillib = root_dir + "/cfi-analysis/build/Release+Debug+Asserts/lib/CfiUtil.so"
+    cfiwrapperlib = root_dir + "/cfi-analysis/build/Release+Debug+Asserts/lib/LLVMWrapper.so"
     cfilib = root_dir + "/cfi-analysis/build/Release+Debug+Asserts/lib/LLVMcfi.so"
     pyscript = root_dir + "/cfi-lowering/CFIAsmEditor.py"
 
@@ -67,6 +68,8 @@ def main():
             "-load", cfipasslib,
 	    "-load", cfiutillib,
 	    "-load", cfilib,
+      "-load", cfiwrapperlib,
+      "-cfi-wrapper",
 	    "-cfi",
             "-" + opt_pass, 
 	    "-cfi-stats",
@@ -82,7 +85,7 @@ def main():
 
         subprocess.check_call(["llc", "-O0", "-mtriple", "armv7a-linux-gnueabi", opt_file, "-o", asm_file])
         subprocess.check_call(["python", pyscript, "-f", asm_file, "-o", asm_fixed])
-        subprocess.check_call(["arm-linux-gnueabi-gcc", "-static", asm_fixed, "-lrt", "-lpthread", "-o", binary])
+        subprocess.check_call(["arm-linux-gnueabi-gcc", "-g", "-static", asm_fixed, "-lrt", "-lpthread", "-o", binary])
         subprocess.check_call(["chmod", "+x", binary])
 
 if __name__ == "__main__":

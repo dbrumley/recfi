@@ -61,6 +61,8 @@ namespace cfi{
         MultiList      /* ID with a white list for solving destination equivalence */
     };
 
+    void addFunctionPointerWrappers(Module* mod);
+
     void print_dest_map(InstDestMap instDestMap, std::string tag);
     void print_ID_maps(InstIDMap callSiteIDs, std::string tag);
     void print_ID_check_maps(InstIDSetMap targetCheckIDs, std::string tag);

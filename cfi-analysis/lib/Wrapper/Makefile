@@ -1,4 +1,4 @@
-##===- lib/CfiPasses/Makefile -----------------------*- Makefile -*-===##
+##===- lib/CfiPass/Makefile -----------------------*- Makefile -*-===##
 #
 #                     The LLVM Compiler Infrastructure
 #
@@ -9,18 +9,19 @@
 
 LEVEL = ../../
 
-LIBRARYNAME=CfiPasses
+LIBRARYNAME = LLVMWrapper
+LOADABLE_MODULE = 1
+USEDLIBS = 
+#LINK_COMPONENTS = CfiPasses CfiUtil
 
 LLVMSRC = /home/rohan/recfi/llvm-3.3
 POOLALLOC_SRCDIR := $(LLVMSRC)/projects/poolalloc
-SC_FLAGS = -I$(POOLALLOC_SRCDIR)/include -I$(PROJ_SRC_ROOT)/include
+SC_FLAGS = -I$(POOLALLOC_SRCDIR)/include -I../include
+
+#LDFLAGS += /home/lynn/boeing-cfi/cfi-proj/build/$(BuildMode)/lib/CfiUtil.so
 
 CFLAGS   += $(SC_FLAGS)
 CPPFLAGS += $(SC_FLAGS)
 CXXFLAGS += $(SC_FLAGS)
-
-LOADABLE_MODULE := 1
-BUILD_ARCHIVE := 1
-SHARED_LIBRARY := 1
 
 include $(LEVEL)/Makefile.common

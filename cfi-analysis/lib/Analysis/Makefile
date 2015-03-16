@@ -14,7 +14,7 @@ LOADABLE_MODULE = 1
 USEDLIBS = 
 #LINK_COMPONENTS = CfiPasses CfiUtil
 
-LLVMSRC = /home/lynn/Documents/boeing-cfi/llvm-3.3
+LLVMSRC = /home/rohan/recfi/llvm-3.3
 POOLALLOC_SRCDIR := $(LLVMSRC)/projects/poolalloc
 SC_FLAGS = -I$(POOLALLOC_SRCDIR)/include -I../include
 

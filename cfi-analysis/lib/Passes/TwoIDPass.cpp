@@ -26,8 +26,9 @@ namespace cfi {
     TwoIDPass::TwoIDPass(Module &M) 
     {
         mod = &M;
+        this->numFunPointers = 0;
     }
-
+    
     /**
      * @brief finds all transfer sites and targets and populates 
      * jmpSites, jmpTars, retSites, retTars
@@ -57,6 +58,7 @@ namespace cfi {
                     //found: call site
                     if (CallInst* callInst = dyn_cast<CallInst>(I))
                     {
+
                         Function *calledFunc = callInst->getCalledFunction();
                         //found: indirect call site
                         if (calledFunc == NULL)
@@ -80,7 +82,8 @@ namespace cfi {
                     //found: return site
                     else if (dyn_cast<ReturnInst>(I))
                     {
-                        if (F->getName() != "main")
+                        //TODO: make the name generic
+                        if (F->getName() != "main" && F->getName().find("__recfi_wrap") == std::string::npos)
                         {
                             retSites.insert(I);
                         }
@@ -267,6 +270,8 @@ namespace cfi {
         resultStream << "\t\tavg = " << avg_tars << "\n";
         resultStream << "\t\tmin = " << min_tars << "\n";
         resultStream << "\t\tmax = " << max_tars << "\n";
+        
+        resultStream << "\t\tnumber of function pointer args: " << numFunPointers << "\n"; 
 
         return resultStream.str();
     }

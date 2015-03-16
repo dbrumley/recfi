@@ -50,6 +50,7 @@ namespace cfi {
         for (MB = mod->begin(), ME = mod->end(); MB != ME; MB++)
         {
             Function *F = &*MB;
+            
             Function::iterator FB, FE;
             //iterate over basic blocsk in function
             for (FB = F->begin(), FE = F->end(); FB != FE; FB++)
@@ -81,6 +82,7 @@ namespace cfi {
         for (CB = ctf.cs_begin(), CE = ctf.cs_end(); CB != CE; CB++)
         {
             CallSite cs = *CB;
+            
             Instruction *I = cs.getInstruction();
 
             //only consider calls that have targets
@@ -92,7 +94,6 @@ namespace cfi {
             for (FB = ctf.begin(cs), FE = ctf.end(cs); FB != FE; FB++)
             {
                 const Function *F = *FB;
-
                 //skip intrinsic or declaration only functions
                 if (F->isIntrinsic() || F->isDeclaration() )
                 {
@@ -109,6 +110,10 @@ namespace cfi {
                     jmpDestMap[I].insert(destInstr);
                 }
 
+                if (F->getName() == "main" || F->getName().find("__recfi_wrap") != std::string::npos)
+                {
+                   continue;
+                }
                 //Third: find all returns in this function
                 Function::iterator BB, BE;
                 Function* ncF = const_cast<Function*>(F);

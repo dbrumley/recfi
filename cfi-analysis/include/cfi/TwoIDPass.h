@@ -12,39 +12,48 @@
 
 namespace cfi {
 
-    class TwoIDPass : public ICfiPass
-    {
-	Module* mod;
+   class TwoIDPass : public ICfiPass
+   {
+      Module* mod;
 
-	int jmpID;
-	int retID;
+      int jmpID;
+      int retID;
 
-	InstSet jmpSites; // all places that need a jmpID check
-	InstSet jmpTars;  // all places that need a jmpID inserted
+      unsigned numFunPointers;
 
-	InstSet retSites; // "" retID check
-	InstSet retTars;  // retID inserted
+      InstSet jmpSites; // all places that need a jmpID check
+      InstSet jmpTars;  // all places that need a jmpID inserted
 
-        //maps of transfer targets to IDs
-	InstIDMap jmpMap;
-	InstIDMap retMap;
- 
-        //maps of transfer sites to IDs
-	InstIDSetMap retCheckMap;
-	InstIDSetMap jmpCheckMap;
+      InstSet retSites; // "" retID check
+      InstSet retTars;  // retID inserted
 
-        BBSet findIndTargets(Function &F);
+      //maps of transfer targets to IDs
+      InstIDMap jmpMap;
+      InstIDMap retMap;
 
-        public: 
-            TwoIDPass(Module &M);
-            ~TwoIDPass();
-            void findAllTargets(CTF &ctf);
-            void generateDestIDs();
-            void generateCheckIDs();
-            void lowerChecksAndIDs();
-            std::string getStats();
-            void print();
-    };
+      //maps of transfer sites to IDs
+      InstIDSetMap retCheckMap;
+      InstIDSetMap jmpCheckMap;
+
+      BBSet findIndTargets(Function &F);
+
+      public: 
+      TwoIDPass(Module &M);
+      ~TwoIDPass();
+      void findAllTargets(CTF &ctf);
+      void generateDestIDs();
+      void generateCheckIDs();
+      void lowerChecksAndIDs();
+
+      std::string getStats();
+      void print();
+      
+      //TODO:will be moved to its own pass once the design is finalized
+      //(rohanseh)
+      void findFunctionPointerArgs(CallInst* CI);
+      void createNewCallInst(CallInst* CI, PointerType* t, FunctionType* ft, int index);
+      Function* createWrapperFunction(FunctionType* ft, GlobalVariable* gvar);
+   };
 }
 
 #endif

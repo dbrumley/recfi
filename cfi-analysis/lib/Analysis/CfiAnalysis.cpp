@@ -130,7 +130,7 @@ namespace {
                     pass = new TwoIDPass(M);
                     break;
             }
-
+            
             if (Debug)
                 errs() << "Finding targets..\n";
             pass->findAllTargets(*ctf);
