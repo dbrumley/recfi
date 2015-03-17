@@ -20,6 +20,20 @@ is_binary_string = lambda bytes: bool(bytes.translate(None, textchars))
 def is_binary(filename):
    return is_binary_string(open(filename, 'rb').read(1024))
 
+def move_binary(sys_fpath):
+   if not os.path.isfile(sys_fpath + ".old"):
+      shutil.move(sys_fpath, sys_fpath + ".old")
+      shutil.copy(filePath, sys_fpath)
+   else:
+      raise NameError("File " + sys_fpath + ".old already exists")
+ 
+def undo_move(sys_fpath):
+   if os.path.isfile(sys_fpath + ".old"):
+      os.remove(sys_fpath)
+      shutil.move(sys_fpath + ".old", sys_fpath)
+   else:
+      print "Warning: File " + sys_fpath + ".old does not exist. Not undoing move."
+
 if opts.binpath == None:
    binPath = coreutilsPath + "/build/src/"
 else:
@@ -29,18 +43,13 @@ for fname in os.listdir(binPath):
    filePath = os.path.join(binPath, fname)
    if os.path.isfile(filePath):
       if is_binary(filePath) and not os.path.splitext(filePath)[1]:
-         sys_fpath = subprocess.check_output(["which", fname]).rstrip()
+         try:
+            sys_fpath = subprocess.check_output(["which", fname]).rstrip()
+         except subprocess.CalledProcessError as e:
+            print "Warning: No default binary for " + fname + ". Binary not moved."
+            continue
          if sys_fpath:
             if not opts.undo:
-               if not os.path.isfile(sys_fpath + ".old"):
-                  shutil.move(sys_fpath, sys_fpath + ".old")
-                  shutil.copy(filePath, sys_fpath)
-               else:
-                  raise NameError("File " + sys_fpath + ".old already exists")
+               move_binary(sys_fpath)
             else:
-               if os.path.isfile(sys_fpath + ".old"):
-                  os.remove(sys_fpath)
-                  shutil.move(sys_fpath + ".old", sys_fpath)
-               else:
-                  raise NameError("File " + sys_fpath + ".old does not exist")
-
+               undo_move(sys_fpath) 
