@@ -154,6 +154,8 @@ as a single line.
     compiled to LLVM IR and linked at IR stage rather than 
     assembly stage.
 
+Note: If the machine is a 64 bit one, coreutils incorrectly configures the build, manually changing
+@BITSIZEOF_SIZE_T@ in ./lib/stdint.in.h to 32 fixes it.
 
 CREDITS
 ==================
