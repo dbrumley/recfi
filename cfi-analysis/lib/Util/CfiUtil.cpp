@@ -74,17 +74,20 @@ namespace cfi{
 
       for (i = 0; i < num_args; i++)
       {
-         Type* arg_type = CI->getArgOperand(i)->getType();
+         Value* arg = CI->getArgOperand(i);
+         Type* arg_type = arg->getType();
 
          if (PointerType * PT = dyn_cast<PointerType>(arg_type)) 
          {
             Type* elem_type = PT->getElementType();
             if (FunctionType * FT = dyn_cast<FunctionType>(elem_type)) 
             {
+               if (isa<ConstantPointerNull>(arg) || isa<ConstantExpr>(arg))
+                  continue;
+
                Function *calledFunc = CI->getCalledFunction();
                if (calledFunc != NULL && calledFunc->isDeclaration())
                {
-
                   if (FT->isVarArg()) {
                      errs() << "Error: Function is variadic, cannot create wrapper\n";
                      exit(-1);
