@@ -16,8 +16,21 @@ using namespace llvm;
 
 namespace cfi{
 
-    AliasAnalysis *AA;
+   /**
+    * @brief a pointer to the AliasAnalysis.
+    */
+   AliasAnalysis *AA;
 
+   /**
+    * @brief given a type and a global variable to call this function creates a
+    * function to call the global variable.
+    *
+    * @param mod
+    * @param ft - type of the wrapper
+    * @param gvar - the inner function that the wrapper should be calling.
+    *
+    * @return 
+    */
    static Function* createWrapperFunction(Module* mod, FunctionType* ft, GlobalVariable* gvar)
    {
       Function* fn_wrap = Function::Create(ft, GlobalValue::ExternalLinkage, "__recfi_wrap", mod);
@@ -26,6 +39,8 @@ namespace cfi{
 
       Function::arg_iterator FB, FE;
       std::vector<Value *> args;
+
+      //pass-through the args.
       for (FB = fn_wrap->arg_begin(), FE = fn_wrap->arg_end(); FB!= FE; FB++)
       {
          Value* v = &*FB;
@@ -35,11 +50,11 @@ namespace cfi{
       LoadInst* ptr_gvar = new LoadInst(gvar, "", false, label_entry);
       CallInst* inner_call = CallInst::Create(ptr_gvar, args, "", label_entry);
 
-
       inner_call->setTailCall(false);
       inner_call->setIsNoInline();
       BranchInst::Create(label_exit, label_entry);
-
+      
+      //create a return inst depending on the return type.
       if (ft->getReturnType()->isVoidTy())
          ReturnInst::Create(mod->getContext(), label_exit);
       else
@@ -48,6 +63,17 @@ namespace cfi{
       return fn_wrap;
    }
 
+   /**
+    * @brief updates the callinst with a call to the wrapper (that is created
+    * here), and creates the instruction to store the argument in the global
+    * variable (which is also created here).
+    *
+    * @param mod
+    * @param CI - the callinst to be updated
+    * @param t - The type of GlobalVariable
+    * @param ft - The type of the wrapper
+    * @param index - The index of the argument to be updated
+    */
    static void createNewCallInst(Module* mod, CallInst* CI, PointerType* t, FunctionType* ft, int index)
    {
       //create global var
@@ -58,24 +84,30 @@ namespace cfi{
             0,
             "cfi_fn_ptr");
 
+      //assign null to the gvar
       ConstantPointerNull* nll = ConstantPointerNull::get(t);
       gvar->setInitializer(nll);
-
+      
+      //create the wrapper and the Instruction to assign the argument to the gvar 
       Function* fn_wrap = createWrapperFunction(mod, ft, gvar);
       new StoreInst(CI->getArgOperand(index), gvar, CI);
       Constant* ptr_wrap = ConstantExpr::getCast(Instruction::BitCast, fn_wrap, t);
-      
+
       CI->setArgOperand(index, ptr_wrap);
    }
 
+   /**
+    * @brief Given a store instruction which aliases with a pointer passed to a
+    * function, create a wrapped store instruction.
+    *
+    * @param mod
+    * @param SI
+    */
    static void createNewStoreFptrInst(Module* mod, StoreInst* SI)
    {
-      /*Type* dtype = SI->getPointerOperand()->getType();
-      PointerType* dest_type = dyn_cast<PointerType>(dtype);
-      assert (dest_type);*/
-
       Value* function = SI->getValueOperand();
 
+      //test if we already got to this store.
       if (function->hasName() && 
             function->getName().str().find("__recfi_wrap") != std::string::npos)
          return;
@@ -86,7 +118,7 @@ namespace cfi{
       FunctionType* function_type = dyn_cast<FunctionType>(t);
       function_type->dump();
       assert(function_type);
-      
+
       GlobalVariable* gvar = new llvm::GlobalVariable(*mod,
             dest_type,
             false,
@@ -96,17 +128,27 @@ namespace cfi{
 
       ConstantPointerNull* nll = ConstantPointerNull::get(dest_type);
       gvar->setInitializer(nll);
+
       Function* fn_wrap = createWrapperFunction(mod, function_type, gvar);
       Constant* ptr_wrap = ConstantExpr::getCast(Instruction::BitCast, fn_wrap, dest_type);
       new StoreInst(SI->getValueOperand(), gvar, SI);
       new StoreInst(ptr_wrap, SI->getPointerOperand(), SI);
+
       SI->eraseFromParent();
    }
 
-   static int findAliasMatches(Module* mod, Function* F, Value* v)
+   /**
+    * @brief given a pointer arg to a function find other instructions in the
+    * function that alias to the pointer, uses basic-aa, and replace them.
+    *
+    * @param mod
+    * @param F
+    * @param v
+    */
+   static void findAliasMatches(Module* mod, Function* F, Value* v)
    {
       Module::iterator MB, ME;
-      
+
       Function::iterator FB, FE;
       for (FB = F->begin(), FE = F->end(); FB != FE; FB++)
       {
@@ -123,21 +165,24 @@ namespace cfi{
                   Value* dest = storeInst->getValueOperand();
                   if (Function* fptr = dyn_cast<Function>(dest))
                   {
-                     errs() << AA->alias(v,ptr) << "\n";
-                     v->dump();
-                     ptr->dump();
-                     storeInst->dump();
                      createNewStoreFptrInst(mod, storeInst);
-                     return 1;
                   }                 
                }
             }
          }
       }
-      return 0;
 
    }
 
+   /**
+    * @brief for a given CallInst, check that the function called is an external
+    * one, if so find all pointer args that might have function pointers assigned
+    * to them and wrap them up if they are pointers to internal functions.
+    *
+    * @param mod
+    * @param F
+    * @param CI
+    */
    static void findFunctionPointerArgs(Module* mod, Function* F, CallInst* CI)
    {
       if (CI == NULL)
@@ -153,8 +198,7 @@ namespace cfi{
 
          if (PointerType * PT = dyn_cast<PointerType>(arg_type)) 
          {
-            if (findAliasMatches(mod, F, arg))
-               CI->dump();
+            findAliasMatches(mod, F, arg);
             Type* elem_type = PT->getElementType();
             if (FunctionType * FT = dyn_cast<FunctionType>(elem_type)) 
             {
@@ -166,7 +210,7 @@ namespace cfi{
                if (Function *pointedFunction = dyn_cast<Function>(arg))
                { 
                   if (pointedFunction->isDeclaration())
-                    continue;
+                     continue;
                }
 
                if (calledFunc != NULL && calledFunc->isDeclaration())
@@ -183,51 +227,9 @@ namespace cfi{
       }
    }
 
-
-
-   static void findIndirectFunctionPtrs(Module* mod, StoreInst* SI)
-   {
-      Value* v = SI->getValueOperand();
-      Value* ptr = SI->getPointerOperand();
-      Type* t = v->getType();
-      
-      if (PointerType * PT = dyn_cast<PointerType>(t))
-      {
-        Type* elem_type = PT->getElementType();
-        if (FunctionType* FT = dyn_cast<FunctionType>(elem_type))
-        {
-          //v->getType()->dump();
-          //errs() << "\n";  
-
-               //arg_type->dump(); 
-               for (Value::use_iterator UI = v->use_begin(), UE = v->use_end(); UI != UE; ++UI)
-               {
-                  errs() << "Use\n";
-                  //Use* u = *UI;
-                  UI->dump();
-               }
-               errs() << "End use\n";
-              for (Value::use_iterator UI = ptr->use_begin(), UE = ptr->use_end(); UI != UE; ++UI)
-               {
-                  errs() << "ptr Use\n";
-                  //Use* u = *UI;
-                  UI->dump();
-               }
-
-               errs()<< AA->alias(v,v) << "\n";
-
-               errs() << "End ptr use\n";
-        }
-      }
-
-      //SI->dump();
-      
-      //if ()
-   }
-
    /**
-    * @brief finds all callsites with fn pointer args and
-    * adds wrappers to them.
+    * @brief finds all callsites with possible fn pointer args (direct or 
+    * nested) and adds wrappers to them.
     *
     * @param mod
     */
@@ -252,10 +254,6 @@ namespace cfi{
                if (CallInst* callInst = dyn_cast<CallInst>(I))
                {
                   findFunctionPointerArgs(mod, F, callInst);
-               }
-               if (StoreInst* storeInst = dyn_cast<StoreInst>(I))
-               {
-                  //findIndirectFunctionPtrs(mod, storeInst);
                }
             }
          }
