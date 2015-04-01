@@ -163,6 +163,12 @@ namespace cfi{
 
                Function *calledFunc = CI->getCalledFunction();
 
+               if (Function *pointedFunction = dyn_cast<Function>(arg))
+               { 
+                  if (pointedFunction->isDeclaration())
+                    continue;
+               }
+
                if (calledFunc != NULL && calledFunc->isDeclaration())
                {
                   if (FT->isVarArg()) {
