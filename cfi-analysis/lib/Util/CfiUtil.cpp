@@ -10,10 +10,13 @@
 #include "llvm/IR/Function.h"
 #include "llvm/IR/Module.h"
 #include "cfi/CfiUtil.h"
+#include "llvm/IR/Use.h"
 
 using namespace llvm;
 
 namespace cfi{
+
+    AliasAnalysis *AA;
 
    static Function* createWrapperFunction(Module* mod, FunctionType* ft, GlobalVariable* gvar)
    {
@@ -31,6 +34,7 @@ namespace cfi{
 
       LoadInst* ptr_gvar = new LoadInst(gvar, "", false, label_entry);
       CallInst* inner_call = CallInst::Create(ptr_gvar, args, "", label_entry);
+
 
       inner_call->setTailCall(false);
       inner_call->setIsNoInline();
@@ -64,7 +68,77 @@ namespace cfi{
       CI->setArgOperand(index, ptr_wrap);
    }
 
-   static void findFunctionPointerArgs(Module* mod, CallInst* CI)
+   static void createNewStoreFptrInst(Module* mod, StoreInst* SI)
+   {
+      /*Type* dtype = SI->getPointerOperand()->getType();
+      PointerType* dest_type = dyn_cast<PointerType>(dtype);
+      assert (dest_type);*/
+
+      Value* function = SI->getValueOperand();
+
+      if (function->hasName() && 
+            function->getName().str().find("__recfi_wrap") != std::string::npos)
+         return;
+
+      Type* ftype = function->getType();
+      PointerType* dest_type = dyn_cast<PointerType>(ftype);
+      Type* t = dest_type->getElementType();
+      FunctionType* function_type = dyn_cast<FunctionType>(t);
+      function_type->dump();
+      assert(function_type);
+      
+      GlobalVariable* gvar = new llvm::GlobalVariable(*mod,
+            dest_type,
+            false,
+            llvm::GlobalValue::ExternalLinkage,
+            0,
+            "cfi_indirect_fn_ptr");
+
+      ConstantPointerNull* nll = ConstantPointerNull::get(dest_type);
+      gvar->setInitializer(nll);
+      Function* fn_wrap = createWrapperFunction(mod, function_type, gvar);
+      Constant* ptr_wrap = ConstantExpr::getCast(Instruction::BitCast, fn_wrap, dest_type);
+      new StoreInst(SI->getValueOperand(), gvar, SI);
+      new StoreInst(ptr_wrap, SI->getPointerOperand(), SI);
+      SI->eraseFromParent();
+   }
+
+   static int findAliasMatches(Module* mod, Function* F, Value* v)
+   {
+      Module::iterator MB, ME;
+      
+      Function::iterator FB, FE;
+      for (FB = F->begin(), FE = F->end(); FB != FE; FB++)
+      {
+         BasicBlock::iterator BB, BE;
+         for(BB = FB->begin(), BE = FB->end(); BB != BE; BB++)
+         {
+            Instruction *I = &*BB;
+
+            if (StoreInst* storeInst = dyn_cast<StoreInst>(I))
+            {
+               Value* ptr = storeInst->getPointerOperand();
+               if (AA->alias(v,ptr) == AliasAnalysis::MustAlias)
+               {
+                  Value* dest = storeInst->getValueOperand();
+                  if (Function* fptr = dyn_cast<Function>(dest))
+                  {
+                     errs() << AA->alias(v,ptr) << "\n";
+                     v->dump();
+                     ptr->dump();
+                     storeInst->dump();
+                     createNewStoreFptrInst(mod, storeInst);
+                     return 1;
+                  }                 
+               }
+            }
+         }
+      }
+      return 0;
+
+   }
+
+   static void findFunctionPointerArgs(Module* mod, Function* F, CallInst* CI)
    {
       if (CI == NULL)
          return;
@@ -79,6 +153,8 @@ namespace cfi{
 
          if (PointerType * PT = dyn_cast<PointerType>(arg_type)) 
          {
+            if (findAliasMatches(mod, F, arg))
+               CI->dump();
             Type* elem_type = PT->getElementType();
             if (FunctionType * FT = dyn_cast<FunctionType>(elem_type)) 
             {
@@ -86,6 +162,7 @@ namespace cfi{
                   continue;
 
                Function *calledFunc = CI->getCalledFunction();
+
                if (calledFunc != NULL && calledFunc->isDeclaration())
                {
                   if (FT->isVarArg()) {
@@ -98,6 +175,48 @@ namespace cfi{
             }
          }
       }
+   }
+
+
+
+   static void findIndirectFunctionPtrs(Module* mod, StoreInst* SI)
+   {
+      Value* v = SI->getValueOperand();
+      Value* ptr = SI->getPointerOperand();
+      Type* t = v->getType();
+      
+      if (PointerType * PT = dyn_cast<PointerType>(t))
+      {
+        Type* elem_type = PT->getElementType();
+        if (FunctionType* FT = dyn_cast<FunctionType>(elem_type))
+        {
+          //v->getType()->dump();
+          //errs() << "\n";  
+
+               //arg_type->dump(); 
+               for (Value::use_iterator UI = v->use_begin(), UE = v->use_end(); UI != UE; ++UI)
+               {
+                  errs() << "Use\n";
+                  //Use* u = *UI;
+                  UI->dump();
+               }
+               errs() << "End use\n";
+              for (Value::use_iterator UI = ptr->use_begin(), UE = ptr->use_end(); UI != UE; ++UI)
+               {
+                  errs() << "ptr Use\n";
+                  //Use* u = *UI;
+                  UI->dump();
+               }
+
+               errs()<< AA->alias(v,v) << "\n";
+
+               errs() << "End ptr use\n";
+        }
+      }
+
+      //SI->dump();
+      
+      //if ()
    }
 
    /**
@@ -126,7 +245,11 @@ namespace cfi{
                //found: call site
                if (CallInst* callInst = dyn_cast<CallInst>(I))
                {
-                  findFunctionPointerArgs(mod, callInst);
+                  findFunctionPointerArgs(mod, F, callInst);
+               }
+               if (StoreInst* storeInst = dyn_cast<StoreInst>(I))
+               {
+                  //findIndirectFunctionPtrs(mod, storeInst);
                }
             }
          }
