@@ -153,9 +153,10 @@ namespace cfi{
       for (FB = F->begin(), FE = F->end(); FB != FE; FB++)
       {
          BasicBlock::iterator BB, BE;
-         for(BB = FB->begin(), BE = FB->end(); BB != BE; BB++)
+         for(BB = FB->begin(), BE = FB->end(); BB != BE; )
          {
-            Instruction *I = &*BB;
+            Instruction *I = BB++;
+	    
 
             if (StoreInst* storeInst = dyn_cast<StoreInst>(I))
             {
