@@ -50,7 +50,11 @@ namespace cfi {
         for (MB = mod->begin(), ME = mod->end(); MB != ME; MB++)
         {
             Function *F = &*MB;
-            
+            if(F->getName().find("__recfi_ext_wrap") != std::string::npos)
+            {
+               continue;
+            }
+
             Function::iterator FB, FE;
             //iterate over basic blocsk in function
             for (FB = F->begin(), FE = F->end(); FB != FE; FB++)
@@ -85,6 +89,13 @@ namespace cfi {
             
             Instruction *I = cs.getInstruction();
 
+            Function* parent_fn = I->getParent()->getParent();
+
+            if(parent_fn->getName().find("__recfi_ext_wrap") != std::string::npos)
+            {
+               continue;
+            }
+
             //only consider calls that have targets
             if (ctf.begin(cs) == ctf.end(cs))
                 continue;
@@ -110,7 +121,7 @@ namespace cfi {
                     jmpDestMap[I].insert(destInstr);
                 }
 
-                if (F->getName() == "main" || F->getName().find("__recfi_wrap") != std::string::npos)
+                if (F->getName() == "main" || F->getName().find("__recfi") != std::string::npos)
                 {
                    continue;
                 }

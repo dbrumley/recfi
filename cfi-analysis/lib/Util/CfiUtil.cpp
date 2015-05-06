@@ -31,9 +31,10 @@ namespace cfi{
     *
     * @return 
     */
-   static Function* createWrapperFunction(Module* mod, FunctionType* ft, GlobalVariable* gvar)
+   static Function* createWrapperFunction(Module* mod, FunctionType* ft, 
+         GlobalVariable* gvar, const std::string wrapper_name)
    {
-      Function* fn_wrap = Function::Create(ft, GlobalValue::ExternalLinkage, "__recfi_wrap", mod);
+      Function* fn_wrap = Function::Create(ft, GlobalValue::ExternalLinkage, wrapper_name, mod);
       BasicBlock* label_entry = BasicBlock::Create(mod->getContext(), "entry",fn_wrap,0);
       BasicBlock* label_exit = BasicBlock::Create(mod->getContext(), "exit",fn_wrap,0);
 
@@ -74,7 +75,8 @@ namespace cfi{
     * @param ft - The type of the wrapper
     * @param index - The index of the argument to be updated
     */
-   static void createNewCallInst(Module* mod, CallInst* CI, PointerType* t, FunctionType* ft, int index)
+   static void createNewCallInst(Module* mod, CallInst* CI, PointerType* t, 
+         FunctionType* ft, int index, const std::string wrapper_name)
    {
       //create global var
       GlobalVariable* gvar = new llvm::GlobalVariable(*mod,
@@ -89,7 +91,7 @@ namespace cfi{
       gvar->setInitializer(nll);
       
       //create the wrapper and the Instruction to assign the argument to the gvar 
-      Function* fn_wrap = createWrapperFunction(mod, ft, gvar);
+      Function* fn_wrap = createWrapperFunction(mod, ft, gvar, wrapper_name);
       new StoreInst(CI->getArgOperand(index), gvar, CI);
       Constant* ptr_wrap = ConstantExpr::getCast(Instruction::BitCast, fn_wrap, t);
 
@@ -109,7 +111,7 @@ namespace cfi{
 
       //test if we already got to this store.
       if (function->hasName() && 
-            function->getName().str().find("__recfi_wrap") != std::string::npos)
+            function->getName().str().find("__recfi") != std::string::npos)
          return;
 
       Type* ftype = function->getType();
@@ -129,7 +131,7 @@ namespace cfi{
       ConstantPointerNull* nll = ConstantPointerNull::get(dest_type);
       gvar->setInitializer(nll);
 
-      Function* fn_wrap = createWrapperFunction(mod, function_type, gvar);
+      Function* fn_wrap = createWrapperFunction(mod, function_type, gvar, "__recfi_wrap");
       Constant* ptr_wrap = ConstantExpr::getCast(Instruction::BitCast, fn_wrap, dest_type);
       new StoreInst(SI->getValueOperand(), gvar, SI);
       new StoreInst(ptr_wrap, SI->getPointerOperand(), SI);
@@ -209,19 +211,41 @@ namespace cfi{
                Function *calledFunc = CI->getCalledFunction();
 
                if (Function *pointedFunction = dyn_cast<Function>(arg))
-               { 
-                  if (pointedFunction->isDeclaration())
+               {
+                  if (calledFunc == NULL)
                      continue;
+
+                  if (calledFunc->isDeclaration() && 
+                        pointedFunction->isDeclaration())
+                     continue;
+
+                  if (!calledFunc->isDeclaration() && 
+                        !pointedFunction->isDeclaration())
+                     continue;
+                  
+                  if (calledFunc->isDeclaration() && 
+                        !pointedFunction->isDeclaration())
+                  {
+                     createNewCallInst(mod, CI, PT, FT, i, "__recfi_wrap");
+                  }
+
+                  if (!calledFunc->isDeclaration() && 
+                        pointedFunction->isDeclaration())
+                  {
+                     createNewCallInst(mod, CI, PT, FT, i, "__recfi_ext_wrap");
+                  }
+
                }
 
-               if (calledFunc != NULL && calledFunc->isDeclaration())
+               if (calledFunc != NULL)
                {
-                  if (FT->isVarArg()) {
+                  if (FT->isVarArg()) 
+                  {
                      errs() << "Error: Function is variadic, cannot create wrapper\n";
                      exit(-1);
                   }
 
-                  createNewCallInst(mod, CI, PT, FT, i);
+                  //createNewCallInst(mod, CI, PT, FT, i);
                }
             }
          }
