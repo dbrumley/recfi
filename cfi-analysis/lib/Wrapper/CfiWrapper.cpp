@@ -15,6 +15,7 @@
 #include "dsa/CallTargets.h"
 #include "dsa/DSCallGraph.h"
 #include "cfi/CfiUtil.h"
+#include "llvm/Analysis/AliasAnalysis.h"
 //#include "cfi/TwoIDPass.h"
 //#include "cfi/MultiMergePass.h"
 //#include "cfi/MultiListPass.h"
@@ -23,7 +24,7 @@ using namespace llvm;
 using namespace cfi;
 
 namespace {
-    
+
     //Command-line flag for printing debug info
     cl::opt<bool> Debug("cfi-wrapper-debug", 
                         cl::desc("Useful for debugging"));
@@ -40,7 +41,7 @@ namespace {
 
         virtual void getAnalysisUsage(AnalysisUsage &AU) const 
         {
-
+            AU.addRequired<AliasAnalysis>();
         }
 
         /**
@@ -52,6 +53,8 @@ namespace {
          */
         virtual bool runOnModule(Module &M) 
         {  
+            AA = &getAnalysis<AliasAnalysis>();
+
              if (Debug)
                 errs() << "Adding function pointer wrappers.\n";
 

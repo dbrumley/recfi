@@ -51,6 +51,11 @@ namespace cfi {
             for (FB = F->begin(), FE = F->end(); FB != FE; FB++)
             {
                 BasicBlock::iterator BB, BE;
+                if(F->getName().find("__recfi_ext_wrap") != std::string::npos)
+                {
+                   continue;
+                }
+
                 for(BB = FB->begin(), BE = FB->end(); BB != BE; BB++)
                 {
                     Instruction *I = &*BB;

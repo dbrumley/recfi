@@ -15,6 +15,7 @@
 #include "llvm/Pass.h"
 #include "llvm/Support/raw_ostream.h"
 #include "llvm/Support/CommandLine.h"
+#include "llvm/Analysis/AliasAnalysis.h"
 
 #include "dsa/DSGraph.h"
 #include "dsa/CallTargets.h"
@@ -51,6 +52,8 @@ namespace cfi{
     typedef std::vector<std::string> ArgNames;
     typedef std::vector<llvm::Type*> ArgTypes;
     typedef std::vector<llvm::Value*> ArgVals;
+
+    extern AliasAnalysis *AA;
 
     /*
      * Levels of CFI precision

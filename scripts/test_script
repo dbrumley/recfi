@@ -18,7 +18,7 @@ def main():
     os.chdir(dir)
     bcfiles = []
     for file in os.listdir("./"):
-        if file.endswith(".bc") and "_opt" not in file:
+        if file.endswith(".bc") and "_opt" not in file and ".so" not in file:
             #skip files that aren't assembling due to unknown issues
             if "su.bc" not in file:
                 bcfiles.append(os.path.abspath(file))

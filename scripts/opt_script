@@ -37,6 +37,7 @@ def main():
 	    #if not ("timeout.bc" in file or "sort.bc" in file):
             bcfiles.append(os.path.abspath(file))
 
+    poollib = root_dir + "/build/projects/poolalloc/Release+Debug+Asserts/lib/poolalloc.so"
     dsalib = root_dir + "/build/projects/poolalloc/Release+Debug+Asserts/lib/LLVMDataStructure.so"
     cfipasslib = root_dir + "/cfi-analysis/build/Release+Debug+Asserts/lib/CfiPasses.so"
     cfiutillib = root_dir + "/cfi-analysis/build/Release+Debug+Asserts/lib/CfiUtil.so"
@@ -63,12 +64,14 @@ def main():
         subprocess.check_call(["llvm-as", disass, "-o", file])
 
         #run opt pass on .bc files
-        subprocess.check_call(["opt", 
-	    "-load", dsalib, 
+        subprocess.check_call(["opt",
+	    "-load", dsalib,
+ 	    "-load", poollib, 
             "-load", cfipasslib,
 	    "-load", cfiutillib,
 	    "-load", cfilib,
       "-load", cfiwrapperlib,
+      "-basicaa", 
       "-cfi-wrapper",
 	    "-cfi",
             "-" + opt_pass, 

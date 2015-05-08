@@ -215,14 +215,25 @@ class ARMAsmEditor(AsmEditorBase):
             else:
                 asm_new.append("\t@ [ ====== CFI checkret begin ====== ]\n")
             asm_new.append("\t@ [ ====== " + ' '.join(split) + " ====== ]\n")
-            asm_new.append("\tpush {" + r_temp + "}\n")
+
+            if r_src != 'r12':
+               asm_new.append("\tpush {" + r_temp + "}\n")
+            else:
+               asm_new.append("\tpush {" + r_temp + ", r12}\n")
+
             asm_new.append("\tldr " + r_temp + \
                     ", [" + r_src + "] \t@ get destination ID\n")
             self.insert_ID_check(asm_new, ids.pop(0), r_temp, True)
             for extra_id in ids:
                 self.insert_ID_check(asm_new, extra_id, r_temp, False)
             asm_new.append("\tbne cfi_abort\n")
-            asm_new.append("\tpop {" + r_temp + "}\n")
+
+            if r_src != 'r12':
+               asm_new.append("\tpop {" + r_temp + "}\n")
+            else:
+               asm_new.append("\tpop {" + r_temp + ", r12}\n")
+
+
             if uses_pc and check_tar:
                 asm_new.append("\tmov lr, pc \t@ this is sorta sketch\n")
             asm_new.append(line)
